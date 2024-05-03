@@ -11,12 +11,10 @@
           <li>Et bien plus encore !</li>
         </ul>
         
-        @if (angularFireAuth.authState | async) {
-            <button (click)="logOut()">Log out</button>
-            } @else {
-                <p>Pour commencer, veuillez vous connecter avec votre compte Google :</p>
-            <button googleSso>Sign in with google</button>
-            }
+        <ng-container *ngIf="!(angularFireAuth.authState | async)">
+          <p>Pour commencer, veuillez vous connecter avec votre compte Google :</p>
+      </ng-container>
+
       </div>
     </div>
   </div>

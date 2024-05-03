@@ -1,8 +1,25 @@
-<nav>
-  <ul>
-    <li>
-      <a routerLink="/">Accueil</a>
-    </li>
-  </ul>
-</nav>
+<mat-toolbar color="primary">
+  <button mat-icon-button  aria-label="Menu" [matMenuTriggerFor]="menu" style="margin-right: 12px;">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button routerLink="/"   aria-label="Accueil" mat-menu-item> 
+      <mat-icon>home</mat-icon> Accueil
+    </button>
+
+    <ng-container *ngIf="!(angularFireAuth.authState | async)">
+      <button googleSso aria-label="Se connecter" mat-menu-item> 
+        <mat-icon>login</mat-icon> Se Connecter
+      </button>
+    </ng-container>
+   
+    <ng-container *ngIf="angularFireAuth.authState | async">
+      <button  (click)="logOut()" aria-label="Se déconnecter" mat-menu-item> 
+        <mat-icon>logout</mat-icon> Se Déconnecter
+      </button>      
+    </ng-container>
+
+  </mat-menu>
+  <span>Puyfolais WEB</span>
+</mat-toolbar>
 <router-outlet></router-outlet>

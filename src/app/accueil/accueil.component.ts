@@ -8,7 +8,5 @@ import { AngularFireAuth } from "@angular/fire/compat/auth";
 })
 export class AccueilComponent {
   constructor(public angularFireAuth: AngularFireAuth) {}
-  logOut() {
-    this.angularFireAuth.signOut();
-  }
+
 }

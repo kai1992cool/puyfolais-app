@@ -8,6 +8,11 @@ import { AngularFireAuthModule } from "@angular/fire/compat/auth";
 import { environment } from "../environments/environment.development";
 import { AccueilComponent } from './accueil/accueil.component';
 import { GoogleSsoDirective } from './google-sso.directive';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { MatIconModule  } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import {MatMenuModule} from '@angular/material/menu';
+
 
 @NgModule({
   declarations: [
@@ -18,9 +23,14 @@ import { GoogleSsoDirective } from './google-sso.directive';
     AngularFireAuthModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),    
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatIconModule,
+    MatToolbarModule,
+    MatMenuModule
   ],
-  providers: [],
+  providers: [
+    provideAnimationsAsync()
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
