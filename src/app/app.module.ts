@@ -11,8 +11,8 @@ import { GoogleSsoDirective } from './google-sso.directive';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MatIconModule  } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import {MatMenuModule} from '@angular/material/menu';
-
+import { MatMenuModule} from '@angular/material/menu';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -26,7 +26,8 @@ import {MatMenuModule} from '@angular/material/menu';
     AppRoutingModule,
     MatIconModule,
     MatToolbarModule,
-    MatMenuModule
+    MatMenuModule,
+    MatCardModule
   ],
   providers: [
     provideAnimationsAsync()

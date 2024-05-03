@@ -1,21 +1,24 @@
 <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <h1>Bienvenue sur l'application Puyfolais</h1>
-        <p>Cette application vous permettra de gérer votre activité de Puyfolais au sein de l'association.</p>
-        <p>Vous pouvez utiliser cette application pour :</p>
-        <ul>
-          <li>Renseigner votre planning</li>
-          <li>Consulter vos affectations</li>
-          <li>Obtenir des informations sur différents rôles qui vous sont affectés</li>
-          <li>Et bien plus encore !</li>
-        </ul>
-        
-        <ng-container *ngIf="!(angularFireAuth.authState | async)">
+  <div class="row">
+    <div class="col-md-12">
+      <mat-card>
+        <mat-card-title>Bienvenue sur l'application Puyfolais</mat-card-title>
+        <mat-card-content>
+          <p>Cette application vous permettra de gérer votre activité de Puyfolais au sein de l'association.</p>
+          <p>Vous pouvez utiliser cette application pour :</p>
+          <ul>
+            <li>Renseigner votre planning</li>
+            <li>Consulter vos affectations</li>
+            <li>Obtenir des informations sur différents rôles qui vous sont affectés</li>
+            <li>Et bien plus encore !</li>
+          </ul>
+        </mat-card-content>
+        <mat-card-actions *ngIf="!(angularFireAuth.authState | async)">
           <p>Pour commencer, veuillez vous connecter avec votre compte Google :</p>
-      </ng-container>
-
-      </div>
+          <button googleSso> Se Connecter</button>
+        </mat-card-actions>
+      </mat-card>
     </div>
   </div>
-  
+</div>
+
