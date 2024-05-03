@@ -14,8 +14,8 @@
           </ul>
         </mat-card-content>
         <mat-card-actions *ngIf="!(angularFireAuth.authState | async)">
-          <p>Pour commencer, veuillez vous connecter avec votre compte Google :</p>
-          <button googleSso> Se Connecter</button>
+          <p>Pour commencer, veuillez vous connecter :</p>
+          <button routerLink="/signin"> Se Connecter</button>
         </mat-card-actions>
       </mat-card>
     </div>

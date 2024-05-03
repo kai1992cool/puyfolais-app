@@ -13,12 +13,14 @@ import { MatIconModule  } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule} from '@angular/material/menu';
 import { MatCardModule } from '@angular/material/card';
+import { SigninComponent } from './signin/signin.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AccueilComponent,
-    GoogleSsoDirective  ],
+    GoogleSsoDirective,
+    SigninComponent  ],
   imports: [
     AngularFireAuthModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),    
