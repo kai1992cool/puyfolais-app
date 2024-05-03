@@ -6,19 +6,14 @@ import { AppComponent } from './app.component';
 import { AngularFireModule } from "@angular/fire/compat";
 import { AngularFireAuthModule } from "@angular/fire/compat/auth";
 import { environment } from "../environments/environment.development";
-import { SigninComponent } from './signin/signin.component';
-import { LandingComponent } from './landing/landing.component';
+import { AccueilComponent } from './accueil/accueil.component';
 import { GoogleSsoDirective } from './google-sso.directive';
-import { RequireAuthComponent } from './require-auth/require-auth.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SigninComponent,
-    LandingComponent,
-    GoogleSsoDirective,
-    RequireAuthComponent
-  ],
+    AccueilComponent,
+    GoogleSsoDirective  ],
   imports: [
     AngularFireAuthModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),    

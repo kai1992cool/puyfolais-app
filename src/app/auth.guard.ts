@@ -10,7 +10,7 @@ export const authGuard: CanActivateFn = async (route, state) => {
   // coerce to boolean
   const isLoggedIn = !!user;
   if (!isLoggedIn) {
-    router.navigateByUrl('/signin');
+    router.navigateByUrl('/');
   }
   return isLoggedIn;
 };
