@@ -1,0 +1,23 @@
+<!-- <button mat-raised-button color="primary" googleSso (signInSuccess)="handleSignUpSuccess($event)" aria-label="S'inscrire avec Google">S'inscrire avec Google</button> -->
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+        <mat-label>Nom</mat-label>
+        <input matInput formControlName="nom" type="text" placeholder="Entrez votre Nom">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+        <mat-label>Prénom</mat-label>
+        <input matInput formControlName="prenom" type="text" placeholder="Entrez votre Prénom">
+    </mat-form-field>    
+    <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" type="email" placeholder="Entrez votre email">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+        <mat-label>Mot de passe</mat-label>
+        <input matInput formControlName="password" type="password" placeholder="Entrez votre mot de passe">
+    </mat-form-field>
+    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+
+    <button mat-raised-button color="primary" type="submit">Se connecter</button>
+</form>

@@ -13,14 +13,19 @@ import { MatIconModule  } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule} from '@angular/material/menu';
 import { MatCardModule } from '@angular/material/card';
+import { MatInputModule  } from '@angular/material/input';
 import { SigninComponent } from './signin/signin.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { SignupComponent } from './signup/signup.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AccueilComponent,
     GoogleSsoDirective,
-    SigninComponent  ],
+    SigninComponent,
+    SignupComponent  ],
   imports: [
     AngularFireAuthModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),    
@@ -29,7 +34,10 @@ import { SigninComponent } from './signin/signin.component';
     MatIconModule,
     MatToolbarModule,
     MatMenuModule,
-    MatCardModule
+    MatCardModule,
+    MatInputModule ,
+    ReactiveFormsModule,
+    MatButtonModule 
   ],
   providers: [
     provideAnimationsAsync()
