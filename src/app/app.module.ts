@@ -17,7 +17,9 @@ import { MatInputModule  } from '@angular/material/input';
 import { SigninComponent } from './signin/signin.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
 import { SignupComponent } from './signup/signup.component';
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import { SignupComponent } from './signup/signup.component';
     AccueilComponent,
     GoogleSsoDirective,
     SigninComponent,
-    SignupComponent  ],
+    SignupComponent,
+    ConfirmationDialogComponent  ],
   imports: [
     AngularFireAuthModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),    
@@ -36,6 +39,7 @@ import { SignupComponent } from './signup/signup.component';
     MatMenuModule,
     MatCardModule,
     MatInputModule ,
+    MatDialogModule,
     ReactiveFormsModule,
     MatButtonModule 
   ],

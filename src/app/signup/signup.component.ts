@@ -2,21 +2,28 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AngularFireAuth } from "@angular/fire/compat/auth";
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { take, switchMap } from 'rxjs/operators';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-
+import { take, switchMap } from 'rxjs/operators';
+import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
-  styleUrl: './signup.component.scss'
+  styleUrls: ['./signup.component.scss']
 })
 export class SignupComponent {
 
   form: FormGroup;
-  errorMessage: string = ''; // Propriété pour stocker le message d'erreur
+  errorMessage: string = '';
 
-  constructor(private router: Router, private angularFireAuth: AngularFireAuth, private fb: FormBuilder, private db: AngularFirestore) {
+  constructor(
+    private router: Router,
+    private angularFireAuth: AngularFireAuth,
+    private fb: FormBuilder,
+    private db: AngularFirestore,
+    private dialog: MatDialog
+  ) {
     this.form = this.fb.group({
       nom: [],
       prenom: [],
@@ -25,7 +32,6 @@ export class SignupComponent {
     });
   }
 
-
   onSubmit() {
     if (this.form.invalid) {
       return;
@@ -33,40 +39,32 @@ export class SignupComponent {
 
     const { nom, prenom, email, password } = this.form.value;
 
-    console.log(" nom : " + nom);
-
-    // Vérifier si un utilisateur avec cet e-mail existe déjà
-    this.db.collection('utilisateurs', ref => ref.where('email', '==', email)).valueChanges().pipe(
-      take(1), // Prend seulement le premier résultat pour vérifier si l'e-mail existe
-      switchMap((users) => {
-        if (users && users.length > 0) {
-          // Un utilisateur avec cet e-mail existe déjà
-          this.errorMessage = 'Un utilisateur avec cet e-mail existe déjà.';
-          return [];
-        } else {
-          // Aucun utilisateur avec cet e-mail n'a été trouvé, procéder à l'inscription
-          return this.angularFireAuth.createUserWithEmailAndPassword(email, password);
-        }
-      }),
-      switchMap((result) => {
-        if (!result) {
-          // Utilisateur non créé (peut arriver si l'e-mail existe déjà)
-          return [];
-        }
-        // Utilisateur créé avec succès, insérer les informations dans Firestore
+    this.angularFireAuth.createUserWithEmailAndPassword(email, password)
+      .then((result) => {
         const userId = result.user?.uid;
         return this.db.collection('utilisateurs').doc(userId).set({ email: email, nom: nom, prenom: prenom })
-        .then(() => {
-          // L'insertion des données dans Firestore est réussie, rediriger vers /accueil
-          this.router.navigateByUrl('/');
-        });
+          .then(() => {
+            this.openConfirmationDialog();
+          });
       })
-    ).subscribe({
-      error: (error) => {
-        // Gestion des erreurs
-        this.errorMessage = error.message;
-      }
-    });
+      .catch((error) => {
+        // Handle Errors here.
+        if (error.code === 'auth/email-already-in-use') {
+          this.errorMessage = "Cette adresse est déjà utilisée, merci d'utiliser vos identifiants associés pour vous connecter."
+        } else {
+          this.errorMessage = error.message; 
+        }
+      });
   }
 
+  openConfirmationDialog(): void {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '250px',
+      data: "Votre inscription a été réalisée avec succès ! Vous êtes maintenant connecté. Toutefois, aucun profil ne vous a été affecté pour le moment. Veuillez attendre qu'un administrateur vous affecte ces profils pour utiliser l'application."
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.router.navigateByUrl('/');
+    });
+  }
 }

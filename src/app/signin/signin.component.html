@@ -1,17 +1,27 @@
 <!-- <button mat-raised-button color="primary" googleSso (signInSuccess)="handleSignInSuccess()" aria-label="Se connecter avec Google">Se Connecter avec Google</button> -->
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <mat-form-field appearance="fill">
-      <mat-label>Email</mat-label>
-      <input matInput formControlName="email" type="email" placeholder="Entrez votre email">
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-      <mat-label>Mot de passe</mat-label>
-      <input matInput formControlName="password" type="password" placeholder="Entrez votre mot de passe">
-    </mat-form-field>
-    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
 
-    <button mat-raised-button color="primary" type="submit">Se connecter</button>
-    Pas encore inscrit ?           
-    <button routerLink="/signup"  mat-raised-button color="primary">     Cliquez ici</button>
+<mat-card class="login-card">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <mat-card-content>
+      <div class="form-field">
+        <mat-form-field appearance="fill" class="custom-input">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" type="email" placeholder="Entrez votre email">
+        </mat-form-field>
+      </div>
+      <div class="form-field">
+        <mat-form-field appearance="fill" class="custom-input">
+          <mat-label>Mot de passe</mat-label>
+          <input matInput formControlName="password" type="password" placeholder="Entrez votre mot de passe">
+        </mat-form-field>
+      </div>
+      <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+    </mat-card-content>
 
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit" class="custom-button">Se connecter</button>
+      <div mat-body-1>Pas encore inscrit ?</div>
+      <button mat-raised-button color="primary" routerLink="/signup" class="custom-button">Cliquez ici</button>
+    </mat-card-actions>
   </form>
+</mat-card>
