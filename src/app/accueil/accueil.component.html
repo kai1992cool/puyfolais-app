@@ -1,24 +1,19 @@
 <div class="container">
-  <div class="row">
-    <div class="col-md-12">
-      <mat-card>
-        <!-- <mat-card-title>{{ "accueil.bienvenue" | translate: { name: prenom } }}</mat-card-title> -->
-        <mat-card-title>{{ "accueil.bienvenue" | translate: {  } }}</mat-card-title>
-        <mat-card-content>
-          <p>{{ "accueil.introduction" | translate: {  } }}</p>
-          <p>{{ "accueil.utilisation.titre" | translate: {  } }}</p>
-          <ul>
-            <li>{{ "accueil.utilisation.uti1" | translate: {  } }}</li>
-            <li>{{ "accueil.utilisation.uti2" | translate: {  } }}</li>
-            <li>{{ "accueil.utilisation.uti3" | translate: {  } }}</li>
-            <li>{{ "accueil.utilisation.uti4" | translate: {  } }}</li>
-          </ul>
-        </mat-card-content>
-        <mat-card-actions *ngIf="!(angularFireAuth.authState | async)">
-          <p>{{ "accueil.start" | translate: {  } }}</p>
-        </mat-card-actions>
-      </mat-card>
-    </div>
-  </div>
+  <mat-card>
+    <!-- <mat-card-title>{{ "accueil.bienvenue" | translate: { name: prenom } }}</mat-card-title> -->
+    <mat-card-title>{{ "accueil.bienvenue" | translate: { } }}</mat-card-title>
+    <mat-card-content>
+      <p>{{ "accueil.introduction" | translate: { } }}</p>
+      <p>{{ "accueil.utilisation.titre" | translate: { } }}</p>
+      <ul>
+        <li>{{ "accueil.utilisation.uti1" | translate: { } }}</li>
+        <li>{{ "accueil.utilisation.uti2" | translate: { } }}</li>
+        <li>{{ "accueil.utilisation.uti3" | translate: { } }}</li>
+        <li>{{ "accueil.utilisation.uti4" | translate: { } }}</li>
+      </ul>
+    </mat-card-content>
+    <mat-card-actions *ngIf="!(angularFireAuth.authState | async)">
+      <p>{{ "accueil.start" | translate: { } }}</p>
+    </mat-card-actions>
+  </mat-card>
 </div>
-
