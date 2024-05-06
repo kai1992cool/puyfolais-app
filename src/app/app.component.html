@@ -1,4 +1,4 @@
-<mat-toolbar color="primary">
+<mat-toolbar color="primary" class="toolbar">
   <button mat-icon-button aria-label="Menu" [matMenuTriggerFor]="menu" style="margin-right: 12px;">
     <mat-icon>menu</mat-icon>
   </button>
@@ -8,7 +8,7 @@
     </button>
 
     <ng-container *ngIf="!(angularFireAuth.authState | async)">
-      <button  routerLink="/signin"  aria-label="Se connecter" mat-menu-item>
+      <button routerLink="/signin" aria-label="Se connecter" mat-menu-item>
         <mat-icon>login</mat-icon> Se Connecter
       </button>
     </ng-container>
@@ -21,5 +21,14 @@
 
   </mat-menu>
   <span>Puyfolais WEB</span>
+
+  <div class="language-buttons">
+    <button type="button" mat-icon-button (click)="changeLanguage('fr-FR')" [class.active]="translateService.currentLang !== 'fr-FR'">
+      <img src="../assets/png/language_french_FILL0_wght400_GRAD0_opsz24.png" alt="Français">
+    </button>
+    <button type="button" mat-icon-button (click)="changeLanguage('es-ES')" [class.active]="translateService.currentLang === 'es-ES'">
+      <img src="../assets/png/language_spanish_FILL0_wght400_GRAD0_opsz24.png" alt="Espagnol">
+    </button>
+  </div>
 </mat-toolbar>
 <router-outlet></router-outlet>

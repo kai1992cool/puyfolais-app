@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AngularFireAuth } from "@angular/fire/compat/auth";
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -8,8 +9,14 @@ import { AngularFireAuth } from "@angular/fire/compat/auth";
 })
 export class AppComponent {
   title = 'puyfolais-app';
-  constructor(public angularFireAuth: AngularFireAuth) {}
+  
+  constructor(public translateService: TranslateService,public angularFireAuth: AngularFireAuth) {}
+  
   logOut() {
     this.angularFireAuth.signOut();
+  }
+
+  public changeLanguage(language: string): void {
+    this.translateService.use(language);
   }
 }
