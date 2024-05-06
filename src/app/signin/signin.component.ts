@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AngularFireAuth } from "@angular/fire/compat/auth";
-
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-signin',
@@ -14,7 +14,7 @@ export class SigninComponent implements OnInit {
   form: FormGroup;
   errorMessage: string = ''; // Propriété pour stocker le message d'erreur
 
-  constructor(public angularFireAuth: AngularFireAuth, private router: Router, private fb: FormBuilder) {
+  constructor(public angularFireAuth: AngularFireAuth, private router: Router, private fb: FormBuilder, private translateService: TranslateService) {
     this.form = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
@@ -41,7 +41,7 @@ export class SigninComponent implements OnInit {
       .catch((error) => {
         // Handle Errors here.
         if (error.code === 'auth/invalid-credential') {
-          this.errorMessage = 'Les identifiants fournis sont invalides. Veuillez réssayer.'
+          this.errorMessage = this.errorMessage = this.translateService.instant('sign.identifiants.invalides');
         } else {
           this.errorMessage = error.message; 
         }

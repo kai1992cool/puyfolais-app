@@ -1,34 +1,52 @@
 <mat-toolbar color="primary" class="toolbar">
+  
   <button mat-icon-button aria-label="Menu" [matMenuTriggerFor]="menu" style="margin-right: 12px;">
     <mat-icon>menu</mat-icon>
   </button>
-  <mat-menu #menu="matMenu">
-    <button routerLink="/" aria-label="Accueil" mat-menu-item>
-      <mat-icon>home</mat-icon> Accueil
-    </button>
 
-    <ng-container *ngIf="!(angularFireAuth.authState | async)">
-      <button routerLink="/signin" aria-label="Se connecter" mat-menu-item>
-        <mat-icon>login</mat-icon> Se Connecter
-      </button>
-    </ng-container>
-
-    <ng-container *ngIf="angularFireAuth.authState | async">
-      <button (click)="logOut()" aria-label="Se déconnecter" mat-menu-item>
-        <mat-icon>logout</mat-icon> Se Déconnecter
-      </button>
-    </ng-container>
-
-  </mat-menu>
   <span>Puyfolais WEB</span>
 
-  <div class="language-buttons">
-    <button type="button" mat-icon-button (click)="changeLanguage('fr-FR')" [class.active]="translateService.currentLang !== 'fr-FR'">
-      <img src="../assets/png/language_french_FILL0_wght400_GRAD0_opsz24.png" alt="Français">
-    </button>
-    <button type="button" mat-icon-button (click)="changeLanguage('es-ES')" [class.active]="translateService.currentLang === 'es-ES'">
-      <img src="../assets/png/language_spanish_FILL0_wght400_GRAD0_opsz24.png" alt="Espagnol">
-    </button>
+  <div class="user-info">
+    <ng-container *ngIf="angularFireAuth.authState | async as user">
+      <span>{{ user.displayName }}</span>
+    </ng-container>
+
   </div>
+
+  <div class="language-buttons">
+    <ng-container *ngIf="translateService.currentLang !== 'fr-FR'">
+      <button type="button" mat-icon-button (click)="changeLanguage('fr-FR')"
+        [class.active]="translateService.currentLang !== 'fr-FR'">
+        <img src="../assets/png/language_french_FILL0_wght400_GRAD0_opsz24.png" alt="Français">
+      </button>
+    </ng-container>
+
+    <ng-container *ngIf="translateService.currentLang !== 'es-ES'">
+      <button type="button" mat-icon-button (click)="changeLanguage('es-ES')"
+        [class.active]="translateService.currentLang === 'es-ES'">
+        <img src="../assets/png/language_spanish_FILL0_wght400_GRAD0_opsz24.png" alt="Espagnol">
+      </button>
+    </ng-container>
+  </div>
+
+  <div>
+    <ng-container *ngIf="!(angularFireAuth.authState | async)">
+      <button routerLink="/signin" aria-label="Se connecter" mat-menu-item>
+        <mat-icon>login</mat-icon>
+      </button>
+    </ng-container>
+    <ng-container *ngIf="angularFireAuth.authState | async">
+      <button (click)="logOut()" aria-label="Se déconnecter" mat-menu-item>
+        <mat-icon>logout</mat-icon>
+      </button>
+    </ng-container>
+  </div>
+
+  <mat-menu #menu="matMenu">
+    <button routerLink="/" aria-label="Accueil" mat-menu-item>
+      <mat-icon>home</mat-icon> {{ "toolbar.menu.accueil" | translate: {  } }}
+    </button>
+
+  </mat-menu>
 </mat-toolbar>
 <router-outlet></router-outlet>

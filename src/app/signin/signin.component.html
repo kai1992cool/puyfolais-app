@@ -5,23 +5,23 @@
     <mat-card-content>
       <div class="form-field">
         <mat-form-field appearance="fill" class="custom-input">
-          <mat-label>Email</mat-label>
-          <input matInput formControlName="email" type="email" placeholder="Entrez votre email">
+          <mat-label>{{ 'sign.labelMail' | translate }}</mat-label>
+          <input matInput formControlName="email" type="email" placeholder="{{ 'sign.entrerMail' | translate }}">
         </mat-form-field>
       </div>
       <div class="form-field">
         <mat-form-field appearance="fill" class="custom-input">
-          <mat-label>Mot de passe</mat-label>
-          <input matInput formControlName="password" type="password" placeholder="Entrez votre mot de passe">
+          <mat-label>{{ 'sign.labelMdp' | translate }}</mat-label>
+          <input matInput formControlName="password" type="password" placeholder="{{ 'sign.entrerPwd' | translate }}">
         </mat-form-field>
       </div>
       <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
     </mat-card-content>
 
     <mat-card-actions>
-      <button mat-raised-button color="primary" type="submit" class="custom-button">Se connecter</button>
-      <div mat-body-1>Pas encore inscrit ?</div>
-      <button mat-raised-button color="primary" routerLink="/signup" class="custom-button">Cliquez ici</button>
+      <button mat-raised-button color="primary" type="submit" class="custom-button">{{ 'commun.connecter' | translate }}</button>
+      <div mat-body-1>{{ 'sign.pasInscrit' | translate }}</div>
+      <button mat-raised-button color="primary" routerLink="/signup" class="custom-button">{{ 'commun.cliquerIci' | translate }}</button>
     </mat-card-actions>
   </form>
 </mat-card>

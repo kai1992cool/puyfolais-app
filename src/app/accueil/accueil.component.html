@@ -5,18 +5,17 @@
         <!-- <mat-card-title>{{ "accueil.bienvenue" | translate: { name: prenom } }}</mat-card-title> -->
         <mat-card-title>{{ "accueil.bienvenue" | translate: {  } }}</mat-card-title>
         <mat-card-content>
-          <p>Cette application vous permettra de gérer votre activité de Puyfolais au sein de l'association.</p>
-          <p>Vous pouvez utiliser cette application pour :</p>
+          <p>{{ "accueil.introduction" | translate: {  } }}</p>
+          <p>{{ "accueil.utilisation.titre" | translate: {  } }}</p>
           <ul>
-            <li>Renseigner votre planning</li>
-            <li>Consulter vos affectations</li>
-            <li>Obtenir des informations sur différents rôles qui vous sont affectés</li>
-            <li>Et bien plus encore !</li>
+            <li>{{ "accueil.utilisation.uti1" | translate: {  } }}</li>
+            <li>{{ "accueil.utilisation.uti2" | translate: {  } }}</li>
+            <li>{{ "accueil.utilisation.uti3" | translate: {  } }}</li>
+            <li>{{ "accueil.utilisation.uti4" | translate: {  } }}</li>
           </ul>
         </mat-card-content>
         <mat-card-actions *ngIf="!(angularFireAuth.authState | async)">
-          <p>Pour commencer, veuillez vous connecter</p>
-          <button routerLink="/signin"  mat-raised-button color="primary"> Se Connecter</button>
+          <p>{{ "accueil.start" | translate: {  } }}</p>
         </mat-card-actions>
       </mat-card>
     </div>

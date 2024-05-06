@@ -1,5 +1,42 @@
 {
+  "commun": {
+    "connecter": "Se connecter",
+    "deconnecter": "Se déconnecter",
+    "cliquerIci": "Cliquez ici",
+    "confirmation": "Confirmation"
+  },
+  "toolbar": {
+    "menu": {
+      "accueil": "Accueil"
+    }
+  },
   "accueil": {
-    "bienvenue": "Bienvenue sur l'application Puyfolais !"
+    "bienvenue": "Bienvenue sur l'application Puyfolais !",
+    "introduction": "Cette application vous permettra de gérer votre activité de Puyfolais au sein de l'association.",
+    "utilisation": {
+      "titre": "Vous pouvez utiliser cette application pour :",
+      "uti1": "Renseigner votre planning",
+      "uti2": "Consulter vos affectations",
+      "uti3": "Obtenir des informations sur différents rôles qui vous sont affectés",
+      "uti4": "Et bien plus encore !"
+    },
+    "start": "Pour commencer, veuillez vous connecter en cliquant sur l'icône en haut à droite."
+  },
+  "sign": {
+    "entrerNom": "Entrez votre nom",
+    "entrerPrenom": "Entrez votre prénom",
+    "entrerMail": "Entrez votre email",
+    "entrerMdp": "Entrez votre mot de passe",
+    "labelNom": "Nom",
+    "labelPrenom": "Prénom",
+    "labelMail": "E-mail",
+    "labelMdp": "Mot de passe",    
+    "inscription": "S'inscrire",
+    "pasInscrit": "Pas encore inscrit ?",
+    "validationInscription": "Votre inscription a été réalisée avec succès ! Vous êtes maintenant connecté. Toutefois, aucun profil ne vous a été affecté pour le moment. Veuillez attendre qu'un administrateur vous affecte ces profils pour utiliser l'application.",
+    "identifiants": {
+      "invalides": "Les identifiants fournis sont invalides. Veuillez réssayer.",
+      "existants": "Ce mail est déjà utilisée, merci d'utiliser vos identifiants associés pour vous connecter."
+    }
   }
 }
