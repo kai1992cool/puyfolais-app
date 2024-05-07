@@ -1,5 +1,5 @@
 <mat-toolbar>
-  
+
   <!-- Bouton de menu -->
   <button mat-icon-button aria-label="Menu" [matMenuTriggerFor]="menu" style="margin-right: 12px;">
     <mat-icon>menu</mat-icon>
@@ -8,49 +8,40 @@
   <!-- Titre -->
   <span>Puyfolais WEB</span>
 
-  <!-- Affichage du nom d'utilisateur -->
-  <div>
-    <ng-container *ngIf="angularFireAuth.authState | async as user">
-      <span>{{ user.displayName }}</span>
-    </ng-container>
-  </div>
 
-  <!-- Conteneur pour le menu de sélection de langue et les boutons de connexion/déconnexion -->
+  <!-- Menu profil -->
   <div style="display: flex; justify-content: flex-end; align-items: center; margin-left: auto;">
-  
-    <!-- Menu de sélection de langue -->
+    <!-- Menu Profil -->
     <div>
-      <button mat-icon-button aria-label="Langue" [matMenuTriggerFor]="langue" style="margin-right: 12px;">
-        <mat-icon>flag</mat-icon>
-      </button>
+      <ng-container>
+        <button mat-icon-button aria-label="Profil" [matMenuTriggerFor]="profil" style="margin-right: 12px;">
+          <mat-icon>person</mat-icon>
+        </button>
 
-      <mat-menu #langue="matMenu">
-        <button type="button" mat-menu-item (click)="changeLanguage('fr-FR')"
-          [class.active]="translateService.currentLang !== 'fr-FR'">
-          <mat-icon class="fi fi-fr"></mat-icon>Français
-        </button>
-        <button mat-menu-item type="button" (click)="changeLanguage('es-ES')"
-          [class.active]="translateService.currentLang === 'es-ES'">
-          <mat-icon class="fi fi-es"></mat-icon>Español
-        </button>
-      </mat-menu>
-    </div>
-
-    <!-- Boutons de connexion/déconnexion -->
-    <div>
-      <ng-container *ngIf="!(angularFireAuth.authState | async)">
-        <button routerLink="/signin" aria-label="Se connecter" mat-menu-item>
-          <mat-icon>login</mat-icon>
-        </button>
-      </ng-container>
-      <ng-container *ngIf="angularFireAuth.authState | async">
-        <button (click)="logOut()" aria-label="Se déconnecter" mat-menu-item>
-          <mat-icon>logout</mat-icon>
-        </button>
+        <mat-menu #profil="matMenu">
+          <!-- Affichage du nom d'utilisateur -->
+          <div *ngIf="angularFireAuth.authState | async as user">
+            <span mat-menu-item>{{ user.displayName }}</span>
+            <mat-divider></mat-divider>
+          </div>
+          <!-- Affichage du bouton de connexion d'utilisateur -->
+          <button *ngIf="!(angularFireAuth.authState | async)" routerLink="/signin" aria-label="Se connecter"
+            mat-menu-item>
+            <mat-icon>login</mat-icon> {{ "commun.connecter" | translate: { } }}
+          </button>
+          <!-- Affichage du bouton de déconnexion d'utilisateur -->
+          <button *ngIf="angularFireAuth.authState | async" (click)="logOut()" aria-label="Se déconnecter"
+            mat-menu-item>
+            <mat-icon>logout</mat-icon> {{ "commun.deconnecter" | translate: { } }}
+          </button>
+          <button mat-menu-item aria-label="Langue" [matMenuTriggerFor]="langue" style="margin-right: 12px;">
+            <mat-icon>flag</mat-icon>{{ "commun.langue" | translate: { } }}
+          </button>
+        </mat-menu>
       </ng-container>
     </div>
-
   </div>
+
 
   <!-- Menu principal -->
   <mat-menu #menu="matMenu">
@@ -59,6 +50,17 @@
     </button>
   </mat-menu>
 
+  <!-- Menu langue -->
+  <mat-menu #langue="matMenu">
+    <button type="button" mat-menu-item (click)="changeLanguage('fr-FR')"
+      [class.active]="translateService.currentLang !== 'fr-FR'">
+      <mat-icon class="fi fi-fr"></mat-icon>Français
+    </button>
+    <button mat-menu-item type="button" (click)="changeLanguage('es-ES')"
+      [class.active]="translateService.currentLang === 'es-ES'">
+      <mat-icon class="fi fi-es"></mat-icon>Español
+    </button>
+  </mat-menu>
 </mat-toolbar>
 
 <router-outlet></router-outlet>

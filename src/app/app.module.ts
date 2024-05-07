@@ -19,9 +19,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { SignupComponent } from './signup/signup.component';
-import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
+import { ConfirmationDialogComponent } from './dialog/confirmation-dialog/confirmation-dialog.component';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { MatDividerModule } from '@angular/material/divider';
 
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
@@ -48,6 +49,7 @@ export function createTranslateLoader(http: HttpClient) {
     MatCardModule,
     MatInputModule ,
     MatDialogModule,
+    MatDividerModule,
     ReactiveFormsModule,
     MatButtonModule,
     HttpClientModule,

@@ -3,7 +3,8 @@
     "connecter": "Conectarse",
     "deconnecter": "Desconectarse",
     "cliquerIci": "Haga clic aquí",
-    "confirmation": "Confirmación"
+    "confirmation": "Confirmación",
+    "langue": "Langue"
   },
   "toolbar": {
     "menu": {
@@ -33,7 +34,7 @@
     "labelMdp": "Contraseña",  
     "inscription": "Inscribirse",      
     "pasInscrit": "Aún no estás registrado ?",
-    "validationRegistration": "¡Su registro se ha completado exitosamente! Ahora ha iniciado sesión. Sin embargo, no se le ha asignado ningún perfil en este momento. Espere a que un administrador le asigne estos perfiles para usar la aplicación.",
+    "validationInscription": "¡Su registro se ha completado exitosamente! Ahora ha iniciado sesión. Sin embargo, no se le ha asignado ningún perfil en este momento. Espere a que un administrador le asigne estos perfiles para usar la aplicación.",
     "identifiants": {
       "invalides": "Las credenciales proporcionadas no son válidas. Inténtalo de nuevo.",
       "existants": "Este correo electrónico ya está en uso. Utilice sus credenciales asociadas para iniciar sesión."

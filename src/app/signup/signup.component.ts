@@ -5,7 +5,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
+import { ConfirmationDialogComponent } from '../dialog/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-signup',
@@ -25,8 +25,8 @@ export class SignupComponent {
     private dialog: MatDialog, private translateService: TranslateService
   ) {
     this.form = this.fb.group({
-      nom: [],
-      prenom: [],
+      nom: ['',Validators.required],
+      prenom: ['',Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
@@ -66,7 +66,7 @@ export class SignupComponent {
   openConfirmationDialog(): void {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       width: '250px',
-      data: this.translateService.instant('sign.validationRegistration')
+      data: this.translateService.instant('sign.validationInscription')
     });
 
     dialogRef.afterClosed().subscribe(() => {
