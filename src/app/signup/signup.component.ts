@@ -2,10 +2,8 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AngularFireAuth } from "@angular/fire/compat/auth";
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { ConfirmationDialogComponent } from '../dialog/confirmation-dialog/confirmation-dialog.component';
+import { DialogService } from '../dialog.service';
 
 @Component({
   selector: 'app-signup',
@@ -18,11 +16,11 @@ export class SignupComponent {
   errorMessage: string = '';
 
   constructor(
-    private router: Router,
     private angularFireAuth: AngularFireAuth,
     private fb: FormBuilder,
     private db: AngularFirestore,
-    private dialog: MatDialog, private translateService: TranslateService
+    public dialogService: DialogService,
+    private translateService: TranslateService
   ) {
     this.form = this.fb.group({
       nom: ['',Validators.required],
@@ -49,7 +47,7 @@ export class SignupComponent {
         // Enregistrement des autres informations de l'utilisateur dans Firestore
         return this.db.collection('utilisateurs').doc(userId).set({ email: email, nom: nom, prenom: prenom })
           .then(() => {
-            this.openConfirmationDialog();
+            this.dialogService.openConfirmationDialog(this.translateService.instant('sign.validationInscription'),'/');
           });
       });
     })
@@ -61,16 +59,5 @@ export class SignupComponent {
           this.errorMessage = error.message; 
         }
       });
-  }
-
-  openConfirmationDialog(): void {
-    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-      width: '250px',
-      data: this.translateService.instant('sign.validationInscription')
-    });
-
-    dialogRef.afterClosed().subscribe(() => {
-      this.router.navigateByUrl('/');
-    });
   }
 }

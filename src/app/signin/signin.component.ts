@@ -1,30 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AngularFireAuth } from "@angular/fire/compat/auth";
 import { TranslateService } from '@ngx-translate/core';
+import { DialogService } from '../dialog.service';
 
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
   styleUrl: './signin.component.scss'
 })
-export class SigninComponent implements OnInit {
+export class SigninComponent {
 
   form: FormGroup;
   errorMessage: string = ''; // Propriété pour stocker le message d'erreur
 
-  constructor(public angularFireAuth: AngularFireAuth, private router: Router, private fb: FormBuilder, private translateService: TranslateService) {
+  constructor(public dialogService: DialogService,public angularFireAuth: AngularFireAuth, private router: Router, private fb: FormBuilder, private translateService: TranslateService) {
     this.form = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
 
-
-  ngOnInit(): void {
-
-  }
 
   onSubmit() {
     if (this.form.invalid) {
@@ -41,7 +38,7 @@ export class SigninComponent implements OnInit {
       .catch((error) => {
         // Handle Errors here.
         if (error.code === 'auth/invalid-credential') {
-          this.errorMessage = this.errorMessage = this.translateService.instant('sign.identifiants.invalides');
+          this.errorMessage = this.translateService.instant('sign.identifiants.invalides');
         } else {
           this.errorMessage = error.message; 
         }
@@ -59,13 +56,16 @@ export class SigninComponent implements OnInit {
     this.angularFireAuth.sendPasswordResetEmail(email)
       .then(() => {
         // Email de réinitialisation envoyé avec succès
-        this.errorMessage = this.translateService.instant('sign.emailEnvoye', { mail: email });
+        this.dialogService.openConfirmationDialog(this.translateService.instant('sign.emailEnvoye', { mail: email }),'/');
       })
       .catch((error) => {
         // Erreur lors de l'envoi de l'email de réinitialisation
         this.errorMessage = error.message;
       });
   }
+
+
+
   // Méthode appelée lors de la réussite de l'authentification
   // handleSignInSuccess() {
   //   this.router.navigate(['/']); // Redirection vers la page d'accueil
