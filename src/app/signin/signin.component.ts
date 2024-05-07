@@ -48,6 +48,24 @@ export class SigninComponent implements OnInit {
       });
   }
 
+  // Méthode pour envoyer un email de réinitialisation de mot de passe
+  sendPasswordResetEmail(event: Event) {
+    
+    // Empêche la soumission du formulaire
+    event.preventDefault();
+
+    const email = this.form.value.email;
+
+    this.angularFireAuth.sendPasswordResetEmail(email)
+      .then(() => {
+        // Email de réinitialisation envoyé avec succès
+        this.errorMessage = this.translateService.instant('sign.emailEnvoye', { mail: email });
+      })
+      .catch((error) => {
+        // Erreur lors de l'envoi de l'email de réinitialisation
+        this.errorMessage = error.message;
+      });
+  }
   // Méthode appelée lors de la réussite de l'authentification
   // handleSignInSuccess() {
   //   this.router.navigate(['/']); // Redirection vers la page d'accueil

@@ -34,6 +34,8 @@
     "labelMdp": "Mot de passe",    
     "inscription": "S'inscrire",
     "pasInscrit": "Pas encore inscrit ?",
+    "mdpOublie": "Mot de passe oublié ?",
+    "emailEnvoye": "Un email vous a été envoyé sur l'adresse {{mail}} avec un lien pour réinitialiser votre mot de passe.",
     "validationInscription": "Votre inscription a été réalisée avec succès ! Vous êtes maintenant connecté. Toutefois, aucun profil ne vous a été affecté pour le moment. Veuillez attendre qu'un administrateur vous affecte ces profils pour utiliser l'application.",
     "identifiants": {
       "invalides": "Les identifiants fournis sont invalides. Veuillez réssayer.",

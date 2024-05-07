@@ -12,7 +12,7 @@
       <div class="form-field">
         <mat-form-field appearance="fill" class="custom-input">
           <mat-label>{{ 'sign.labelMdp' | translate }}</mat-label>
-          <input matInput formControlName="password" type="password" placeholder="{{ 'sign.entrerPwd' | translate }}">
+          <input matInput formControlName="password" type="password" placeholder="{{ 'sign.entrerMdp' | translate }}">
         </mat-form-field>
       </div>
       <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
@@ -22,6 +22,8 @@
       <button mat-raised-button color="primary" type="submit" class="custom-button">{{ 'commun.connecter' | translate }}</button>
       <div mat-body-1>{{ 'sign.pasInscrit' | translate }}</div>
       <button mat-raised-button color="primary" routerLink="/signup" class="custom-button">{{ 'commun.cliquerIci' | translate }}</button>
+      <button mat-raised-button color="primary" class="custom-button" (click)="sendPasswordResetEmail($event)">{{ 'sign.mdpOublie'}}</button>
+
     </mat-card-actions>
   </form>
 </mat-card>
