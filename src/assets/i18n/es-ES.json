@@ -2,6 +2,7 @@
   "commun": {
     "connecter": "Conectarse",
     "deconnecter": "Desconectarse",
+    "enregistrer": "Registro",
     "cliquerIci": "Haga clic aquí",
     "confirmation": "Confirmación",
     "langue": "Langue"
@@ -14,13 +15,6 @@
   "accueil": {
     "bienvenue": "Bienvenido a la aplicación Puyfolais !",
     "introduction": "Esta aplicación le permitirá gestionar su actividad Puyfolais dentro de la asociación.",
-    "utilisation": {
-      "titre": "Puedes utilizar esta aplicación para:",
-      "uti1": "Completa tu agenda",
-      "uti2": "Ver tus tareas",
-      "uti3": "Obtenga información sobre los diferentes roles que se le han asignado",
-      "uti4": "Y mucho más !"
-    },
     "start": "Para comenzar, inicie sesión haciendo clic en el icono en la parte superior derecha."
   },
   "sign": {
@@ -31,10 +25,11 @@
     "labelNom": "Apellido",
     "labelPrenom": "Nombre de pila",
     "labelMail": "Correo electrónico",
-    "labelMdp": "Contraseña",  
-    "inscription": "Inscribirse",      
+    "labelMdp": "Contraseña",
+    "inscription": "Inscribirse",
     "pasInscrit": "Aún no estás registrado ?",
     "mdpOublie": "Contraseña olvidada ?",
+    "reinitialiserMdp": "Restablecer la contraseña",
     "emailEnvoye": "Se ha enviado un correo electrónico a la dirección {{mail}} con un enlace para restablecer su contraseña.",
     "validationInscription": "¡Su registro se ha completado exitosamente! Ahora ha iniciado sesión. Sin embargo, no se le ha asignado ningún perfil en este momento. Espere a que un administrador le asigne estos perfiles para usar la aplicación.",
     "identifiants": {

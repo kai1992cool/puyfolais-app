@@ -12,10 +12,13 @@ import { DialogService } from '../dialog.service';
 })
 export class SigninComponent {
 
+  public username = '';
+  public password = '';
+
   form: FormGroup;
   errorMessage: string = ''; // Propriété pour stocker le message d'erreur
 
-  constructor(public dialogService: DialogService,public angularFireAuth: AngularFireAuth, private router: Router, private fb: FormBuilder, private translateService: TranslateService) {
+  constructor(public dialogService: DialogService, public angularFireAuth: AngularFireAuth, private router: Router, private fb: FormBuilder, private translateService: TranslateService) {
     this.form = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
@@ -40,14 +43,14 @@ export class SigninComponent {
         if (error.code === 'auth/invalid-credential') {
           this.errorMessage = this.translateService.instant('sign.identifiants.invalides');
         } else {
-          this.errorMessage = error.message; 
+          this.errorMessage = error.message;
         }
       });
   }
 
   // Méthode pour envoyer un email de réinitialisation de mot de passe
   sendPasswordResetEmail(event: Event) {
-    
+
     // Empêche la soumission du formulaire
     event.preventDefault();
 
@@ -56,7 +59,7 @@ export class SigninComponent {
     this.angularFireAuth.sendPasswordResetEmail(email)
       .then(() => {
         // Email de réinitialisation envoyé avec succès
-        this.dialogService.openConfirmationDialog(this.translateService.instant('sign.emailEnvoye', { mail: email }),'/');
+        this.dialogService.openConfirmationDialog(this.translateService.instant('sign.emailEnvoye', { mail: email }), '/');
       })
       .catch((error) => {
         // Erreur lors de l'envoi de l'email de réinitialisation

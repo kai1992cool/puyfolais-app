@@ -1,23 +1,40 @@
 <!-- <button mat-raised-button color="primary" googleSso (signInSuccess)="handleSignUpSuccess($event)" aria-label="S'inscrire avec Google">S'inscrire avec Google</button> -->
+<mat-card>
 
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <mat-form-field appearance="fill">
-        <mat-label>{{ 'sign.labelNom' | translate }}</mat-label>
-        <input matInput formControlName="nom" type="text" placeholder="{{ 'sign.entrerNom' | translate }}">
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-        <mat-label>{{ 'sign.labelPrenom' | translate }}</mat-label>
-        <input matInput formControlName="prenom" type="text" placeholder="{{ 'sign.entrerPrenom' | translate }}">
-    </mat-form-field>    
-    <mat-form-field appearance="fill">
-        <mat-label>{{ 'sign.labelMail' | translate }}</mat-label>
-        <input matInput formControlName="email" type="email" placeholder="{{ 'sign.entrerMail' | translate }}">
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-        <mat-label>{{ 'sign.labelMdp' | translate }}</mat-label>
-        <input matInput formControlName="password" type="password" placeholder="{{ 'sign.entrerMdp' | translate }}">
-    </mat-form-field>
-    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+    <mat-card-content>
 
-    <button mat-raised-button color="primary" type="submit">{{ 'sign.inscription' | translate }}</button>
-</form>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+            <h2>{{ 'commun.enregistrer' | translate }}</h2>
+
+            <mat-error *ngIf="errorMessage" class="error-message">{{ errorMessage }}</mat-error>
+
+            <mat-form-field appearance="fill">
+                <mat-label>{{ 'sign.labelNom' | translate }}</mat-label>
+                <input matInput formControlName="nom" type="text" placeholder="{{ 'sign.entrerNom' | translate }}">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+                <mat-label>{{ 'sign.labelPrenom' | translate }}</mat-label>
+                <input matInput formControlName="prenom" type="text"
+                    placeholder="{{ 'sign.entrerPrenom' | translate }}">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+                <mat-label>{{ 'sign.labelMail' | translate }}</mat-label>
+                <input matInput formControlName="email" type="email" placeholder="{{ 'sign.entrerMail' | translate }}">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+                <mat-label>{{ 'sign.labelMdp' | translate }}</mat-label>
+                <input matInput formControlName="password" type="password"
+                    placeholder="{{ 'sign.entrerMdp' | translate }}">
+            </mat-form-field>
+
+            <button mat-raised-button color="primary" type="submit">{{ 'sign.inscription' | translate }}</button>
+        
+        </form>
+
+    </mat-card-content>
+  
+</mat-card>

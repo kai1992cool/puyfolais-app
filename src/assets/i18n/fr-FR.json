@@ -2,6 +2,7 @@
   "commun": {
     "connecter": "Se connecter",
     "deconnecter": "Se déconnecter",
+    "enregistrer": "S'enregistrer",
     "cliquerIci": "Cliquez ici",
     "confirmation": "Confirmation",
     "langue": "Langue"
@@ -14,13 +15,6 @@
   "accueil": {
     "bienvenue": "Bienvenue sur l'application Puyfolais !",
     "introduction": "Cette application vous permettra de gérer votre activité de Puyfolais au sein de l'association.",
-    "utilisation": {
-      "titre": "Vous pouvez utiliser cette application pour :",
-      "uti1": "Renseigner votre planning",
-      "uti2": "Consulter vos affectations",
-      "uti3": "Obtenir des informations sur différents rôles qui vous sont affectés",
-      "uti4": "Et bien plus encore !"
-    },
     "start": "Pour commencer, veuillez vous connecter en cliquant sur l'icône en haut à droite."
   },
   "sign": {
@@ -31,10 +25,11 @@
     "labelNom": "Nom",
     "labelPrenom": "Prénom",
     "labelMail": "E-mail",
-    "labelMdp": "Mot de passe",    
+    "labelMdp": "Mot de passe",
     "inscription": "S'inscrire",
     "pasInscrit": "Pas encore inscrit ?",
     "mdpOublie": "Mot de passe oublié ?",
+    "reinitialiserMdp": "Réinitialiser Mot de passe",
     "emailEnvoye": "Un email vous a été envoyé sur l'adresse {{mail}} avec un lien pour réinitialiser votre mot de passe.",
     "validationInscription": "Votre inscription a été réalisée avec succès ! Vous êtes maintenant connecté. Toutefois, aucun profil ne vous a été affecté pour le moment. Veuillez attendre qu'un administrateur vous affecte ces profils pour utiliser l'application.",
     "identifiants": {

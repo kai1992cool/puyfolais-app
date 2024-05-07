@@ -1,29 +1,35 @@
 <!-- <button mat-raised-button color="primary" googleSso (signInSuccess)="handleSignInSuccess()" aria-label="Se connecter avec Google">Se Connecter avec Google</button> -->
 
-<mat-card class="login-card">
-  <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <mat-card-content>
-      <div class="form-field">
-        <mat-form-field appearance="fill" class="custom-input">
-          <mat-label>{{ 'sign.labelMail' | translate }}</mat-label>
-          <input matInput formControlName="email" type="email" placeholder="{{ 'sign.entrerMail' | translate }}">
-        </mat-form-field>
-      </div>
-      <div class="form-field">
-        <mat-form-field appearance="fill" class="custom-input">
-          <mat-label>{{ 'sign.labelMdp' | translate }}</mat-label>
-          <input matInput formControlName="password" type="password" placeholder="{{ 'sign.entrerMdp' | translate }}">
-        </mat-form-field>
-      </div>
-      <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
-    </mat-card-content>
+<mat-card>
 
-    <mat-card-actions>
-      <button mat-raised-button color="primary" type="submit" class="custom-button">{{ 'commun.connecter' | translate }}</button>
-      <div mat-body-1>{{ 'sign.pasInscrit' | translate }}</div>
-      <button mat-raised-button color="primary" routerLink="/signup" class="custom-button">{{ 'commun.cliquerIci' | translate }}</button>
-      <button mat-raised-button color="primary" class="custom-button" (click)="sendPasswordResetEmail($event)">{{ 'sign.mdpOublie' | translate }}</button>
+  <mat-card-content>
 
-    </mat-card-actions>
-  </form>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+      <h2>{{ 'commun.connecter' | translate }}</h2>
+
+      <mat-error *ngIf="errorMessage" class="error-message">{{ errorMessage }}</mat-error>
+
+      <mat-form-field appearance="fill" class="custom-input">
+        <mat-label>{{ 'sign.labelMail' | translate }}</mat-label>
+        <input matInput formControlName="email" type="email" placeholder="{{ 'sign.entrerMail' | translate }}">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="custom-input">
+        <mat-label>{{ 'sign.labelMdp' | translate }}</mat-label>
+        <input matInput formControlName="password" type="password" placeholder="{{ 'sign.entrerMdp' | translate }}">
+      </mat-form-field>
+      
+      <button mat-raised-button color="primary" type="submit" class="custom-button">{{ 'commun.connecter' | translate  }}</button>
+
+      <p mat-body-1>{{ 'sign.pasInscrit' | translate }}</p>
+      <button mat-raised-button color="primary" routerLink="/signup" class="custom-button">{{ 'sign.inscription' | translate }}</button>
+
+      <p mat-body-1>{{ 'sign.mdpOublie' | translate }}</p>
+      <button mat-raised-button color="primary" class="custom-button" (click)="sendPasswordResetEmail($event)">{{ 'sign.reinitialiserMdp' | translate }}</button>
+
+    </form>
+    
+  </mat-card-content>
+  
 </mat-card>
