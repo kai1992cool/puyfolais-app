@@ -9,7 +9,8 @@
   },
   "toolbar": {
     "menu": {
-      "accueil": "bienvenida"
+      "accueil": "bienvenida",
+      "admin": "Administración"
     }
   },
   "accueil": {
@@ -36,5 +37,8 @@
       "invalides": "Las credenciales proporcionadas no son válidas. Inténtalo de nuevo.",
       "existants": "Este correo electrónico ya está en uso. Utilice sus credenciales asociadas para iniciar sesión."
     }
+  },
+  "admin": {
+    "titre": "Administración"
   }
 }

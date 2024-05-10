@@ -46,7 +46,7 @@ export class SignupComponent {
             displayName: nom + ' ' + prenom // Concaténez nom et prénom pour obtenir le nom d'affichage
           }).then(() => {
             // Enregistrement des autres informations de l'utilisateur dans Firestore
-            this.utilisateurService.createUser(userId, email, nom, prenom)
+            this.utilisateurService.creerUtilisateur(userId, email, nom, prenom)
               .then(() => {
                 this.dialogService.openConfirmationDialog(this.translateService.instant('sign.validationInscription'), '/');
               });

@@ -48,6 +48,9 @@
     <button routerLink="/" aria-label="Accueil" mat-menu-item>
       <mat-icon>home</mat-icon> {{ "toolbar.menu.accueil" | translate: { } }}
     </button>
+    <button *ngIf="isAdmin" routerLink="/admin" aria-label="Administration" mat-menu-item>
+      <mat-icon>home</mat-icon> {{ "toolbar.menu.admin" | translate: { } }}
+    </button>
   </mat-menu>
 
   <!-- Menu langue -->

@@ -9,7 +9,8 @@
   },
   "toolbar": {
     "menu": {
-      "accueil": "Accueil"
+      "accueil": "Accueil",
+      "admin": "Administration"
     }
   },
   "accueil": {
@@ -36,5 +37,8 @@
       "invalides": "Les identifiants fournis sont invalides. Veuillez réssayer.",
       "existants": "Ce mail est déjà utilisée, merci d'utiliser vos identifiants associés pour vous connecter."
     }
+  },
+  "admin": {
+    "titre": "Administration"
   }
 }
