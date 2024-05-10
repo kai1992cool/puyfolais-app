@@ -8,10 +8,10 @@ export class UtilisateurService {
 
   constructor(private firestore: AngularFirestore) { }
 
-  createUser(userId: string, email: string, nom: string, prenom: string, role?: string): Promise<void> {
-    if (!role) {
-      role = 'DEF';
+  createUser(userId: string, email: string, nom: string, prenom: string, permissions?: string[]): Promise<void> {
+    if (!permissions) {
+      permissions = ['DEF'];
     }
-    return this.firestore.collection('utilisateurs').doc(userId).set({ email, nom, prenom, role });
+    return this.firestore.collection('utilisateurs').doc(userId).set({ email, nom, prenom, permissions });
   }
 }
