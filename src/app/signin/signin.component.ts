@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AngularFireAuth } from "@angular/fire/compat/auth";
 import { TranslateService } from '@ngx-translate/core';
-import { DialogService } from '../dialog.service';
+import { DialogService } from '../service/dialog.service';
 
 @Component({
   selector: 'app-signin',

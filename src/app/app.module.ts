@@ -7,7 +7,7 @@ import { AngularFireModule } from "@angular/fire/compat";
 import { AngularFireAuthModule } from "@angular/fire/compat/auth";
 import { environment } from "../environments/environment.development";
 import { AccueilComponent } from './accueil/accueil.component';
-import { GoogleSsoDirective } from './google-sso.directive';
+import { GoogleSsoDirective } from './directive/google-sso.directive';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MatIconModule  } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
