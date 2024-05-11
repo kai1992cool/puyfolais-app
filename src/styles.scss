@@ -10,3 +10,69 @@ body {
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+#titre-page {
+    font-family: Impact, Charcoal, sans-serif;
+    font-size: 40px;
+    letter-spacing: 6px;
+    word-spacing: 6px;
+    color: #000000;
+    font-weight: 400;
+    text-decoration: none solid rgb(68, 68, 68);
+    font-style: normal;
+    font-variant: small-caps;
+    text-transform: none;
+    text-align: center;
+    padding: 10px;
+}
+
+.menu-button-container {
+    /* Existing styles */
+    height: 100vh;
+    /* Set container height to 100% viewport height */
+    display: flex;
+    /* Enable Flexbox layout */
+    justify-content: center;
+    /* Center buttons horizontally */
+    align-items: center;
+    /* Center buttons vertically */
+    gap: 20px;
+    /* Space buttons horizontally */
+    flex-wrap: wrap;
+    /* Enable line wrapping */
+    align-content: flex-start;
+    /* Align rows at the top */
+}
+
+.menu-button {
+    height: 150px !important; 
+    /* Increase button height */
+    width: 200px !important;
+    /* Increase button width */
+    font-size: 18px !important;
+    /* Increase font size as desired */
+}
+
+.menu-button-content {
+    display: flex;
+    /* Enable Flexbox */
+    flex-direction: column;
+    /* Arrange items vertically */
+    align-items: center;
+    /* Center items horizontally */
+    gap: 5px;
+    /* Add space between icon and text */
+}
+
+#text-page {
+    font-family: Georgia, serif;
+    font-size: 19px;
+    letter-spacing: -1px;
+    word-spacing: 0px;
+    color: #000000;
+    font-weight: normal;
+    text-decoration: none;
+    font-style: normal;
+    font-variant: normal;
+    text-transform: none;
+    text-align: center;
+}

@@ -23,9 +23,8 @@ import { ConfirmationDialogComponent } from './dialog/confirmation-dialog/confir
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MatDividerModule } from '@angular/material/divider';
-
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { AdminComponent } from './admin/admin.component';
+import { AdministrationModule } from './administration/administration.module';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -38,12 +37,12 @@ export function createTranslateLoader(http: HttpClient) {
     GoogleSsoDirective,
     SigninComponent,
     SignupComponent,
-    ConfirmationDialogComponent,
-    AdminComponent  ],
+    ConfirmationDialogComponent  ],
   imports: [
     AngularFireAuthModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),    
     BrowserModule,
+    AdministrationModule,
     AppRoutingModule,
     MatIconModule,
     MatToolbarModule,

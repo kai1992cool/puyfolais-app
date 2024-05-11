@@ -1,0 +1,12 @@
+<div id="titre-page">{{ "admin.titre" | translate: { } }}</div>
+
+<p id="text-page">{{ "admin.introduction" | translate: { } }}</p>
+
+<div class="menu-button-container">
+    <button  mat-raised-button color="primary" routerLink="/admin/utilisateurs"  class="menu-button">
+        <div class="menu-button-content">
+        <mat-icon >manage accounts</mat-icon>
+        {{ 'admin.service.gestionUtilisateur' | translate }}
+    </div>
+    </button>
+</div>
