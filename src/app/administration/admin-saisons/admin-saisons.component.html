@@ -3,7 +3,10 @@
 <p id="text-page">{{ "admin.saisons.introduction" | translate: { } }}</p>
 
 <div *ngFor="let saison of listSaisons">
-  <app-saison-card [saison]="saison"></app-saison-card>
+  <app-saison-card 
+  [saison]="saison"
+  (suppressionEffectuee)="mettreAJourListeSaison()">
+  </app-saison-card>
 </div>
 
 <button mat-fab class="add-button" (click)="openModal()">

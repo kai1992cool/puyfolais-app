@@ -4,30 +4,60 @@
 }
 
 mat-card {
-    /* width: 400px; */ /* Supprimez la largeur fixe */
-    margin: 10px; /* Ajoutez une marge pour l'espace entre les cartes */
+    /* width: 400px; */
+    /* Supprimez la largeur fixe */
+    margin: 10px;
+    /* Ajoutez une marge pour l'espace entre les cartes */
 }
 
 .content {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     grid-gap: 10px;
 }
 
 .column {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centre verticalement */
-    justify-content: center; /* Centre horizontalement */
+    align-items: center;
+    /* Centre verticalement */
+    justify-content: center;
+    /* Centre horizontalement */
     padding: 8px;
+}
+
+.column-boutons {
+    display: flex;
+    align-items: center;
+    /* Centre verticalement */
+    position: relative;
 }
 
 .label {
     font-weight: bold;
-    font-size: 1.2rem; /* Taille de police plus grande */
+    font-size: 1.2rem;
+    /* Taille de police plus grande */
 }
 
 .chip-text-etat-saison {
     font-weight: bold;
-    color: white; 
+    color: white;
+}
+
+.disabled-button {
+    opacity: 0.5 !important;
+    /* Opacité pour griser le bouton */
+}
+
+.disabled-button:hover::after {
+    content: "Cette saison ne peut pas être supprimée car des séances existent.";
+    position: absolute;
+    top: -30px;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 5px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    border-radius: 3px;
 }

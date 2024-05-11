@@ -17,9 +17,7 @@ export class AdminSaisonsComponent implements OnInit {
   saisonService = inject(SaisonService);
   
   ngOnInit() {
-    this.saisonService.recupererSaisons().subscribe(saisons => {
-      this.listSaisons.push(...saisons); // Utilisation de l'opérateur spread pour ajouter chaque élément du tableau saisons à listSaisons
-    });
+   this.mettreAJourListeSaison();
   }
 
   openModal(): void {
@@ -28,5 +26,11 @@ export class AdminSaisonsComponent implements OnInit {
     });
   }
 
+  mettreAJourListeSaison() {
+    this.listSaisons = [];
+    this.saisonService.recupererSaisons().subscribe(saisons => {
+      this.listSaisons.push(...saisons); // Utilisation de l'opérateur spread pour ajouter chaque élément du tableau saisons à listSaisons
+    });
+    }
   
 }
