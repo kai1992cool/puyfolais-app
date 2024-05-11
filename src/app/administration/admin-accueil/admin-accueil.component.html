@@ -5,8 +5,22 @@
 <div class="menu-button-container">
     <button  mat-raised-button color="primary" routerLink="/admin/utilisateurs"  class="menu-button">
         <div class="menu-button-content">
-        <mat-icon >manage accounts</mat-icon>
+        <mat-icon >supervisor_account</mat-icon>
         {{ 'admin.service.gestionUtilisateur' | translate }}
     </div>
     </button>
+
+    <button  mat-raised-button color="primary" routerLink="/admin/structures"  class="menu-button">
+        <div class="menu-button-content">
+        <mat-icon >account_tree</mat-icon>
+        {{ 'admin.service.gestionStructure' | translate }}
+    </div>
+    </button>
+
+    <button  mat-raised-button color="primary" routerLink="/admin/saisons"  class="menu-button">
+        <div class="menu-button-content">
+        <mat-icon >theater_comedy</mat-icon>
+        {{ 'admin.service.gestionSaison' | translate }}
+    </div>
+    </button>    
 </div>

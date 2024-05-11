@@ -10,10 +10,12 @@ import { HttpClient } from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { AdminComponent } from './admin/admin.component';
+import { AdminStructuresComponent } from './admin-structures/admin-structures.component';
+import { AdminSaisonsComponent } from './admin-saisons/admin-saisons.component';
 
 
 @NgModule({
-  declarations: [ AdminUtilisateursComponent, AdminAccueilComponent,  AdminComponent],
+  declarations: [AdminUtilisateursComponent, AdminAccueilComponent, AdminComponent, AdminStructuresComponent, AdminSaisonsComponent],
   imports: [
     CommonModule,
     AdministrationRoutingModule,

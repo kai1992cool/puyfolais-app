@@ -5,6 +5,8 @@ import { adminGuard } from '../guard/admin.guard';
 import { authGuard } from '../guard/auth.guard';
 import { AdminUtilisateursComponent } from './admin-utilisateurs/admin-utilisateurs.component';
 import { AdminAccueilComponent } from './admin-accueil/admin-accueil.component';
+import { AdminStructuresComponent } from './admin-structures/admin-structures.component';
+import { AdminSaisonsComponent } from './admin-saisons/admin-saisons.component';
 
 const routes: Routes = [
   
@@ -15,6 +17,14 @@ const routes: Routes = [
     {
       path: 'utilisateurs',
       component: AdminUtilisateursComponent
+    },
+    {
+      path: 'structures',
+      component: AdminStructuresComponent
+    },
+    {
+      path: 'saisons',
+      component: AdminSaisonsComponent
     }
     
   

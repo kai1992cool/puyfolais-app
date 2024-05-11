@@ -42,7 +42,22 @@
     "titre": "Administration",
     "introduction": "Ici vous pouvez accéder au paramétrage de l'application (utilisateur, structure, options ...).",
     "service": {
-      "gestionUtilisateur": "Gestion des Utilisateurs"
+      "gestionUtilisateur": "Gestion des Utilisateurs",
+      "gestionStructure": "Gestion des structures",
+      "gestionSaison": "Gestion des saisons"
+    },
+    "utilisateurs": {
+      "titre": "Administration Utilisateurs",
+      "introduction": "Ici vous pouvez gérer les utilisateurs de l'applications."
+    },
+    "structures": {
+      "titre": "Administration Structures",
+      "introduction": "Ici vous pouvez gérer les structures de l'association."
+    },
+    "saisons": {
+      "titre": "Administration Saisons",
+      "introduction": "Ici vous pouvez gérer les saisons."
     }
+    
   }
 }
