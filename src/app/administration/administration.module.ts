@@ -15,17 +15,25 @@ import { AdminSaisonsComponent } from './admin-saisons/admin-saisons.component';
 import { SaisonCardComponent } from './component/saison-card/saison-card.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
-
+import { SaisonEditCardComponent } from './component/saison-edit-card/saison-edit-card.component';
+import { FormsModule } from '@angular/forms'; 
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
-  declarations: [AdminUtilisateursComponent, AdminAccueilComponent, AdminComponent, AdminStructuresComponent, AdminSaisonsComponent, SaisonCardComponent],
+  declarations: [AdminUtilisateursComponent, AdminAccueilComponent, AdminComponent, AdminStructuresComponent, AdminSaisonsComponent, SaisonCardComponent, SaisonEditCardComponent],
   imports: [
     CommonModule,
     AdministrationRoutingModule,
     MatIconModule,
+    MatInputModule,
+    MatFormFieldModule,    
     MatButtonModule,
     MatCardModule,
     MatChipsModule,
+    MatDatepickerModule,
+    FormsModule ,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

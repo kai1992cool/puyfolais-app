@@ -3,12 +3,23 @@
 <p id="text-page">{{ "admin.saisons.introduction" | translate: { } }}</p>
 
 <div *ngFor="let saison of listSaisons">
-  <app-saison-card 
-  [saison]="saison"
-  (suppressionEffectuee)="mettreAJourListeSaison()">
-  </app-saison-card>
+  <div class="saisons-container">
+    <app-saison-card 
+      [saison]="saison" 
+      (suppressionEffectuee)="mettreAJourListeSaison()"
+      (editionSaisonDemandee)="afficherBlocEditionSaison($event)">
+    </app-saison-card>
+  </div>
+  <div class="saisons-container" *ngIf="saisonSelectionnee === saison">
+    <app-saison-edit-card
+      [saison]="saisonSelectionnee"
+      (editionSaisonValidee)="validerModificationSaison($event)"
+      (annulerEditionSaisonDemandee)="annulerEditionSaison()">
+    </app-saison-edit-card>
+  </div>
 </div>
 
+
 <button mat-fab class="add-button" (click)="openModal()">
-    <mat-icon>add</mat-icon>
-  </button>
+  <mat-icon>add</mat-icon>
+</button>

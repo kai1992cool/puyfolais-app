@@ -1,0 +1,59 @@
+/* votre-modal.component.css */
+
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin-top: 20px;
+    /* Ajoute de l'espace au-dessus de la dialog */
+    margin-bottom: 20px;
+    /* Ajoute de l'espace en dessous de la dialog */
+}
+
+.mat-dialog-container {
+    padding: 20px;
+    /* Ajoute un espace autour de la dialog */
+}
+
+
+
+.full-width {
+    width: calc(100% - 32px);
+    /* Réduit la largeur des éléments à l'intérieur de la carte */
+    margin: 0 auto;
+    /* Centre les éléments horizontalement */
+}
+
+
+.mat-card {
+    width: auto;
+    /* Permet à la carte de prendre la dimension du contenu */
+    margin: 40px;
+    /* Ajoute des marges autour de la carte */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mat-card-title {
+    width: 100%;
+    text-align: center; /* Centre le texte horizontalement */
+    margin: 20px 0; /* Ajoute de l'espace au-dessus et en dessous du titre */
+    box-sizing: border-box; /* Inclus la marge dans le calcul de la largeur */
+    padding: 0 20px; /* Ajoute de l'espace à gauche et à droite du titre */
+  }
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    /* Ajoute de l'espace au-dessus des boutons */
+    margin-bottom: 20px;
+    /* Ajoute de l'espace en dessous des boutons */
+}
+
+.button-container button {
+    margin: 0 10px;
+    /* Ajoute de l'espace entre les boutons */
+}

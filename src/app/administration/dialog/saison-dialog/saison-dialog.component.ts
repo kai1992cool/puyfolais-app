@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { SaisonService } from '../../service/saison.service';
+import { SaisonService } from '../../../service/saison.service';
 import { first, switchMap, of } from 'rxjs';
 
 
@@ -12,13 +12,15 @@ import { first, switchMap, of } from 'rxjs';
 })
 export class SaisonDialogComponent {
 
-  constructor(public dialogRef: MatDialogRef<SaisonDialogComponent>, public saisonService: SaisonService) { }
+  constructor(
+    public dialogRef: MatDialogRef<SaisonDialogComponent>, 
+    public saisonService: SaisonService,
+  ) { }
 
   messageErreur: boolean = false; // Variable pour contrôler l'affichage du message d'erreur
 
 
   @ViewChild('saisonForm') saisonForm!: NgForm;
-
 
   closeDialog(): void {
     this.dialogRef.close();

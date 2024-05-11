@@ -2,7 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { SaisonService } from '../../service/saison.service';
 import { ISaison } from '../../interface/saison';
 import { MatDialog } from '@angular/material/dialog';
-import { SaisonDialogComponent } from '../../dialog/saison-dialog/saison-dialog.component';
+import { SaisonDialogComponent } from '../dialog/saison-dialog/saison-dialog.component';
 
 @Component({
   selector: 'app-admin-saisons',
@@ -15,15 +15,23 @@ export class AdminSaisonsComponent implements OnInit {
   
   listSaisons: ISaison[] = [];
   saisonService = inject(SaisonService);
-  
+  saisonEditEnabled: boolean = false;
+  saisonSelectionnee: ISaison | null = null;
+
   ngOnInit() {
    this.mettreAJourListeSaison();
   }
 
   openModal(): void {
-    this.dialog.open(SaisonDialogComponent, {
+    this.saisonSelectionnee = null;
+    const dialogRef = this.dialog.open(SaisonDialogComponent, {
       width: '400px', // Ajustez la largeur de la modale selon vos besoins
     });
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.mettreAJourListeSaison();
+    });
+
   }
 
   mettreAJourListeSaison() {
@@ -33,4 +41,18 @@ export class AdminSaisonsComponent implements OnInit {
     });
     }
   
+    validerModificationSaison(saison: ISaison) {
+      // TODo : implémenter ici l'update en BDD
+      this.saisonSelectionnee = null;
+
+    }
+  
+    afficherBlocEditionSaison(saison: ISaison) {
+      this.saisonSelectionnee = saison;
+    }
+
+    annulerEditionSaison() {
+      this.saisonSelectionnee = null;
+    }
+
 }

@@ -29,8 +29,7 @@ import { GoogleSsoDirective } from './directive/google-sso.directive';
 import { SigninComponent } from './signin/signin.component';
 import { SignupComponent } from './signup/signup.component';
 import { ConfirmationDialogComponent } from './dialog/confirmation-dialog/confirmation-dialog.component';
-import { SaisonDialogComponent } from './dialog/saison-dialog/saison-dialog.component';
-import { SaisonCardComponent } from './administration/component/saison-card/saison-card.component';
+import { SaisonDialogComponent } from './administration/dialog/saison-dialog/saison-dialog.component';
 
 import { MAT_DATE_LOCALE, DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
 import { MAT_MOMENT_DATE_ADAPTER_OPTIONS, MomentDateAdapter } from '@angular/material-moment-adapter';
