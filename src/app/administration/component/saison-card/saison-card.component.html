@@ -1,0 +1,18 @@
+<div class="saison-details">
+    <mat-card>
+        <mat-card-content class="content">
+            <div class="column">
+                <div class="label">{{ saison.libelle }}</div>
+            </div>
+            <div class="column">
+                <div>Du {{ toDate(saison.dateDebut) | date:'dd/MM/yyyy' }} au {{ toDate(saison.dateFin) |
+                    date:'dd/MM/yyyy' }}</div>
+            </div>
+            <div class="column">
+                <mat-chip  [style.background-color]="getSaisonStatusColor(saison)">
+                    <div class="chip-text-etat-saison">{{ getSaisonStatusText(saison) }}</div>
+                </mat-chip>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>

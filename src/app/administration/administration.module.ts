@@ -12,15 +12,20 @@ import { MatButtonModule } from '@angular/material/button';
 import { AdminComponent } from './admin/admin.component';
 import { AdminStructuresComponent } from './admin-structures/admin-structures.component';
 import { AdminSaisonsComponent } from './admin-saisons/admin-saisons.component';
+import { SaisonCardComponent } from './component/saison-card/saison-card.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatChipsModule } from '@angular/material/chips';
 
 
 @NgModule({
-  declarations: [AdminUtilisateursComponent, AdminAccueilComponent, AdminComponent, AdminStructuresComponent, AdminSaisonsComponent],
+  declarations: [AdminUtilisateursComponent, AdminAccueilComponent, AdminComponent, AdminStructuresComponent, AdminSaisonsComponent, SaisonCardComponent],
   imports: [
     CommonModule,
     AdministrationRoutingModule,
     MatIconModule,
     MatButtonModule,
+    MatCardModule,
+    MatChipsModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

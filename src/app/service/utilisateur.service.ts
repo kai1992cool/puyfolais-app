@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { Utilisateur } from '../interface/utilisateur';
+import { IUtilisateur } from '../interface/utilisateur';
 import { Observable, map, filter, switchMap, of } from 'rxjs';
 import { AngularFireAuth } from "@angular/fire/compat/auth";
 
@@ -39,7 +39,7 @@ export class UtilisateurService {
     return this.firestore.collection('utilisateurs').doc(userId).get().pipe(
       map(documentSnapshot => {
         if (documentSnapshot.exists) {
-          const userData = documentSnapshot.data() as Utilisateur;
+          const userData = documentSnapshot.data() as IUtilisateur;
           return userData.permissions || [];
         } else {
           return [];

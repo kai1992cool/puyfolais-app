@@ -1,3 +1,11 @@
 <div id="titre-page">{{ "admin.saisons.titre" | translate: { } }}</div>
 
 <p id="text-page">{{ "admin.saisons.introduction" | translate: { } }}</p>
+
+<div *ngFor="let saison of listSaisons">
+  <app-saison-card [saison]="saison"></app-saison-card>
+</div>
+
+<button mat-fab class="add-button" (click)="openModal()">
+    <mat-icon>add</mat-icon>
+  </button>

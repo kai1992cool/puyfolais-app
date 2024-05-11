@@ -1,0 +1,41 @@
+<!-- votre-modal.component.html -->
+
+<h2>Formulaire de Saisie de Saison</h2>
+
+<form #saisonForm="ngForm" (ngSubmit)="onSubmit(saisonForm)" class="form-container">
+
+  <mat-form-field class="full-width">
+    <input matInput placeholder="Libellé" name="libelle" [(ngModel)]="saisonForm.value['libelle']" required>
+    <mat-error *ngIf="saisonForm.controls['libelle'].invalid && saisonForm.controls['libelle'].touched">
+      Le libellé est requis
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <input matInput [matDatepicker]="picker" placeholder="Date de Début" name="dateDebut" ngModel required>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+    <mat-error *ngIf="saisonForm.controls['dateDebut'].invalid && saisonForm.controls['dateDebut'].touched">
+      La date de début est requise
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <input matInput [matDatepicker]="picker2" placeholder="Date de Fin" name="dateFin" ngModel required>
+    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+    <mat-datepicker #picker2></mat-datepicker>
+    <mat-error *ngIf="saisonForm.controls['dateFin'].invalid && saisonForm.controls['dateFin'].touched">
+      La date de fin est requise
+    </mat-error>
+  </mat-form-field>
+
+    <!-- Zone de message d'erreur pour la période chevauchante -->
+    <mat-error *ngIf="messageErreur">
+        La période saisie chevauche une période existante.
+      </mat-error>
+      
+  <div class="button-container">
+    <button mat-button type="button" (click)="closeDialog()">Annuler</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="saisonForm.invalid">Enregistrer</button>
+  </div>
+</form>
