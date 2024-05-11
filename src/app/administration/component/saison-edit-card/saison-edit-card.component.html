@@ -27,7 +27,7 @@
 
       <!-- Troisième ligne : Boutons -->
       <div class="form-group" fxLayout="row" fxLayoutAlign="space-between">
-        <button mat-raised-button color="primary" (click)="validerMiseAJourSaison()">Enregistrer</button>
+        <button mat-raised-button color="primary" (click)="validerMiseAJourSaison()" [disabled]="!formulaireValide()">Enregistrer</button>
         <button mat-button color="warn" (click)="annulerMiseAJourSaison()">Annuler</button>
       </div>
     </mat-card-content>

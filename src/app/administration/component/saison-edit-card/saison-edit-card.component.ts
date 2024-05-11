@@ -12,8 +12,6 @@ export class SaisonEditCardComponent {
   @Input()
   saison!: ISaison;
 
-  constructor() { }
-
   validerMiseAJourSaison() {
     this.editionSaisonValidee.emit(this.saison);
   }
@@ -21,5 +19,9 @@ export class SaisonEditCardComponent {
   annulerMiseAJourSaison() {
     this.annulerEditionSaisonDemandee.emit()
   }
-  
+
+  formulaireValide(): boolean {
+    // Vérifiez si tous les champs requis sont remplis
+    return !!this.saison?.libelle && !!this.saison?.dateDebut && !!this.saison?.dateFin;
+  }
 }

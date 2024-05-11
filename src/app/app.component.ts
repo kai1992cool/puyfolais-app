@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
     public traductionService: TranslateService,
     public utilisateurService: UtilisateurService,
     public authentificationFirebaseAngular: AngularFireAuth,
-    public router: Router) { }
+    public router: Router ) { }
 
   ngOnInit() {
     this.utilisateurService.possedePermission(Profil.Administrateur)

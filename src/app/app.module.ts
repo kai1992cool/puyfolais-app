@@ -8,7 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
-import { MatNativeDateModule } from '@angular/material/core';
+import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -30,17 +30,11 @@ import { SigninComponent } from './signin/signin.component';
 import { SignupComponent } from './signup/signup.component';
 import { ConfirmationDialogComponent } from './dialog/confirmation-dialog/confirmation-dialog.component';
 import { SaisonDialogComponent } from './administration/dialog/saison-dialog/saison-dialog.component';
-
-import { MAT_DATE_LOCALE, DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
-import { MAT_MOMENT_DATE_ADAPTER_OPTIONS, MomentDateAdapter } from '@angular/material-moment-adapter';
 import { AdministrationModule } from './administration/administration.module';
 
-// Importez les locales nécessaires pour la localisation en français
-// import localeFr from '@angular/common/locales/fr';
-// import { registerLocaleData } from '@angular/common';
-
-// Enregistrez la localisation française
-// registerLocaleData(localeFr);
+import { LOCALE_ID } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr'; // Import direct de la locale française
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -85,10 +79,14 @@ export function createTranslateLoader(http: HttpClient) {
   ],
   providers: [
     provideAnimationsAsync(), 
-    // { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' }, // Définissez la langue française pour les dates
-    // { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS] }, // Utilisez MomentDateAdapter pour gérer les dates
-    // { provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { useUtc: true } } // Utilisez l'heure UTC
+    { provide: LOCALE_ID, useValue: 'fr-FR' }, { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' }  
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  
+  constructor() {
+    registerLocaleData(localeFr); // Charger les données de la langue française
+  }
+
+}
