@@ -20,17 +20,17 @@
 
         <mat-menu #profil="matMenu">
           <!-- Affichage du nom d'utilisateur -->
-          <div *ngIf="angularFireAuth.authState | async as user">
+          <div *ngIf="authentificationFirebaseAngular.authState | async as user">
             <span mat-menu-item>{{ user.displayName }}</span>
             <mat-divider></mat-divider>
           </div>
           <!-- Affichage du bouton de connexion d'utilisateur -->
-          <button *ngIf="!(angularFireAuth.authState | async)" routerLink="/signin" aria-label="Se connecter"
+          <button *ngIf="!(authentificationFirebaseAngular.authState | async)" routerLink="/signin" aria-label="Se connecter"
             mat-menu-item>
             <mat-icon>login</mat-icon> {{ "commun.connecter" | translate: { } }}
           </button>
           <!-- Affichage du bouton de déconnexion d'utilisateur -->
-          <button *ngIf="angularFireAuth.authState | async" (click)="logOut()" aria-label="Se déconnecter"
+          <button *ngIf="authentificationFirebaseAngular.authState | async" (click)="deconnexionFirebase()" aria-label="Se déconnecter"
             mat-menu-item>
             <mat-icon>logout</mat-icon> {{ "commun.deconnecter" | translate: { } }}
           </button>
@@ -48,19 +48,19 @@
     <button routerLink="/" aria-label="Accueil" mat-menu-item>
       <mat-icon>home</mat-icon> {{ "toolbar.menu.accueil" | translate: { } }}
     </button>
-    <button *ngIf="isAdmin" routerLink="/admin" aria-label="Administration" mat-menu-item>
+    <button *ngIf="utilisateurEstAdmin" routerLink="/admin" aria-label="Administration" mat-menu-item>
       <mat-icon>home</mat-icon> {{ "toolbar.menu.admin" | translate: { } }}
     </button>
   </mat-menu>
 
   <!-- Menu langue -->
   <mat-menu #langue="matMenu">
-    <button type="button" mat-menu-item (click)="changeLanguage('fr-FR')"
-      [class.active]="translateService.currentLang !== 'fr-FR'">
+    <button type="button" mat-menu-item (click)="changerLangue('fr-FR')"
+      [class.active]="traductionService.currentLang !== 'fr-FR'">
       <mat-icon class="fi fi-fr"></mat-icon>Français
     </button>
-    <button mat-menu-item type="button" (click)="changeLanguage('es-ES')"
-      [class.active]="translateService.currentLang === 'es-ES'">
+    <button mat-menu-item type="button" (click)="changerLangue('es-ES')"
+      [class.active]="traductionService.currentLang === 'es-ES'">
       <mat-icon class="fi fi-es"></mat-icon>Español
     </button>
   </mat-menu>

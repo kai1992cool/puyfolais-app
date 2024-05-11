@@ -1,33 +1,26 @@
 import { CanActivateFn } from "@angular/router";
-import { AngularFireAuth } from "@angular/fire/compat/auth";
 import { UtilisateurService } from '../service/utilisateur.service';
-import { map, take, switchMap } from 'rxjs/operators';
-import { of } from 'rxjs';
+import { of, switchMap } from 'rxjs';
 import { inject } from "@angular/core";
 import { Router } from "@angular/router";
+import { Profil } from "../enum/profil";
 
 export const adminGuard: CanActivateFn = (route, state) => {
 
-  const angularFireAuth = inject(AngularFireAuth);
   const utilisateurService = inject(UtilisateurService);
   const router = inject(Router);
 
-  return angularFireAuth.authState.pipe(
-    take(1),
-    switchMap(user => {
-      if (!user) {
-        router.navigateByUrl('/');
-        return of(false);
-      }
-      return utilisateurService.recupererPermissionsUtilisateur(user.uid).pipe(
-        map(permissions => {
-          const isAdmin = permissions.includes('ADM');
-          if (!isAdmin) {
-            router.navigateByUrl('/');
-          }
-          return isAdmin;
-        })
-      );
-    })
-  );
+  // Use 'pipe' to flatten the nested observable
+  return utilisateurService.possedePermission(Profil.Administrateur)
+    .pipe(
+      switchMap(estAdmin => {
+        if (!estAdmin) {
+          router.navigateByUrl('/');
+          return of(false); 
+        } else {
+          return of(true); 
+        }
+      })
+    );
 };
+
