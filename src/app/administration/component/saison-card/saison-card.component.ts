@@ -1,6 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { ISaison } from '../../../interface/saison';
-import { Timestamp } from '@firebase/firestore';
 import { EtatSaison } from '../../../enum/etat-saison';
 import { SaisonService } from '../../../service/saison.service';
 
@@ -47,10 +46,6 @@ export class SaisonCardComponent implements OnInit {
         this.couleurBadgeSaison = 'yellow';
         break;
     }
-  }
-
-  timestampVersDate(timestamp: Timestamp): Date {
-    return timestamp.toDate();
   }
 
   verifierPossibiliteSupprimerSaison(arg0: ISaison) {

@@ -5,8 +5,8 @@
                 <div class="label">{{ saison.libelle }}</div>
             </div>
             <div class="column">
-                <div>{{ "admin.saisons.mentionDu" | translate: { } }} {{ timestampVersDate(saison.dateDebut) | date:'dd/MM/yyyy' }} {{ "admin.saisons.mentionAu" | translate: { } }} {{
-                    timestampVersDate(saison.dateFin) |
+                <div>{{ "admin.saisons.mentionDu" | translate: { } }} {{ saison.dateDebut.toDate() | date:'dd/MM/yyyy' }} {{ "admin.saisons.mentionAu" | translate: { } }} {{
+                    saison.dateFin.toDate() |
                     date:'dd/MM/yyyy' }}</div>
             </div>
             <div class="column">

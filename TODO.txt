@@ -1,6 +1,3 @@
-      implémenter ici l'update en BDD des saison en cas d'étidion (Voir TODO)
       revoir la gestion du message/icone qui ne fonctionne pas quand on désactive la suppression d'une saison
-      Implémenter l'alimentation des datePicker avec les dates de saison
       Internationaliser les datePicker avec la langue choisi par l'utilisateur
       Mettre le lundi en premier jour de la semaine sur les datePicker
-      Revoir l'affichage des vieux saisons lors de la suppression (OK mais on apercois furtivement des doublons)
