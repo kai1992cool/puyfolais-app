@@ -1,5 +1,5 @@
-import { Component, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { SaisonService } from '../../../service/saison.service';
 import { first, switchMap, of } from 'rxjs';
@@ -18,7 +18,6 @@ export class SaisonDialogComponent {
   ) { }
 
   afficherMessageErreur: boolean = false; // Variable pour contrôler l'affichage du message d'erreur
-
 
   @ViewChild('saisonForm') saisonForm!: NgForm;
 

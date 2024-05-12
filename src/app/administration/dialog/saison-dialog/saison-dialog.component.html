@@ -9,7 +9,7 @@
   </mat-card-title>
   <mat-form-field class="full-width">
     <input matInput placeholder="{{ 'admin.saisons.edition.champLibelle' | translate }}" name="libelle" [(ngModel)]="saisonForm.value['libelle']" required>
-    <mat-error *ngIf="saisonForm.controls['libelle'].invalid && saisonForm.controls['libelle'].touched">
+    <mat-error *ngIf="saisonForm.invalid && saisonForm.controls['libelle'].touched">
       {{ "admin.saisons.edition.champLibelleObligatoire" | translate: { } }}
     </mat-error>
   </mat-form-field>
@@ -18,7 +18,7 @@
     <input matInput [matDatepicker]="picker" placeholder="{{ 'admin.saisons.edition.champDateDebut' | translate }}" name="dateDebut" ngModel required>
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
-    <mat-error *ngIf="saisonForm.controls['dateDebut'].invalid && saisonForm.controls['dateDebut'].touched">
+    <mat-error *ngIf="saisonForm.invalid && saisonForm.controls['dateDebut'].touched">
       {{ "admin.saisons.edition.champDateDebutObligatoire" | translate: { } }}
     </mat-error>
   </mat-form-field>
@@ -27,7 +27,7 @@
     <input matInput [matDatepicker]="picker2" placeholder="{{ 'admin.saisons.edition.champDateFin' | translate }}" name="dateFin" ngModel required>
     <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
     <mat-datepicker #picker2></mat-datepicker>
-    <mat-error *ngIf="saisonForm.controls['dateFin'].invalid && saisonForm.controls['dateFin'].touched">
+    <mat-error *ngIf="saisonForm.invalid && saisonForm.controls['dateFin'].touched">
       {{ "admin.saisons.edition.champDateFinObligatoire" | translate: { } }}
     </mat-error>
   </mat-form-field>
