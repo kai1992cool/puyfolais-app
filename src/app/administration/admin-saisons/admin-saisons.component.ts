@@ -19,6 +19,7 @@ export class AdminSaisonsComponent implements OnInit, OnDestroy  {
   saisonService = inject(SaisonService);
   editionSaisonActivee: boolean = false;
   saisonSelectionnee: ISaison | null = null;
+  planningSelectionnee: ISaison | null = null;
   saisonSubscription: Subscription | undefined ; // Garder une référence à l'abonnement pour pouvoir s'en désabonner
 
   ngOnInit() {
@@ -59,6 +60,10 @@ export class AdminSaisonsComponent implements OnInit, OnDestroy  {
 
   afficherBlocEditionSaison(saison: ISaison) {
     this.saisonSelectionnee = saison;
+  }
+
+  afficherBlocPlanningSaison(saison: ISaison) {
+    this.planningSelectionnee = saison;
   }
 
   annulerEditionSaison() {

@@ -14,6 +14,7 @@ export class SaisonCardComponent implements OnInit {
   @Input() saison!: ISaison;
   @Output() suppressionEffectuee: EventEmitter<void> = new EventEmitter<void>();
   @Output() editionSaisonDemandee: EventEmitter<ISaison> = new EventEmitter<ISaison>();
+  @Output() planningSaison: EventEmitter<ISaison> = new EventEmitter<ISaison>();
 
   texteBadgeSaison: string = '';
   etatSaisonTraduit: Map<EtatSaison, string> = new Map();
@@ -66,6 +67,10 @@ export class SaisonCardComponent implements OnInit {
 
   editerSaison(arg0: ISaison) {
     this.editionSaisonDemandee.emit(arg0);
+  }
+
+  editerPlanningSaison(arg0: ISaison) {
+    this.planningSaison.emit(arg0);
   }
 
   recupererMessageSuppressionImpossible(): string {

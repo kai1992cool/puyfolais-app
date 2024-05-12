@@ -21,10 +21,11 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { SaisonCardSeancesComponent } from './component/saison-card-seances/saison-card-seances.component';
 
 
 @NgModule({
-  declarations: [AdminUtilisateursComponent, AdminAccueilComponent, AdminComponent, AdminStructuresComponent, AdminSaisonsComponent, SaisonCardComponent, SaisonEditCardComponent],
+  declarations: [AdminUtilisateursComponent, AdminAccueilComponent, AdminComponent, AdminStructuresComponent, AdminSaisonsComponent, SaisonCardComponent, SaisonEditCardComponent, SaisonCardSeancesComponent],
   imports: [
     CommonModule,
     AdministrationRoutingModule,

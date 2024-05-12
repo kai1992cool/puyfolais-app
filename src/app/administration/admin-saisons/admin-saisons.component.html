@@ -7,7 +7,8 @@
     <app-saison-card 
       [saison]="saison" 
       (suppressionEffectuee)="mettreAJourListeSaison()"
-      (editionSaisonDemandee)="afficherBlocEditionSaison($event)">
+      (editionSaisonDemandee)="afficherBlocEditionSaison($event)"
+      (planningSaison)="afficherBlocPlanningSaison($event)">
     </app-saison-card>
   </div>
   <div class="saisons-container" *ngIf="saisonSelectionnee === saison">
@@ -17,6 +18,12 @@
       (annulerEditionSaisonDemandee)="annulerEditionSaison()">
     </app-saison-edit-card>
   </div>
+  <div class="saisons-container" *ngIf="planningSelectionnee === saison">
+    <app-saison-card-seances
+      [saison]="planningSelectionnee">
+    </app-saison-card-seances>
+  </div>
+
 </div>
 
 <button mat-fab class="add-button" (click)="ouvrirModalAjoutSaison()">

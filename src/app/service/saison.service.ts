@@ -5,6 +5,7 @@ import { AngularFireAuth } from "@angular/fire/compat/auth";
 import { ISaison } from '../interface/saison';
 import { EtatSaison } from '../enum/etat-saison';
 import { EnumTraductionService } from './enum-traduction.service';
+import { ISeance } from '../interface/seance';
 
 @Injectable({
   providedIn: 'root'
@@ -24,11 +25,11 @@ export class SaisonService {
    * @param listSeances La liste des séances
    * @returns L'identifiant technique de la saison
    */
-  creerSaison(libelle: string, dateDebut: Date, dateFin: Date, listSeances?: ISaison[]): Promise<DocumentReference<any>> {
-    if (!listSeances) {
-      return this.firestore.collection('saisons').add({ libelle, dateDebut, dateFin });
+  creerSaison(libelle: string, dateDebut: Date, dateFin: Date, seances?: ISeance[]): Promise<DocumentReference<any>> {
+    if (!seances) {
+      return this.firestore.collection('saisons').add({ libelle, dateDebut, dateFin, seances: []  });
     } else {
-      return this.firestore.collection('saisons').add({ libelle, dateDebut, dateFin, listSeances });
+      return this.firestore.collection('saisons').add({ libelle, dateDebut, dateFin, seances });
     }
   }
 
