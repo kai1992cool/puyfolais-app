@@ -6,6 +6,7 @@ export const environment = {
         projectId: "puyfolais-app",
         storageBucket: "puyfolais-app.appspot.com",
         messagingSenderId: "502516336689",
-        appId: "1:502516336689:web:e1107fca1d17f2f8266d10"
+        appId: "1:502516336689:web:e1107fca1d17f2f8266d10",
+        measurementId: "G-R1Y72BS6T3"
     }
 };

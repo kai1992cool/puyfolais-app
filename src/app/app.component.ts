@@ -5,6 +5,8 @@ import { UtilisateurService } from './service/utilisateur.service';
 import { Profil } from './enum/profil';
 import { Router } from "@angular/router";
 import { LangueService } from './service/langue.service';
+import { AngularFireAnalytics } from '@angular/fire/compat/analytics';
+
 
 @Component({
   selector: 'app-root',
@@ -21,7 +23,8 @@ export class AppComponent implements OnInit {
     public utilisateurService: UtilisateurService,
     public authentificationFirebaseAngular: AngularFireAuth,
     public router: Router,
-    private langueService: LangueService ) { }
+    private langueService: LangueService,
+    private analytics: AngularFireAnalytics ) { }
 
   ngOnInit() {
     this.utilisateurService.possedePermission(Profil.Administrateur)
