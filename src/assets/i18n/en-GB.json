@@ -1,8 +1,8 @@
 {
-  "common": {
+  "commun": {
     "connecter": "Log in",
     "deconnecter": "Log out",
-    "inscription": "Register",
+    "inscription": "Sign up",
     "cliquerIci": "Click here",
     "confirmation": "Confirmation",
     "enregistrer": "Save",
@@ -36,12 +36,12 @@
     "labelPrenom": "First Name",
     "labelMail": "Email",
     "labelMdp": "Password",
-    "inscription": "Register",
+    "inscription": "Sign up",
     "pasInscrit": "Not registered yet?",
     "mdpOublie": "Forgot your password?",
     "reinitialiserMdp": "Reset Password",
     "emailEnvoye": "An email has been sent to the address {{mail}} with a link to reset your password.",
-    "validationInscription": "Your registration was successful! You are now logged in. However, no profile has been assigned to you at the moment. Please wait for an administrator to assign you these profiles to use the application.",
+    "validationInscription": "Your registration was successful! You are now logged in. However, no profile has been assigned to you yet. Please wait for an administrator to assign you these profiles to use the application.",
     "identifiants": {
       "invalides": "The provided credentials are invalid. Please try again.",
       "existants": "This email is already in use, please use your associated credentials to log in."
@@ -49,7 +49,7 @@
   },
   "admin": {
     "titre": "Administration",
-    "introduction": "Here you can access the application settings (users, structures, options ...).",
+    "introduction": "Here you can access the application settings (users, structures, options...).",
     "service": {
       "gestionUtilisateur": "User Management",
       "gestionStructure": "Structure Management",
@@ -77,7 +77,8 @@
         "champLibelleObligatoire": "Label is required",
         "champDateDebutObligatoire": "Start date is required",
         "champDateFinObligatoire": "End date is required",
-        "messageChevauchement": "The entered period overlaps an existing period."
+        "messageChevauchement": "The entered period overlaps with an existing period.",
+        "messageDatesErronees": "Start date is greater than end date."
       }
     }
   }

@@ -77,7 +77,8 @@
         "champLibelleObligatoire": " Le libellé est requis",
         "champDateDebutObligatoire": "La date de début est requise",
         "champDateFinObligatoire": "La date de fin est requise",
-        "messageChevauchement": "La période saisie chevauche une période existante."
+        "messageChevauchement": "La période saisie chevauche une période existante.",
+        "messageDatesErronees": "La date de début est supérieure à la date de fin."
       }
     }
   }

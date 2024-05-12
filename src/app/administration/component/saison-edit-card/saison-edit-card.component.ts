@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ISaison } from '../../../interface/saison';
 import { Timestamp } from '@angular/fire/firestore';
+import { DateAdapter } from '@angular/material/core';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -16,8 +18,14 @@ export class SaisonEditCardComponent implements OnInit {
   saison!: ISaison;
   saisonConvertie!: Saison;
 
+  constructor(
+    private traductionService: TranslateService,
+    private dateAdapter: DateAdapter<any>
+  ) {}
+
   ngOnInit(): void {
     this.saisonConvertie = new Saison(this.saison);
+    this.dateAdapter.setLocale(this.traductionService.currentLang);
   }
 
   validerMiseAJourSaison() {
@@ -30,8 +38,7 @@ export class SaisonEditCardComponent implements OnInit {
   }
 
   formulaireValide(): boolean {
-    // Vérifiez si tous les champs requis sont remplis
-    return !!this.saison?.libelle && !!this.saison?.dateDebut && !!this.saison?.dateFin;
+    return !!this.saisonConvertie?.libelle && !!this.saisonConvertie?.dateDebut && !!this.saisonConvertie?.dateFin && this.saisonConvertie.dateDebut <= this.saisonConvertie.dateFin;
   }
 
   convertirTimestampFirestoreVersDate(timestamp: Timestamp): Date | null {

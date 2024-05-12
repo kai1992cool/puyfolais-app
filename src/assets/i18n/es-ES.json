@@ -1,9 +1,9 @@
 {
   "commun": {
     "connecter": "Iniciar sesión",
-    "deconnecter": "Cerrar sesión",
+    "deconnecter": "Desconectar",
     "inscription": "Registrarse",
-    "cliquerIci": "Haga clic aquí",
+    "cliquerIci": "Haz clic aquí",
     "confirmation": "Confirmación",
     "enregistrer": "Guardar",
     "annuler": "Cancelar",
@@ -25,7 +25,7 @@
   "accueil": {
     "bienvenue": "¡Bienvenido a la aplicación Puyfolais!",
     "introduction": "Esta aplicación le permitirá gestionar su actividad de Puyfolais dentro de la asociación.",
-    "start": "Para empezar, por favor inicie sesión haciendo clic en el icono en la esquina superior derecha."
+    "start": "Para comenzar, por favor inicie sesión haciendo clic en el ícono en la esquina superior derecha."
   },
   "sign": {
     "entrerNom": "Ingrese su nombre",
@@ -37,13 +37,13 @@
     "labelMail": "Correo electrónico",
     "labelMdp": "Contraseña",
     "inscription": "Registrarse",
-    "pasInscrit": "¿No está registrado?",
-    "mdpOublie": "¿Olvidó su contraseña?",
+    "pasInscrit": "¿No estás registrado?",
+    "mdpOublie": "¿Olvidaste tu contraseña?",
     "reinitialiserMdp": "Restablecer contraseña",
-    "emailEnvoye": "Se le ha enviado un correo electrónico a {{mail}} con un enlace para restablecer su contraseña.",
-    "validationInscription": "¡Se ha registrado correctamente! Ahora está conectado. Sin embargo, aún no se le ha asignado ningún perfil. Por favor, espere a que un administrador le asigne estos perfiles para usar la aplicación.",
+    "emailEnvoye": "Se ha enviado un correo electrónico a la dirección {{mail}} con un enlace para restablecer su contraseña.",
+    "validationInscription": "¡Su registro se ha realizado con éxito! Ahora está conectado. Sin embargo, aún no se le ha asignado ningún perfil. Espere a que un administrador le asigne esos perfiles para usar la aplicación.",
     "identifiants": {
-      "invalides": "Las credenciales proporcionadas no son válidas. Por favor, inténtelo de nuevo.",
+      "invalides": "Las credenciales proporcionadas son inválidas. Por favor, inténtelo de nuevo.",
       "existants": "Este correo electrónico ya está en uso, por favor use sus credenciales asociadas para iniciar sesión."
     }
   },
@@ -66,18 +66,19 @@
     "saisons": {
       "titre": "Administración de temporadas",
       "introduction": "Aquí puede gestionar las temporadas.",
-      "mentionDu": "Del",
-      "mentionAu": "al",
+      "mentionDu": "Desde",
+      "mentionAu": "hasta",
       "blocageSuppression": "No puede eliminar temporadas con sesiones existentes.",
       "edition": {
         "titre":"Nueva temporada",
         "champLibelle": "Etiqueta",
         "champDateDebut": "Fecha de Inicio",
         "champDateFin": "Fecha de Fin",
-        "champLibelleObligatoire": "La etiqueta es obligatoria",
-        "champDateDebutObligatoire": "La fecha de inicio es obligatoria",
-        "champDateFinObligatoire": "La fecha de fin es obligatoria",
-        "messageChevauchement": "El período ingresado se superpone a un período existente."
+        "champLibelleObligatoire": "Se requiere etiqueta",
+        "champDateDebutObligatoire": "Se requiere fecha de inicio",
+        "champDateFinObligatoire": "Se requiere fecha de fin",
+        "messageChevauchement": "El período ingresado se superpone a un período existente.",
+        "messageDatesErronees": "La fecha de inicio es posterior a la fecha de fin."
       }
     }
   }

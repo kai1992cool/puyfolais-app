@@ -1,2 +1,1 @@
-     Internationaliser les datePicker avec la langue choisi par l'utilisateur
       Mettre le lundi en premier jour de la semaine sur les datePicker

@@ -34,7 +34,10 @@ import { AdministrationModule } from './administration/administration.module';
 
 import { LOCALE_ID } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
-import localeFr from '@angular/common/locales/fr'; // Import direct de la locale française
+import localeFr from '@angular/common/locales/fr';
+import localeEs from '@angular/common/locales/es';
+import localeEn from '@angular/common/locales/en';
+
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -87,6 +90,8 @@ export class AppModule {
   
   constructor() {
     registerLocaleData(localeFr); // Charger les données de la langue française
+    registerLocaleData(localeEs); // Charger les données de la langue espagnol
+    registerLocaleData(localeEn); // Charger les données de la langue anglais
   }
 
 }
