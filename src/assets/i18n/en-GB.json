@@ -1,0 +1,84 @@
+{
+  "common": {
+    "connecter": "Log in",
+    "deconnecter": "Log out",
+    "inscription": "Register",
+    "cliquerIci": "Click here",
+    "confirmation": "Confirmation",
+    "enregistrer": "Save",
+    "annuler": "Cancel",
+    "langue": "Language"
+  },
+  "toolbar": {
+    "menu": {
+      "accueil": "Home",
+      "admin": "Administration"
+    }
+  },
+  "enum": {
+    "etatSaison": {
+      "ENC": "Ongoing",
+      "AVN": "Upcoming",
+      "PAS": "Past"
+    }
+  },
+  "accueil": {
+    "bienvenue": "Welcome to the Puyfolais application!",
+    "introduction": "This application will allow you to manage your Puyfolais activity within the association.",
+    "start": "To get started, please log in by clicking on the icon in the top right corner."
+  },
+  "sign": {
+    "entrerNom": "Enter your name",
+    "entrerPrenom": "Enter your first name",
+    "entrerMail": "Enter your email",
+    "entrerMdp": "Enter your password",
+    "labelNom": "Name",
+    "labelPrenom": "First Name",
+    "labelMail": "Email",
+    "labelMdp": "Password",
+    "inscription": "Register",
+    "pasInscrit": "Not registered yet?",
+    "mdpOublie": "Forgot your password?",
+    "reinitialiserMdp": "Reset Password",
+    "emailEnvoye": "An email has been sent to the address {{mail}} with a link to reset your password.",
+    "validationInscription": "Your registration was successful! You are now logged in. However, no profile has been assigned to you at the moment. Please wait for an administrator to assign you these profiles to use the application.",
+    "identifiants": {
+      "invalides": "The provided credentials are invalid. Please try again.",
+      "existants": "This email is already in use, please use your associated credentials to log in."
+    }
+  },
+  "admin": {
+    "titre": "Administration",
+    "introduction": "Here you can access the application settings (users, structures, options ...).",
+    "service": {
+      "gestionUtilisateur": "User Management",
+      "gestionStructure": "Structure Management",
+      "gestionSaison": "Season Management"
+    },
+    "utilisateurs": {
+      "titre": "User Administration",
+      "introduction": "Here you can manage the application users."
+    },
+    "structures": {
+      "titre": "Structure Administration",
+      "introduction": "Here you can manage the association's structures."
+    },
+    "saisons": {
+      "titre": "Season Administration",
+      "introduction": "Here you can manage the seasons.",
+      "mentionDu": "From",
+      "mentionAu": "to",
+      "blocageSuppression": "You cannot delete seasons with existing sessions.",
+      "edition": {
+        "titre":"New Season",
+        "champLibelle": "Label",
+        "champDateDebut": "Start Date",
+        "champDateFin": "End Date",
+        "champLibelleObligatoire": "Label is required",
+        "champDateDebutObligatoire": "Start date is required",
+        "champDateFinObligatoire": "End date is required",
+        "messageChevauchement": "The entered period overlaps an existing period."
+      }
+    }
+  }
+}
