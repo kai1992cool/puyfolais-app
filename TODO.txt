@@ -1,3 +1,2 @@
-      revoir la gestion du message/icone qui ne fonctionne pas quand on désactive la suppression d'une saison
-      Internationaliser les datePicker avec la langue choisi par l'utilisateur
+     Internationaliser les datePicker avec la langue choisi par l'utilisateur
       Mettre le lundi en premier jour de la semaine sur les datePicker

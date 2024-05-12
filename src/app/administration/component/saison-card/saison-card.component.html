@@ -5,7 +5,8 @@
                 <div class="label">{{ saison.libelle }}</div>
             </div>
             <div class="column">
-                <div>{{ "admin.saisons.mentionDu" | translate: { } }} {{ saison.dateDebut.toDate() | date:'dd/MM/yyyy' }} {{ "admin.saisons.mentionAu" | translate: { } }} {{
+                <div>{{ "admin.saisons.mentionDu" | translate: { } }} {{ saison.dateDebut.toDate() | date:'dd/MM/yyyy'
+                    }} {{ "admin.saisons.mentionAu" | translate: { } }} {{
                     saison.dateFin.toDate() |
                     date:'dd/MM/yyyy' }}</div>
             </div>
@@ -19,9 +20,9 @@
                     <mat-icon>edit</mat-icon>
                 </button>
                 <!-- TODO : revoir la gestion du message/icone qui ne fonctionne pas + Tradution -->
-                <button mat-icon-button (click)="supprimerSaison(saison)" [disabled]="suppressionImpossible"
-                [matTooltip]="'Vous ne pouvez pas supprimer de saisons avec des séances existantes.'"
-                [ngStyle]="{'cursor': suppressionImpossible ? 'not-allowed' : 'pointer'}"
+                <button mat-icon-button (click)="supprimerSaison(saison)" 
+                    [matTooltip]="recupererMessageSuppressionImpossible()"
+                    [ngStyle]="{'cursor': suppressionImpossible ? 'not-allowed' : 'pointer'}"
                     [ngClass]="{'disabled-button': suppressionImpossible}">
                     <mat-icon>delete</mat-icon>
                 </button>
