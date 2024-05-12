@@ -2,7 +2,7 @@
 
 <p id="text-page">{{ "admin.saisons.introduction" | translate: { } }}</p>
 
-<div *ngFor="let saison of listSaisons">
+<div *ngFor="let saison of listeToutesSaisons">
   <div class="saisons-container">
     <app-saison-card 
       [saison]="saison" 
@@ -19,7 +19,6 @@
   </div>
 </div>
 
-
-<button mat-fab class="add-button" (click)="openModal()">
+<button mat-fab class="add-button" (click)="ouvrirModalAjoutSaison()">
   <mat-icon>add</mat-icon>
 </button>

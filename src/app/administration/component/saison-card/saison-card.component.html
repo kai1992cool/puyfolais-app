@@ -5,7 +5,7 @@
                 <div class="label">{{ saison.libelle }}</div>
             </div>
             <div class="column">
-                <div>Du {{ timestampVersDate(saison.dateDebut) | date:'dd/MM/yyyy' }} au {{
+                <div>{{ "admin.saisons.mentionDu" | translate: { } }} {{ timestampVersDate(saison.dateDebut) | date:'dd/MM/yyyy' }} {{ "admin.saisons.mentionAu" | translate: { } }} {{
                     timestampVersDate(saison.dateFin) |
                     date:'dd/MM/yyyy' }}</div>
             </div>
@@ -18,7 +18,7 @@
                 <button mat-icon-button (click)="editerSaison(saison)">
                     <mat-icon>edit</mat-icon>
                 </button>
-                <!-- TODO : revoir la gestion du message/icone qui ne fonctionne pas  -->
+                <!-- TODO : revoir la gestion du message/icone qui ne fonctionne pas + Tradution -->
                 <button mat-icon-button 
                     (click)="supprimerSaison(saison)" 
                     [disabled]="suppressionImpossible"

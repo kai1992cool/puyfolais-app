@@ -2,15 +2,24 @@
   "commun": {
     "connecter": "Se connecter",
     "deconnecter": "Se déconnecter",
-    "enregistrer": "S'enregistrer",
+    "inscription": "S'enregistrer",
     "cliquerIci": "Cliquez ici",
     "confirmation": "Confirmation",
+    "enregistrer": "Enregistrer",
+    "annuler": "Annuler",
     "langue": "Langue"
   },
   "toolbar": {
     "menu": {
       "accueil": "Accueil",
       "admin": "Administration"
+    }
+  },
+  "enum": {
+    "etatSaison": {
+      "ENC": "En cours",
+      "AVN": "A venir",
+      "PAS": "Passé"
     }
   },
   "accueil": {
@@ -42,7 +51,7 @@
     "titre": "Administration",
     "introduction": "Ici vous pouvez accéder au paramétrage de l'application (utilisateur, structure, options ...).",
     "service": {
-      "gestionUtilisateur": "Gestion des Utilisateurs",
+      "gestionUtilisateur": "Gestion des utilisateurs",
       "gestionStructure": "Gestion des structures",
       "gestionSaison": "Gestion des saisons"
     },
@@ -56,8 +65,20 @@
     },
     "saisons": {
       "titre": "Administration Saisons",
-      "introduction": "Ici vous pouvez gérer les saisons."
+      "introduction": "Ici vous pouvez gérer les saisons.",
+      "mentionDu": "Du",
+      "mentionAu": "au",
+      "blocageSuppression": "Vous ne pouvez pas supprimer de saisons avec des séances existantes.",
+      "edition": {
+        "titre":"Nouvelle Saison",
+        "champLibelle": "Libellé",
+        "champDateDebut": "Date de Début",
+        "champDateFin": "Date de Fin",
+        "champLibelleObligatoire": " Le libellé est requis",
+        "champDateDebutObligatoire": "La date de début est requise",
+        "champDateFinObligatoire": "La date de fin est requise",
+        "messageChevauchement": "La période saisie chevauche une période existante."
+      }
     }
-    
   }
 }

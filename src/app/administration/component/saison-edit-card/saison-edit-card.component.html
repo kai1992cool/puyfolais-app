@@ -4,7 +4,7 @@
       <!-- Première ligne : Titre -->
       <div class="form-group" fxLayout="row" fxLayoutAlign="center center">
         <mat-form-field>
-          <mat-label for="libelle">Libellé:</mat-label>
+          <mat-label for="libelle">{{ 'admin.saisons.edition.champLibelle' | translate }}</mat-label>
           <input matInput type="text" class="form-control" id="libelle" [(ngModel)]="saison.libelle">
         </mat-form-field>
       </div>
@@ -12,13 +12,13 @@
       <!-- Deuxième ligne : Dates -->
       <div class="form-group" fxLayout="row">
         <mat-form-field style="margin-right: 10px;">
-          <mat-label>Date de début:</mat-label>
+          <mat-label>{{ 'admin.saisons.edition.champDateDebut' | translate }}</mat-label>
           <input matInput [matDatepicker]="pickerDebut" id="dateDebut" [(ngModel)]="saison.dateDebut">
           <mat-datepicker-toggle matSuffix [for]="pickerDebut"></mat-datepicker-toggle>
           <mat-datepicker #pickerDebut></mat-datepicker>
         </mat-form-field>
         <mat-form-field style="margin-left: 10px;">
-          <mat-label>Date de fin:</mat-label>
+          <mat-label>{{ 'admin.saisons.edition.champDateFin' | translate }}</mat-label>
           <input matInput [matDatepicker]="pickerFin" id="dateFin" [(ngModel)]="saison.dateFin">
           <mat-datepicker-toggle matSuffix [for]="pickerFin"></mat-datepicker-toggle>
           <mat-datepicker #pickerFin></mat-datepicker>
@@ -27,8 +27,8 @@
 
       <!-- Troisième ligne : Boutons -->
       <div class="form-group" fxLayout="row" fxLayoutAlign="space-between">
-        <button mat-raised-button color="primary" (click)="validerMiseAJourSaison()" [disabled]="!formulaireValide()">Enregistrer</button>
-        <button mat-button color="warn" (click)="annulerMiseAJourSaison()">Annuler</button>
+        <button mat-raised-button color="primary" (click)="validerMiseAJourSaison()" [disabled]="!formulaireValide()">{{ 'commun.enregistrer' | translate }}</button>
+        <button mat-button color="warn" (click)="annulerMiseAJourSaison()">{{ 'commun.annuler' | translate }}</button>
       </div>
     </mat-card-content>
   </mat-card>

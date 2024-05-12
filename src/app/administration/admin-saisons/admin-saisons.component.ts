@@ -13,31 +13,31 @@ export class AdminSaisonsComponent implements OnInit {
 
   constructor(private dialog: MatDialog) { }
   
-  listSaisons: ISaison[] = [];
+  listeToutesSaisons: ISaison[] = [];
   saisonService = inject(SaisonService);
-  saisonEditEnabled: boolean = false;
+  editionSaisonActivee: boolean = false;
   saisonSelectionnee: ISaison | null = null;
 
   ngOnInit() {
    this.mettreAJourListeSaison();
   }
 
-  openModal(): void {
+  ouvrirModalAjoutSaison(): void {
     this.saisonSelectionnee = null;
-    const dialogRef = this.dialog.open(SaisonDialogComponent, {
-      width: '400px', // Ajustez la largeur de la modale selon vos besoins
+    const dialogAjoutSaison = this.dialog.open(SaisonDialogComponent, {
+      width: '400px', 
     });
 
-    dialogRef.afterClosed().subscribe(() => {
+    dialogAjoutSaison.afterClosed().subscribe(() => {
       this.mettreAJourListeSaison();
     });
 
   }
 
   mettreAJourListeSaison() {
-    this.listSaisons = [];
+    this.listeToutesSaisons = [];
     this.saisonService.recupererSaisons().subscribe(saisons => {
-      this.listSaisons.push(...saisons); // Utilisation de l'opérateur spread pour ajouter chaque élément du tableau saisons à listSaisons
+      this.listeToutesSaisons.push(...saisons); // Utilisation de l'opérateur spread pour ajouter chaque élément du tableau saisons à listSaisons
     });
     }
   

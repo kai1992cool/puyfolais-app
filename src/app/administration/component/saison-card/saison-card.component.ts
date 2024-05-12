@@ -3,7 +3,6 @@ import { ISaison } from '../../../interface/saison';
 import { Timestamp } from '@firebase/firestore';
 import { EtatSaison } from '../../../enum/etat-saison';
 import { SaisonService } from '../../../service/saison.service';
-import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-saison-card',
@@ -17,12 +16,12 @@ export class SaisonCardComponent implements OnInit {
   @Output() editionSaisonDemandee: EventEmitter<ISaison> = new EventEmitter<ISaison>();
 
   texteBadgeSaison: string = '';
+  etatSaisonTraduit: Map<EtatSaison, string> = new Map();
   couleurBadgeSaison: string = '';
   suppressionImpossible: boolean = true;
 
   constructor(
     public saisonService: SaisonService,
-    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -31,8 +30,10 @@ export class SaisonCardComponent implements OnInit {
   }
 
   detecterTexteEtCouleurBadgeSaison() {
-    this.texteBadgeSaison = this.saisonService.detecterEtatSaison(this.saison);
-    switch (this.texteBadgeSaison) {
+    this.etatSaisonTraduit = this.saisonService.detecterEtatSaison(this.saison);
+    this.texteBadgeSaison = this.etatSaisonTraduit.values().next().value;
+    const etatSaison = this.etatSaisonTraduit.keys().next().value; 
+    switch (etatSaison) {
       case EtatSaison.AVN:
         this.couleurBadgeSaison = 'blue';
         break;

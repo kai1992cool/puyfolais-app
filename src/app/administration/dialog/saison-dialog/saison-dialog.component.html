@@ -5,41 +5,41 @@
 <form #saisonForm="ngForm" (ngSubmit)="onSubmit(saisonForm)" class="form-container">
 <mat-card>
   <mat-card-title class="mat-card-title">
-    Nouvelle Saison
+    {{ "admin.saisons.edition.titre" | translate: { } }}
   </mat-card-title>
   <mat-form-field class="full-width">
-    <input matInput placeholder="Libellé" name="libelle" [(ngModel)]="saisonForm.value['libelle']" required>
+    <input matInput placeholder="{{ 'admin.saisons.edition.champLibelle' | translate }}" name="libelle" [(ngModel)]="saisonForm.value['libelle']" required>
     <mat-error *ngIf="saisonForm.controls['libelle'].invalid && saisonForm.controls['libelle'].touched">
-      Le libellé est requis
+      {{ "admin.saisons.edition.champLibelleObligatoire" | translate: { } }}
     </mat-error>
   </mat-form-field>
 
   <mat-form-field class="full-width">
-    <input matInput [matDatepicker]="picker" placeholder="Date de Début" name="dateDebut" ngModel required>
+    <input matInput [matDatepicker]="picker" placeholder="{{ 'admin.saisons.edition.champDateDebut' | translate }}" name="dateDebut" ngModel required>
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
     <mat-error *ngIf="saisonForm.controls['dateDebut'].invalid && saisonForm.controls['dateDebut'].touched">
-      La date de début est requise
+      {{ "admin.saisons.edition.champDateDebutObligatoire" | translate: { } }}
     </mat-error>
   </mat-form-field>
 
   <mat-form-field class="full-width">
-    <input matInput [matDatepicker]="picker2" placeholder="Date de Fin" name="dateFin" ngModel required>
+    <input matInput [matDatepicker]="picker2" placeholder="{{ 'admin.saisons.edition.champDateFin' | translate }}" name="dateFin" ngModel required>
     <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
     <mat-datepicker #picker2></mat-datepicker>
     <mat-error *ngIf="saisonForm.controls['dateFin'].invalid && saisonForm.controls['dateFin'].touched">
-      La date de fin est requise
+      {{ "admin.saisons.edition.champDateFinObligatoire" | translate: { } }}
     </mat-error>
   </mat-form-field>
 
     <!-- Zone de message d'erreur pour la période chevauchante -->
-    <mat-error *ngIf="messageErreur">
-        La période saisie chevauche une période existante.
+    <mat-error *ngIf="afficherMessageErreur">
+      {{ "admin.saisons.edition.messageChevauchement" | translate: { } }}
       </mat-error>
       
   <div class="button-container">
-    <button mat-raised-button color="primary" type="submit" [disabled]="saisonForm.invalid">Enregistrer</button>
-    <button mat-button  color="warn" type="button" (click)="closeDialog()">Annuler</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="saisonForm.invalid">{{ "commun.enregistrer" | translate: { } }}</button>
+    <button mat-button  color="warn" type="button" (click)="closeDialog()">{{ "commun.annuler" | translate: { } }}</button>
 
   </div>
 </mat-card>

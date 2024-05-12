@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, DocumentReference } from '@angular/fire/compat/firestore';
-import { Observable, map, take } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { AngularFireAuth } from "@angular/fire/compat/auth";
 import { ISaison } from '../interface/saison';
 import { EtatSaison } from '../enum/etat-saison';
+import { EnumTraductionService } from './enum-traduction.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class SaisonService {
 
   constructor(
     private firestore: AngularFirestore,
-    private authentificationFirebaseAngular: AngularFireAuth
+    private traductionEnumService: EnumTraductionService
   ) { }
 
   /**
@@ -91,19 +92,23 @@ export class SaisonService {
     /**
      * Retourne l'état en Enum d'une saison
      * @param saison La saison a traiter
-     * @returns l'enum EtatSaison associé
+     * @returns l'enum EtatSaison associé et son libéllé tradit dans un MAP
      */
-    detecterEtatSaison(saison: ISaison): EtatSaison {
+    detecterEtatSaison(saison: ISaison): Map<EtatSaison, string> {
       const now = new Date();
       const dateDebut = saison.dateDebut.toDate();
       const dateFin = saison.dateFin.toDate();
-  
+    
+      const etatsMap: Map<EtatSaison, string> = new Map();
+    
       if (dateFin < now) {
-        return EtatSaison.PAS;
+        etatsMap.set(EtatSaison.PAS, this.traductionEnumService.traduireEtatSaison(EtatSaison.PAS));
       } else if (dateDebut <= now && dateFin >= now) {
-        return EtatSaison.ENC;
+        etatsMap.set(EtatSaison.ENC, this.traductionEnumService.traduireEtatSaison(EtatSaison.ENC));
       } else {
-        return EtatSaison.AVN;
+        etatsMap.set(EtatSaison.AVN, this.traductionEnumService.traduireEtatSaison(EtatSaison.AVN));
       }
+    
+      return etatsMap;
     }
 }

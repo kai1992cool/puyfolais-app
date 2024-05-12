@@ -17,7 +17,7 @@ export class SaisonDialogComponent {
     public saisonService: SaisonService,
   ) { }
 
-  messageErreur: boolean = false; // Variable pour contrôler l'affichage du message d'erreur
+  afficherMessageErreur: boolean = false; // Variable pour contrôler l'affichage du message d'erreur
 
 
   @ViewChild('saisonForm') saisonForm!: NgForm;
@@ -45,7 +45,7 @@ export class SaisonDialogComponent {
                   // Gérer les erreurs éventuelles lors de la création de la saison
                 });
             } else {
-              this.messageErreur = true; // Affichez le message d'erreur
+              this.afficherMessageErreur = true; // Affichez le message d'erreur
             }
             return of(null); // Renvoyer une valeur nulle pour terminer le flux observable
           })

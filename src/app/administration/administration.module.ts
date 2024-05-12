@@ -33,8 +33,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatCardModule,
     MatChipsModule,
     MatDatepickerModule,
-    FormsModule ,
-    TranslateModule.forRoot({
+    FormsModule,
+    TranslateModule.forChild({
       loader: {
         provide: TranslateLoader,
         useFactory: (createTranslateLoader),
