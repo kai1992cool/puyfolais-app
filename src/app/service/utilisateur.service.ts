@@ -21,13 +21,31 @@ export class UtilisateurService {
    * @param nom Le nom de l'utilisateur
    * @param prenom Le prénom de l'utilisateur
    * @param permissions Les permissions accordées à l'utilisateur (DEF si non fourni)
-   * @returns Le promize résultant de la création utilisateur
+   * @returns Le promise résultant de la création utilisateur
    */
   creerUtilisateur(userId: string, email: string, nom: string, prenom: string, permissions?: string[]): Promise<void> {
     if (!permissions) {
       permissions = ['DEF'];
     }
     return this.firestore.collection('utilisateurs').doc(userId).set({ email, nom, prenom, permissions });
+  }
+
+  recupererUtilisaeur(uid: string) {
+    return this.firestore.collection('utilisateurs').doc(uid).get();
+  }
+  /**
+   * Met à jour la langue de l'utilisateur dans son profil
+   * @param uid l'UID de l'utilisateur
+   * @param lang la Langue à mette à jour
+   * @returns Le promise résultant de la mise à jour utilisateur
+   */
+  mettreAJourLangueUtilisateur(uid: string, lang: string):  Promise<void> {
+    return this.firestore.collection('utilisateurs').doc(uid).update({
+      langue: lang
+    }).catch(error => {
+      // Gérer les erreurs
+      console.error("Erreur lors de la mise à jour de la langue de l'utilisateur :", error);
+    });
   }
 
   /**

@@ -3,6 +3,7 @@ import { AngularFireAuth } from "@angular/fire/compat/auth";
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
 import { IUtilisateur } from '../interface/utilisateur';
+import { UtilisateurService } from './utilisateur.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,19 +11,15 @@ import { IUtilisateur } from '../interface/utilisateur';
 export class LangueService {
   constructor(
     private afAuth: AngularFireAuth,
-    private firestore: AngularFirestore
+    private firestore: AngularFirestore,
+    private utilisateurService: UtilisateurService
   ) {}
 
   // Fonction pour sauvegarder la langue préférée de l'utilisateur
   enregisterPreferenceUtilisateur(language: string): void {
     this.afAuth.currentUser.then(user => {
       if (user) {
-        this.firestore.collection('utilisateurs').doc(user.uid).update({
-          langue: language
-        }).catch(error => {
-          // Gérer les erreurs
-          console.error("Erreur lors de la mise à jour de la langue de l'utilisateur :", error);
-        });
+        this.utilisateurService.mettreAJourLangueUtilisateur(user.uid, language)
       }
     });
   }
@@ -32,7 +29,7 @@ export class LangueService {
     return new Observable(observer => {
       this.afAuth.onAuthStateChanged(user => {
         if (user) {
-          this.firestore.collection('utilisateurs').doc(user.uid).get()
+          this.utilisateurService.recupererUtilisaeur(user.uid)
             .subscribe(snapshot => {
               const data = snapshot.data() as IUtilisateur;
               const languagePreference = data ? data.langue : null;

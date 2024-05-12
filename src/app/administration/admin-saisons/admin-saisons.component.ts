@@ -50,11 +50,9 @@ export class AdminSaisonsComponent implements OnInit, OnDestroy  {
   }
 
   validerModificationSaison(saison: ISaison) {
-    this.firestore.collection('saisons').doc(saison.uid).update(saison).catch(error => {
-      // Gérer les erreurs
-      console.error("Erreur lors de la mise à jour de la saison :", error);
-    });
+  this.saisonService.mettreAJourSaison(saison).then( () => {
     this.mettreAJourListeSaison();
+  })
     this.saisonSelectionnee = null;
 
   }

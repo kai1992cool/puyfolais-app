@@ -32,10 +32,26 @@ export class SaisonService {
     }
   }
 
+  /**
+   * Supprime une saison
+   * @param uid l'UID de la saison à supprimer
+   * @returns  Le promise résultant de la suppression
+   */
   supprimerSaison(uid: string): Promise<void> {
       return this.firestore.collection('saisons').doc(uid).delete();
   }
 
+  /**
+   * Met à jour une saison utilisateur
+   * @param saison l'objet Saison à mettre à jour
+   * @returns  Le promise résultant de la mise à jour
+   */
+  mettreAJourSaison(saison: ISaison) : Promise<void> {
+    return this.firestore.collection('saisons').doc(saison.uid).update(saison).catch(error => {
+      // Gérer les erreurs
+      console.error("Erreur lors de la mise à jour de la saison :", error);
+    });
+  }
   /**
    * Retourne la liste des saisons
    * @returns un tableau contenant la liste des saisons
