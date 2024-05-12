@@ -20,6 +20,8 @@ import { FormsModule } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatTooltipModule } from '@angular/material/tooltip';
+
 
 @NgModule({
   declarations: [AdminUtilisateursComponent, AdminAccueilComponent, AdminComponent, AdminStructuresComponent, AdminSaisonsComponent, SaisonCardComponent, SaisonEditCardComponent],
@@ -33,6 +35,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatCardModule,
     MatChipsModule,
     MatDatepickerModule,
+    MatTooltipModule ,
     FormsModule,
     TranslateModule.forChild({
       loader: {

@@ -19,11 +19,9 @@
                     <mat-icon>edit</mat-icon>
                 </button>
                 <!-- TODO : revoir la gestion du message/icone qui ne fonctionne pas + Tradution -->
-                <button mat-icon-button 
-                    (click)="supprimerSaison(saison)" 
-                    [disabled]="suppressionImpossible"
-                    matTooltip="Vous ne pouvez pas supprimer de saisons avec des séances existantes."
-                    [ngStyle]="{'cursor': suppressionImpossible ? 'not-allowed' : 'pointer'}"
+                <button mat-icon-button (click)="supprimerSaison(saison)" [disabled]="suppressionImpossible"
+                [matTooltip]="'Vous ne pouvez pas supprimer de saisons avec des séances existantes.'"
+                [ngStyle]="{'cursor': suppressionImpossible ? 'not-allowed' : 'pointer'}"
                     [ngClass]="{'disabled-button': suppressionImpossible}">
                     <mat-icon>delete</mat-icon>
                 </button>

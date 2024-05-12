@@ -45,12 +45,11 @@ mat-card {
 }
 
 .disabled-button {
-    opacity: 0.5 !important;
+    opacity: 0.5;
     /* Opacité pour griser le bouton */
 }
 
 .disabled-button:hover::after {
-    content: "Cette saison ne peut pas être supprimée car des séances existent.";
     position: absolute;
     top: -30px;
     bottom: 100%;
