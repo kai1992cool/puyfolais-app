@@ -14,7 +14,7 @@ export class SaisonCardSeancesComponent implements OnInit {
   listeJoursPeriode: SeanceTravail[] = [];
   listeSeances: ISeance[] = [];
 
-  constructor(private seanceService: SeanceService) {}
+  constructor(private seanceService: SeanceService) { }
 
   ngOnInit(): void {
     this.recupererTousLesJoursDeLaSaison();
@@ -25,14 +25,11 @@ export class SaisonCardSeancesComponent implements OnInit {
    * Ce code récupère pour la saison chaque séance dans la collection firestore pour ensuite etre rapproché avec les jours de la période
    */
   recupererSeancesExistantes(): void {
-  //   this.seanceService.recupererListeSeances(this.saison.seances)
-  //     .then(seances => {
-  //       this.listeSeances = seances;
-  //       this.rapprocherSeancesExistantes(); 
-  //     })
-  //     .catch(error => {
-  //       console.error('Une erreur est survenue : ', error);
-  //     });
+    this.seanceService.recupererListeSeance(this.saison.seances)
+      .subscribe(seances => {
+        this.listeSeances = seances
+        this.rapprocherSeancesExistantes();
+      })
   }
 
   /**
@@ -46,10 +43,11 @@ export class SaisonCardSeancesComponent implements OnInit {
       const jour = this.listeJoursPeriode.find(jour => this.compareDates(jour.date, seanceDate));
       if (jour) {
         jour.seance = seance;
+        jour.selectionne = true;
       }
     });
-    console.log(this.listeSeances);
-    console.log(this.listeJoursPeriode);
+    this.listeJoursPeriode.forEach(seance => console.log(seance.seance))
+
   }
 
   /**
