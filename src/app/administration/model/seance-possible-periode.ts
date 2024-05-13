@@ -1,12 +1,12 @@
 import { ISeance } from "../../interface/seance";
 
-export class SeanceTravail {
+export class SeancePossiblePeriode {
     date: Date;
-    seance?: ISeance;
     selectionne = false;
   
     constructor(date: Date) {
       this.date = date;
     }
+    
     
 }

@@ -1,9 +1,31 @@
 .date-header {
   font-size: 20px;
   font-weight: bold;
+  // text-align: center;
+  display: flex;
+  align-items: center; /* Pour centrer verticalement le texte */
+  justify-content: center; /* Pour centrer horizontalement le texte */
+  height: 100%; /* Pour que la colonne ait une hauteur de 100% */
 }
 
 .type-line {
   margin-top: 10px;
 }
 
+.row {
+  display: flex;
+  justify-content: space-between; /* Pour aligner les colonnes sur les extrémités */
+}
+
+.col {
+  flex: 1; /* Pour que les colonnes aient la même largeur */
+}
+
+.date-column {
+  text-align: center; /* Pour centrer le contenu de la colonne de la date */
+}
+
+.button-column {
+  display: flex;
+  justify-content: flex-end; /* Pour aligner le bouton à droite */
+}

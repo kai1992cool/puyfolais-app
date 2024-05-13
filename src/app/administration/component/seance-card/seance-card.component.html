@@ -1,14 +1,21 @@
 <mat-card>
     <mat-card-content>
-        <!-- Première ligne avec la date -->
-        <div class="date-header">
-            {{ seanceTravail.date | date:'EEEE dd MMMM yyyy' }}
-        </div>
+        <div class="row">
+            <!-- Colonne pour la date -->
+            <!-- <div class="col date-column"> -->
+                <div class="date-header">
+                    {{ seancePossiblePeriode.date | date:'EEEE dd MMMM yyyy' }}
+                </div>
+            <!-- </div> -->
 
-        <!-- Seconde ligne avec le bouton de sélection et le libellé -->
-        <div class="type-line">
-            <mat-slide-toggle [(ngModel)]="seanceTravail.selectionne"></mat-slide-toggle>
-            <span>{{ traductionEnumService.traduireEtatSeance(seanceTravail.seance?.type) }}</span>
+            <!-- Colonne pour le bouton -->
+            <div class="col button-column">
+                <!-- <div class="type-line"> -->
+                    <button mat-icon-button class="add-button" (click)="ajouterSeance()">
+                        <mat-icon>add</mat-icon>
+                    </button>
+                <!-- </div> -->
+            </div>
         </div>
     </mat-card-content>
 </mat-card>

@@ -92,11 +92,21 @@
   </mat-card>
 </div>
 
+<!-- <mat-chip-listbox aria-label="Filtres jour">
+  <mat-chip class="jourFiltre" color="primary" selected (click)="toggleFiltre('lundi')">Lundi</mat-chip>
+  <mat-chip class="jourFiltre" color="primary" selected (click)="toggleFiltre('mardi')">Mardi</mat-chip>
+  <mat-chip class="jourFiltre" color="primary" selected (click)="toggleFiltre('mercredi')">Mercredi</mat-chip>
+  <mat-chip class="jourFiltre" color="primary" selected (click)="toggleFiltre('jeudi')">Jeudi</mat-chip>
+  <mat-chip class="jourFiltre" color="primary" selected (click)="toggleFiltre('vendredi')">Vendredi</mat-chip>
+  <mat-chip class="jourFiltre" color="primary" selected (click)="toggleFiltre('samedi')">Samedi</mat-chip>
+  <mat-chip class="jourFiltre" color="primary" selected (click)="toggleFiltre('dimanche')">Dimanche</mat-chip>
+</mat-chip-listbox> -->
 
 <div class="seance-details" *ngIf="planningDemande">
-  <div class="seance-row">
-    <div *ngFor="let seance of listeJoursPeriode" class="seance-cell">
-      <app-seance-card [seanceTravail]="seance"></app-seance-card>
+  <div class="seance-column">
+    <div *ngFor="let seance of recupererSeancesNonSelectionnees()" class="seance-cell">
+      <app-seance-card [seancePossiblePeriode]="seance">$
+      </app-seance-card>
     </div>
   </div>
 </div>
