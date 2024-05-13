@@ -1,24 +1,38 @@
+/* Définit l'affichage en flexbox et centre les éléments horizontalement */
 .saison-details {
     display: flex;
     justify-content: center;
 }
 
-mat-card {
-    /* width: 400px; */
-    /* Supprimez la largeur fixe */
-    margin: 10px;
-    /* Ajoutez une marge pour l'espace entre les cartes */
-}
-
-.content {
+/* Définit l'affichage en grille avec 4 colonnes égales et un espacement entre les éléments */
+.content-card-saison-details {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 10px;
 }
 
-.column {
+/* Définit l'affichage en flexbox avec une direction de rangée et aligne les éléments horizontalement avec un espacement entre eux, et les centre verticalement */
+.display-container-card-saison-details {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    /* Aligner les éléments horizontalement */
+    justify-content: space-between;
+    /* Espacement entre les éléments */
+    align-items: center;
+    /* Centrer verticalement */
+}
+
+/* Applique une police en gras et une taille de police plus grande */
+.label {
+    font-weight: bold;
+    font-size: 1.2rem;
+    /* Taille de police plus grande */
+}
+
+/* Définit l'affichage en flexbox avec une direction de rangée et centre les éléments verticalement et horizontalement */
+.column-card {
+    display: flex;
+    flex-direction: row;
     align-items: center;
     /* Centre verticalement */
     justify-content: center;
@@ -26,6 +40,7 @@ mat-card {
     padding: 8px;
 }
 
+/* Définit l'affichage en flexbox et centre les éléments verticalement */
 .column-boutons {
     display: flex;
     align-items: center;
@@ -33,21 +48,22 @@ mat-card {
     position: relative;
 }
 
-.label {
-    font-weight: bold;
-    font-size: 1.2rem;
-    /* Taille de police plus grande */
+/* Ajoute une marge autour de la carte */
+mat-card {
+    margin: 10px;
 }
 
+/* Applique une police en gras  */
 .chip-text-etat-saison {
     font-weight: bold;
-    color: white;
 }
 
+/* Réduit l'opacité des boutons désactivés */
 .disabled-button {
     opacity: 0.5;
 }
 
+/* Ajoute un effet de survol sur les boutons désactivés */
 .disabled-button:hover::after {
     position: absolute;
     top: -30px;
@@ -59,3 +75,10 @@ mat-card {
     color: white;
     border-radius: 3px;
 }
+
+/* Ajoute une marge à gauche et à droite des champs de formulaire */
+.mat-form-field {
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
