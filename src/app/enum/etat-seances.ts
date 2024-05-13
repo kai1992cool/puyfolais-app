@@ -1,8 +1,10 @@
 export enum EtatSeance {
-    NOR = 'Normale',
-    REP = 'Répétition',
-    SPE = 'Spéciale'
+    NOR = 'NOR',
+    REP = 'REP',
+    SPE = 'SPE'
   }
+
+  
 
 
   

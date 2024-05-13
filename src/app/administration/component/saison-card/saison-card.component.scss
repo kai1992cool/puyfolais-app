@@ -82,3 +82,19 @@ mat-card {
     margin-left: 10px;
 }
 
+.seance-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.seance-cell {
+    flex: 0 0 10%;
+    /* Chaque cellule occupe 10% de la largeur */
+    max-width: 10%;
+    /* Maximum de 10 cellules par ligne */
+    box-sizing: border-box;
+    /* Inclure les bordures et les marges dans la largeur */
+    padding: 5px;
+    /* Ajoutez un peu d'espace entre les cellules si nécessaire */
+}

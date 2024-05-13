@@ -8,7 +8,7 @@ import { EtatSeance } from '../enum/etat-seances';
 })
 export class EnumTraductionService {
 
-  constructor(private translateService: TranslateService) {}
+  constructor(private translateService: TranslateService) { }
 
   traduireEtatSaison(enumValue: EtatSaison): string {
     switch (enumValue) {
@@ -23,17 +23,36 @@ export class EnumTraductionService {
     }
   }
 
-  traduireEtatSeance(enumValue: EtatSeance): string {
-    switch (enumValue) {
-      case EtatSeance.NOR:
-        return this.translateService.instant('enum.etatSeance.NOR');
-      case EtatSeance.SPE:
-        return this.translateService.instant('enum.etatSeance.SPE');
-      case EtatSeance.REP:
-        return this.translateService.instant('enum.etatSeance.REP');
-      default:
-        return '';
+  traduireEtatSeance(enumValue: EtatSeance | undefined): string {
+    if (enumValue) {
+      const val = this.stringToEnum(enumValue, EtatSeance);
+      if (val) {
+        switch (val) {
+          case EtatSeance.NOR:
+            return this.translateService.instant('enum.etatSeance.NOR');
+          case EtatSeance.SPE:
+            return this.translateService.instant('enum.etatSeance.SPE');
+          case EtatSeance.REP:
+            return this.translateService.instant('enum.etatSeance.REP');
+          default:
+            return '';
+        }
+      } else {
+        return ''
+      }
+    } else {
+      return ''
     }
   }
+
+  stringToEnum<T>(str: string, enumObj: any): T[keyof T] | undefined {
+    const enumValues = Object.values(enumObj) as string[];
+    if (enumValues.includes(str)) {
+      return str as unknown as T[keyof T];
+    }
+    return undefined;
+  }
+
+
 
 }

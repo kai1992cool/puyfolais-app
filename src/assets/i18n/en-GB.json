@@ -20,6 +20,11 @@
       "ENC": "Ongoing",
       "AVN": "Upcoming",
       "PAS": "Past"
+    },
+    "etatSeance": {
+      "NOR": "Normal",
+      "SPE": "Special",
+      "REP": "Rehearsal"
     }
   },
   "accueil": {
@@ -70,7 +75,7 @@
       "mentionAu": "to",
       "blocageSuppression": "You cannot delete seasons with existing sessions.",
       "edition": {
-        "titre":"New Season",
+        "titre": "New Season",
         "champLibelle": "Label",
         "champDateDebut": "Start Date",
         "champDateFin": "End Date",

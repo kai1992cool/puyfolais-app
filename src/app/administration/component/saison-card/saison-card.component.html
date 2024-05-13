@@ -83,7 +83,8 @@
           <div class="button-container">
             <button mat-raised-button color="primary" (click)="validerMiseAJourSaison()"
               [disabled]="!formulaireValide()">{{ 'commun.enregistrer' | translate }}</button>
-            <button mat-button color="warn" (click)="annulerMiseAJourSaison()">{{ 'commun.annuler' | translate }}</button>
+            <button mat-button color="warn" (click)="annulerMiseAJourSaison()">{{ 'commun.annuler' | translate
+              }}</button>
           </div>
         </div>
       </div>
@@ -92,16 +93,10 @@
 </div>
 
 
-<div class="saison-details" *ngIf="planningDemande">
-    <mat-card>
-    <mat-card-content>
-<div *ngFor="let seance of listeJoursPeriode">
-  <div class="label">{{ seance.date }}</div>
-  <div class="label">{{ seance.selectionne }}</div>
-  <div class="label">{{ seance.seance?.type }}</div>
-  <div class="label">{{ seance.seance?.uid }}</div>
-
-</div>
-</mat-card-content>
-</mat-card>
+<div class="seance-details" *ngIf="planningDemande">
+  <div class="seance-row">
+    <div *ngFor="let seance of listeJoursPeriode" class="seance-cell">
+      <app-seance-card [seanceTravail]="seance"></app-seance-card>
+    </div>
+  </div>
 </div>

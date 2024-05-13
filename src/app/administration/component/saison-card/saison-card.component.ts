@@ -7,6 +7,7 @@ import { DateAdapter } from '@angular/material/core';
 import { Timestamp } from '@angular/fire/firestore';
 import { ISeance } from '../../../interface/seance';
 import { SeanceService } from '../../../service/seance.service';
+import { SeanceTravail } from '../../model/seance-travail';
 
 @Component({
   selector: 'app-saison-card',
@@ -191,15 +192,5 @@ class Saison {
     this.libelle = saison.libelle;
     this.dateFin = saison.dateFin.toDate();
     this.uid = saison.uid;
-  }
-}
-
-class SeanceTravail {
-  date: Date;
-  seance?: ISeance;
-  selectionne = false;
-
-  constructor(date: Date) {
-    this.date = date;
   }
 }

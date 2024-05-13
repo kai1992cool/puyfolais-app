@@ -20,6 +20,11 @@
       "ENC": "En curso",
       "AVN": "Próxima",
       "PAS": "Pasada"
+    },
+    "etatSeance": {
+      "NOR": "Normal",
+      "SPE": "Especial",
+      "REP": "Repetición"
     }
   },
   "accueil": {
@@ -70,7 +75,7 @@
       "mentionAu": "hasta",
       "blocageSuppression": "No puede eliminar temporadas con sesiones existentes.",
       "edition": {
-        "titre":"Nueva temporada",
+        "titre": "Nueva temporada",
         "champLibelle": "Etiqueta",
         "champDateDebut": "Fecha de Inicio",
         "champDateFin": "Fecha de Fin",

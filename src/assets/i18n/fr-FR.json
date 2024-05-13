@@ -20,6 +20,11 @@
       "ENC": "En cours",
       "AVN": "A venir",
       "PAS": "Passé"
+    },
+    "etatSeance": {
+      "NOR": "Normale",
+      "SPE": "Spéciale",
+      "REP": "Répétition"
     }
   },
   "accueil": {
@@ -70,7 +75,7 @@
       "mentionAu": "au",
       "blocageSuppression": "Vous ne pouvez pas supprimer de saisons avec des séances existantes.",
       "edition": {
-        "titre":"Nouvelle Saison",
+        "titre": "Nouvelle Saison",
         "champLibelle": "Libellé",
         "champDateDebut": "Date de Début",
         "champDateFin": "Date de Fin",

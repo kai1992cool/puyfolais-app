@@ -20,10 +20,13 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatSlideToggle } from '@angular/material/slide-toggle';
+
+import { SeanceCardComponent } from './component/seance-card/seance-card.component';
 
 
 @NgModule({
-  declarations: [AdminUtilisateursComponent, AdminAccueilComponent, AdminComponent, AdminStructuresComponent, AdminSaisonsComponent, SaisonCardComponent],
+  declarations: [AdminUtilisateursComponent, AdminAccueilComponent, AdminComponent, AdminStructuresComponent, AdminSaisonsComponent, SaisonCardComponent, SeanceCardComponent],
   imports: [
     CommonModule,
     AdministrationRoutingModule,
@@ -35,6 +38,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatChipsModule,
     MatDatepickerModule,
     MatTooltipModule ,
+    MatSlideToggle,
     FormsModule,
     TranslateModule.forChild({
       loader: {
