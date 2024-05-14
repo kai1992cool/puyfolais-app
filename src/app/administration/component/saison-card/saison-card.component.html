@@ -104,7 +104,7 @@
 
 <div class="seance-details" *ngIf="planningDemande">
   <div class="seance-column">
-    <div *ngFor="let seance of recupererSeancesNonSelectionnees()" class="seance-cell">
+    <div *ngFor="let seance of recupererSeancesPossiblesNonSelectionnees()" class="seance-cell">
       <app-seance-card [seancePossiblePeriode]="seance">$
       </app-seance-card>
     </div>

@@ -47,7 +47,7 @@ export class SaisonCardComponent implements OnInit {
     this.verifierPossibiliteSupprimerSaison(this.saison);
   }
 
-  detecterTexteEtCouleurBadgeSaison() {
+  private detecterTexteEtCouleurBadgeSaison() {
     this.etatSaisonTraduit = this.saisonService.detecterEtatSaison(this.saison);
     this.texteBadgeSaison = this.etatSaisonTraduit.values().next().value;
     const etatSaison = this.etatSaisonTraduit.keys().next().value;
@@ -74,7 +74,7 @@ export class SaisonCardComponent implements OnInit {
    * Vérifie qu'il n'existe pas de séances existante pour valider la demande de suppression
    * @param arg0 La saison à vérifié émise par la card
    */
-  verifierPossibiliteSupprimerSaison(arg0: ISaison) {
+  private verifierPossibiliteSupprimerSaison(arg0: ISaison) {
     this.saisonService.verifierSeancesExistantesSaison(arg0.uid).subscribe(seanceExist => {
       this.suppressionImpossible = seanceExist;
     })
@@ -129,7 +129,7 @@ export class SaisonCardComponent implements OnInit {
   /**
    * Réalise la conversion entre Saison et SaisonConvertie pour la MAJ en BDD
    */
-  recupererMajDansSaison() {
+  private recupererMajDansSaison() {
     this.saison.libelle = this.saisonConvertie.libelle;
     this.saison.dateDebut = Timestamp.fromDate(this.saisonConvertie.dateDebut);
     this.saison.dateFin = Timestamp.fromDate(this.saisonConvertie.dateFin);
@@ -146,54 +146,23 @@ export class SaisonCardComponent implements OnInit {
   // Edition des séances
   //********************
 
-  recupererSeancesNonSelectionnees(): SeancePossiblePeriode[] {
-    return this.listeSeancesPossiblePeriode.filter(seance => !seance.selectionne);
-  }
-
+  /**
+   * Active le bloc de gestion du planning (ou l'annule si nouveau clic)
+   */
   editerPlanningSaison() {
     if (this.planningDemande) {
       this.planningDemande = false
     } else {
-      this.recupererTousLesJoursDeLaSaison();
+      this.recupererDatesSeancesPossiblesSaison();
       this.recupererSeancesExistantes();
       this.planningDemande = true;
     }
   }
 
-
-
-
-  /**
-   * Ce code récupère pour la saison chaque séance dans la collection firestore pour ensuite etre rapproché avec les jours de la période
-   */
-  recupererSeancesExistantes(): void {
-    this.seanceService.recupererListeSeance(this.saison.seances)
-      .subscribe(seances => {
-        this.listeSeances = seances
-        this.rapprocherSeancesExistantes();
-      })
-  }
-
-  /**
-   * Réalise un rapprochement entre la liste des seances affectées à la saison et la liste des jours de la période
-   * Chaque jour du tableau concerné par une séance existante est mise à jour avec la dite séance
-   * Ce tableau servira à l'alimentation du composant HTML
-   */
-  rapprocherSeancesExistantes(): void {
-    this.listeSeances.forEach(seance => {
-      const seanceDate = seance.date.toDate();
-      const jour = this.listeSeancesPossiblePeriode.find(jour => this.compareDates(jour.date, seanceDate));
-      if (jour) {
-        jour.selectionne = true;
-      }
-    });
-
-  }
-
   /**
    * Pour une saison donnée, met à jour le tableau des jours de la saison en initialisant des Seances
    */
-  recupererTousLesJoursDeLaSaison(): void {
+  private recupererDatesSeancesPossiblesSaison(): void {
     const jours: SeancePossiblePeriode[] = [];
     const dateDebut = new Date(this.saison.dateDebut.toDate());
     let dateActuelle = dateDebut;
@@ -208,13 +177,54 @@ export class SaisonCardComponent implements OnInit {
     this.listeSeancesPossiblePeriode = jours;
   }
 
-  compareDates(date1: Date, date2: Date): boolean {
+  /**
+   * Ce code récupère pour la saison chaque séance dans la collection firestore pour ensuite etre rapproché avec les jours de la période
+   */
+  private recupererSeancesExistantes(): void {
+    this.seanceService.recupererListeSeance(this.saison.seances)
+      .subscribe(seances => {
+        this.listeSeances = seances
+        this.rapprocherSeancesExistantes();
+      })
+  }
+
+  /**
+  * Réalise un rapprochement entre la liste des seances affectées à la saison et la liste des jours de la période
+  * Il s'agit de mettre à jour l'indicateur de sélection de la liste des dates possible
+  */
+  private rapprocherSeancesExistantes(): void {
+    this.listeSeances.forEach(seance => {
+      const seanceDate = seance.date.toDate();
+      const jour = this.listeSeancesPossiblePeriode.find(jour => this.compareDates(jour.date, seanceDate));
+      if (jour) {
+        jour.selectionne = true;
+      }
+    });
+  }
+
+  /**
+   * Méthode pour tester si les dates des séances possibles et existantes sont identique
+   * @param date1 La première date à tester
+   * @param date2 La seconde date à tester
+   * @returns True ou False
+   */
+  private compareDates(date1: Date, date2: Date): boolean {
     return (
       date1.getFullYear() === date2.getFullYear() &&
       date1.getMonth() === date2.getMonth() &&
       date1.getDate() === date2.getDate()
     );
   }
+
+  /**
+   * Filtre la liste des dates sélectionnables qui ne sont pas encore affectée à la saison
+   * @returns La liste des dates non sélectionnées
+   */
+  recupererSeancesPossiblesNonSelectionnees(): SeancePossiblePeriode[] {
+    return this.listeSeancesPossiblePeriode.filter(seance => !seance.selectionne);
+  }
+
+
 
   // toggleFiltre(jour: string) {
   //   // Vérifie si le jour est déjà dans la liste des filtres
