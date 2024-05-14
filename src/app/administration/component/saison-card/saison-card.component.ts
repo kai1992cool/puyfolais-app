@@ -9,6 +9,7 @@ import { ISeance } from '../../../interface/seance';
 import { SeanceService } from '../../../service/seance.service';
 import { SeancePossiblePeriode } from '../../model/seance-possible-periode';
 
+
 @Component({
   selector: 'app-saison-card',
   templateUrl: './saison-card.component.html',
@@ -17,21 +18,19 @@ import { SeancePossiblePeriode } from '../../model/seance-possible-periode';
 export class SaisonCardComponent implements OnInit {
 
   @Input() saison!: ISaison;
-  @Output() suppressionEffectuee: EventEmitter<void> = new EventEmitter<void>();
-  @Output() editionSaisonDemandee: EventEmitter<ISaison> = new EventEmitter<ISaison>();
-  @Output() planningSaison: EventEmitter<ISaison> = new EventEmitter<ISaison>();
-  @Output() editionSaisonValidee: EventEmitter<ISaison> = new EventEmitter<ISaison>();
-  @Output() annulerEditionSaisonDemandee: EventEmitter<void> = new EventEmitter<void>();
 
   texteBadgeSaison: string = '';
   etatSaisonTraduit: Map<EtatSaison, string> = new Map();
   couleurBadgeSaison: string = '';
   suppressionImpossible: boolean = true;
-  saisonConvertie!: Saison;
   editionDemandee: boolean = false;
   planningDemande: boolean = false;
   listeSeancesPossiblePeriode: SeancePossiblePeriode[] = [];
   listeSeances: ISeance[] = [];
+
+  // Nécessaire pour gérer la conversion entre les DatePicker (Date) et Firestore (Timestamp)
+  dateDebutFormatee!: Date;
+  dateFinFormatee!: Date;
 
   constructor(
     public saisonService: SaisonService,
@@ -41,7 +40,6 @@ export class SaisonCardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.saisonConvertie = new Saison(this.saison);
     this.dateAdapter.setLocale(this.traductionService.currentLang);
     this.detecterTexteEtCouleurBadgeSaison();
     this.verifierPossibiliteSupprimerSaison(this.saison);
@@ -87,7 +85,6 @@ export class SaisonCardComponent implements OnInit {
   supprimerSaison(arg0: ISaison) {
     if (!this.suppressionImpossible) {
       this.saisonService.supprimerSaison(arg0.uid).then(() => {
-        this.suppressionEffectuee.emit();
       })
     }
   }
@@ -107,16 +104,23 @@ export class SaisonCardComponent implements OnInit {
    * Active le bloc d'édition d'une saison (et désative le bloc de visualisation)
    */
   editerSaison() {
+    this.dateDebutFormatee = this.saison.dateDebut.toDate();
+    this.dateFinFormatee = this.saison.dateFin.toDate();
     this.editionDemandee = true;
   }
 
   /**
    * Valide la mise à jour en BDD
    */
-  validerMiseAJourSaison() {
-    this.recupererMajDansSaison();
+  validerMiseAJourSaison(libelle: string, dateDebut: Date, dateFin: Date) {
 
-    this.editionSaisonValidee.emit(this.saison);
+    this.saison.libelle = libelle;
+    this.saison.dateDebut = Timestamp.fromDate(dateDebut);
+    this.saison.dateFin = Timestamp.fromDate(dateFin);
+
+    this.saisonService.mettreAJourSaison(this.saison).then(() => {
+      this.editionDemandee = false;
+    })
   }
 
   /**
@@ -127,20 +131,24 @@ export class SaisonCardComponent implements OnInit {
   }
 
   /**
-   * Réalise la conversion entre Saison et SaisonConvertie pour la MAJ en BDD
-   */
-  private recupererMajDansSaison() {
-    this.saison.libelle = this.saisonConvertie.libelle;
-    this.saison.dateDebut = Timestamp.fromDate(this.saisonConvertie.dateDebut);
-    this.saison.dateFin = Timestamp.fromDate(this.saisonConvertie.dateFin);
-  }
-
-  /**
    * Réalise les contrôle sur le formulaire
    * @returns True ou False
    */
   formulaireValide(): boolean {
-    return !!this.saisonConvertie?.libelle && !!this.saisonConvertie?.dateDebut && !!this.saisonConvertie?.dateFin && this.saisonConvertie.dateDebut <= this.saisonConvertie.dateFin;
+    return !!this.saison?.libelle && !!this.saison?.dateDebut && !!this.saison?.dateFin && this.saison.dateDebut <= this.saison.dateFin;
+  }
+
+  lorsChangementDatePicker(event: any, type: string) {
+    const selectedDate = event.value;
+    if (type === 'deb') {
+      this.saison.dateDebut = Timestamp.fromDate(selectedDate);
+      return
+    }
+    if (type === 'fin') {
+      this.saison.dateFin = Timestamp.fromDate(selectedDate);
+      return
+    }
+    throw new Error('Type de date invalide');
   }
 
   // Edition des séances
@@ -271,25 +279,4 @@ export class SaisonCardComponent implements OnInit {
   //     default: return '';
   //   }
   // }
-}
-
-
-/**
- * Cette classe est créé uniquement pour gérer la conversion timestamp <> Date pour l'utilisation des matDatePicker
- */
-class Saison {
-  dateDebut!: Date;
-  seances: any[]; // Ajoutez le type approprié pour votre application
-  libelle: string;
-  dateFin!: Date;
-  uid: string;
-
-  constructor(saison: ISaison) {
-    this.dateDebut = saison.dateDebut.toDate();
-    this.seances = saison.seances;
-    this.libelle = saison.libelle;
-    this.dateFin = saison.dateFin.toDate();
-    this.uid = saison.uid;
-  }
-
 }

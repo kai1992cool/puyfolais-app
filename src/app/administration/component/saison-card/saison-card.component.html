@@ -19,14 +19,14 @@
       </div>
 
       <!-- Etat Saison -->
-      <div class="column-card" *ngIf="!(editionDemandee && planningSaison)">
+      <div class="column-card" *ngIf="!(editionDemandee && planningDemande)">
         <mat-chip [style.background-color]="couleurBadgeSaison">
           <div class="chip-text-etat-saison">{{ texteBadgeSaison }}</div>
         </mat-chip>
       </div>
 
       <!-- Boutons d'édition / Suppression / Planning -->
-      <div class="column-boutons column-card" *ngIf="!(editionDemandee && planningSaison)">
+      <div class="column-boutons column-card" *ngIf="!(editionDemandee && planningDemande)">
 
         <button mat-icon-button (click)="editerSaison()">
           <mat-icon>edit</mat-icon>
@@ -59,29 +59,29 @@
           <!-- Libelle -->
           <mat-form-field class="mat-form-field">
             <mat-label for="libelle">{{ 'admin.saisons.edition.champLibelle' | translate }}</mat-label>
-            <input matInput type="text" class="form-control" id="libelle" [(ngModel)]="saisonConvertie.libelle">
+            <input matInput type="text" class="form-control" id="libelle" [(ngModel)]="saison.libelle">
           </mat-form-field>
 
           <!-- Dates -->
           <div class="column-card">
             <mat-form-field class="mat-form-field">
               <mat-label>{{ 'admin.saisons.edition.champDateDebut' | translate }}</mat-label>
-              <input matInput [matDatepicker]="pickerDebut" id="dateDebut" [(ngModel)]="saisonConvertie.dateDebut">
+              <input matInput [matDatepicker]="pickerDebut" id="dateDebut" [(ngModel)]="dateDebutFormatee">
               <mat-datepicker-toggle matSuffix [for]="pickerDebut"></mat-datepicker-toggle>
-              <mat-datepicker #pickerDebut></mat-datepicker>
+              <mat-datepicker #pickerDebut (dateChange)="lorsChangementDatePicker($event,'deb')"></mat-datepicker>
             </mat-form-field>
 
             <mat-form-field class="mat-form-field">
               <mat-label>{{ 'admin.saisons.edition.champDateFin' | translate }}</mat-label>
-              <input matInput [matDatepicker]="pickerFin" id="dateFin" [(ngModel)]="saisonConvertie.dateFin">
+              <input matInput [matDatepicker]="pickerFin" id="dateFin" [(ngModel)]="dateFinFormatee">
               <mat-datepicker-toggle matSuffix [for]="pickerFin"></mat-datepicker-toggle>
-              <mat-datepicker #pickerFin></mat-datepicker>
+              <mat-datepicker #pickerFin (dateChange)="lorsChangementDatePicker($event,'fin')"></mat-datepicker>
             </mat-form-field>
           </div>
 
           <!--  Boutons Formulaire -->
           <div class="button-container">
-            <button mat-raised-button color="primary" (click)="validerMiseAJourSaison()"
+            <button mat-raised-button color="primary" (click)="validerMiseAJourSaison(saison.libelle, dateDebutFormatee, dateFinFormatee)"
               [disabled]="!formulaireValide()">{{ 'commun.enregistrer' | translate }}</button>
             <button mat-button color="warn" (click)="annulerMiseAJourSaison()">{{ 'commun.annuler' | translate
               }}</button>

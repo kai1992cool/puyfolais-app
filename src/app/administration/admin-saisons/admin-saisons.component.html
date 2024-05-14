@@ -5,10 +5,7 @@
 <div *ngFor="let saison of listeToutesSaisons">
   <div class="saisons-container">
     <app-saison-card 
-      [saison]="saison" 
-      (suppressionEffectuee)="mettreAJourListeSaison()"
-      (editionSaisonDemandee)="afficherBlocEditionSaison($event)"
-      (planningSaison)="afficherBlocPlanningSaison($event)">
+      [saison]="saison">
     </app-saison-card>
   </div>
 

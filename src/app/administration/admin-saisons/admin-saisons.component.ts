@@ -50,14 +50,6 @@ export class AdminSaisonsComponent implements OnInit, OnDestroy  {
     });
   }
 
-  validerModificationSaison(saison: ISaison) {
-  this.saisonService.mettreAJourSaison(saison).then( () => {
-    this.mettreAJourListeSaison();
-  })
-    this.saisonSelectionnee = null;
-
-  }
-
   afficherBlocEditionSaison(saison: ISaison) {
     this.saisonSelectionnee = saison;
   }
