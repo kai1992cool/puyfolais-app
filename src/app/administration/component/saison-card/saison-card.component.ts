@@ -27,13 +27,14 @@ export class SaisonCardComponent implements OnInit {
   planningDemande: boolean = false;
   listeSeancesPossiblePeriode: SeancePossiblePeriode[] = [];
   listeSeancesPossiblePeriodeFiltree: SeancePossiblePeriode[] = [];
-  listeJoursFiltresActifs: string[] = ['vendredi', 'samedi']
-  listeMoisFiltresActifs: string[] = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
+  listeJoursFiltresActifs: number[] = [5, 6]
+  listeMoisFiltresActifs: number[] = [1,2,3,4,5,6,7,8,9,10,11,12];
   listeSeances: ISeance[] = [];
 
   // Nécessaire pour gérer la conversion entre les DatePicker (Date) et Firestore (Timestamp)
   dateDebutFormatee!: Date;
   dateFinFormatee!: Date;
+
 
   constructor(
     public saisonService: SaisonService,
@@ -238,7 +239,7 @@ export class SaisonCardComponent implements OnInit {
   }
 
   // Méthode pour filtrer les éléments en fonction du jour de la semaine sélectionné
-  toggleFiltre(jour: string |undefined, mois:string |undefined) {
+  toggleFiltre(jour: number |undefined, mois:number |undefined) {
     // Activez ou désactivez le filtre pour le jour sélectionné
     // Par exemple, vous pouvez avoir un tableau de jours sélectionnés
     // ou un objet qui stocke les états de sélection des jours
@@ -269,31 +270,21 @@ export class SaisonCardComponent implements OnInit {
 
     // Filtrer les séances en fonction des jours sélectionnés
     this.listeSeancesPossiblePeriodeFiltree = this.listeSeancesPossiblePeriode.filter(seance => {
-      const seanceJour = seance.date.getDay();
-      const seanceMois = seance.date.getMonth();
+      const seanceJour = seance.date.getDay() + 1;
+      const seanceMois = seance.date.getMonth() + 1;
       // Vérifiez si le jour de la semaine de la séance est dans le tableau des jours sélectionnés
-      return this.listeJoursFiltresActifs.includes(this.getNomJour(seanceJour)) && this.listeMoisFiltresActifs.includes(this.getNomMois(seanceMois));
+      return this.listeJoursFiltresActifs.includes(seanceJour) && this.listeMoisFiltresActifs.includes(seanceMois);
     });
   }
 
-  // Méthode pour obtenir le nom du jour à partir de l'index du jour de la semaine
-  getNomJour(index: number): string {
-    const jours: string[] = ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'];
-    return jours[index];
-  }
 
-  getNomMois(index: number): string {
-    const mois: string[] = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
-    return mois[index];
-  }
-
-  isFilterJourActive(jour: string): boolean {
+  isFilterJourActive(jour: number): boolean {
     // Logique pour déterminer si le filtre est actif ou non
     // Par exemple, vous pouvez utiliser une liste de filtres actifs
     return this.listeJoursFiltresActifs.includes(jour); // suppose que listeFiltresActifs contient les jours actifs
   }
 
-  isFilterMoisActive(mois: string): boolean {
+  isFilterMoisActive(mois: number): boolean {
     // Logique pour déterminer si le filtre est actif ou non
     // Par exemple, vous pouvez utiliser une liste de filtres actifs
     return this.listeMoisFiltresActifs.includes(mois); // suppose que listeFiltresActifs contient les jours actifs

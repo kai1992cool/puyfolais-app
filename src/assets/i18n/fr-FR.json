@@ -7,7 +7,30 @@
     "confirmation": "Confirmation",
     "enregistrer": "Enregistrer",
     "annuler": "Annuler",
-    "langue": "Langue"
+    "langue": "Langue",
+    "jours": {
+      "lun": "Lundi",
+      "mar": "Mardi",
+      "mer": "Mercredi",
+      "jeu": "Jeudi",
+      "ven": "Vendredi",
+      "sam": "Samedi",
+      "dim": "Dimanche"
+    },
+    "mois": {
+      "jan": "Janvier",
+      "fev": "Février",
+      "mar": "Mars",
+      "avr": "Avril",
+      "mai": "Mai",
+      "jun": "Juin",
+      "jui": "Juillet",
+      "aou": "Août",
+      "sep": "Septembre",
+      "oct": "Octobre",
+      "nov": "Novembre",
+      "dec": "Décembre"
+    }
   },
   "toolbar": {
     "menu": {

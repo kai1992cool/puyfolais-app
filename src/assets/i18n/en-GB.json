@@ -2,12 +2,35 @@
   "commun": {
     "connecter": "Log in",
     "deconnecter": "Log out",
-    "inscription": "Sign up",
+    "inscription": "Register",
     "cliquerIci": "Click here",
     "confirmation": "Confirmation",
     "enregistrer": "Save",
     "annuler": "Cancel",
-    "langue": "Language"
+    "langue": "Language",
+    "jours": {
+      "lun": "Monday",
+      "mar": "Tuesday",
+      "mer": "Wednesday",
+      "jeu": "Thursday",
+      "ven": "Friday",
+      "sam": "Saturday",
+      "dim": "Sunday"
+    },
+    "mois": {
+      "jan": "January",
+      "fev": "February",
+      "mar": "March",
+      "avr": "April",
+      "mai": "May",
+      "jun": "June",
+      "jui": "July",
+      "aou": "August",
+      "sep": "September",
+      "oct": "October",
+      "nov": "November",
+      "dec": "December"
+    }
   },
   "toolbar": {
     "menu": {
@@ -24,7 +47,7 @@
     "etatSeance": {
       "NOR": "Normal",
       "SPE": "Special",
-      "REP": "Rehearsal"
+      "REP": "Repetition"
     }
   },
   "accueil": {
@@ -41,12 +64,12 @@
     "labelPrenom": "First Name",
     "labelMail": "Email",
     "labelMdp": "Password",
-    "inscription": "Sign up",
+    "inscription": "Sign Up",
     "pasInscrit": "Not registered yet?",
-    "mdpOublie": "Forgot your password?",
+    "mdpOublie": "Forgot password?",
     "reinitialiserMdp": "Reset Password",
     "emailEnvoye": "An email has been sent to the address {{mail}} with a link to reset your password.",
-    "validationInscription": "Your registration was successful! You are now logged in. However, no profile has been assigned to you yet. Please wait for an administrator to assign you these profiles to use the application.",
+    "validationInscription": "Your registration has been successfully completed! You are now logged in. However, no profile has been assigned to you yet. Please wait for an administrator to assign these profiles to you before using the application.",
     "identifiants": {
       "invalides": "The provided credentials are invalid. Please try again.",
       "existants": "This email is already in use, please use your associated credentials to log in."
@@ -54,7 +77,7 @@
   },
   "admin": {
     "titre": "Administration",
-    "introduction": "Here you can access the application settings (users, structures, options...).",
+    "introduction": "Here you can access the application settings (user, structure, options...).",
     "service": {
       "gestionUtilisateur": "User Management",
       "gestionStructure": "Structure Management",
@@ -62,15 +85,15 @@
     },
     "utilisateurs": {
       "titre": "User Administration",
-      "introduction": "Here you can manage the application users."
+      "introduction": "Here you can manage application users."
     },
     "structures": {
       "titre": "Structure Administration",
-      "introduction": "Here you can manage the association's structures."
+      "introduction": "Here you can manage association structures."
     },
     "saisons": {
-      "titre": "Season Administration",
-      "introduction": "Here you can manage the seasons.",
+      "titre": "Season Management",
+      "introduction": "Here you can manage seasons.",
       "mentionDu": "From",
       "mentionAu": "to",
       "blocageSuppression": "You cannot delete seasons with existing sessions.",
@@ -79,7 +102,7 @@
         "champLibelle": "Label",
         "champDateDebut": "Start Date",
         "champDateFin": "End Date",
-        "champLibelleObligatoire": "Label is required",
+        "champLibelleObligatoire": "The label is required",
         "champDateDebutObligatoire": "Start date is required",
         "champDateFinObligatoire": "End date is required",
         "messageChevauchement": "The entered period overlaps with an existing period.",

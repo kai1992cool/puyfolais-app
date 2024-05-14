@@ -1,13 +1,36 @@
 {
   "commun": {
     "connecter": "Iniciar sesión",
-    "deconnecter": "Desconectar",
+    "deconnecter": "Cerrar sesión",
     "inscription": "Registrarse",
-    "cliquerIci": "Haz clic aquí",
+    "cliquerIci": "Haga clic aquí",
     "confirmation": "Confirmación",
     "enregistrer": "Guardar",
     "annuler": "Cancelar",
-    "langue": "Idioma"
+    "langue": "Idioma",
+    "jours": {
+      "lun": "Lunes",
+      "mar": "Martes",
+      "mer": "Miércoles",
+      "jeu": "Jueves",
+      "ven": "Viernes",
+      "sam": "Sábado",
+      "dim": "Domingo"
+    },
+    "mois": {
+      "jan": "Enero",
+      "fev": "Febrero",
+      "mar": "Marzo",
+      "avr": "Abril",
+      "mai": "Mayo",
+      "jun": "Junio",
+      "jui": "Julio",
+      "aou": "Agosto",
+      "sep": "Septiembre",
+      "oct": "Octubre",
+      "nov": "Noviembre",
+      "dec": "Diciembre"
+    }
   },
   "toolbar": {
     "menu": {
@@ -19,7 +42,7 @@
     "etatSaison": {
       "ENC": "En curso",
       "AVN": "Próxima",
-      "PAS": "Pasada"
+      "PAS": "Pasado"
     },
     "etatSeance": {
       "NOR": "Normal",
@@ -30,60 +53,60 @@
   "accueil": {
     "bienvenue": "¡Bienvenido a la aplicación Puyfolais!",
     "introduction": "Esta aplicación le permitirá gestionar su actividad de Puyfolais dentro de la asociación.",
-    "start": "Para comenzar, por favor inicie sesión haciendo clic en el ícono en la esquina superior derecha."
+    "start": "Para comenzar, inicie sesión haciendo clic en el icono en la esquina superior derecha."
   },
   "sign": {
     "entrerNom": "Ingrese su nombre",
-    "entrerPrenom": "Ingrese su apellido",
+    "entrerPrenom": "Ingrese su nombre",
     "entrerMail": "Ingrese su correo electrónico",
     "entrerMdp": "Ingrese su contraseña",
     "labelNom": "Nombre",
-    "labelPrenom": "Apellido",
+    "labelPrenom": "Nombre",
     "labelMail": "Correo electrónico",
     "labelMdp": "Contraseña",
     "inscription": "Registrarse",
-    "pasInscrit": "¿No estás registrado?",
+    "pasInscrit": "¿No estás registrado aún?",
     "mdpOublie": "¿Olvidaste tu contraseña?",
     "reinitialiserMdp": "Restablecer contraseña",
     "emailEnvoye": "Se ha enviado un correo electrónico a la dirección {{mail}} con un enlace para restablecer su contraseña.",
-    "validationInscription": "¡Su registro se ha realizado con éxito! Ahora está conectado. Sin embargo, aún no se le ha asignado ningún perfil. Espere a que un administrador le asigne esos perfiles para usar la aplicación.",
+    "validationInscription": "¡Su registro se ha completado con éxito! Ahora has iniciado sesión. Sin embargo, aún no se te ha asignado un perfil. Por favor, espera a que un administrador te asigne estos perfiles antes de usar la aplicación.",
     "identifiants": {
-      "invalides": "Las credenciales proporcionadas son inválidas. Por favor, inténtelo de nuevo.",
-      "existants": "Este correo electrónico ya está en uso, por favor use sus credenciales asociadas para iniciar sesión."
+      "invalides": "Las credenciales proporcionadas no son válidas. Por favor, inténtalo de nuevo.",
+      "existants": "Este correo electrónico ya está en uso, por favor, utiliza tus credenciales asociadas para iniciar sesión."
     }
   },
   "admin": {
     "titre": "Administración",
-    "introduction": "Aquí puede acceder a la configuración de la aplicación (usuarios, estructuras, opciones ...).",
+    "introduction": "Aquí puede acceder a la configuración de la aplicación (usuario, estructura, opciones...).",
     "service": {
-      "gestionUtilisateur": "Gestión de usuarios",
-      "gestionStructure": "Gestión de estructuras",
-      "gestionSaison": "Gestión de temporadas"
+      "gestionUtilisateur": "Gestión de Usuarios",
+      "gestionStructure": "Gestión de Estructuras",
+      "gestionSaison": "Gestión de Temporadas"
     },
     "utilisateurs": {
-      "titre": "Administración de usuarios",
-      "introduction": "Aquí puede gestionar los usuarios de la aplicación."
+      "titre": "Administración de Usuarios",
+      "introduction": "Aquí puede administrar los usuarios de la aplicación."
     },
     "structures": {
-      "titre": "Administración de estructuras",
-      "introduction": "Aquí puede gestionar las estructuras de la asociación."
+      "titre": "Administración de Estructuras",
+      "introduction": "Aquí puede administrar las estructuras de la asociación."
     },
     "saisons": {
-      "titre": "Administración de temporadas",
+      "titre": "Gestión de Temporadas",
       "introduction": "Aquí puede gestionar las temporadas.",
       "mentionDu": "Desde",
       "mentionAu": "hasta",
-      "blocageSuppression": "No puede eliminar temporadas con sesiones existentes.",
+      "blocageSuppression": "No puedes eliminar temporadas con sesiones existentes.",
       "edition": {
-        "titre": "Nueva temporada",
+        "titre": "Nueva Temporada",
         "champLibelle": "Etiqueta",
         "champDateDebut": "Fecha de Inicio",
-        "champDateFin": "Fecha de Fin",
-        "champLibelleObligatoire": "Se requiere etiqueta",
-        "champDateDebutObligatoire": "Se requiere fecha de inicio",
-        "champDateFinObligatoire": "Se requiere fecha de fin",
-        "messageChevauchement": "El período ingresado se superpone a un período existente.",
-        "messageDatesErronees": "La fecha de inicio es posterior a la fecha de fin."
+        "champDateFin": "Fecha de Finalización",
+        "champLibelleObligatoire": "La etiqueta es obligatoria",
+        "champDateDebutObligatoire": "La fecha de inicio es obligatoria",
+        "champDateFinObligatoire": "La fecha de finalización es obligatoria",
+        "messageChevauchement": "El período ingresado se superpone con un período existente.",
+        "messageDatesErronees": "La fecha de inicio es mayor que la fecha de finalización."
       }
     }
   }

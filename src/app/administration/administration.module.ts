@@ -23,10 +23,11 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
 
 import { SeanceCardComponent } from './component/seance-card/seance-card.component';
+import { LocalizeDatePipe } from './pipe/localize-date.pipe';
 
 
 @NgModule({
-  declarations: [AdminUtilisateursComponent, AdminAccueilComponent, AdminComponent, AdminStructuresComponent, AdminSaisonsComponent, SaisonCardComponent, SeanceCardComponent],
+  declarations: [AdminUtilisateursComponent, AdminAccueilComponent, AdminComponent, AdminStructuresComponent, AdminSaisonsComponent, SaisonCardComponent, SeanceCardComponent, LocalizeDatePipe],
   imports: [
     CommonModule,
     AdministrationRoutingModule,
