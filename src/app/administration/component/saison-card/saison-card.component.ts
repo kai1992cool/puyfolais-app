@@ -26,6 +26,9 @@ export class SaisonCardComponent implements OnInit {
   editionDemandee: boolean = false;
   planningDemande: boolean = false;
   listeSeancesPossiblePeriode: SeancePossiblePeriode[] = [];
+  listeSeancesPossiblePeriodeFiltree: SeancePossiblePeriode[] = [];
+  listeJoursFiltresActifs: string[] = ['vendredi', 'samedi']
+  listeMoisFiltresActifs: string[] = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
   listeSeances: ISeance[] = [];
 
   // Nécessaire pour gérer la conversion entre les DatePicker (Date) et Firestore (Timestamp)
@@ -163,6 +166,7 @@ export class SaisonCardComponent implements OnInit {
     } else {
       this.recupererDatesSeancesPossiblesSaison();
       this.recupererSeancesExistantes();
+      this.toggleFiltre(undefined, undefined);
       this.planningDemande = true;
     }
   }
@@ -183,6 +187,7 @@ export class SaisonCardComponent implements OnInit {
     }
 
     this.listeSeancesPossiblePeriode = jours;
+    this.listeSeancesPossiblePeriodeFiltree = jours;
   }
 
   /**
@@ -229,54 +234,68 @@ export class SaisonCardComponent implements OnInit {
    * @returns La liste des dates non sélectionnées
    */
   recupererSeancesPossiblesNonSelectionnees(): SeancePossiblePeriode[] {
-    return this.listeSeancesPossiblePeriode.filter(seance => !seance.selectionne);
+    return this.listeSeancesPossiblePeriodeFiltree.filter(seance => !seance.selectionne);
   }
 
+  // Méthode pour filtrer les éléments en fonction du jour de la semaine sélectionné
+  toggleFiltre(jour: string |undefined, mois:string |undefined) {
+    // Activez ou désactivez le filtre pour le jour sélectionné
+    // Par exemple, vous pouvez avoir un tableau de jours sélectionnés
+    // ou un objet qui stocke les états de sélection des jours
 
+    // Ici, je vais supposer que vous avez un tableau de jours sélectionnés
 
-  // toggleFiltre(jour: string) {
-  //   // Vérifie si le jour est déjà dans la liste des filtres
-  //   const index = this.listeSeancesPossiblePeriode.findIndex(seance => this.getNomJour(seance.date.getDay()) === jour);
+    if (jour) {
+    const index = this.listeJoursFiltresActifs.indexOf(jour);
+    if (index !== -1) {
+      // Si le jour est déjà sélectionné, le retirez
+      this.listeJoursFiltresActifs.splice(index, 1);
+    } else {
+      // Sinon, ajoutez-le
+      this.listeJoursFiltresActifs.push(jour);
+    }
+  }
 
-  //   // Si le jour est déjà dans la liste des filtres, le supprimer
-  //   if (index !== -1) {
-  //     this.listeSeancesPossiblePeriode = this.listeSeancesPossiblePeriode.filter(seance => this.getNomJour(seance.date.getDay()) !== jour);
-  //   } else {
-  //     // Sinon, ajouter le jour à la liste des filtres
-  //     const dateDuJour = new Date();
-  //     dateDuJour.setHours(0, 0, 0, 0);
-  //     dateDuJour.setDate(dateDuJour.getDate() + this.jourIndex(jour) - dateDuJour.getDay());
-  //     const seancesDuJour = this.listeSeances.filter(seance => {
-  //       const seanceDate = seance.date.toDate();
-  //       return this.compareDates(seanceDate, dateDuJour);
-  //     });
-  //     this.listeSeancesPossiblePeriode.push(...seancesDuJour.map(seance => new SeancePossiblePeriode(seance.date.toDate(), seance)));
-  //   }
-  // }
+  if (mois) {
+    const index = this.listeMoisFiltresActifs.indexOf(mois);
+    if (index !== -1) {
+      // Si le jour est déjà sélectionné, le retirez
+      this.listeMoisFiltresActifs.splice(index, 1);
+    } else {
+      // Sinon, ajoutez-le
+      this.listeMoisFiltresActifs.push(mois);
+    }
+  }
 
-  // jourIndex(jour: string): number {
-  //   switch (jour.toLowerCase()) {
-  //     case 'dimanche': return 0;
-  //     case 'lundi': return 1;
-  //     case 'mardi': return 2;
-  //     case 'mercredi': return 3;
-  //     case 'jeudi': return 4;
-  //     case 'vendredi': return 5;
-  //     case 'samedi': return 6;
-  //     default: return -1;
-  //   }
-  // }
+    // Filtrer les séances en fonction des jours sélectionnés
+    this.listeSeancesPossiblePeriodeFiltree = this.listeSeancesPossiblePeriode.filter(seance => {
+      const seanceJour = seance.date.getDay();
+      const seanceMois = seance.date.getMonth();
+      // Vérifiez si le jour de la semaine de la séance est dans le tableau des jours sélectionnés
+      return this.listeJoursFiltresActifs.includes(this.getNomJour(seanceJour)) && this.listeMoisFiltresActifs.includes(this.getNomMois(seanceMois));
+    });
+  }
 
-  // getNomJour(jour: number): string {
-  //   switch (jour) {
-  //     case 0: return 'dimanche';
-  //     case 1: return 'lundi';
-  //     case 2: return 'mardi';
-  //     case 3: return 'mercredi';
-  //     case 4: return 'jeudi';
-  //     case 5: return 'vendredi';
-  //     case 6: return 'samedi';
-  //     default: return '';
-  //   }
-  // }
+  // Méthode pour obtenir le nom du jour à partir de l'index du jour de la semaine
+  getNomJour(index: number): string {
+    const jours: string[] = ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'];
+    return jours[index];
+  }
+
+  getNomMois(index: number): string {
+    const mois: string[] = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
+    return mois[index];
+  }
+
+  isFilterJourActive(jour: string): boolean {
+    // Logique pour déterminer si le filtre est actif ou non
+    // Par exemple, vous pouvez utiliser une liste de filtres actifs
+    return this.listeJoursFiltresActifs.includes(jour); // suppose que listeFiltresActifs contient les jours actifs
+  }
+
+  isFilterMoisActive(mois: string): boolean {
+    // Logique pour déterminer si le filtre est actif ou non
+    // Par exemple, vous pouvez utiliser une liste de filtres actifs
+    return this.listeMoisFiltresActifs.includes(mois); // suppose que listeFiltresActifs contient les jours actifs
+  }
 }

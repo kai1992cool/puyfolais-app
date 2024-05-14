@@ -29,8 +29,8 @@ export class SeanceCardComponent {
     }
 }
 
-ajouterSeance() {
+  ajouterSeance() {
 
-}
+  }
 
 }

@@ -92,20 +92,36 @@
   </mat-card>
 </div>
 
-<!-- <mat-chip-listbox aria-label="Filtres jour">
-  <mat-chip class="jourFiltre" color="primary" selected (click)="toggleFiltre('lundi')">Lundi</mat-chip>
-  <mat-chip class="jourFiltre" color="primary" selected (click)="toggleFiltre('mardi')">Mardi</mat-chip>
-  <mat-chip class="jourFiltre" color="primary" selected (click)="toggleFiltre('mercredi')">Mercredi</mat-chip>
-  <mat-chip class="jourFiltre" color="primary" selected (click)="toggleFiltre('jeudi')">Jeudi</mat-chip>
-  <mat-chip class="jourFiltre" color="primary" selected (click)="toggleFiltre('vendredi')">Vendredi</mat-chip>
-  <mat-chip class="jourFiltre" color="primary" selected (click)="toggleFiltre('samedi')">Samedi</mat-chip>
-  <mat-chip class="jourFiltre" color="primary" selected (click)="toggleFiltre('dimanche')">Dimanche</mat-chip>
-</mat-chip-listbox> -->
+
 
 <div class="seance-details" *ngIf="planningDemande">
+  <mat-chip-listbox aria-label="Filtres jour">
+    <mat-chip class="jourFiltre" color="primary" [ngStyle]="{'background-color': isFilterJourActive('lundi') ? 'blue' : 'gray'}" (click)="toggleFiltre('lundi', undefined)">Lundi</mat-chip>
+    <mat-chip class="jourFiltre" color="primary" [ngStyle]="{'background-color': isFilterJourActive('mardi') ? 'blue' : 'gray'}" (click)="toggleFiltre('mardi', undefined)">Mardi</mat-chip>
+    <mat-chip class="jourFiltre" color="primary" [ngStyle]="{'background-color': isFilterJourActive('mercredi') ? 'blue' : 'gray'}" (click)="toggleFiltre('mercredi', undefined)">Mercredi</mat-chip>
+    <mat-chip class="jourFiltre" color="primary" [ngStyle]="{'background-color': isFilterJourActive('jeudi') ? 'blue' : 'gray'}" (click)="toggleFiltre('jeudi', undefined)">Jeudi</mat-chip>
+    <mat-chip class="jourFiltre" color="primary" [ngStyle]="{'background-color': isFilterJourActive('vendredi') ? 'blue' : 'gray'}" (click)="toggleFiltre('vendredi', undefined)">Vendredi</mat-chip>
+    <mat-chip class="jourFiltre" color="primary" [ngStyle]="{'background-color': isFilterJourActive('samedi') ? 'blue' : 'gray'}" (click)="toggleFiltre('samedi', undefined)">Samedi</mat-chip>
+    <mat-chip class="jourFiltre" color="primary" [ngStyle]="{'background-color': isFilterJourActive('dimanche') ? 'blue' : 'gray'}" (click)="toggleFiltre('dimanche', undefined)">Dimanche</mat-chip>
+  </mat-chip-listbox>
+  <mat-chip-listbox aria-label="Filtres mois">
+    <mat-chip class="moisFiltre" color="primary" [ngStyle]="{'background-color': isFilterMoisActive('Janvier') ? 'blue' : 'gray'}" (click)="toggleFiltre( undefined,'Janvier')">Janvier</mat-chip>
+    <mat-chip class="moisFiltre" color="primary" [ngStyle]="{'background-color': isFilterMoisActive('Février') ? 'blue' : 'gray'}" (click)="toggleFiltre(undefined,'Février')">Février</mat-chip>
+    <mat-chip class="moisFiltre" color="primary" [ngStyle]="{'background-color': isFilterMoisActive('Mars') ? 'blue' : 'gray'}" (click)="toggleFiltre(undefined,'Mars')">Mars</mat-chip>
+    <mat-chip class="moisFiltre" color="primary" [ngStyle]="{'background-color': isFilterMoisActive('Avril') ? 'blue' : 'gray'}" (click)="toggleFiltre(undefined,'Avril')">Avril</mat-chip>
+    <mat-chip class="moisFiltre" color="primary" [ngStyle]="{'background-color': isFilterMoisActive('Mai') ? 'blue' : 'gray'}" (click)="toggleFiltre(undefined,'Mai')">Mai</mat-chip>
+    <mat-chip class="moisFiltre" color="primary" [ngStyle]="{'background-color': isFilterMoisActive('Juin') ? 'blue' : 'gray'}" (click)="toggleFiltre(undefined,'Juin')">Juin</mat-chip>
+    <mat-chip class="moisFiltre" color="primary" [ngStyle]="{'background-color': isFilterMoisActive('Juillet') ? 'blue' : 'gray'}" (click)="toggleFiltre(undefined,'Juillet')">Juillet</mat-chip>
+    <mat-chip class="moisFiltre" color="primary" [ngStyle]="{'background-color': isFilterMoisActive('Août') ? 'blue' : 'gray'}" (click)="toggleFiltre(undefined,'Août')">Août</mat-chip>
+    <mat-chip class="moisFiltre" color="primary" [ngStyle]="{'background-color': isFilterMoisActive('Septembre') ? 'blue' : 'gray'}" (click)="toggleFiltre(undefined,'Septembre')">Septembre</mat-chip>
+    <mat-chip class="moisFiltre" color="primary" [ngStyle]="{'background-color': isFilterMoisActive('Octobre') ? 'blue' : 'gray'}" (click)="toggleFiltre(undefined,'Octobre')">Octobre</mat-chip>
+    <mat-chip class="moisFiltre" color="primary" [ngStyle]="{'background-color': isFilterMoisActive('Novembre') ? 'blue' : 'gray'}" (click)="toggleFiltre(undefined,'Novembre')">Novembre</mat-chip>
+    <mat-chip class="moisFiltre" color="primary" [ngStyle]="{'background-color': isFilterMoisActive('Décembre') ? 'blue' : 'gray'}" (click)="toggleFiltre(undefined,'Décembre')">Décembre</mat-chip>
+  </mat-chip-listbox>
+  <mat-label for="libelle">Liste des séances disponibles</mat-label>
   <div class="seance-column">
     <div *ngFor="let seance of recupererSeancesPossiblesNonSelectionnees()" class="seance-cell">
-      <app-seance-card [seancePossiblePeriode]="seance">$
+      <app-seance-card [seancePossiblePeriode]="seance">
       </app-seance-card>
     </div>
   </div>

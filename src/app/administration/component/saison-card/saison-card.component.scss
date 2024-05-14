@@ -85,19 +85,36 @@ mat-card {
 .seance-details {
     display: flex;
     justify-content: flex-start;
-    align-items: center; /* Pour centrer verticalement */
-  }
-  
-  .seance-column {
+    align-items: center;
+    /* Pour centrer verticalement */
+}
+
+.seance-column {
     display: flex;
-    flex-direction: column;
-  }
-  
-  .seance-cell {
-    margin-bottom: 1rem; /* Espacement en dessous de chaque carte */
-  }
-  
-  .seance-card-content {
-    text-align: center; /* Centrer le texte à l'intérieur de chaque carte */
+    flex-wrap: wrap; /* Permet aux éléments de passer à la ligne si nécessaire */
+    justify-content: space-between; /* Espacement égal entre les éléments */
+}
+
+.seance-cell {
+    flex: calc(33.33% - 10px); /* Divise l'espace en trois colonnes avec un espacement de 10px entre chaque carte */
+    margin-bottom: 20px; /* Espacement entre les lignes de cartes */
+    box-sizing: border-box; /* Inclut la bordure et le padding dans le calcul de la largeur */
   }
 
+.seance-card-content {
+    text-align: center;
+    /* Centrer le texte à l'intérieur de chaque carte */
+}
+
+.seance-details {
+    display: flex;
+    flex-direction: column; /* Disposition en colonne */
+}
+
+/* Styles supplémentaires si nécessaire */
+.seance-details mat-chip,
+.seance-details mat-label,
+.seance-details app-seances-card {
+    margin-right: 10px;
+    /* Espace entre les éléments */
+}
