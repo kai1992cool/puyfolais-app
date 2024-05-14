@@ -96,49 +96,49 @@
 
 <div class="seance-details" *ngIf="planningDemande">
   <mat-chip-listbox aria-label="Filtres jour">
-    <mat-chip class="jourFiltre" color="primary" [ngStyle]="{'background-color': isFilterJourActive(1) ? 'blue' : 'gray'}" (click)="toggleFiltre(1, undefined)">{{ "commun.jours.lun" | translate }}</mat-chip>
-    <mat-chip class="jourFiltre" color="primary" [ngStyle]="{'background-color': isFilterJourActive(2) ? 'blue' : 'gray'}" (click)="toggleFiltre(2, undefined)">{{ "commun.jours.mar" | translate }}</mat-chip>
-    <mat-chip class="jourFiltre" color="primary" [ngStyle]="{'background-color': isFilterJourActive(3) ? 'blue' : 'gray'}" (click)="toggleFiltre(3, undefined)">{{ "commun.jours.mer" | translate }}</mat-chip>
-    <mat-chip class="jourFiltre" color="primary" [ngStyle]="{'background-color': isFilterJourActive(4) ? 'blue' : 'gray'}" (click)="toggleFiltre(4, undefined)">{{ "commun.jours.jeu" | translate }}</mat-chip>
-    <mat-chip class="jourFiltre" color="primary" [ngStyle]="{'background-color': isFilterJourActive(5) ? 'blue' : 'gray'}" (click)="toggleFiltre(5, undefined)">{{ "commun.jours.ven" | translate }}</mat-chip>
-    <mat-chip class="jourFiltre" color="primary" [ngStyle]="{'background-color': isFilterJourActive(6) ? 'blue' : 'gray'}" (click)="toggleFiltre(6, undefined)">{{ "commun.jours.sam" | translate }}</mat-chip>
-    <mat-chip class="jourFiltre" color="primary" [ngStyle]="{'background-color': isFilterJourActive(7) ? 'blue' : 'gray'}" (click)="toggleFiltre(6, undefined)">{{ "commun.jours.dim" | translate }}</mat-chip>
+    <mat-chip class="jourFiltre" color="primary" [ngStyle]="{'background-color': isFilterJourActive(1) ? 'blue' : ''}" (click)="toggleFiltre(1, undefined)">{{ "commun.jours.lun" | translate }}</mat-chip>
+    <mat-chip class="jourFiltre" color="primary" [ngStyle]="{'background-color': isFilterJourActive(2) ? 'blue' : ''}" (click)="toggleFiltre(2, undefined)">{{ "commun.jours.mar" | translate }}</mat-chip>
+    <mat-chip class="jourFiltre" color="primary" [ngStyle]="{'background-color': isFilterJourActive(3) ? 'blue' : ''}" (click)="toggleFiltre(3, undefined)">{{ "commun.jours.mer" | translate }}</mat-chip>
+    <mat-chip class="jourFiltre" color="primary" [ngStyle]="{'background-color': isFilterJourActive(4) ? 'blue' : ''}" (click)="toggleFiltre(4, undefined)">{{ "commun.jours.jeu" | translate }}</mat-chip>
+    <mat-chip class="jourFiltre" color="primary" [ngStyle]="{'background-color': isFilterJourActive(5) ? 'blue' : ''}" (click)="toggleFiltre(5, undefined)">{{ "commun.jours.ven" | translate }}</mat-chip>
+    <mat-chip class="jourFiltre" color="primary" [ngStyle]="{'background-color': isFilterJourActive(6) ? 'blue' : ''}" (click)="toggleFiltre(6, undefined)">{{ "commun.jours.sam" | translate }}</mat-chip>
+    <mat-chip class="jourFiltre" color="primary" [ngStyle]="{'background-color': isFilterJourActive(7) ? 'blue' : ''}" (click)="toggleFiltre(7, undefined)">{{ "commun.jours.dim" | translate }}</mat-chip>
   </mat-chip-listbox>
   <mat-chip-listbox aria-label="Filtres mois">
-    <mat-chip class="moisFiltre" color="primary" [ngStyle]="{'background-color': isFilterMoisActive(1) ? 'blue' : 'gray'}" (click)="toggleFiltre(undefined,1)">
+    <mat-chip class="moisFiltre" color="primary" [ngStyle]="{'background-color': isFilterMoisActive(1) ? 'blue' : ''}" (click)="toggleFiltre(undefined,1)">
       {{ 'commun.mois.jan' | translate }}
     </mat-chip>
-    <mat-chip class="moisFiltre" color="primary" [ngStyle]="{'background-color': isFilterMoisActive(2) ? 'blue' : 'gray'}" (click)="toggleFiltre(undefined,2)">
+    <mat-chip class="moisFiltre" color="primary" [ngStyle]="{'background-color': isFilterMoisActive(2) ? 'blue' : ''}" (click)="toggleFiltre(undefined,2)">
       {{ 'commun.mois.fev' | translate }}
     </mat-chip>
-    <mat-chip class="moisFiltre" color="primary" [ngStyle]="{'background-color': isFilterMoisActive(3) ? 'blue' : 'gray'}" (click)="toggleFiltre(undefined,3)">
+    <mat-chip class="moisFiltre" color="primary" [ngStyle]="{'background-color': isFilterMoisActive(3) ? 'blue' : ''}" (click)="toggleFiltre(undefined,3)">
       {{ 'commun.mois.mar' | translate }}
     </mat-chip>
-    <mat-chip class="moisFiltre" color="primary" [ngStyle]="{'background-color': isFilterMoisActive(4) ? 'blue' : 'gray'}" (click)="toggleFiltre(undefined,4)">
+    <mat-chip class="moisFiltre" color="primary" [ngStyle]="{'background-color': isFilterMoisActive(4) ? 'blue' : ''}" (click)="toggleFiltre(undefined,4)">
       {{ 'commun.mois.avr' | translate }}
     </mat-chip>
-    <mat-chip class="moisFiltre" color="primary" [ngStyle]="{'background-color': isFilterMoisActive(5) ? 'blue' : 'gray'}" (click)="toggleFiltre(undefined,5)">
+    <mat-chip class="moisFiltre" color="primary" [ngStyle]="{'background-color': isFilterMoisActive(5) ? 'blue' : ''}" (click)="toggleFiltre(undefined,5)">
       {{ 'commun.mois.mai' | translate }}
     </mat-chip>
-    <mat-chip class="moisFiltre" color="primary" [ngStyle]="{'background-color': isFilterMoisActive(6) ? 'blue' : 'gray'}" (click)="toggleFiltre(undefined,6)">
+    <mat-chip class="moisFiltre" color="primary" [ngStyle]="{'background-color': isFilterMoisActive(6) ? 'blue' : ''}" (click)="toggleFiltre(undefined,6)">
       {{ 'commun.mois.jun' | translate }}
     </mat-chip>
-    <mat-chip class="moisFiltre" color="primary" [ngStyle]="{'background-color': isFilterMoisActive(7) ? 'blue' : 'gray'}" (click)="toggleFiltre(undefined,7)">
+    <mat-chip class="moisFiltre" color="primary" [ngStyle]="{'background-color': isFilterMoisActive(7) ? 'blue' : ''}" (click)="toggleFiltre(undefined,7)">
       {{ 'commun.mois.jui' | translate }}
     </mat-chip>
-    <mat-chip class="moisFiltre" color="primary" [ngStyle]="{'background-color': isFilterMoisActive(8) ? 'blue' : 'gray'}" (click)="toggleFiltre(undefined,8)">
+    <mat-chip class="moisFiltre" color="primary" [ngStyle]="{'background-color': isFilterMoisActive(8) ? 'blue' : ''}" (click)="toggleFiltre(undefined,8)">
       {{ 'commun.mois.aou' | translate }}
     </mat-chip>
-    <mat-chip class="moisFiltre" color="primary" [ngStyle]="{'background-color': isFilterMoisActive(9) ? 'blue' : 'gray'}" (click)="toggleFiltre(undefined,9)">
+    <mat-chip class="moisFiltre" color="primary" [ngStyle]="{'background-color': isFilterMoisActive(9) ? 'blue' : ''}" (click)="toggleFiltre(undefined,9)">
       {{ 'commun.mois.sep' | translate }}
     </mat-chip>
-    <mat-chip class="moisFiltre" color="primary" [ngStyle]="{'background-color': isFilterMoisActive(10) ? 'blue' : 'gray'}" (click)="toggleFiltre(undefined,10)">
+    <mat-chip class="moisFiltre" color="primary" [ngStyle]="{'background-color': isFilterMoisActive(10) ? 'blue' : ''}" (click)="toggleFiltre(undefined,10)">
       {{ 'commun.mois.oct' | translate }}
     </mat-chip>
-    <mat-chip class="moisFiltre" color="primary" [ngStyle]="{'background-color': isFilterMoisActive(11) ? 'blue' : 'gray'}" (click)="toggleFiltre(undefined,11)">
+    <mat-chip class="moisFiltre" color="primary" [ngStyle]="{'background-color': isFilterMoisActive(11) ? 'blue' : ''}" (click)="toggleFiltre(undefined,11)">
       {{ 'commun.mois.nov' | translate }}
     </mat-chip>
-    <mat-chip class="moisFiltre" color="primary" [ngStyle]="{'background-color': isFilterMoisActive(12) ? 'blue' : 'gray'}" (click)="toggleFiltre(undefined,12)">
+    <mat-chip class="moisFiltre" color="primary" [ngStyle]="{'background-color': isFilterMoisActive(12) ? 'blue' : ''}" (click)="toggleFiltre(undefined,12)">
       {{ 'commun.mois.dec' | translate }}
     </mat-chip>
     

@@ -19,6 +19,9 @@ export class SaisonCardComponent implements OnInit {
 
   @Input() saison!: ISaison;
 
+  readonly FILTRE_JOURS_VEN_SAM: number[] = [5,6];
+  readonly FILTRE_MOIS_TOUS: number[] = [1,2,3,4,5,6,7,8,9,10,11,12];
+
   texteBadgeSaison: string = '';
   etatSaisonTraduit: Map<EtatSaison, string> = new Map();
   couleurBadgeSaison: string = '';
@@ -27,8 +30,8 @@ export class SaisonCardComponent implements OnInit {
   planningDemande: boolean = false;
   listeSeancesPossiblePeriode: SeancePossiblePeriode[] = [];
   listeSeancesPossiblePeriodeFiltree: SeancePossiblePeriode[] = [];
-  listeJoursFiltresActifs: number[] = [5, 6]
-  listeMoisFiltresActifs: number[] = [1,2,3,4,5,6,7,8,9,10,11,12];
+  listeJoursFiltresActifs: number[] = this.FILTRE_JOURS_VEN_SAM.slice();;
+  listeMoisFiltresActifs: number[] = this.FILTRE_MOIS_TOUS.slice();;
   listeSeances: ISeance[] = [];
 
   // Nécessaire pour gérer la conversion entre les DatePicker (Date) et Firestore (Timestamp)
@@ -251,6 +254,9 @@ export class SaisonCardComponent implements OnInit {
     if (index !== -1) {
       // Si le jour est déjà sélectionné, le retirez
       this.listeJoursFiltresActifs.splice(index, 1);
+      if (this.listeJoursFiltresActifs.length === 0) {
+        this.listeJoursFiltresActifs = this.FILTRE_JOURS_VEN_SAM
+      }
     } else {
       // Sinon, ajoutez-le
       this.listeJoursFiltresActifs.push(jour);
@@ -262,6 +268,9 @@ export class SaisonCardComponent implements OnInit {
     if (index !== -1) {
       // Si le jour est déjà sélectionné, le retirez
       this.listeMoisFiltresActifs.splice(index, 1);
+      if (this.listeMoisFiltresActifs.length === 0) {
+        this.listeMoisFiltresActifs = this.FILTRE_MOIS_TOUS
+      }      
     } else {
       // Sinon, ajoutez-le
       this.listeMoisFiltresActifs.push(mois);
@@ -270,7 +279,7 @@ export class SaisonCardComponent implements OnInit {
 
     // Filtrer les séances en fonction des jours sélectionnés
     this.listeSeancesPossiblePeriodeFiltree = this.listeSeancesPossiblePeriode.filter(seance => {
-      const seanceJour = seance.date.getDay() + 1;
+      const seanceJour = seance.date.getDay() ;
       const seanceMois = seance.date.getMonth() + 1;
       // Vérifiez si le jour de la semaine de la séance est dans le tableau des jours sélectionnés
       return this.listeJoursFiltresActifs.includes(seanceJour) && this.listeMoisFiltresActifs.includes(seanceMois);
