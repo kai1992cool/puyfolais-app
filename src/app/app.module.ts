@@ -4,10 +4,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { AngularFireAnalyticsModule, ScreenTrackingService, UserTrackingService } from '@angular/fire/compat/analytics';
 
-import { getAnalytics } from "firebase/analytics";
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { initializeApp } from 'firebase/app';
+import { getAnalytics } from "firebase/analytics";
 
 import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -39,7 +41,6 @@ import localeFr from '@angular/common/locales/fr';
 import localeEs from '@angular/common/locales/es';
 import localeEn from '@angular/common/locales/en';
 
-
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -56,6 +57,7 @@ export function createTranslateLoader(http: HttpClient) {
   imports: [
     AngularFireAuthModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAnalyticsModule,
     BrowserModule,
     AdministrationModule,
     AppRoutingModule,
@@ -83,7 +85,10 @@ export function createTranslateLoader(http: HttpClient) {
   ],
   providers: [
     provideAnimationsAsync(), 
-    { provide: LOCALE_ID, useValue: 'fr-FR' }, { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' }  
+    { provide: LOCALE_ID, useValue: 'fr-FR' }, 
+    { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' },
+    ScreenTrackingService,
+    UserTrackingService
   ],
   bootstrap: [AppComponent]
 })
@@ -93,6 +98,10 @@ export class AppModule {
     registerLocaleData(localeFr); // Charger les données de la langue française
     registerLocaleData(localeEs); // Charger les données de la langue espagnol
     registerLocaleData(localeEn); // Charger les données de la langue anglais
+
+        // Initialiser Firebase App et Google Analytics
+        const app = initializeApp(environment.firebaseConfig);
+        const analytics = getAnalytics(app);
   }
 
 }
