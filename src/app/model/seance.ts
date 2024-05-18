@@ -6,7 +6,6 @@ export class Seance {
     type: EtatSeance;
     supprimee: boolean ;
     miseAJour: boolean;
-    creation: boolean;
 
     constructor(
         uid: string,
@@ -18,7 +17,6 @@ export class Seance {
         this.type = type;
         this.supprimee = false;
         this.miseAJour = false;
-        this.creation = false;
       }
 
       seanceADate(date: Date): boolean {

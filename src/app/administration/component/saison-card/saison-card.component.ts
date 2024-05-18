@@ -130,6 +130,7 @@ export class SaisonCardComponent implements OnInit {
    * @returns True ou False
    */
   formulaireValide(): boolean {
+    // TODO : contrôler l'exclusion de séances dans les nouvelles dates de saisons
     return !!this.saison?.libelle && !!this.saison?.dateDebut && !!this.saison?.dateFin && this.saison.dateDebut <= this.saison.dateFin;
   }
 
@@ -167,21 +168,19 @@ export class SaisonCardComponent implements OnInit {
 
     if (seancesADate.length === 0) {
       const nouvelleSeance = new Seance('', selectedDate, EtatSeance.NOR)
-      nouvelleSeance.creation = true
       // TODO : implémenter le paramétrage de l'heure de début de séance
       nouvelleSeance.date.setHours(21)
       this.listeSeances.push(nouvelleSeance)
     } else {
       const duplicationSeance = new Seance('', selectedDate, EtatSeance.NOR)
-      duplicationSeance.creation = true
       this.listeSeances.push(duplicationSeance)
     }
   }
 
   validerMiseAJourSeances() {
-    const listDocCreePromise = this.seanceService.creerListeSeances(this.listeSeances.filter(seanceACreer => seanceACreer.creation));
-    const listDocMajPromise = this.seanceService.majListeSeances(this.listeSeances.filter(seanceACreer => seanceACreer.miseAJour));
-    const listDocNonImpacteesPromise = this.seanceService.listeSeancesNonImpactees(this.listeSeances.filter(seanceNonImpactees => (!seanceNonImpactees.miseAJour) && !seanceNonImpactees.creation && !seanceNonImpactees.supprimee));
+    const listDocCreePromise = this.seanceService.creerListeSeances(this.listeSeances.filter(seanceACreer => seanceACreer.uid === '' ));
+    const listDocMajPromise = this.seanceService.majListeSeances(this.listeSeances.filter(seanceACreer => seanceACreer.miseAJour && seanceACreer.uid !== ''));
+    const listDocNonImpacteesPromise = this.seanceService.listeSeancesNonImpactees(this.listeSeances.filter(seanceNonImpactees => (!seanceNonImpactees.miseAJour) && seanceNonImpactees.uid !== '' && !seanceNonImpactees.supprimee));
     const listDocSupprimesPromise = this.seanceService.supprimerListeSeances(this.listeSeances.filter(seanceACreer => seanceACreer.supprimee));
 
     Promise.all([listDocCreePromise, listDocMajPromise, listDocNonImpacteesPromise, listDocSupprimesPromise])
@@ -196,7 +195,7 @@ export class SaisonCardComponent implements OnInit {
         return this.saisonService.mettreAjourListeLienSeances(this.saison.uid, mergedArray);
       })
       .then(() => {
-        console.log("DocumentReference insérées avec succès dans l'enregistrement de la saison");
+        console.debug("DocumentReference insérées avec succès dans l'enregistrement de la saison");
       })
       .catch(error => {
         console.error("Une erreur est survenue lors de l'insertion des DocumentReference :", error);

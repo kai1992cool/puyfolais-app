@@ -1,8 +1,7 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component,  Input, OnInit } from '@angular/core';
 import { EnumTraductionService } from '../../../service/enum-traduction.service';
 import { EtatSeance } from '../../../enum/etat-seances';
 import { Seance } from '../../../model/seance';
-import { Time } from '@angular/common';
 
 @Component({
   selector: 'app-seance-card',
@@ -12,14 +11,14 @@ import { Time } from '@angular/common';
 export class SeanceCardComponent implements OnInit {
 
   @Input() seance!: Seance;
-  seanceInitialDate!: Date;
+  seanceInitial!: Seance ;
 
   constructor(
     public traductionEnumService: EnumTraductionService
   ) { }
 
   ngOnInit(): void {
-    this.seanceInitialDate = new Date(this.seance.date);
+    this.seanceInitial = new Seance(this.seance.uid, this.seance.date, this.seance.type);
   }
 
   determinerCouleurSeance(type?: EtatSeance): string {
@@ -43,8 +42,25 @@ export class SeanceCardComponent implements OnInit {
     const date = new Date(this.seance.date);
     date.setMinutes(date.getMinutes() + minutes);
     this.seance.date = date;
-    this.seance.miseAJour = !(this.seance.date.getTime() === this.seanceInitialDate.getTime());
+    this.seance.miseAJour =  this.verifierMaj();
   }
 
+  // Obtenez EtatSeance en filtrant la valeur exclue
+  recupererEtatSeanceAAfficher(): EtatSeance[] {
+    return Object.values(EtatSeance)
+    .filter(value => value !== EtatSeance.NDE)
+    .map(name => EtatSeance[name as keyof typeof EtatSeance]);
+  }
 
+  choisirTypeSeance(type: EtatSeance) {
+    this.seance.type = type
+    this.seance.miseAJour = this.verifierMaj();
+  }
+
+  private verifierMaj(): boolean {
+    return !(this.seance.date.getTime() === this.seanceInitial.date.getTime()) 
+        || !(this.seance.type === this.seanceInitial.type);
+  }
 }
+
+

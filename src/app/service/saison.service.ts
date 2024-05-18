@@ -29,7 +29,7 @@ export class SaisonService {
    */
   creerSaison(libelle: string, dateDebut: Date, dateFin: Date, seances?: ISeance[]): Promise<DocumentReference<any>> {
     if (!seances) {
-      return this.firestore.collection('saisons').add({ libelle, dateDebut, dateFin, seances: []  });
+      return this.firestore.collection('saisons').add({ libelle, dateDebut, dateFin, seances: [] });
     } else {
       return this.firestore.collection('saisons').add({ libelle, dateDebut, dateFin, seances });
     }
@@ -41,7 +41,7 @@ export class SaisonService {
    * @returns  Le promise résultant de la suppression
    */
   supprimerSaison(uid: string): Promise<void> {
-      return this.firestore.collection('saisons').doc(uid).delete();
+    return this.firestore.collection('saisons').doc(uid).delete();
   }
 
   /**
@@ -49,7 +49,7 @@ export class SaisonService {
    * @param saison l'objet Saison à mettre à jour
    * @returns  Le promise résultant de la mise à jour
    */
-  mettreAJourSaison(saison: Saison) : Promise<void> {
+  mettreAJourSaison(saison: Saison): Promise<void> {
 
     const isaison: ISaison = {
       libelle: saison.libelle,
@@ -73,11 +73,11 @@ export class SaisonService {
         return actions.map(action => {
           const firestoreData = action.payload.doc.data() as ISaison;
           const uid = action.payload.doc.id;
-  
+
           // Transformation des dates de Timestamp en Date
           const dateDebut = (firestoreData.dateDebut as Timestamp).toDate();
           const dateFin = (firestoreData.dateFin as Timestamp).toDate();
-  
+
           // Construction de l'objet ISaison
           const saison: Saison = {
             uid: uid,
@@ -86,7 +86,7 @@ export class SaisonService {
             dateFin: dateFin,
             seances: firestoreData.seances
           };
-  
+
           return saison;
         });
       })
@@ -102,57 +102,57 @@ export class SaisonService {
   verifierChevauchementSaison(dateDebut: Date, dateFin: Date): Observable<boolean> {
     return this.firestore.collection<ISaison>('saisons', ref =>
       ref.where('dateFin', '>=', dateDebut) // La date de fin de la saison est postérieure ou égale à la date de début fournie
-         .where('dateDebut', '<=', dateFin) // La date de début de la saison est antérieure ou égale à la date de fin fournie
+        .where('dateDebut', '<=', dateFin) // La date de début de la saison est antérieure ou égale à la date de fin fournie
     ).get().pipe(
       map(snapshot => !snapshot.empty) // Vérifie si la collection est vide ou non
     );
   }
 
-    /**
-   * Contrôle si une saison contient des séances
-   * @param uidSaison L'identifiant de la saison
-   * @returns True si une saison possède au moins une séance
-   */
-    verifierSeancesExistantesSaison(uidSaison: string): Observable<boolean> {
-      return this.firestore.collection('saisons').doc(uidSaison).get().pipe(
-        map(documentSnapshot => {
-          if (documentSnapshot.exists) {
-            const userData = documentSnapshot.data() as ISaison;
-            if (userData.seances) {
-            return userData.seances.length > 0 ;
-            } else {
-              return false
-            }
+  /**
+ * Contrôle si une saison contient des séances
+ * @param uidSaison L'identifiant de la saison
+ * @returns True si une saison possède au moins une séance
+ */
+  verifierSeancesExistantesSaison(uidSaison: string): Observable<boolean> {
+    return this.firestore.collection('saisons').doc(uidSaison).get().pipe(
+      map(documentSnapshot => {
+        if (documentSnapshot.exists) {
+          const userData = documentSnapshot.data() as ISaison;
+          if (userData.seances) {
+            return userData.seances.length > 0;
           } else {
-            return false;
+            return false
           }
-        })
-      );
+        } else {
+          return false;
+        }
+      })
+    );
+  }
+
+  /**
+   * Retourne l'état en Enum d'une saison
+   * @param saison La saison a traiter
+   * @returns l'enum EtatSaison associé et son libéllé tradit dans un MAP
+   */
+  detecterEtatSaison(saison: Saison): Map<EtatSaison, string> {
+    const now = new Date();
+    const etatsMap: Map<EtatSaison, string> = new Map();
+
+    if (saison.dateFin < now) {
+      etatsMap.set(EtatSaison.PAS, this.traductionEnumService.traduireEtatSaison(EtatSaison.PAS));
+    } else if (saison.dateDebut <= now && saison.dateFin >= now) {
+      etatsMap.set(EtatSaison.ENC, this.traductionEnumService.traduireEtatSaison(EtatSaison.ENC));
+    } else {
+      etatsMap.set(EtatSaison.AVN, this.traductionEnumService.traduireEtatSaison(EtatSaison.AVN));
     }
 
-    /**
-     * Retourne l'état en Enum d'une saison
-     * @param saison La saison a traiter
-     * @returns l'enum EtatSaison associé et son libéllé tradit dans un MAP
-     */
-    detecterEtatSaison(saison: Saison): Map<EtatSaison, string> {
-      const now = new Date();   
-      const etatsMap: Map<EtatSaison, string> = new Map();
-    
-      if (saison.dateFin < now) {
-        etatsMap.set(EtatSaison.PAS, this.traductionEnumService.traduireEtatSaison(EtatSaison.PAS));
-      } else if (saison.dateDebut <= now && saison.dateFin >= now) {
-        etatsMap.set(EtatSaison.ENC, this.traductionEnumService.traduireEtatSaison(EtatSaison.ENC));
-      } else {
-        etatsMap.set(EtatSaison.AVN, this.traductionEnumService.traduireEtatSaison(EtatSaison.AVN));
-      }
-    
-      return etatsMap;
-    }
+    return etatsMap;
+  }
 
-    mettreAjourListeLienSeances(uid: string, listeRef: DocumentReference<unknown>[]): Promise<void> {
-      return this.firestore.collection("saisons").doc(uid).update({
-        seances: listeRef
-      });
-    }
+  mettreAjourListeLienSeances(uid: string, listeRef: DocumentReference<unknown>[]): Promise<void> {
+    return this.firestore.collection("saisons").doc(uid).update({
+      seances: listeRef
+    });
+  }
 }

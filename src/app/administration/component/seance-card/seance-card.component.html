@@ -4,12 +4,12 @@
             <div class="date-header">
                 {{ seance.date | date:'yyyy-MM-dd HH:mm' | localizeDate:'EEEE dd MMMM yyyy' }}
             </div>
-            <div class="time-header">
-                <button mat-icon-button (click)="ajusterHeureSeance(-15)">
+            <div class="time-header" >
+                <button *ngIf="!seance.supprimee" mat-icon-button (click)="ajusterHeureSeance(-15)">
                     <mat-icon>remove</mat-icon>
                 </button>
                 {{ seance.date | date:'yyyy-MM-dd HH:mm' | localizeDate:'HH:mm' }}
-                <button mat-icon-button (click)="ajusterHeureSeance(+15)">
+                <button *ngIf="!seance.supprimee" mat-icon-button (click)="ajusterHeureSeance(+15)">
                     <mat-icon>add</mat-icon>
                 </button>
             </div>
@@ -17,6 +17,15 @@
                 <button mat-icon-button class="add-button" (click)="supprimerSeance()">
                     <mat-icon>delete</mat-icon>
                 </button>
+            </div>
+        </div>
+        <div class="chips-container" *ngIf="!seance.supprimee">
+            <div *ngFor="let enumTypeSeance of recupererEtatSeanceAAfficher()" >
+                <mat-chip 
+                [ngClass]="{'blue-chip': enumTypeSeance === seance.type}"
+                (click)="choisirTypeSeance(enumTypeSeance)">
+                {{ traductionEnumService.traduireEtatSeance(enumTypeSeance) }}
+            </mat-chip>
             </div>
         </div>
     </mat-card-content>
