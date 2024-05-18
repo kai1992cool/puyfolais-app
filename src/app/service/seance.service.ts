@@ -12,20 +12,76 @@ export class SeanceService {
 
   constructor(private firestore: AngularFirestore) { }
 
+
+  creerListeSeances(seances: Seance[]): Promise<DocumentReference<ISeance>[]> {
+    const listDoc: Promise<DocumentReference<ISeance>>[] = [];
+
+    seances.forEach(seanceAcreer => {
+
+      
+    const iseance: ISeance = {
+      date: Timestamp.fromDate(seanceAcreer.date),
+      type: seanceAcreer.type
+    };
+
+      const promise = this.firestore.collection<ISeance>('seances').add(iseance);
+      listDoc.push(promise);
+    });
+
+    return Promise.all(listDoc);
+  }
+
+
+  majListeSeances(seances: Seance[]): Promise<DocumentReference<ISeance>[]> {
+    const listDoc: Promise<DocumentReference<ISeance>>[] = [];
+
+    seances.forEach(seanceAmodifier => {
+
+      const iseance: ISeance = {
+        date: Timestamp.fromDate(seanceAmodifier.date),
+        type: seanceAmodifier.type
+      };
+
+      const promise = this.firestore.collection<ISeance>('seances').doc(seanceAmodifier.uid).update(iseance).then(() => this.firestore.collection<ISeance>('seances').doc(seanceAmodifier.uid).ref);
+      listDoc.push(promise);
+    });
+
+    return Promise.all(listDoc);
+  }
+
+  listeSeancesNonImpactees(seances: Seance[]): Promise<DocumentReference<ISeance>[]> {
+    const listDoc: DocumentReference<ISeance>[] = [];
+     seances.forEach(seanceNonImpactee => {
+      const promise =  this.firestore.collection<ISeance>('seances').doc(seanceNonImpactee.uid).ref
+      listDoc.push(promise);
+    });
+    return Promise.all(listDoc);
+  }
+
+  supprimerListeSeances(seances: Seance[]): Promise<void> {
+    const listDoc: Promise<void>[] = [];
+    seances.forEach(seanceAsupprimer => {
+      const promise = this.firestore.collection<ISeance>('seances').doc(seanceAsupprimer.uid).delete()
+      listDoc.push(promise);
+    });
+    return Promise.all(listDoc).then(() => {});  
+  }
+
+
   recupererListeSeance(references: DocumentReference[]): Observable<Seance[]> {
     // Créer un tableau d'observables pour chaque référence
     const observables = references.map(reference =>
       this.firestore.doc<ISeance>(reference.path).snapshotChanges().pipe(
         filter(changes => !!changes.payload.data()), // Filtrer les valeurs indéfinies
         map(action => {
-          const data = action.payload.data() as ISeance;        
-          return new Seance(action.payload.id,(data.date as Timestamp).toDate(),data.type);  
+          const data = action.payload.data() as ISeance;
+          return new Seance(action.payload.id, (data.date as Timestamp).toDate(), data.type);
         })
       )
     );
-  
+
     // Utiliser combineLatest pour combiner les résultats de tous les observables
     return combineLatest(observables);
   }
-  
+
 }

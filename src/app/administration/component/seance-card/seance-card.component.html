@@ -2,8 +2,16 @@
     <mat-card-content>
         <div class="row">
             <div class="date-header">
-                {{ seance.date | date:'yyyy-MM-dd' | localizeDate:'EEEE dd MMMM yyyy' }}
-                {{ seance.date | date:'yyyy-MM-dd' | localizeDate:'hh:mm' }}
+                {{ seance.date | date:'yyyy-MM-dd HH:mm' | localizeDate:'EEEE dd MMMM yyyy' }}
+            </div>
+            <div class="time-header">
+                <button mat-icon-button (click)="ajusterHeureSeance(-15)">
+                    <mat-icon>remove</mat-icon>
+                </button>
+                {{ seance.date | date:'yyyy-MM-dd HH:mm' | localizeDate:'HH:mm' }}
+                <button mat-icon-button (click)="ajusterHeureSeance(+15)">
+                    <mat-icon>add</mat-icon>
+                </button>
             </div>
             <div class="col button-column">
                 <button mat-icon-button class="add-button" (click)="supprimerSeance()">

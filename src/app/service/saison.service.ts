@@ -52,7 +52,6 @@ export class SaisonService {
   mettreAJourSaison(saison: Saison) : Promise<void> {
 
     const isaison: ISaison = {
-      uid: saison.uid,
       libelle: saison.libelle,
       dateDebut: Timestamp.fromDate(saison.dateDebut),
       dateFin: Timestamp.fromDate(saison.dateFin),
@@ -149,5 +148,11 @@ export class SaisonService {
       }
     
       return etatsMap;
+    }
+
+    mettreAjourListeLienSeances(uid: string, listeRef: DocumentReference<unknown>[]): Promise<void> {
+      return this.firestore.collection("saisons").doc(uid).update({
+        seances: listeRef
+      });
     }
 }

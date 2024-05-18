@@ -7,6 +7,8 @@ import { SeanceService } from '../../../service/seance.service';
 import { Saison } from '../../../model/saison';
 import { Seance } from '../../../model/seance';
 import { EtatSeance } from '../../../enum/etat-seances';
+import { ISeance } from '../../../interface/seance';
+import { DocumentReference } from '@angular/fire/compat/firestore';
 
 
 @Component({
@@ -166,6 +168,8 @@ export class SaisonCardComponent implements OnInit {
     if (seancesADate.length === 0) {
       const nouvelleSeance = new Seance('', selectedDate, EtatSeance.NOR)
       nouvelleSeance.creation = true
+      // TODO : implémenter le paramétrage de l'heure de début de séance
+      nouvelleSeance.date.setHours(21)
       this.listeSeances.push(nouvelleSeance)
     } else {
       const duplicationSeance = new Seance('', selectedDate, EtatSeance.NOR)
@@ -174,6 +178,29 @@ export class SaisonCardComponent implements OnInit {
     }
   }
 
-  
+  validerMiseAJourSeances() {
+    const listDocCreePromise = this.seanceService.creerListeSeances(this.listeSeances.filter(seanceACreer => seanceACreer.creation));
+    const listDocMajPromise = this.seanceService.majListeSeances(this.listeSeances.filter(seanceACreer => seanceACreer.miseAJour));
+    const listDocNonImpacteesPromise = this.seanceService.listeSeancesNonImpactees(this.listeSeances.filter(seanceNonImpactees => (!seanceNonImpactees.miseAJour) && !seanceNonImpactees.creation && !seanceNonImpactees.supprimee));
+    const listDocSupprimesPromise = this.seanceService.supprimerListeSeances(this.listeSeances.filter(seanceACreer => seanceACreer.supprimee));
+
+    Promise.all([listDocCreePromise, listDocMajPromise, listDocNonImpacteesPromise, listDocSupprimesPromise])
+      .then(results => {
+        const mergedArray: DocumentReference<ISeance>[] = [];
+        results.forEach(result => {
+          if (Array.isArray(result)) {
+            mergedArray.push(...result);
+          }
+        });
+        // Mettre à jour l'enregistrement avec les DocumentReference
+        return this.saisonService.mettreAjourListeLienSeances(this.saison.uid, mergedArray);
+      })
+      .then(() => {
+        console.log("DocumentReference insérées avec succès dans l'enregistrement de la saison");
+      })
+      .catch(error => {
+        console.error("Une erreur est survenue lors de l'insertion des DocumentReference :", error);
+      });
+}
 }
 
