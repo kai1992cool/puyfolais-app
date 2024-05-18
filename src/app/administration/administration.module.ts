@@ -27,7 +27,7 @@ import { LocalizeDatePipe } from './pipe/localize-date.pipe';
 
 
 @NgModule({
-  declarations: [AdminUtilisateursComponent, AdminAccueilComponent, AdminComponent, AdminStructuresComponent, AdminSaisonsComponent, SaisonCardComponent, SeanceCardComponent, LocalizeDatePipe],
+  declarations: [AdminUtilisateursComponent, AdminAccueilComponent, AdminComponent, AdminStructuresComponent, AdminSaisonsComponent, SaisonCardComponent, SeanceCardComponent, LocalizeDatePipe],  
   imports: [
     CommonModule,
     AdministrationRoutingModule,

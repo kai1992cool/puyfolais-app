@@ -29,3 +29,15 @@
   display: flex;
   justify-content: flex-end; /* Pour aligner le bouton à droite */
 }
+
+.greyed-out {
+  background-color: #e0e0e0; /* Couleur de fond grisée */
+  color: #9e9e9e;           /* Couleur du texte grisée */
+  opacity: 0.6;             /* Réduit l'opacité pour un effet grisé */
+}
+
+/* Si vous voulez aussi griser les boutons à l'intérieur de la carte */
+.greyed-out .mat-icon-button {
+  pointer-events: none; /* Désactive les interactions */
+  color: #9e9e9e;       /* Couleur de l'icône grisée */
+}

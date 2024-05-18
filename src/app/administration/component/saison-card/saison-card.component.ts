@@ -1,13 +1,12 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { ISaison } from '../../../interface/saison';
 import { EtatSaison } from '../../../enum/etat-saison';
 import { SaisonService } from '../../../service/saison.service';
 import { TranslateService } from '@ngx-translate/core';
 import { DateAdapter } from '@angular/material/core';
-import { Timestamp } from '@angular/fire/firestore';
-import { ISeance } from '../../../interface/seance';
 import { SeanceService } from '../../../service/seance.service';
-import { SeancePossiblePeriode } from '../../model/seance-possible-periode';
+import { Saison } from '../../../model/saison';
+import { Seance } from '../../../model/seance';
+import { EtatSeance } from '../../../enum/etat-seances';
 
 
 @Component({
@@ -17,10 +16,10 @@ import { SeancePossiblePeriode } from '../../model/seance-possible-periode';
 })
 export class SaisonCardComponent implements OnInit {
 
-  @Input() saison!: ISaison;
+  @Input() saison!: Saison;
 
-  readonly FILTRE_JOURS_VEN_SAM: number[] = [5,6];
-  readonly FILTRE_MOIS_TOUS: number[] = [1,2,3,4,5,6,7,8,9,10,11,12];
+  readonly FILTRE_JOURS_VEN_SAM: number[] = [5, 6];
+  readonly FILTRE_MOIS_TOUS: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
   texteBadgeSaison: string = '';
   etatSaisonTraduit: Map<EtatSaison, string> = new Map();
@@ -28,16 +27,9 @@ export class SaisonCardComponent implements OnInit {
   suppressionImpossible: boolean = true;
   editionDemandee: boolean = false;
   planningDemande: boolean = false;
-  listeSeancesPossiblePeriode: SeancePossiblePeriode[] = [];
-  listeSeancesPossiblePeriodeFiltree: SeancePossiblePeriode[] = [];
   listeJoursFiltresActifs: number[] = this.FILTRE_JOURS_VEN_SAM.slice();;
   listeMoisFiltresActifs: number[] = this.FILTRE_MOIS_TOUS.slice();;
-  listeSeances: ISeance[] = [];
-
-  // Nécessaire pour gérer la conversion entre les DatePicker (Date) et Firestore (Timestamp)
-  dateDebutFormatee!: Date;
-  dateFinFormatee!: Date;
-
+  listeSeances: Seance[] = [];
 
   constructor(
     public saisonService: SaisonService,
@@ -79,7 +71,7 @@ export class SaisonCardComponent implements OnInit {
    * Vérifie qu'il n'existe pas de séances existante pour valider la demande de suppression
    * @param arg0 La saison à vérifié émise par la card
    */
-  private verifierPossibiliteSupprimerSaison(arg0: ISaison) {
+  private verifierPossibiliteSupprimerSaison(arg0: Saison) {
     this.saisonService.verifierSeancesExistantesSaison(arg0.uid).subscribe(seanceExist => {
       this.suppressionImpossible = seanceExist;
     })
@@ -89,7 +81,7 @@ export class SaisonCardComponent implements OnInit {
    * Supprime la saison
    * @param arg0 La saison à vérifié émise par la card
    */
-  supprimerSaison(arg0: ISaison) {
+  supprimerSaison(arg0: Saison) {
     if (!this.suppressionImpossible) {
       this.saisonService.supprimerSaison(arg0.uid).then(() => {
       })
@@ -111,19 +103,13 @@ export class SaisonCardComponent implements OnInit {
    * Active le bloc d'édition d'une saison (et désative le bloc de visualisation)
    */
   editerSaison() {
-    this.dateDebutFormatee = this.saison.dateDebut.toDate();
-    this.dateFinFormatee = this.saison.dateFin.toDate();
     this.editionDemandee = true;
   }
 
   /**
    * Valide la mise à jour en BDD
    */
-  validerMiseAJourSaison(libelle: string, dateDebut: Date, dateFin: Date) {
-
-    this.saison.libelle = libelle;
-    this.saison.dateDebut = Timestamp.fromDate(dateDebut);
-    this.saison.dateFin = Timestamp.fromDate(dateFin);
+  validerMiseAJourSaison() {
 
     this.saisonService.mettreAJourSaison(this.saison).then(() => {
       this.editionDemandee = false;
@@ -145,18 +131,6 @@ export class SaisonCardComponent implements OnInit {
     return !!this.saison?.libelle && !!this.saison?.dateDebut && !!this.saison?.dateFin && this.saison.dateDebut <= this.saison.dateFin;
   }
 
-  lorsChangementDatePicker(event: any, type: string) {
-    const selectedDate = event.value;
-    if (type === 'deb') {
-      this.saison.dateDebut = Timestamp.fromDate(selectedDate);
-      return
-    }
-    if (type === 'fin') {
-      this.saison.dateFin = Timestamp.fromDate(selectedDate);
-      return
-    }
-    throw new Error('Type de date invalide');
-  }
 
   // Edition des séances
   //********************
@@ -168,30 +142,9 @@ export class SaisonCardComponent implements OnInit {
     if (this.planningDemande) {
       this.planningDemande = false
     } else {
-      this.recupererDatesSeancesPossiblesSaison();
       this.recupererSeancesExistantes();
-      this.toggleFiltre(undefined, undefined);
       this.planningDemande = true;
     }
-  }
-
-  /**
-   * Pour une saison donnée, met à jour le tableau des jours de la saison en initialisant des Seances
-   */
-  private recupererDatesSeancesPossiblesSaison(): void {
-    const jours: SeancePossiblePeriode[] = [];
-    const dateDebut = new Date(this.saison.dateDebut.toDate());
-    let dateActuelle = dateDebut;
-    const dateFin = new Date(this.saison.dateFin.toDate());
-
-    while (dateActuelle <= dateFin) {
-      const dateAInserer = new Date(dateActuelle);
-      jours.push(new SeancePossiblePeriode(dateAInserer));
-      dateActuelle.setDate(dateActuelle.getDate() + 1);
-    }
-
-    this.listeSeancesPossiblePeriode = jours;
-    this.listeSeancesPossiblePeriodeFiltree = jours;
   }
 
   /**
@@ -199,103 +152,28 @@ export class SaisonCardComponent implements OnInit {
    */
   private recupererSeancesExistantes(): void {
     this.seanceService.recupererListeSeance(this.saison.seances)
-      .subscribe(seances => {
-        this.listeSeances = seances
-        this.rapprocherSeancesExistantes();
+      .subscribe(listeSeancesBdd => {
+
+        listeSeancesBdd.forEach(seanceBdd => {
+          this.listeSeances.push(seanceBdd)
+        })
       })
   }
 
-  /**
-  * Réalise un rapprochement entre la liste des seances affectées à la saison et la liste des jours de la période
-  * Il s'agit de mettre à jour l'indicateur de sélection de la liste des dates possible
-  */
-  private rapprocherSeancesExistantes(): void {
-    this.listeSeances.forEach(seance => {
-      const seanceDate = seance.date.toDate();
-      const jour = this.listeSeancesPossiblePeriode.find(jour => this.compareDates(jour.date, seanceDate));
-      if (jour) {
-        jour.selectionne = true;
-      }
-    });
-  }
+  selectionDateSeanceCalendrier(selectedDate: Date) {
+    const seancesADate = this.listeSeances.filter(seance => seance.seanceADate(selectedDate))
 
-  /**
-   * Méthode pour tester si les dates des séances possibles et existantes sont identique
-   * @param date1 La première date à tester
-   * @param date2 La seconde date à tester
-   * @returns True ou False
-   */
-  private compareDates(date1: Date, date2: Date): boolean {
-    return (
-      date1.getFullYear() === date2.getFullYear() &&
-      date1.getMonth() === date2.getMonth() &&
-      date1.getDate() === date2.getDate()
-    );
-  }
-
-  /**
-   * Filtre la liste des dates sélectionnables qui ne sont pas encore affectée à la saison
-   * @returns La liste des dates non sélectionnées
-   */
-  recupererSeancesPossiblesNonSelectionnees(): SeancePossiblePeriode[] {
-    return this.listeSeancesPossiblePeriodeFiltree.filter(seance => !seance.selectionne);
-  }
-
-  // Méthode pour filtrer les éléments en fonction du jour de la semaine sélectionné
-  toggleFiltre(jour: number |undefined, mois:number |undefined) {
-    // Activez ou désactivez le filtre pour le jour sélectionné
-    // Par exemple, vous pouvez avoir un tableau de jours sélectionnés
-    // ou un objet qui stocke les états de sélection des jours
-
-    // Ici, je vais supposer que vous avez un tableau de jours sélectionnés
-
-    if (jour) {
-    const index = this.listeJoursFiltresActifs.indexOf(jour);
-    if (index !== -1) {
-      // Si le jour est déjà sélectionné, le retirez
-      this.listeJoursFiltresActifs.splice(index, 1);
-      if (this.listeJoursFiltresActifs.length === 0) {
-        this.listeJoursFiltresActifs = this.FILTRE_JOURS_VEN_SAM
-      }
+    if (seancesADate.length === 0) {
+      const nouvelleSeance = new Seance('', selectedDate, EtatSeance.NOR)
+      nouvelleSeance.creation = true
+      this.listeSeances.push(nouvelleSeance)
     } else {
-      // Sinon, ajoutez-le
-      this.listeJoursFiltresActifs.push(jour);
+      const duplicationSeance = new Seance('', selectedDate, EtatSeance.NOR)
+      duplicationSeance.creation = true
+      this.listeSeances.push(duplicationSeance)
     }
   }
 
-  if (mois) {
-    const index = this.listeMoisFiltresActifs.indexOf(mois);
-    if (index !== -1) {
-      // Si le jour est déjà sélectionné, le retirez
-      this.listeMoisFiltresActifs.splice(index, 1);
-      if (this.listeMoisFiltresActifs.length === 0) {
-        this.listeMoisFiltresActifs = this.FILTRE_MOIS_TOUS
-      }      
-    } else {
-      // Sinon, ajoutez-le
-      this.listeMoisFiltresActifs.push(mois);
-    }
-  }
-
-    // Filtrer les séances en fonction des jours sélectionnés
-    this.listeSeancesPossiblePeriodeFiltree = this.listeSeancesPossiblePeriode.filter(seance => {
-      const seanceJour = seance.date.getDay() ;
-      const seanceMois = seance.date.getMonth() + 1;
-      // Vérifiez si le jour de la semaine de la séance est dans le tableau des jours sélectionnés
-      return this.listeJoursFiltresActifs.includes(seanceJour) && this.listeMoisFiltresActifs.includes(seanceMois);
-    });
-  }
-
-
-  isFilterJourActive(jour: number): boolean {
-    // Logique pour déterminer si le filtre est actif ou non
-    // Par exemple, vous pouvez utiliser une liste de filtres actifs
-    return this.listeJoursFiltresActifs.includes(jour); // suppose que listeFiltresActifs contient les jours actifs
-  }
-
-  isFilterMoisActive(mois: number): boolean {
-    // Logique pour déterminer si le filtre est actif ou non
-    // Par exemple, vous pouvez utiliser une liste de filtres actifs
-    return this.listeMoisFiltresActifs.includes(mois); // suppose que listeFiltresActifs contient les jours actifs
-  }
+  
 }
+

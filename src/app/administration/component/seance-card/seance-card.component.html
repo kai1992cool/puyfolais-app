@@ -1,22 +1,15 @@
-<mat-card>
+<mat-card [ngClass]="{ 'greyed-out': seance.supprimee }">
     <mat-card-content>
         <div class="row">
-            <!-- Colonne pour la date -->
-            <!-- <div class="col date-column"> -->
-                <div class="date-header">
-                    {{ seancePossiblePeriode.date | date:'yyyy-MM-dd' | localizeDate:'EEEE dd MMMM yyyy' }}
-                </div>
-            <!-- </div> -->
-
-            <!-- Colonne pour le bouton -->
+            <div class="date-header">
+                {{ seance.date | date:'yyyy-MM-dd' | localizeDate:'EEEE dd MMMM yyyy' }}
+                {{ seance.date | date:'yyyy-MM-dd' | localizeDate:'hh:mm' }}
+            </div>
             <div class="col button-column">
-                <!-- <div class="type-line"> -->
-                    <button mat-icon-button class="add-button" (click)="ajouterSeance()">
-                        <mat-icon>add</mat-icon>
-                    </button>
-                <!-- </div> -->
+                <button mat-icon-button class="add-button" (click)="supprimerSeance()">
+                    <mat-icon>delete</mat-icon>
+                </button>
             </div>
         </div>
     </mat-card-content>
-    
 </mat-card>

@@ -6,6 +6,8 @@ import { ISaison } from '../interface/saison';
 import { EtatSaison } from '../enum/etat-saison';
 import { EnumTraductionService } from './enum-traduction.service';
 import { ISeance } from '../interface/seance';
+import { Timestamp } from 'firebase/firestore';
+import { Saison } from '../model/saison';
 
 @Injectable({
   providedIn: 'root'
@@ -47,8 +49,17 @@ export class SaisonService {
    * @param saison l'objet Saison à mettre à jour
    * @returns  Le promise résultant de la mise à jour
    */
-  mettreAJourSaison(saison: ISaison) : Promise<void> {
-    return this.firestore.collection('saisons').doc(saison.uid).update(saison).catch(error => {
+  mettreAJourSaison(saison: Saison) : Promise<void> {
+
+    const isaison: ISaison = {
+      uid: saison.uid,
+      libelle: saison.libelle,
+      dateDebut: Timestamp.fromDate(saison.dateDebut),
+      dateFin: Timestamp.fromDate(saison.dateFin),
+      seances: saison.seances
+    };
+
+    return this.firestore.collection('saisons').doc(saison.uid).update(isaison).catch(error => {
       // Gérer les erreurs
       console.error("Erreur lors de la mise à jour de la saison :", error);
     });
@@ -57,13 +68,27 @@ export class SaisonService {
    * Retourne la liste des saisons
    * @returns un tableau contenant la liste des saisons
    */
-  recupererSaisons(): Observable<ISaison[]> {
+  recupererSaisons(): Observable<Saison[]> {
     return this.firestore.collection('saisons').snapshotChanges().pipe(
       map(actions => {
         return actions.map(action => {
-          const data = action.payload.doc.data() as ISaison;
-          data.uid = action.payload.doc.id;
-          return { ...data };
+          const firestoreData = action.payload.doc.data() as ISaison;
+          const uid = action.payload.doc.id;
+  
+          // Transformation des dates de Timestamp en Date
+          const dateDebut = (firestoreData.dateDebut as Timestamp).toDate();
+          const dateFin = (firestoreData.dateFin as Timestamp).toDate();
+  
+          // Construction de l'objet ISaison
+          const saison: Saison = {
+            uid: uid,
+            libelle: firestoreData.libelle,
+            dateDebut: dateDebut,
+            dateFin: dateFin,
+            seances: firestoreData.seances
+          };
+  
+          return saison;
         });
       })
     );
@@ -111,16 +136,13 @@ export class SaisonService {
      * @param saison La saison a traiter
      * @returns l'enum EtatSaison associé et son libéllé tradit dans un MAP
      */
-    detecterEtatSaison(saison: ISaison): Map<EtatSaison, string> {
-      const now = new Date();
-      const dateDebut = saison.dateDebut.toDate();
-      const dateFin = saison.dateFin.toDate();
-    
+    detecterEtatSaison(saison: Saison): Map<EtatSaison, string> {
+      const now = new Date();   
       const etatsMap: Map<EtatSaison, string> = new Map();
     
-      if (dateFin < now) {
+      if (saison.dateFin < now) {
         etatsMap.set(EtatSaison.PAS, this.traductionEnumService.traduireEtatSaison(EtatSaison.PAS));
-      } else if (dateDebut <= now && dateFin >= now) {
+      } else if (saison.dateDebut <= now && saison.dateFin >= now) {
         etatsMap.set(EtatSaison.ENC, this.traductionEnumService.traduireEtatSaison(EtatSaison.ENC));
       } else {
         etatsMap.set(EtatSaison.AVN, this.traductionEnumService.traduireEtatSaison(EtatSaison.AVN));

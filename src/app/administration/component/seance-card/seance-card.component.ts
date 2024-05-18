@@ -1,7 +1,7 @@
-import { Component, Input } from '@angular/core';
-import { SeancePossiblePeriode } from '../../model/seance-possible-periode';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { EnumTraductionService } from '../../../service/enum-traduction.service';
 import { EtatSeance } from '../../../enum/etat-seances';
+import { Seance } from '../../../model/seance';
 
 @Component({
   selector: 'app-seance-card',
@@ -10,7 +10,7 @@ import { EtatSeance } from '../../../enum/etat-seances';
 })
 export class SeanceCardComponent {
 
-  @Input() seancePossiblePeriode!: SeancePossiblePeriode;
+  @Input() seance!: Seance;
 
   constructor(
     public traductionEnumService: EnumTraductionService
@@ -29,8 +29,8 @@ export class SeanceCardComponent {
     }
 }
 
-  ajouterSeance() {
-
+supprimerSeance() {
+  this.seance.supprimee = ! this.seance.supprimee;
   }
 
 }

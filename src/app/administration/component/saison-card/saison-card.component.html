@@ -12,8 +12,8 @@
       <!-- Dates -->
       <div *ngIf="!editionDemandee" class="display-container-card-saison-details">
         <div class="column-card">
-          {{ "admin.saisons.mentionDu" | translate: { } }} {{ saison.dateDebut.toDate() | date:'dd/MM/yyyy' }} {{
-          "admin.saisons.mentionAu" | translate: { } }} {{ saison.dateFin.toDate() | date:'dd/MM/yyyy' }}
+          {{ "admin.saisons.mentionDu" | translate: { } }} {{ saison.dateDebut | date:'dd/MM/yyyy' }} {{
+          "admin.saisons.mentionAu" | translate: { } }} {{ saison.dateFin | date:'dd/MM/yyyy' }}
         </div>
 
       </div>
@@ -66,22 +66,22 @@
           <div class="column-card">
             <mat-form-field class="mat-form-field">
               <mat-label>{{ 'admin.saisons.edition.champDateDebut' | translate }}</mat-label>
-              <input matInput [matDatepicker]="pickerDebut" id="dateDebut" [(ngModel)]="dateDebutFormatee">
+              <input matInput [matDatepicker]="pickerDebut" id="dateDebut" [(ngModel)]="saison.dateDebut">
               <mat-datepicker-toggle matSuffix [for]="pickerDebut"></mat-datepicker-toggle>
-              <mat-datepicker #pickerDebut (dateChange)="lorsChangementDatePicker($event,'deb')"></mat-datepicker>
+              <mat-datepicker #pickerDebut></mat-datepicker>
             </mat-form-field>
 
             <mat-form-field class="mat-form-field">
               <mat-label>{{ 'admin.saisons.edition.champDateFin' | translate }}</mat-label>
-              <input matInput [matDatepicker]="pickerFin" id="dateFin" [(ngModel)]="dateFinFormatee">
+              <input matInput [matDatepicker]="pickerFin" id="dateFin" [(ngModel)]="saison.dateFin">
               <mat-datepicker-toggle matSuffix [for]="pickerFin"></mat-datepicker-toggle>
-              <mat-datepicker #pickerFin (dateChange)="lorsChangementDatePicker($event,'fin')"></mat-datepicker>
+              <mat-datepicker #pickerFin></mat-datepicker>
             </mat-form-field>
           </div>
 
           <!--  Boutons Formulaire -->
           <div class="button-container">
-            <button mat-raised-button color="primary" (click)="validerMiseAJourSaison(saison.libelle, dateDebutFormatee, dateFinFormatee)"
+            <button mat-raised-button color="primary" (click)="validerMiseAJourSaison()"
               [disabled]="!formulaireValide()">{{ 'commun.enregistrer' | translate }}</button>
             <button mat-button color="warn" (click)="annulerMiseAJourSaison()">{{ 'commun.annuler' | translate
               }}</button>
@@ -92,62 +92,19 @@
   </mat-card>
 </div>
 
-
-
 <div class="seance-details" *ngIf="planningDemande">
-  <mat-chip-listbox aria-label="Filtres jour">
-    <mat-chip class="jourFiltre" color="primary" [ngStyle]="{'background-color': isFilterJourActive(1) ? 'blue' : ''}" (click)="toggleFiltre(1, undefined)">{{ "commun.jours.lun" | translate }}</mat-chip>
-    <mat-chip class="jourFiltre" color="primary" [ngStyle]="{'background-color': isFilterJourActive(2) ? 'blue' : ''}" (click)="toggleFiltre(2, undefined)">{{ "commun.jours.mar" | translate }}</mat-chip>
-    <mat-chip class="jourFiltre" color="primary" [ngStyle]="{'background-color': isFilterJourActive(3) ? 'blue' : ''}" (click)="toggleFiltre(3, undefined)">{{ "commun.jours.mer" | translate }}</mat-chip>
-    <mat-chip class="jourFiltre" color="primary" [ngStyle]="{'background-color': isFilterJourActive(4) ? 'blue' : ''}" (click)="toggleFiltre(4, undefined)">{{ "commun.jours.jeu" | translate }}</mat-chip>
-    <mat-chip class="jourFiltre" color="primary" [ngStyle]="{'background-color': isFilterJourActive(5) ? 'blue' : ''}" (click)="toggleFiltre(5, undefined)">{{ "commun.jours.ven" | translate }}</mat-chip>
-    <mat-chip class="jourFiltre" color="primary" [ngStyle]="{'background-color': isFilterJourActive(6) ? 'blue' : ''}" (click)="toggleFiltre(6, undefined)">{{ "commun.jours.sam" | translate }}</mat-chip>
-    <mat-chip class="jourFiltre" color="primary" [ngStyle]="{'background-color': isFilterJourActive(7) ? 'blue' : ''}" (click)="toggleFiltre(7, undefined)">{{ "commun.jours.dim" | translate }}</mat-chip>
-  </mat-chip-listbox>
-  <mat-chip-listbox aria-label="Filtres mois">
-    <mat-chip class="moisFiltre" color="primary" [ngStyle]="{'background-color': isFilterMoisActive(1) ? 'blue' : ''}" (click)="toggleFiltre(undefined,1)">
-      {{ 'commun.mois.jan' | translate }}
-    </mat-chip>
-    <mat-chip class="moisFiltre" color="primary" [ngStyle]="{'background-color': isFilterMoisActive(2) ? 'blue' : ''}" (click)="toggleFiltre(undefined,2)">
-      {{ 'commun.mois.fev' | translate }}
-    </mat-chip>
-    <mat-chip class="moisFiltre" color="primary" [ngStyle]="{'background-color': isFilterMoisActive(3) ? 'blue' : ''}" (click)="toggleFiltre(undefined,3)">
-      {{ 'commun.mois.mar' | translate }}
-    </mat-chip>
-    <mat-chip class="moisFiltre" color="primary" [ngStyle]="{'background-color': isFilterMoisActive(4) ? 'blue' : ''}" (click)="toggleFiltre(undefined,4)">
-      {{ 'commun.mois.avr' | translate }}
-    </mat-chip>
-    <mat-chip class="moisFiltre" color="primary" [ngStyle]="{'background-color': isFilterMoisActive(5) ? 'blue' : ''}" (click)="toggleFiltre(undefined,5)">
-      {{ 'commun.mois.mai' | translate }}
-    </mat-chip>
-    <mat-chip class="moisFiltre" color="primary" [ngStyle]="{'background-color': isFilterMoisActive(6) ? 'blue' : ''}" (click)="toggleFiltre(undefined,6)">
-      {{ 'commun.mois.jun' | translate }}
-    </mat-chip>
-    <mat-chip class="moisFiltre" color="primary" [ngStyle]="{'background-color': isFilterMoisActive(7) ? 'blue' : ''}" (click)="toggleFiltre(undefined,7)">
-      {{ 'commun.mois.jui' | translate }}
-    </mat-chip>
-    <mat-chip class="moisFiltre" color="primary" [ngStyle]="{'background-color': isFilterMoisActive(8) ? 'blue' : ''}" (click)="toggleFiltre(undefined,8)">
-      {{ 'commun.mois.aou' | translate }}
-    </mat-chip>
-    <mat-chip class="moisFiltre" color="primary" [ngStyle]="{'background-color': isFilterMoisActive(9) ? 'blue' : ''}" (click)="toggleFiltre(undefined,9)">
-      {{ 'commun.mois.sep' | translate }}
-    </mat-chip>
-    <mat-chip class="moisFiltre" color="primary" [ngStyle]="{'background-color': isFilterMoisActive(10) ? 'blue' : ''}" (click)="toggleFiltre(undefined,10)">
-      {{ 'commun.mois.oct' | translate }}
-    </mat-chip>
-    <mat-chip class="moisFiltre" color="primary" [ngStyle]="{'background-color': isFilterMoisActive(11) ? 'blue' : ''}" (click)="toggleFiltre(undefined,11)">
-      {{ 'commun.mois.nov' | translate }}
-    </mat-chip>
-    <mat-chip class="moisFiltre" color="primary" [ngStyle]="{'background-color': isFilterMoisActive(12) ? 'blue' : ''}" (click)="toggleFiltre(undefined,12)">
-      {{ 'commun.mois.dec' | translate }}
-    </mat-chip>
-    
-  </mat-chip-listbox>
-  <mat-label for="libelle">Liste des séances disponibles</mat-label>
-  <div class="seance-column">
-    <div *ngFor="let seance of recupererSeancesPossiblesNonSelectionnees()" class="seance-cell">
-      <app-seance-card [seancePossiblePeriode]="seance">
-      </app-seance-card>
+  <div class="seance-container">
+    <mat-calendar 
+      [minDate]="saison.dateDebut" 
+      [maxDate]="saison.dateFin" 
+      (selectedChange)="selectionDateSeanceCalendrier($event)">
+    </mat-calendar>
+    <div class="seance-column">
+      <div *ngFor="let seance of listeSeances" class="seance-cell">
+        <app-seance-card 
+        [seance]="seance">
+        </app-seance-card>
+      </div>
     </div>
   </div>
 </div>

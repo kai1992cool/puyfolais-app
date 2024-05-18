@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { SaisonDialogComponent } from '../dialog/saison-dialog/saison-dialog.component';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Subscription } from 'rxjs';
+import { Saison } from '../../model/saison';
 
 @Component({
   selector: 'app-admin-saisons',
@@ -15,7 +16,7 @@ export class AdminSaisonsComponent implements OnInit, OnDestroy  {
 
   constructor(private dialog: MatDialog, private firestore: AngularFirestore) { }
 
-  listeToutesSaisons: ISaison[] = [];
+  listeToutesSaisons: Saison[] = [];
   saisonService = inject(SaisonService);
   editionSaisonActivee: boolean = false;
   saisonSelectionnee: ISaison | null = null;
