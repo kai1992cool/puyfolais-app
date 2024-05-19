@@ -32,7 +32,9 @@ export class SaisonCardComponent implements OnInit {
   listeJoursFiltresActifs: number[] = this.FILTRE_JOURS_VEN_SAM.slice();;
   listeMoisFiltresActifs: number[] = this.FILTRE_MOIS_TOUS.slice();;
   listeSeances: Seance[] = [];
-
+  errorEdit: boolean = false;
+  errorEditMessage: string = '';
+  
   constructor(
     public saisonService: SaisonService,
     private traductionService: TranslateService,
@@ -131,8 +133,44 @@ export class SaisonCardComponent implements OnInit {
    * @returns True ou False
    */
   formulaireValide(): boolean {
-    // TODO : contrôler l'exclusion de séances dans les nouvelles dates de saisons
-    return !!this.saison?.libelle && !!this.saison?.dateDebut && !!this.saison?.dateFin && this.saison.dateDebut <= this.saison.dateFin;
+
+    const dateMaxEtMin = this.trouverMinEtMaxDates(this.listeSeances);
+    this.errorEdit = false;
+
+    if (!this.saison?.libelle) {
+      this.errorEdit = true;
+      this.errorEditMessage = this.traductionService.instant('admin.saisons.edition.champLibelleObligatoire');
+    }
+
+    if (!this.saison?.dateDebut) {
+      this.errorEdit = true;
+      this.errorEditMessage = this.traductionService.instant('admin.saisons.edition.champDateDebutObligatoire');
+    }
+
+    if (!this.saison?.dateFin) {
+      this.errorEdit = true;
+      this.errorEditMessage = this.traductionService.instant('admin.saisons.edition.champDateFinObligatoire');
+    }
+
+    if (!(this.saison.dateDebut <= this.saison.dateFin)) {
+      this.errorEdit = true;
+      this.errorEditMessage = this.traductionService.instant('admin.saisons.edition.messageDatesErronees');
+    }
+
+    if (dateMaxEtMin.dateMin) {
+      if (!(this.saison.dateDebut <= dateMaxEtMin.dateMin)) {
+        this.errorEdit = true;
+        this.errorEditMessage = this.traductionService.instant('admin.saisons.edition.messageModificationPlageAvecSeanceExistantes');
+      }
+    }
+    if (dateMaxEtMin.dateMax) {
+      if (!(this.saison.dateFin >= dateMaxEtMin.dateMax)) {
+        this.errorEdit = true;
+        this.errorEditMessage = this.traductionService.instant('admin.saisons.edition.messageModificationPlageAvecSeanceExistantes');
+      }
+    }
+
+    return !this.errorEdit
   }
 
 
@@ -180,7 +218,7 @@ export class SaisonCardComponent implements OnInit {
     if (seancesADate.length === 0) {
       // TODO : implémenter le paramétrage de l'heure de début de séance
       nouvelleSeance.date.setHours(21)
-        } 
+    }
     this.listeSeances.push(nouvelleSeance)
     this.listeSeances.sort((a, b) => a.date.getTime() - b.date.getTime());
   }
@@ -224,6 +262,25 @@ export class SaisonCardComponent implements OnInit {
     if (indexSeancesNouvelleASupprimer !== -1) {
       this.listeSeances.splice(indexSeancesNouvelleASupprimer, 1);
     }
+  }
+
+  private trouverMinEtMaxDates(tableau: Seance[]) {
+    if (tableau.length === 0) {
+      return { dateMin: null, dateMax: null };
+    }
+
+    // Convertir les dates en timestamps pour comparaison
+    const dates = tableau.map(obj => new Date(obj.date).setHours(0, 0, 0, 0));
+
+    // Trouver le timestamp minimal et maximal
+    const minTimestamp = Math.min(...dates);
+    const maxTimestamp = Math.max(...dates);
+
+    // Convertir les timestamps en objets Date
+    return {
+      dateMin: new Date(minTimestamp),
+      dateMax: new Date(maxTimestamp)
+    };
   }
 }
 

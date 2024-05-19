@@ -41,7 +41,7 @@
   "enum": {
     "etatSaison": {
       "ENC": "En curso",
-      "AVN": "Próxima",
+      "AVN": "Próximo",
       "PAS": "Pasado"
     },
     "typeSeance": {
@@ -53,63 +53,64 @@
   "accueil": {
     "bienvenue": "¡Bienvenido a la aplicación Puyfolais!",
     "introduction": "Esta aplicación le permitirá gestionar su actividad de Puyfolais dentro de la asociación.",
-    "start": "Para comenzar, por favor inicie sesión haciendo clic en el icono en la esquina superior derecha."
+    "start": "Para empezar, por favor inicie sesión haciendo clic en el icono en la esquina superior derecha."
   },
   "sign": {
     "entrerNom": "Ingrese su nombre",
-    "entrerPrenom": "Ingrese su apellido",
+    "entrerPrenom": "Ingrese su primer nombre",
     "entrerMail": "Ingrese su correo electrónico",
     "entrerMdp": "Ingrese su contraseña",
     "labelNom": "Nombre",
-    "labelPrenom": "Apellido",
+    "labelPrenom": "Primer nombre",
     "labelMail": "Correo electrónico",
     "labelMdp": "Contraseña",
     "inscription": "Registrarse",
-    "pasInscrit": "¿No está registrado aún?",
-    "mdpOublie": "¿Olvidó su contraseña?",
+    "pasInscrit": "¿Aún no estás registrado?",
+    "mdpOublie": "¿Olvidaste tu contraseña?",
     "reinitialiserMdp": "Restablecer contraseña",
     "emailEnvoye": "Se ha enviado un correo electrónico a {{mail}} con un enlace para restablecer su contraseña.",
-    "validationInscription": "¡Su registro se ha realizado con éxito! Ahora está conectado. Sin embargo, aún no se le ha asignado ningún perfil. Espere a que un administrador le asigne estos perfiles para usar la aplicación.",
+    "validationInscription": "¡Su registro ha sido realizado con éxito! Ahora ha iniciado sesión. Sin embargo, aún no se le ha asignado ningún perfil. Por favor, espere a que un administrador le asigne estos perfiles para usar la aplicación.",
     "identifiants": {
       "invalides": "Las credenciales proporcionadas son inválidas. Por favor, inténtelo de nuevo.",
-      "existants": "Este correo electrónico ya está en uso, por favor utilice sus credenciales asociadas para iniciar sesión."
+      "existants": "Este correo electrónico ya está en uso, por favor use sus credenciales asociadas para iniciar sesión."
     }
   },
   "admin": {
     "titre": "Administración",
-    "introduction": "Aquí puede acceder a la configuración de la aplicación (usuarios, estructura, opciones ...).",
+    "introduction": "Aquí puede acceder a la configuración de la aplicación (usuario, estructura, opciones ...).",
     "service": {
       "gestionUtilisateur": "Gestión de usuarios",
       "gestionStructure": "Gestión de estructuras",
       "gestionSaison": "Gestión de temporadas"
     },
     "utilisateurs": {
-      "titre": "Administración de usuarios",
+      "titre": "Administración de Usuarios",
       "introduction": "Aquí puede gestionar los usuarios de la aplicación."
     },
     "structures": {
-      "titre": "Administración de estructuras",
+      "titre": "Administración de Estructuras",
       "introduction": "Aquí puede gestionar las estructuras de la asociación."
     },
     "saisons": {
-      "titre": "Administración de temporadas",
+      "titre": "Administración de Temporadas",
       "introduction": "Aquí puede gestionar las temporadas.",
-      "mentionDu": "Del",
-      "mentionAu": "al",
+      "mentionDu": "Desde",
+      "mentionAu": "hasta",
       "blocageSuppression": "No puede eliminar temporadas con sesiones existentes.",
       "edition": {
-        "titre": "Nueva temporada",
+        "titre": "Nueva Temporada",
         "champLibelle": "Etiqueta",
-        "champDateDebut": "Fecha de inicio",
-        "champDateFin": "Fecha de finalización",
-        "champLibelleObligatoire": " Se requiere la etiqueta",
-        "champDateDebutObligatoire": "Se requiere la fecha de inicio",
-        "champDateFinObligatoire": "Se requiere la fecha de finalización",
-        "messageChevauchement": "El período ingresado se superpone a un período existente.",
-        "messageDatesErronees": "La fecha de inicio es posterior a la fecha de finalización."
+        "champDateDebut": "Fecha de Inicio",
+        "champDateFin": "Fecha de Fin",
+        "champLibelleObligatoire": " La etiqueta es obligatoria",
+        "champDateDebutObligatoire": "La fecha de inicio es obligatoria",
+        "champDateFinObligatoire": "La fecha de fin es obligatoria",
+        "messageChevauchement": "El período ingresado se superpone con un período existente.",
+        "messageDatesErronees": "La fecha de inicio es mayor que la fecha de fin.",
+        "messageModificationPlageAvecSeanceExistantes": "El nuevo rango de fechas no incluye todas las sesiones definidas actualmente. Por favor, modifique las fechas o ajuste las sesiones."
       },
-      "seances" : {
-        "aucuneSeance": "Ninguna sesión definida, por favor agregue una usando el calendario"
+      "seances": {
+        "aucuneSeance": "No hay sesiones definidas, por favor agregue una usando el calendario"
       }
     }
   }
