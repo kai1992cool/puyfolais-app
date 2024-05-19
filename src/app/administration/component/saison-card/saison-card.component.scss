@@ -98,3 +98,50 @@ mat-card {
     flex-direction: column;
     gap: 10px; /* Espacement entre les séances */
   }
+
+
+  
+  .calendar-planning-column {
+    width: 100%; /* Le calendrier occupera toute la largeur du conteneur */
+  }
+  
+  .button-planning-column {
+    flex: 4; /* 80% de la largeur */
+    display: flex;
+    align-items: flex-end; /* Aligner le bouton en bas */
+  }
+  
+
+  
+
+
+  .seance-details-planning {
+    display: flex;
+    flex-wrap: wrap; /* Permettre le retour à la ligne si nécessaire */
+  }
+  
+  .container-planning {
+    flex: 1 1 20%; /* 20% de largeur */
+  }
+  
+  .seance-planning-column {
+    flex: 1 1 calc(80% - 10px); /* 80% de la largeur moins un espace de 10px */
+    margin-left: 10px; /* Espacement entre les deux colonnes */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* 3 colonnes maximum, chaque colonne ayant une largeur minimale de 300px */
+    grid-gap: 20px; /* Espacement entre les éléments */
+    align-items: center; /* Centrer horizontalement */
+    justify-content: center; /* Centrer verticalement */
+  }
+  
+  .seance-cell {
+    max-width: 100%; /* Largeur maximale de la cellule */
+    overflow: hidden; /* Masquer le contenu qui dépasse */
+  }
+
+  .empty-seance-message {
+    display: flex;
+    justify-content: center; /* Centrer horizontalement */
+    align-items: center; /* Centrer verticalement */
+    height: 100%; /* Utiliser toute la hauteur de la colonne */
+  }

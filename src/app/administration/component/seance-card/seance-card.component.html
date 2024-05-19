@@ -1,33 +1,39 @@
 <mat-card [ngClass]="{ 'greyed-out': seance.supprimee }">
-    <mat-card-content>
+    <mat-card-content class="seance-content">
         <div class="row">
-            <div class="date-header">
-                {{ seance.date | date:'yyyy-MM-dd HH:mm' | localizeDate:'EEEE dd MMMM yyyy' }}
+            <!-- Colonne 1 -->
+            <div class="column-date-time">
+                <div class="date-time-text">
+                    {{ seance.date | date:'yyyy-MM-dd HH:mm' | localizeDate:'EEEE dd MMMM yyyy' }}
+                </div>
+                <div class="date-time-text">
+                    <button *ngIf="!seance.supprimee" mat-icon-button (click)="ajusterHeureSeance(-15)">
+                        <mat-icon>remove</mat-icon>
+                    </button>
+                    {{ seance.date | date:'yyyy-MM-dd HH:mm' | localizeDate:'HH:mm' }}
+                    <button *ngIf="!seance.supprimee" mat-icon-button (click)="ajusterHeureSeance(+15)">
+                        <mat-icon>add</mat-icon>
+                    </button>
+                </div>
             </div>
-            <div class="time-header" >
-                <button *ngIf="!seance.supprimee" mat-icon-button (click)="ajusterHeureSeance(-15)">
-                    <mat-icon>remove</mat-icon>
-                </button>
-                {{ seance.date | date:'yyyy-MM-dd HH:mm' | localizeDate:'HH:mm' }}
-                <button *ngIf="!seance.supprimee" mat-icon-button (click)="ajusterHeureSeance(+15)">
-                    <mat-icon>add</mat-icon>
-                </button>
+            <!-- Colonne 2 -->
+            <div class="column-chips">
+                <div *ngFor="let enumTypeSeance of recupererTypeSeanceAAfficher()">
+                    <mat-chip
+                        [ngStyle]="enumTypeSeance === seance.type ? {'background-color': couleurTypeSeance} : {}"
+                        (click)="choisirTypeSeance(enumTypeSeance)">
+                        <span
+                            [ngStyle]="enumTypeSeance === seance.type ? {'color': 'white', 'font-weight': 'bold'} : {}">
+                            {{ traductionEnumService.traduireTypeSeance(enumTypeSeance) }}
+                        </span>
+                    </mat-chip>
+                </div>
             </div>
-            <div class="col button-column">
-                <button mat-icon-button class="add-button" (click)="supprimerSeance()">
+            <!-- Colonne 3 -->
+            <div class="column-button-delete">
+                <button mat-icon-button (click)="supprimerSeance()">
                     <mat-icon>delete</mat-icon>
                 </button>
-            </div>
-        </div>
-        <div class="chips-container" *ngIf="!seance.supprimee">
-            <div *ngFor="let enumTypeSeance of recupererTypeSeanceAAfficher()" >
-                <mat-chip  class="ebd"
-                [ngStyle]="enumTypeSeance === seance.type ? {'background-color': couleurTypeSeance} : {}"
-                (click)="choisirTypeSeance(enumTypeSeance)">
-                <span [ngStyle]="enumTypeSeance === seance.type ? {'color': 'white', 'font-weight': 'bold'} : {}">
-                    {{ traductionEnumService.traduireTypeSeance(enumTypeSeance) }}
-                </span>
-            </mat-chip>
             </div>
         </div>
     </mat-card-content>

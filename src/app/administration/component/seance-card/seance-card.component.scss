@@ -1,4 +1,4 @@
-.date-header {
+.date-time-text {
   font-size: 20px;
   font-weight: bold;
   // text-align: center;
@@ -6,28 +6,6 @@
   align-items: center; /* Pour centrer verticalement le texte */
   justify-content: center; /* Pour centrer horizontalement le texte */
   height: 100%; /* Pour que la colonne ait une hauteur de 100% */
-}
-
-.type-line {
-  margin-top: 10px;
-}
-
-.row {
-  display: flex;
-  justify-content: space-between; /* Pour aligner les colonnes sur les extrémités */
-}
-
-.col {
-  flex: 1; /* Pour que les colonnes aient la même largeur */
-}
-
-.date-column {
-  text-align: center; /* Pour centrer le contenu de la colonne de la date */
-}
-
-.button-column {
-  display: flex;
-  justify-content: flex-end; /* Pour aligner le bouton à droite */
 }
 
 .greyed-out {
@@ -40,4 +18,34 @@
 .greyed-out .mat-icon-button {
   pointer-events: none; /* Désactive les interactions */
   color: #9e9e9e;       /* Couleur de l'icône grisée */
+}
+
+seance-content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.row {
+  display: flex;
+  flex: 1;
+  align-items: center;
+}
+
+.column-date-time,
+.column-chips,
+.column-button-delete {
+  flex: 1; /* Chaque colonne occupera un tiers de l'espace disponible */
+  padding: 0 10px; /* Ajoute une marge intérieure pour l'espacement */
+}
+
+.column-date-time {
+  max-width: 300px; /* Largeur maximale de la colonne de date/heure */
+}
+
+.column-chips {
+  max-width: 100px; /* Largeur maximale de la colonne des puces */
+}
+
+.column-button-delete {
+  max-width: 50px; /* Largeur maximale de la colonne du bouton de suppression */
 }

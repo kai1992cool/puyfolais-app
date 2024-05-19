@@ -161,6 +161,7 @@ export class SaisonCardComponent implements OnInit {
 
         listeSeancesBdd.forEach(seanceBdd => {
           this.listeSeances.push(seanceBdd)
+          this.listeSeances.sort((a, b) => a.date.getTime() - b.date.getTime());
         })
       })
   }
@@ -180,6 +181,7 @@ export class SaisonCardComponent implements OnInit {
       nouvelleSeance.date.setHours(21)
         } 
     this.listeSeances.push(nouvelleSeance)
+    this.listeSeances.sort((a, b) => a.date.getTime() - b.date.getTime());
   }
 
   /**
