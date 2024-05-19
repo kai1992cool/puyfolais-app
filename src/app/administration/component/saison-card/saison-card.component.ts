@@ -6,7 +6,7 @@ import { DateAdapter } from '@angular/material/core';
 import { SeanceService } from '../../../service/seance.service';
 import { Saison } from '../../../model/saison';
 import { Seance } from '../../../model/seance';
-import { EtatSeance } from '../../../enum/etat-seances';
+import { TypeSeance } from '../../../enum/type-seances';
 import { ISeance } from '../../../interface/seance';
 import { DocumentReference } from '@angular/fire/compat/firestore';
 
@@ -151,9 +151,11 @@ export class SaisonCardComponent implements OnInit {
   }
 
   /**
-   * Ce code récupère pour la saison chaque séance dans la collection firestore pour ensuite etre rapproché avec les jours de la période
+   * Ce code récupère pour la saison chaque séance dans la collection firestore pour ensuite etre
+   * rapproché avec les jours de la période
    */
   private recupererSeancesExistantes(): void {
+    this.listeSeances = [];
     this.seanceService.recupererListeSeance(this.saison.seances)
       .subscribe(listeSeancesBdd => {
 
@@ -163,36 +165,43 @@ export class SaisonCardComponent implements OnInit {
       })
   }
 
+  /**
+   * Gestion de la sélection d'une date dans le calendrier. Si la date n'existe pas, on initialise une séance
+   * sinon, on la duplique
+   * @param selectedDate La date sélectionnée
+   */
   selectionDateSeanceCalendrier(selectedDate: Date) {
     const seancesADate = this.listeSeances.filter(seance => seance.seanceADate(selectedDate))
+    const nouvelleSeance = new Seance('', selectedDate, TypeSeance.NOR)
 
+    // Dans le cas d'une création, on applique une heure par défaut à la nouvelle séance.
     if (seancesADate.length === 0) {
-      const nouvelleSeance = new Seance('', selectedDate, EtatSeance.NOR)
       // TODO : implémenter le paramétrage de l'heure de début de séance
       nouvelleSeance.date.setHours(21)
-      this.listeSeances.push(nouvelleSeance)
-    } else {
-      const duplicationSeance = new Seance('', selectedDate, EtatSeance.NOR)
-      this.listeSeances.push(duplicationSeance)
-    }
+        } 
+    this.listeSeances.push(nouvelleSeance)
   }
 
+  /**
+   * Réalise la mise à jour de la BDD firestore une fois toutes les opérations de créations, modifications,
+   * suppressions réalisés en vu de mettre à jour la liste de séances dans l'objet saison
+   */
   validerMiseAJourSeances() {
-    const listDocCreePromise = this.seanceService.creerListeSeances(this.listeSeances.filter(seanceACreer => seanceACreer.uid === '' ));
+    const listDocCreePromise = this.seanceService.creerListeSeances(this.listeSeances.filter(seanceACreer => seanceACreer.uid === ''));
     const listDocMajPromise = this.seanceService.majListeSeances(this.listeSeances.filter(seanceACreer => seanceACreer.miseAJour && seanceACreer.uid !== ''));
     const listDocNonImpacteesPromise = this.seanceService.listeSeancesNonImpactees(this.listeSeances.filter(seanceNonImpactees => (!seanceNonImpactees.miseAJour) && seanceNonImpactees.uid !== '' && !seanceNonImpactees.supprimee));
     const listDocSupprimesPromise = this.seanceService.supprimerListeSeances(this.listeSeances.filter(seanceACreer => seanceACreer.supprimee));
 
     Promise.all([listDocCreePromise, listDocMajPromise, listDocNonImpacteesPromise, listDocSupprimesPromise])
       .then(results => {
-        const mergedArray: DocumentReference<ISeance>[] = [];
+        const toutesReferencesSeancesAMaj: DocumentReference<ISeance>[] = [];
         results.forEach(result => {
           if (Array.isArray(result)) {
-            mergedArray.push(...result);
+            toutesReferencesSeancesAMaj.push(...result);
           }
         });
         // Mettre à jour l'enregistrement avec les DocumentReference
-        return this.saisonService.mettreAjourListeLienSeances(this.saison.uid, mergedArray);
+        return this.saisonService.mettreAjourListeLienSeances(this.saison.uid, toutesReferencesSeancesAMaj);
       })
       .then(() => {
         console.debug("DocumentReference insérées avec succès dans l'enregistrement de la saison");
@@ -200,15 +209,18 @@ export class SaisonCardComponent implements OnInit {
       .catch(error => {
         console.error("Une erreur est survenue lors de l'insertion des DocumentReference :", error);
       });
-}
-
-retirerSeanceSansUid(seance: Seance) {
-  const indexSeancesNouvelleASupprimer = this.listeSeances.findIndex(seanceTrouvee => seanceTrouvee.seanceADate(seance.date));
-
-  if (indexSeancesNouvelleASupprimer !== -1) {
-    this.listeSeances.splice(indexSeancesNouvelleASupprimer, 1);
   }
 
-}
+  /**
+   * Permet la suppression dans le tableau des séances d'un item qui a été créé (sans uid) puis supprimée
+   * @param seance La séance sans uid à supprimer
+   */
+  retirerSeanceSansUid(seance: Seance) {
+    const indexSeancesNouvelleASupprimer = this.listeSeances.findIndex(seanceTrouvee => seanceTrouvee.seanceADate(seance.date));
+
+    if (indexSeancesNouvelleASupprimer !== -1) {
+      this.listeSeances.splice(indexSeancesNouvelleASupprimer, 1);
+    }
+  }
 }
 

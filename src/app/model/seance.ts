@@ -1,16 +1,16 @@
-import { EtatSeance } from '../enum/etat-seances';
+import { TypeSeance } from '../enum/type-seances';
 
 export class Seance {
     uid: string;
     date: Date;
-    type: EtatSeance;
+    type: TypeSeance;
     supprimee: boolean ;
     miseAJour: boolean;
 
     constructor(
         uid: string,
         date: Date,
-        type: EtatSeance,
+        type: TypeSeance,
       ) {
         this.uid = uid;
         this.date = date;

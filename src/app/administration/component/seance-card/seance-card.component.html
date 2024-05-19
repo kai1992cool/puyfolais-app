@@ -20,11 +20,13 @@
             </div>
         </div>
         <div class="chips-container" *ngIf="!seance.supprimee">
-            <div *ngFor="let enumTypeSeance of recupererEtatSeanceAAfficher()" >
-                <mat-chip 
-                [ngClass]="{'blue-chip': enumTypeSeance === seance.type}"
+            <div *ngFor="let enumTypeSeance of recupererTypeSeanceAAfficher()" >
+                <mat-chip  class="ebd"
+                [ngStyle]="enumTypeSeance === seance.type ? {'background-color': couleurTypeSeance} : {}"
                 (click)="choisirTypeSeance(enumTypeSeance)">
-                {{ traductionEnumService.traduireEtatSeance(enumTypeSeance) }}
+                <span [ngStyle]="enumTypeSeance === seance.type ? {'color': 'white', 'font-weight': 'bold'} : {}">
+                    {{ traductionEnumService.traduireTypeSeance(enumTypeSeance) }}
+                </span>
             </mat-chip>
             </div>
         </div>

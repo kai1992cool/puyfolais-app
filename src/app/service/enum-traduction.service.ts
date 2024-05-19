@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { EtatSaison } from '../enum/etat-saison';
-import { EtatSeance } from '../enum/etat-seances';
+import { TypeSeance } from '../enum/type-seances';
 
 @Injectable({
   providedIn: 'root'
@@ -23,17 +23,17 @@ export class EnumTraductionService {
     }
   }
 
-  traduireEtatSeance(enumValue: EtatSeance | undefined): string {
+  traduireTypeSeance(enumValue: TypeSeance | undefined): string {
     if (enumValue) {
-      const val = this.stringToEnum(enumValue, EtatSeance);
+      const val = this.stringToEnum(enumValue, TypeSeance);
       if (val) {
         switch (val) {
-          case EtatSeance.NOR:
-            return this.translateService.instant('enum.etatSeance.NOR');
-          case EtatSeance.SPE:
-            return this.translateService.instant('enum.etatSeance.SPE');
-          case EtatSeance.REP:
-            return this.translateService.instant('enum.etatSeance.REP');
+          case TypeSeance.NOR:
+            return this.translateService.instant('enum.typeSeance.NOR');
+          case TypeSeance.SPE:
+            return this.translateService.instant('enum.typeSeance.SPE');
+          case TypeSeance.REP:
+            return this.translateService.instant('enum.typeSeance.REP');
           default:
             return '';
         }

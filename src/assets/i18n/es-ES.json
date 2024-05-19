@@ -44,7 +44,7 @@
       "AVN": "Próxima",
       "PAS": "Pasado"
     },
-    "etatSeance": {
+    "typeSeance": {
       "NOR": "Normal",
       "SPE": "Especial",
       "REP": "Repetición"
