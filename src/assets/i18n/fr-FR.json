@@ -48,6 +48,10 @@
       "NOR": "Normale",
       "SPE": "Spéciale",
       "REP": "Répétition"
+    },
+    "typeStructure": {
+      "ACT": "Acteurs",
+      "SEV": "Services"
     }
   },
   "accueil": {
@@ -89,7 +93,14 @@
     },
     "structures": {
       "titre": "Administration Structures",
-      "introduction": "Ici vous pouvez gérer les structures de l'association."
+      "introduction": "Ici vous pouvez gérer les structures de l'association.",
+      "edition": {
+        "titre": "Nouvelle Structure",
+        "champLibelle": "Nom",
+        "champType": "Type de structure",
+        "champLibelleObligatoire": " Le nom est requis",
+        "champTypeObligatoire": " Le type est requis"
+      }
     },
     "saisons": {
       "titre": "Administration Saisons",
@@ -109,7 +120,7 @@
         "messageDatesErronees": "La date de début est supérieure à la date de fin.",
         "messageModificationPlageAvecSeanceExistantes": "La nouvelle plage de dates n'inclus pas toutes les séances actuellement définies. Veuillez modifier les dates ou rectifier les séances."
       },
-      "seances" : {
+      "seances": {
         "aucuneSeance": "Aucune séance définie, veuillez en ajouter à l'aide du calendrier"
       }
     }

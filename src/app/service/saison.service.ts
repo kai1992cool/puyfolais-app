@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, DocumentReference } from '@angular/fire/compat/firestore';
+import { AngularFirestore, AngularFirestoreCollection, DocumentReference } from '@angular/fire/compat/firestore';
 import { Observable, map } from 'rxjs';
 import { AngularFireAuth } from "@angular/fire/compat/auth";
 import { ISaison } from '../interface/saison';
@@ -19,6 +19,9 @@ export class SaisonService {
     private traductionEnumService: EnumTraductionService
   ) { }
 
+  collection: AngularFirestoreCollection<ISaison> = this.firestore.collection<ISaison>('saisons')
+
+
   /**
    * Créé une saison dans Firestore
    * @param libelle Le libellé de la saison (Année)
@@ -27,12 +30,15 @@ export class SaisonService {
    * @param listSeances La liste des séances
    * @returns L'identifiant technique de la saison
    */
-  creerSaison(libelle: string, dateDebut: Date, dateFin: Date, seances?: ISeance[]): Promise<DocumentReference<any>> {
-    if (!seances) {
-      return this.firestore.collection('saisons').add({ libelle, dateDebut, dateFin, seances: [] });
-    } else {
-      return this.firestore.collection('saisons').add({ libelle, dateDebut, dateFin, seances });
-    }
+  creerSaison(libelle: string, dateDebut: Date, dateFin: Date): Promise<DocumentReference<any>> {
+    const dateDebutTimestamp = Timestamp.fromDate(dateDebut);
+    const dateFinTimestamp = Timestamp.fromDate(dateFin);
+    return this.collection.add({
+      libelle, 
+      dateDebut: dateDebutTimestamp,
+      dateFin: dateFinTimestamp, 
+      seances: []
+    });
   }
 
   /**
@@ -41,11 +47,11 @@ export class SaisonService {
    * @returns  Le promise résultant de la suppression
    */
   supprimerSaison(uid: string): Promise<void> {
-    return this.firestore.collection('saisons').doc(uid).delete();
+    return this.collection.doc(uid).delete();
   }
 
   /**
-   * Met à jour une saison utilisateur
+   * Met à jour une saison 
    * @param saison l'objet Saison à mettre à jour
    * @returns  Le promise résultant de la mise à jour
    */
@@ -58,17 +64,18 @@ export class SaisonService {
       seances: saison.seances
     };
 
-    return this.firestore.collection('saisons').doc(saison.uid).update(isaison).catch(error => {
+    return this.collection.doc(saison.uid).update(isaison).catch(error => {
       // Gérer les erreurs
       console.error("Erreur lors de la mise à jour de la saison :", error);
     });
   }
+
   /**
    * Retourne la liste des saisons
    * @returns un tableau contenant la liste des saisons
    */
   recupererSaisons(): Observable<Saison[]> {
-    return this.firestore.collection('saisons').snapshotChanges().pipe(
+    return this.collection.snapshotChanges().pipe(
       map(actions => {
         return actions.map(action => {
           const firestoreData = action.payload.doc.data() as ISaison;
@@ -114,7 +121,7 @@ export class SaisonService {
  * @returns True si une saison possède au moins une séance
  */
   verifierSeancesExistantesSaison(uidSaison: string): Observable<boolean> {
-    return this.firestore.collection('saisons').doc(uidSaison).get().pipe(
+    return this.collection.doc(uidSaison).get().pipe(
       map(documentSnapshot => {
         if (documentSnapshot.exists) {
           const userData = documentSnapshot.data() as ISaison;

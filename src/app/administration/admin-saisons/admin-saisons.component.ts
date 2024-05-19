@@ -3,7 +3,6 @@ import { SaisonService } from '../../service/saison.service';
 import { ISaison } from '../../interface/saison';
 import { MatDialog } from '@angular/material/dialog';
 import { SaisonDialogComponent } from '../dialog/saison-dialog/saison-dialog.component';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Subscription } from 'rxjs';
 import { Saison } from '../../model/saison';
 
@@ -14,7 +13,7 @@ import { Saison } from '../../model/saison';
 })
 export class AdminSaisonsComponent implements OnInit, OnDestroy  {
 
-  constructor(private dialog: MatDialog, private firestore: AngularFirestore) { }
+  constructor(private dialog: MatDialog) { }
 
   listeToutesSaisons: Saison[] = [];
   saisonService = inject(SaisonService);

@@ -1,0 +1,44 @@
+.content-card-structure-details {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+}
+
+.display-container-card-structure-details {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; /* Aligner les éléments horizontalement */
+    align-items: center; /* Espacement entre les éléments */
+}
+
+.label {
+    font-weight: bold;
+    font-size: 1.2rem; /* Taille de police plus grande */
+}
+
+.column-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center; /* Centre verticalement */
+    justify-content: center; /* Centre horizontalement */
+    padding: 8px;
+}
+
+.column-boutons {
+    display: flex;
+    align-items: center; /* Centre verticalement */
+    position: relative;
+}
+
+mat-card {
+    margin: 10px;
+}
+
+.disabled-button {
+    opacity: 0.5; /* Réduit l'opacité des boutons désactivés */
+}
+
+.mat-form-field {
+    margin-right: 10px;
+    margin-left: 10px;
+}

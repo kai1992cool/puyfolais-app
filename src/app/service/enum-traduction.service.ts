@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { EtatSaison } from '../enum/etat-saison';
 import { TypeSeance } from '../enum/type-seances';
+import { TypeStructure } from '../enum/type-structures';
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +35,26 @@ export class EnumTraductionService {
             return this.translateService.instant('enum.typeSeance.SPE');
           case TypeSeance.REP:
             return this.translateService.instant('enum.typeSeance.REP');
+          default:
+            return '';
+        }
+      } else {
+        return ''
+      }
+    } else {
+      return ''
+    }
+  }
+
+  traduireTypeStructure(enumValue: TypeStructure | undefined): string {
+    if (enumValue) {
+      const val = this.stringToEnum(enumValue, TypeStructure);
+      if (val) {
+        switch (val) {
+          case TypeStructure.ACT:
+            return this.translateService.instant('enum.typeStructure.ACT');
+          case TypeStructure.SEV:
+            return this.translateService.instant('enum.typeStructure.SEV');
           default:
             return '';
         }

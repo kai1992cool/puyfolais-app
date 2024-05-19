@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, DocumentReference } from '@angular/fire/compat/firestore';
+import { AngularFirestore, AngularFirestoreCollection, DocumentReference } from '@angular/fire/compat/firestore';
 import { Observable, combineLatest, filter, forkJoin, map } from 'rxjs';
 import { ISeance } from '../interface/seance';
 import { Seance } from '../model/seance';
@@ -12,6 +12,7 @@ export class SeanceService {
 
   constructor(private firestore: AngularFirestore) { }
 
+  collection: AngularFirestoreCollection<ISeance> = this.firestore.collection<ISeance>('seances')
 
   creerListeSeances(seances: Seance[]): Promise<DocumentReference<ISeance>[]> {
     const listDoc: Promise<DocumentReference<ISeance>>[] = [];
@@ -24,7 +25,7 @@ export class SeanceService {
       type: seanceAcreer.type
     };
 
-      const promise = this.firestore.collection<ISeance>('seances').add(iseance);
+      const promise = this.collection.add(iseance);
       listDoc.push(promise);
     });
 
@@ -42,7 +43,7 @@ export class SeanceService {
         type: seanceAmodifier.type
       };
 
-      const promise = this.firestore.collection<ISeance>('seances').doc(seanceAmodifier.uid).update(iseance).then(() => this.firestore.collection<ISeance>('seances').doc(seanceAmodifier.uid).ref);
+      const promise = this.collection.doc(seanceAmodifier.uid).update(iseance).then(() => this.firestore.collection<ISeance>('seances').doc(seanceAmodifier.uid).ref);
       listDoc.push(promise);
     });
 
@@ -52,7 +53,7 @@ export class SeanceService {
   listeSeancesNonImpactees(seances: Seance[]): Promise<DocumentReference<ISeance>[]> {
     const listDoc: DocumentReference<ISeance>[] = [];
      seances.forEach(seanceNonImpactee => {
-      const promise =  this.firestore.collection<ISeance>('seances').doc(seanceNonImpactee.uid).ref
+      const promise =  this.collection.doc(seanceNonImpactee.uid).ref
       listDoc.push(promise);
     });
     return Promise.all(listDoc);
@@ -61,7 +62,7 @@ export class SeanceService {
   supprimerListeSeances(seances: Seance[]): Promise<void> {
     const listDoc: Promise<void>[] = [];
     seances.forEach(seanceAsupprimer => {
-      const promise = this.firestore.collection<ISeance>('seances').doc(seanceAsupprimer.uid).delete()
+      const promise = this.collection.doc(seanceAsupprimer.uid).delete()
       listDoc.push(promise);
     });
     return Promise.all(listDoc).then(() => {});  

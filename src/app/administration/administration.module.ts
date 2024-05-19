@@ -22,13 +22,15 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { MatBadgeModule } from '@angular/material/badge';
-
+import { MatSelectModule } from '@angular/material/select'
 import { SeanceCardComponent } from './component/seance-card/seance-card.component';
 import { LocalizeDatePipe } from './pipe/localize-date.pipe';
+import { StructureDialogComponent } from './dialog/structure-dialog/structure-dialog.component';
+import { StructureCardComponent } from './component/structure-card/structure-card.component';
 
 
 @NgModule({
-  declarations: [AdminUtilisateursComponent, AdminAccueilComponent, AdminComponent, AdminStructuresComponent, AdminSaisonsComponent, SaisonCardComponent, SeanceCardComponent, LocalizeDatePipe],  
+  declarations: [AdminUtilisateursComponent, AdminAccueilComponent, AdminComponent, AdminStructuresComponent, AdminSaisonsComponent, SaisonCardComponent, SeanceCardComponent, LocalizeDatePipe, StructureDialogComponent, StructureCardComponent],  
   imports: [
     CommonModule,
     AdministrationRoutingModule,
@@ -41,6 +43,7 @@ import { LocalizeDatePipe } from './pipe/localize-date.pipe';
     MatDatepickerModule,
     MatTooltipModule,
     MatBadgeModule,
+    MatSelectModule,
     MatSlideToggle,
     FormsModule,
     TranslateModule.forChild({

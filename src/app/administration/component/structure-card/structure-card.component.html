@@ -1,0 +1,71 @@
+<div class="structure-details" *ngIf="!editionDemandee">
+  <mat-card>
+    <mat-card-content class="content-card-structure-details">
+
+      <!-- Affichage classique -->
+
+      <!-- Libelle -->
+      <div *ngIf="!editionDemandee" class="display-container-card-structure-details">
+        <div class="label column-card">{{ structure.nom }}</div>
+      </div>
+
+      <!-- Type -->
+      <div *ngIf="!editionDemandee" class="display-container-card-structure-details">
+        <div class="label column-card">{{ traductionEnumService.traduireTypeStructure(structure.type) }}</div>
+      </div>
+
+      <!-- Boutons d'édition / Suppression  -->
+      <div class="column-boutons column-card" *ngIf="!(editionDemandee)">
+
+        <button mat-icon-button (click)="editerStructure()">
+          <mat-icon>edit</mat-icon>
+        </button>
+
+        <button mat-icon-button (click)="supprimerStructure(structure)"
+          [matTooltip]="recupererMessageSuppressionImpossible()"
+          [ngStyle]="{'cursor': suppressionImpossible ? 'not-allowed' : 'pointer'}"
+          [ngClass]="{'disabled-button': suppressionImpossible}">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<div class="structure-details" *ngIf="editionDemandee">
+  <mat-card>
+    <mat-card-content>
+      <!-- Affichage Edition -->
+      <div *ngIf="editionDemandee" class="display-container-card-structure-details">
+
+        <div class="form-group column-card" fxLayout="row" fxLayoutAlign="center center">
+
+          <!-- Libelle -->
+          <mat-form-field class="mat-form-field">
+            <mat-label for="libelle">{{ 'admin.structures.edition.champLibelle' | translate }}</mat-label>
+            <input matInput type="text" class="form-control" id="libelle" [(ngModel)]="structure.nom">
+          </mat-form-field>
+
+          <!-- Liste déroulante pour le type de structure -->
+          <mat-form-field class="full-width">
+            <mat-label>{{ 'admin.structures.edition.champType' | translate }}</mat-label>
+            <mat-select [(ngModel)]="structure.type" name="typeStructure">
+              <mat-option *ngFor="let type of listeTypesStructures" [value]="type">
+                {{ traductionEnumService.traduireTypeStructure(type) }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <!--  Boutons Formulaire -->
+          <div class="button-container">
+            <button mat-raised-button color="primary" (click)="validerMiseAJourStructure()"
+              [disabled]="!formulaireValide()">{{ 'commun.enregistrer' | translate }}</button>
+            <button mat-button color="warn" (click)="annulerMiseAJourStructure()">{{ 'commun.annuler' | translate
+              }}</button>
+          </div>
+        </div>
+      </div>
+      <mat-error *ngIf="errorEdit" class="error-message">{{ errorEditMessage }}</mat-error>
+    </mat-card-content>
+  </mat-card>
+</div>

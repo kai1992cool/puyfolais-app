@@ -1,0 +1,39 @@
+<form #structureForm="ngForm" (ngSubmit)="onSubmit(structureForm)" class="form-container">
+    <mat-card>
+        <mat-card-title class="mat-card-title">
+            {{ "admin.structures.edition.titre" | translate: { } }}
+        </mat-card-title>
+        <mat-form-field class="full-width">
+            <input matInput placeholder="{{ 'admin.structures.edition.champLibelle' | translate }}" name="libelle"
+                [(ngModel)]="structureForm.value['libelle']" required>
+            <mat-error *ngIf="structureForm.invalid && structureForm.controls['libelle'].touched">
+                {{ "admin.structures.edition.champLibelleObligatoire" | translate: { } }}
+            </mat-error>
+        </mat-form-field>
+
+        <!-- Liste déroulante pour le type de structure -->
+        <mat-form-field class="full-width">
+            <mat-label>{{ 'admin.structures.edition.champType' | translate }}</mat-label>
+            <mat-select [(ngModel)]="typeStructureSelectionnee" name="typeStructure">
+                <mat-option *ngFor="let type of listeTypesStructures" [value]="type">
+                    {{ traductionEnumService.traduireTypeStructure(type) }}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="structureForm.invalid && structureForm.controls['typeStructure'].touched">
+                {{ "admin.structures.edition.champTypeObligatoire" | translate: { } }}
+            </mat-error>
+        </mat-form-field>
+
+        <mat-error *ngIf="afficherMessageErreur">
+            {{ messageErreur }}
+        </mat-error>
+
+        <div class="button-container">
+            <button mat-raised-button color="primary" type="submit" [disabled]="structureForm.invalid || !typeStructureSelectionnee">{{
+                "commun.enregistrer" | translate: { } }}</button>
+            <button mat-button color="warn" type="button" (click)="closeDialog()">{{ "commun.annuler" | translate: { }
+                }}</button>
+
+        </div>
+    </mat-card>
+</form>

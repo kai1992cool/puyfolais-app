@@ -84,7 +84,7 @@ export class SaisonCardComponent implements OnInit {
 
   /**
    * Supprime la saison
-   * @param arg0 La saison à vérifié émise par la card
+   * @param arg0 La saison à supprimer
    */
   supprimerSaison(arg0: Saison) {
     if (!this.suppressionImpossible) {
