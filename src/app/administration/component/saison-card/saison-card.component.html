@@ -20,7 +20,7 @@
 
       <!-- Etat Saison -->
       <div class="column-card" *ngIf="!(editionDemandee && planningDemande)">
-        <mat-chip [style.background-color]="couleurBadgeSaison">
+        <mat-chip [style.background-color]="couleurBadgeSaison" [matBadge]="listeSeances.length" matBadgePosition="above after">
           <div class="chip-text-etat-saison">{{ texteBadgeSaison }}</div>
         </mat-chip>
       </div>
@@ -95,17 +95,21 @@
 <div class="seance-details-planning" *ngIf="planningDemande">
   <div class="container-planning">
     <div class="calendar-planning-column">
-      <mat-calendar [minDate]="saison.dateDebut" [maxDate]="saison.dateFin" (selectedChange)="selectionDateSeanceCalendrier($event)"></mat-calendar>
+      <mat-calendar [minDate]="saison.dateDebut" [maxDate]="saison.dateFin"
+        (selectedChange)="selectionDateSeanceCalendrier($event)"></mat-calendar>
     </div>
     <div class="button-planning-column">
-      <button mat-raised-button color="primary" (click)="validerMiseAJourSeances()">{{ 'commun.enregistrer' | translate }}</button>
+      <button mat-raised-button color="primary" (click)="validerMiseAJourSeances()">{{ 'commun.enregistrer' | translate
+        }}</button>
     </div>
   </div>
-  
+
   <div class="seance-planning-column">
     <div *ngFor="let seance of listeSeances" class="seance-cell">
       <app-seance-card [seance]="seance" (emitSupprimerNouvelleSeance)="retirerSeanceSansUid($event)"></app-seance-card>
     </div>
-    <span *ngIf="listeSeances.length === 0" class="empty-seance-message">Aucune séance définie, veuillez en ajouter à l'aide du calendrier</span>
+    <span *ngIf="listeSeances.length === 0" class="empty-seance-message">
+      {{ "admin.saisons.seances.aucuneSeance" | translate: { } }}
+    </span>
   </div>
 </div>

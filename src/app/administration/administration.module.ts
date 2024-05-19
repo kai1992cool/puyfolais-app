@@ -21,6 +21,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
+import { MatBadgeModule } from '@angular/material/badge';
 
 import { SeanceCardComponent } from './component/seance-card/seance-card.component';
 import { LocalizeDatePipe } from './pipe/localize-date.pipe';
@@ -39,6 +40,7 @@ import { LocalizeDatePipe } from './pipe/localize-date.pipe';
     MatChipsModule,
     MatDatepickerModule,
     MatTooltipModule,
+    MatBadgeModule,
     MatSlideToggle,
     FormsModule,
     TranslateModule.forChild({

@@ -2,7 +2,7 @@
   "commun": {
     "connecter": "Log in",
     "deconnecter": "Log out",
-    "inscription": "Register",
+    "inscription": "Sign up",
     "cliquerIci": "Click here",
     "confirmation": "Confirmation",
     "enregistrer": "Save",
@@ -64,12 +64,12 @@
     "labelPrenom": "First Name",
     "labelMail": "Email",
     "labelMdp": "Password",
-    "inscription": "Sign Up",
+    "inscription": "Sign up",
     "pasInscrit": "Not registered yet?",
-    "mdpOublie": "Forgot password?",
+    "mdpOublie": "Forgot your password?",
     "reinitialiserMdp": "Reset Password",
-    "emailEnvoye": "An email has been sent to the address {{mail}} with a link to reset your password.",
-    "validationInscription": "Your registration has been successfully completed! You are now logged in. However, no profile has been assigned to you yet. Please wait for an administrator to assign these profiles to you before using the application.",
+    "emailEnvoye": "An email has been sent to {{mail}} with a link to reset your password.",
+    "validationInscription": "Your registration has been successfully completed! You are now logged in. However, no profile has been assigned to you yet. Please wait for an administrator to assign you these profiles to use the application.",
     "identifiants": {
       "invalides": "The provided credentials are invalid. Please try again.",
       "existants": "This email is already in use, please use your associated credentials to log in."
@@ -77,7 +77,7 @@
   },
   "admin": {
     "titre": "Administration",
-    "introduction": "Here you can access the application settings (user, structure, options...).",
+    "introduction": "Here you can access the application settings (users, structure, options ...).",
     "service": {
       "gestionUtilisateur": "User Management",
       "gestionStructure": "Structure Management",
@@ -85,15 +85,15 @@
     },
     "utilisateurs": {
       "titre": "User Administration",
-      "introduction": "Here you can manage application users."
+      "introduction": "Here you can manage the application users."
     },
     "structures": {
       "titre": "Structure Administration",
-      "introduction": "Here you can manage association structures."
+      "introduction": "Here you can manage the association's structures."
     },
     "saisons": {
-      "titre": "Season Management",
-      "introduction": "Here you can manage seasons.",
+      "titre": "Season Administration",
+      "introduction": "Here you can manage the seasons.",
       "mentionDu": "From",
       "mentionAu": "to",
       "blocageSuppression": "You cannot delete seasons with existing sessions.",
@@ -102,11 +102,14 @@
         "champLibelle": "Label",
         "champDateDebut": "Start Date",
         "champDateFin": "End Date",
-        "champLibelleObligatoire": "The label is required",
+        "champLibelleObligatoire": " Label is required",
         "champDateDebutObligatoire": "Start date is required",
         "champDateFinObligatoire": "End date is required",
         "messageChevauchement": "The entered period overlaps with an existing period.",
         "messageDatesErronees": "Start date is greater than end date."
+      },
+      "seances" : {
+        "aucuneSeance": "No sessions defined, please add one using the calendar"
       }
     }
   }

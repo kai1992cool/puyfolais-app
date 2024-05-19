@@ -44,6 +44,7 @@ export class SaisonCardComponent implements OnInit {
     this.dateAdapter.setLocale(this.traductionService.currentLang);
     this.detecterTexteEtCouleurBadgeSaison();
     this.verifierPossibiliteSupprimerSaison(this.saison);
+    this.recupererSeancesExistantes();
   }
 
   private detecterTexteEtCouleurBadgeSaison() {
@@ -144,8 +145,8 @@ export class SaisonCardComponent implements OnInit {
   editerPlanningSaison() {
     if (this.planningDemande) {
       this.planningDemande = false
-    } else {
       this.recupererSeancesExistantes();
+    } else {
       this.planningDemande = true;
     }
   }
