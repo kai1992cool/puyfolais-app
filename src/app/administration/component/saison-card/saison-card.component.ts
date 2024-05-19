@@ -201,5 +201,14 @@ export class SaisonCardComponent implements OnInit {
         console.error("Une erreur est survenue lors de l'insertion des DocumentReference :", error);
       });
 }
+
+retirerSeanceSansUid(seance: Seance) {
+  const indexSeancesNouvelleASupprimer = this.listeSeances.findIndex(seanceTrouvee => seanceTrouvee.seanceADate(seance.date));
+
+  if (indexSeancesNouvelleASupprimer !== -1) {
+    this.listeSeances.splice(indexSeancesNouvelleASupprimer, 1);
+  }
+
+}
 }
 

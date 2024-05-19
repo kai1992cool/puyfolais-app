@@ -1,4 +1,4 @@
-import { Component,  Input, OnInit } from '@angular/core';
+import { Component,  EventEmitter,  Input, OnInit, Output } from '@angular/core';
 import { EnumTraductionService } from '../../../service/enum-traduction.service';
 import { EtatSeance } from '../../../enum/etat-seances';
 import { Seance } from '../../../model/seance';
@@ -11,6 +11,8 @@ import { Seance } from '../../../model/seance';
 export class SeanceCardComponent implements OnInit {
 
   @Input() seance!: Seance;
+  @Output() emitSupprimerNouvelleSeance: EventEmitter<Seance> = new EventEmitter<Seance>();
+
   seanceInitial!: Seance ;
 
   constructor(
@@ -35,8 +37,12 @@ export class SeanceCardComponent implements OnInit {
   }
 
   supprimerSeance() {
+    if (this.seance.uid !== '') {
     this.seance.supprimee = !this.seance.supprimee;
+  } else {
+    this.emitSupprimerNouvelleSeance.emit(this.seance);
   }
+}
 
   ajusterHeureSeance(minutes: number): void {
     const date = new Date(this.seance.date);
