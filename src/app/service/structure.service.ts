@@ -13,7 +13,7 @@ export class StructureService {
 
   constructor(private firestore: AngularFirestore) { }
 
-  collection: AngularFirestoreCollection<IStructure> = this.firestore.collection<IStructure>('structure')
+  collection: AngularFirestoreCollection<IStructure> = this.firestore.collection<IStructure>('structures')
 
   
 /**

@@ -14,7 +14,7 @@
         <div class="label column-card">{{ traductionEnumService.traduireTypeStructure(structure.type) }}</div>
       </div>
 
-      <!-- Boutons d'édition / Suppression  -->
+      <!-- Boutons d'édition / Suppression / Listes  -->
       <div class="column-boutons column-card" *ngIf="!(editionDemandee)">
 
         <button mat-icon-button (click)="editerStructure()">
@@ -26,6 +26,10 @@
           [ngStyle]="{'cursor': suppressionImpossible ? 'not-allowed' : 'pointer'}"
           [ngClass]="{'disabled-button': suppressionImpossible}">
           <mat-icon>delete</mat-icon>
+        </button>
+
+        <button mat-icon-button (click)="parametrerStructure()">
+          <mat-icon>lists</mat-icon>
         </button>
       </div>
     </mat-card-content>
@@ -68,4 +72,11 @@
       <mat-error *ngIf="errorEdit" class="error-message">{{ errorEditMessage }}</mat-error>
     </mat-card-content>
   </mat-card>
+</div>
+
+<div class="structure-details-liste" *ngIf="listeDemande">
+  <div *ngFor="let groupe of listeGroupeStructure">
+    <span>{{groupe.nom}}</span>
+    <span>{{groupe.numero}}</span>
+  </div>
 </div>

@@ -4,13 +4,15 @@ import { StructureService } from '../../../service/structure.service';
 import { TranslateService } from '@ngx-translate/core';
 import { EnumTraductionService } from '../../../service/enum-traduction.service';
 import { TypeStructure } from '../../../enum/type-structures';
-
+import { GroupeService } from '../../../service/groupe.service';
+import { IGroupe } from '../../../interface/groupe';
 @Component({
   selector: 'app-structure-card',
   templateUrl: './structure-card.component.html',
   styleUrl: './structure-card.component.scss'
 })
 export class StructureCardComponent {
+
   @Input() structure!: Structure;
 
   editionDemandee: boolean = false;
@@ -18,10 +20,12 @@ export class StructureCardComponent {
   errorEdit: boolean = false;
   errorEditMessage: string = '';
   listeTypesStructures = Object.values(TypeStructure); // Create a list of enum values
-
+  listeDemande: boolean = false;
+  listeGroupeStructure: IGroupe[] = [];
   
   constructor(
     public structureService: StructureService,
+    public groupeService: GroupeService,
     private traductionService: TranslateService,
     public traductionEnumService: EnumTraductionService
   ) { }
@@ -88,5 +92,23 @@ export class StructureCardComponent {
     }
 
     return !this.errorEdit
+  }
+
+  /**
+   * Active le bloc de gestion des listes de groupes (ou l'annule si nouveau clic)
+   */
+      parametrerStructure() {
+    if (this.listeDemande) {
+      this.listeDemande = false
+    } else {
+      this.listeDemande = true;
+      this.recupererGroupesExistants();
+    }
+  }
+
+  private recupererGroupesExistants() {
+   this.groupeService.recupererGroupesParUidStructure(this.structure.uid).subscribe(groups => {
+      this.listeGroupeStructure = groups
+    })
   }
 }
