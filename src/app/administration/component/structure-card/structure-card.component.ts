@@ -6,6 +6,8 @@ import { EnumTraductionService } from '../../../service/enum-traduction.service'
 import { TypeStructure } from '../../../enum/type-structures';
 import { GroupeService } from '../../../service/groupe.service';
 import { Groupe } from '../../../model/groupe';
+import { GroupeDialogComponent } from '../../dialog/groupe-dialog/groupe-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-structure-card',
@@ -17,22 +19,23 @@ export class StructureCardComponent {
   @Input() structure!: Structure;
 
   editionDemandee: boolean = false;
-  suppressionImpossible: boolean = false ; // A implémenter si besoin (méthode verifierPossibiliteSupprimerStructure )
+  suppressionImpossible: boolean = false; // A implémenter si besoin (méthode verifierPossibiliteSupprimerStructure )
   errorEdit: boolean = false;
   errorEditMessage: string = '';
   listeTypesStructures = Object.values(TypeStructure); // Create a list of enum values
-  listeDemande: boolean = false;
+  demandeAffichageListeGroupes: boolean = false;
   listeGroupeStructure: Groupe[] = [];
-  
+
   constructor(
     public structureService: StructureService,
     public groupeService: GroupeService,
     private traductionService: TranslateService,
-    public traductionEnumService: EnumTraductionService
+    public traductionEnumService: EnumTraductionService,
+    private dialog: MatDialog
   ) { }
 
   /**
- * Supprime la saison
+ * Supprime la structure
  * @param arg0 La structure à supprimer 
  */
   supprimerStructure(arg0: Structure) {
@@ -86,7 +89,7 @@ export class StructureCardComponent {
       this.errorEditMessage = this.traductionService.instant('admin.saisons.edition.champLibelleObligatoire');
     }
 
-    
+
     if (!this.structure?.type) {
       this.errorEdit = true;
       this.errorEditMessage = this.traductionService.instant('admin.saisons.edition.champTypeObligatoire');
@@ -98,22 +101,45 @@ export class StructureCardComponent {
   /**
    * Active le bloc de gestion des listes de groupes (ou l'annule si nouveau clic)
    */
-      parametrerStructure() {
-    if (this.listeDemande) {
-      this.listeDemande = false
+  parametrerStructure() {
+    if (this.demandeAffichageListeGroupes) {
+      this.demandeAffichageListeGroupes = false
     } else {
-      this.listeDemande = true;
+      this.demandeAffichageListeGroupes = true;
       this.recupererGroupesExistants();
     }
   }
 
   private recupererGroupesExistants() {
-   this.groupeService.recupererGroupesParUidStructure(this.structure.uid).subscribe(groups => {
+    this.groupeService.recupererGroupesParUidStructure(this.structure.uid).subscribe(groups => {
       this.listeGroupeStructure = groups
     })
   }
 
   voirFicheGroupe(arg0: Groupe) {
-    console.log("Accès groupe " + arg0.nom + ' / ' + arg0.uid )
-    }
+    console.log("Accès groupe " + arg0.nom + ' / ' + arg0.uid)
+  }
+
+  ajouterGroupe() {
+    const dialogAjoutGroupe = this.dialog.open(GroupeDialogComponent, {
+      width: '400px',
+      data: { referenceStructureParente: this.structure.uid }
+    });
+
+    dialogAjoutGroupe.afterClosed().subscribe(() => {
+      this.recupererGroupesExistants();
+    });
+  }
+
+    /**
+ * Supprime du groupe
+ * @param arg0 Le groupe à supprimer 
+ */
+    supprimerGroupe(arg0: Groupe) {
+      
+        this.groupeService.supprimerGroupe(arg0.uid).then(() => {
+          this.recupererGroupesExistants();
+        })
+      }
+    
 }

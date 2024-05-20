@@ -28,10 +28,11 @@ import { LocalizeDatePipe } from './pipe/localize-date.pipe';
 import { StructureDialogComponent } from './dialog/structure-dialog/structure-dialog.component';
 import { StructureCardComponent } from './component/structure-card/structure-card.component';
 import {MatListModule} from '@angular/material/list';
+import { GroupeDialogComponent } from './dialog/groupe-dialog/groupe-dialog.component';
 
 
 @NgModule({
-  declarations: [AdminUtilisateursComponent, AdminAccueilComponent, AdminComponent, AdminStructuresComponent, AdminSaisonsComponent, SaisonCardComponent, SeanceCardComponent, LocalizeDatePipe, StructureDialogComponent, StructureCardComponent],  
+  declarations: [AdminUtilisateursComponent, AdminAccueilComponent, AdminComponent, AdminStructuresComponent, AdminSaisonsComponent, SaisonCardComponent, SeanceCardComponent, LocalizeDatePipe, StructureDialogComponent, StructureCardComponent, GroupeDialogComponent],  
   imports: [
     CommonModule,
     AdministrationRoutingModule,

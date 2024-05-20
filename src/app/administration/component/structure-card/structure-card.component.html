@@ -74,8 +74,17 @@
   </mat-card>
 </div>
 
-<mat-action-list>
-  @for (groupe of listeGroupeStructure; track groupe) {
-    <button mat-list-item (click)="voirFicheGroupe(groupe)">{{groupe.nom}} (Groupe {{groupe.numero}})</button><
-  }
-</mat-action-list>
+<div *ngIf="demandeAffichageListeGroupes">
+  <mat-action-list>
+    @for (groupe of listeGroupeStructure; track groupe) {
+      <div class="button-container">
+        <button mat-list-item (click)="voirFicheGroupe(groupe)">{{groupe.nom}} (Groupe {{groupe.numero}})</button>
+        <button mat-icon-button (click)="supprimerGroupe(groupe)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    }
+  </mat-action-list>
+  <button mat-raised-button color="primary" (click)="ajouterGroupe()">{{ 'admin.groupes.ajouterGroupe' | translate: {
+    nomStructure: structure.nom} }}</button>
+</div>

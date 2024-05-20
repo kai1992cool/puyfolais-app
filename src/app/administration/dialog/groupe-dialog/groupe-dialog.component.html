@@ -1,0 +1,35 @@
+<form #groupeForm="ngForm" (ngSubmit)="onSubmit(groupeForm)" class="form-container">
+    <mat-card>
+        <mat-card-title class="mat-card-title">
+            {{ "admin.groupes.edition.titre" | translate: { } }}
+        </mat-card-title>
+
+        <mat-form-field class="full-width">
+            <input matInput placeholder="{{ 'admin.groupes.edition.champLibelle' | translate }}" name="libelle"
+                [(ngModel)]="groupeForm.value['libelle']" required>
+            <mat-error *ngIf="groupeForm.invalid && groupeForm.controls['libelle'].touched">
+                {{ "admin.groupes.edition.champLibelleObligatoire" | translate: { } }}
+            </mat-error>
+        </mat-form-field>
+
+             <mat-form-field class="full-width">
+            <input matInput placeholder="{{ 'admin.groupes.edition.champNumero' | translate }}" name="numero"
+                [(ngModel)]="groupeForm.value['numero']" required>
+            <mat-error *ngIf="groupeForm.invalid && groupeForm.controls['numero'].touched">
+                {{ "admin.groupes.edition.champNumeroObligatoire" | translate: { } }}
+            </mat-error>
+        </mat-form-field>
+
+        <mat-error *ngIf="afficherMessageErreur">
+            {{ messageErreur }}
+        </mat-error>
+
+        <div class="button-container">
+            <button mat-raised-button color="primary" type="submit" [disabled]="groupeForm.invalid">{{
+                "commun.enregistrer" | translate: { } }}</button>
+            <button mat-button color="warn" type="button" (click)="closeDialog()">{{ "commun.annuler" | translate: { }
+                }}</button>
+
+        </div>
+    </mat-card>
+</form>
