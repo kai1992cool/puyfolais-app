@@ -74,9 +74,8 @@
   </mat-card>
 </div>
 
-<div class="structure-details-liste" *ngIf="listeDemande">
-  <div *ngFor="let groupe of listeGroupeStructure">
-    <span>{{groupe.nom}}</span>
-    <span>{{groupe.numero}}</span>
-  </div>
-</div>
+<mat-action-list>
+  @for (groupe of listeGroupeStructure; track groupe) {
+    <button mat-list-item (click)="voirFicheGroupe(groupe)">{{groupe.nom}} (Groupe {{groupe.numero}})</button><
+  }
+</mat-action-list>

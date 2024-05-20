@@ -1,14 +1,16 @@
+import { DocumentReference } from "@angular/fire/compat/firestore";
+
 export class Groupe {
     uid: string;
     nom: string;
     numero: number;
-    structure: string;
+    structure: DocumentReference;
 
     constructor(
         uid: string,
         nom: string,
         numero: number,
-        structure: string
+        structure: DocumentReference
       ) {
         this.uid = uid;
         this.nom = nom;

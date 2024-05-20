@@ -27,6 +27,7 @@ import { SeanceCardComponent } from './component/seance-card/seance-card.compone
 import { LocalizeDatePipe } from './pipe/localize-date.pipe';
 import { StructureDialogComponent } from './dialog/structure-dialog/structure-dialog.component';
 import { StructureCardComponent } from './component/structure-card/structure-card.component';
+import {MatListModule} from '@angular/material/list';
 
 
 @NgModule({
@@ -45,6 +46,7 @@ import { StructureCardComponent } from './component/structure-card/structure-car
     MatBadgeModule,
     MatSelectModule,
     MatSlideToggle,
+    MatListModule,
     FormsModule,
     TranslateModule.forChild({
       loader: {

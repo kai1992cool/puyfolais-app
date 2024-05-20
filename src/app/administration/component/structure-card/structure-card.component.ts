@@ -5,7 +5,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { EnumTraductionService } from '../../../service/enum-traduction.service';
 import { TypeStructure } from '../../../enum/type-structures';
 import { GroupeService } from '../../../service/groupe.service';
-import { IGroupe } from '../../../interface/groupe';
+import { Groupe } from '../../../model/groupe';
+
 @Component({
   selector: 'app-structure-card',
   templateUrl: './structure-card.component.html',
@@ -21,7 +22,7 @@ export class StructureCardComponent {
   errorEditMessage: string = '';
   listeTypesStructures = Object.values(TypeStructure); // Create a list of enum values
   listeDemande: boolean = false;
-  listeGroupeStructure: IGroupe[] = [];
+  listeGroupeStructure: Groupe[] = [];
   
   constructor(
     public structureService: StructureService,
@@ -111,4 +112,8 @@ export class StructureCardComponent {
       this.listeGroupeStructure = groups
     })
   }
+
+  voirFicheGroupe(arg0: Groupe) {
+    console.log("Accès groupe " + arg0.nom + ' / ' + arg0.uid )
+    }
 }
