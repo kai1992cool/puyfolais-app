@@ -46,8 +46,8 @@ export class StructureService {
   mettreAJourStructure(structure: Structure): Promise<void> {
 
     const istructure: IStructure = {
-      nom: structure.nom,
-      type: structure.type
+      nom: structure.nom!,
+      type: structure.type!
     };
 
     return this.collection.doc(structure.uid).update(istructure).catch(error => {

@@ -98,6 +98,7 @@
       "introduction": "Ici vous pouvez gérer les utilisateurs de l'applications."
     },
     "groupes" :{
+      "confirmationSuppressionGroupe": "Voulez-vous vraiment supprimer ce groupe ?",
       "ajouterGroupe": "Ajouter un groupe à la structure {{ nomStructure }}",
       "edition":  {
         "titreCreation": "Nouveau Groupe",
@@ -111,8 +112,10 @@
     "structures": {
       "titre": "Administration Structures",
       "introduction": "Ici vous pouvez gérer les structures de l'association.",
+      "confirmationSuppressionStructure": "Voulez-vous vraiment supprimer cette structure ?",
       "edition": {
-        "titre": "Nouvelle Structure",
+        "titreCreation": "Nouvelle Structure",
+        "titreModification": "Modification de la Structure",
         "champNom": "Nom",
         "champType": "Type de structure",
         "champNomObligatoire": " Le nom est requis",

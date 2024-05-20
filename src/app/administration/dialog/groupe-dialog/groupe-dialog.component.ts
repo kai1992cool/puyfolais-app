@@ -27,7 +27,6 @@ export class GroupeDialogComponent {
     this.referenceStructureParente = data.referenceStructureParente;
   }
 
-
   closeDialog(): void {
     this.dialogRef.close();
   }
@@ -35,8 +34,8 @@ export class GroupeDialogComponent {
   onSubmit(): void {
     if (this.groupeForm.valid) {
       const operation = (this.groupeAEditer.uid !== '')
-        ? this.updateGroupe()
-        : this.createGroupe();
+        ? this.mettreAJourGroupe()
+        : this.creerGroupe();
 
       operation
         .then(() => {
@@ -49,7 +48,7 @@ export class GroupeDialogComponent {
     }
   }
 
-  createGroupe(): Promise<void> {
+  creerGroupe(): Promise<void> {
     return this.groupeService.creerGroupe(
       this.groupeAEditer.nom!,
       this.groupeAEditer.numero!,
@@ -57,7 +56,7 @@ export class GroupeDialogComponent {
     ).then(() => {});  // Convert the Promise<DocumentReference<IGroupe>> to Promise<void>
   }
 
-  updateGroupe(): Promise<void> {
+  mettreAJourGroupe(): Promise<void> {
     return this.groupeService.mettreAJourGroupe(this.groupeAEditer);
   }
 

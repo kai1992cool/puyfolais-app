@@ -1,26 +1,32 @@
-<form #structureForm="ngForm" (ngSubmit)="onSubmit(structureForm)" class="form-container">
+<form #structureForm="ngForm" (ngSubmit)="onSubmit()" class="form-container">
     <mat-card>
         <mat-card-title class="mat-card-title">
-            {{ "admin.structures.edition.titre" | translate: { } }}
+            <div *ngIf="structureAEditer.uid === ''">
+                {{ "admin.structures.edition.titreCreation" | translate }}
+            </div>
+            <div *ngIf="structureAEditer.uid !== ''">
+                {{ "admin.structures.edition.titreModification" | translate }}
+            </div>
         </mat-card-title>
-        <mat-form-field class="full-width">
+
+        <mat-form-field class="full-width mat-form-field">
             <input matInput placeholder="{{ 'admin.structures.edition.champNom' | translate }}" name="nom"
-                [(ngModel)]="structureForm.value['nom']" required>
-            <mat-error *ngIf="structureForm.invalid && structureForm.controls['nom'].touched">
-                {{ "admin.structures.edition.champNomObligatoire" | translate: { } }}
+                [(ngModel)]="structureAEditer.nom" #nomModel="ngModel" required>
+            <mat-error *ngIf="nomModel.invalid && nomModel.touched">
+                {{ "admin.structures.edition.champNomObligatoire" | translate }}
             </mat-error>
         </mat-form-field>
 
-        <!-- Liste déroulante pour le type de structure -->
-        <mat-form-field class="full-width">
+        <mat-form-field class="full-width mat-form-field">
             <mat-label>{{ 'admin.structures.edition.champType' | translate }}</mat-label>
-            <mat-select [(ngModel)]="typeStructureSelectionnee" name="typeStructure">
+            <mat-select [(ngModel)]="structureAEditer.type" name="typeStructure" #typeStructureModel="ngModel" required
+            [ngModelOptions]="{ standalone: true }">
                 <mat-option *ngFor="let type of listeTypesStructures" [value]="type">
                     {{ traductionEnumService.traduireTypeStructure(type) }}
                 </mat-option>
             </mat-select>
-            <mat-error *ngIf="structureForm.invalid && structureForm.controls['typeStructure'].touched">
-                {{ "admin.structures.edition.champTypeObligatoire" | translate: { } }}
+            <mat-error *ngIf="typeStructureModel.invalid && typeStructureModel.touched">
+                {{ "admin.structures.edition.champTypeObligatoire" | translate }}
             </mat-error>
         </mat-form-field>
 
@@ -29,11 +35,13 @@
         </mat-error>
 
         <div class="button-container">
-            <button mat-raised-button color="primary" type="submit" [disabled]="structureForm.invalid || !typeStructureSelectionnee">{{
-                "commun.enregistrer" | translate: { } }}</button>
-            <button mat-button color="warn" type="button" (click)="closeDialog()">{{ "commun.annuler" | translate: { }
-                }}</button>
+            <button mat-raised-button color="primary" type="submit" [disabled]="nomModel.invalid || typeStructureModel.invalid">
+                {{ "commun.enregistrer" | translate }}
+            </button>
 
+            <button mat-button color="warn" type="button" (click)="closeDialog()">
+                {{ "commun.annuler" | translate }}
+            </button>
         </div>
     </mat-card>
 </form>

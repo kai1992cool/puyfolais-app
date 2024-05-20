@@ -33,14 +33,16 @@ export class AdminStructuresComponent implements OnInit {
 
     // Souscrire à un nouvel observable
     this.strutureSubscription = this.structureService.recupererStructure().subscribe(structures => {
-      this.listeToutesStructure = structures.sort((a, b) => a.nom.localeCompare(b.nom));
+      this.listeToutesStructure = structures.sort((a, b) => a.nom!.localeCompare(b.nom!));
     });
   }
 
   ouvrirModalAjoutStructure(): void {
     this.structureSelectionnee = null;
+    const newStructure: Structure = { uid: '' }
     const dialogAjoutSaison = this.dialog.open(StructureDialogComponent, {
       width: '400px',
+      data: { structureAEditer: newStructure }
     });
 
     dialogAjoutSaison.afterClosed().subscribe(() => {

@@ -2,8 +2,8 @@ import { TypeStructure } from "../enum/type-structures";
 
 export class Structure {
     uid: string;
-    nom: string;
-    type: TypeStructure;
+    nom?: string;
+    type?: TypeStructure;
 
     constructor(
         uid: string,
