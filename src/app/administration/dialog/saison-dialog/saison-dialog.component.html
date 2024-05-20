@@ -1,42 +1,51 @@
 <form #saisonForm="ngForm" (ngSubmit)="onSubmit(saisonForm)" class="form-container">
-<mat-card>
-  <mat-card-title class="mat-card-title">
-    {{ "admin.saisons.edition.titre" | translate: { } }}
-  </mat-card-title>
-  <mat-form-field class="full-width">
-    <input matInput placeholder="{{ 'admin.saisons.edition.champLibelle' | translate }}" name="libelle" [(ngModel)]="saisonForm.value['libelle']" required>
-    <mat-error *ngIf="saisonForm.invalid && saisonForm.controls['libelle'].touched">
-      {{ "admin.saisons.edition.champLibelleObligatoire" | translate: { } }}
-    </mat-error>
-  </mat-form-field>
+  <mat-card>
 
-  <mat-form-field class="full-width">
-    <input matInput [matDatepicker]="picker" placeholder="{{ 'admin.saisons.edition.champDateDebut' | translate }}" name="dateDebut" ngModel required>
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-    <mat-error *ngIf="saisonForm.invalid && saisonForm.controls['dateDebut'].touched">
-      {{ "admin.saisons.edition.champDateDebutObligatoire" | translate: { } }}
-    </mat-error>
-  </mat-form-field>
+    <mat-card-title class="mat-card-title">
+      <div *ngIf="saisonAEditer.uid === ''"> {{ "admin.saisons.edition.titreCreation" | translate }}</div>
+      <div *ngIf="saisonAEditer.uid !== ''"> {{ "admin.saisons.edition.titreModification" | translate }}</div>
+    </mat-card-title>
 
-  <mat-form-field class="full-width">
-    <input matInput [matDatepicker]="picker2" placeholder="{{ 'admin.saisons.edition.champDateFin' | translate }}" name="dateFin" ngModel required>
-    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-    <mat-datepicker #picker2></mat-datepicker>
-    <mat-error *ngIf="saisonForm.invalid && saisonForm.controls['dateFin'].touched">
-      {{ "admin.saisons.edition.champDateFinObligatoire" | translate: { } }}
-    </mat-error>
-  </mat-form-field>
+    <mat-form-field class="full-width mat-form-field">
+      <input matInput placeholder="{{ 'admin.saisons.edition.champLibelle' | translate }}" name="libelle"
+        [(ngModel)]="saisonAEditer.libelle" required>
+      <mat-error *ngIf="saisonForm.controls['libelle']?.invalid && saisonForm.controls['libelle']?.touched">
+        {{ "admin.saisons.edition.champLibelleObligatoire" | translate: { } }}
+      </mat-error>
+    </mat-form-field>
 
-    <!-- Zone de message d'erreur pour la période chevauchante -->
+    <mat-form-field class="full-width mat-form-field">
+      <input matInput [matDatepicker]="picker" placeholder="{{ 'admin.saisons.edition.champDateDebut' | translate }}"
+        name="dateDebut" #dateDebutModel="ngModel" [(ngModel)]="saisonAEditer.dateDebut" required>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="dateDebutModel.invalid && dateDebutModel.touched">
+        {{ "admin.saisons.edition.champDateDebutObligatoire" | translate: { } }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width mat-form-field">
+      <input matInput [matDatepicker]="picker2" placeholder="{{ 'admin.saisons.edition.champDateFin' | translate }}"
+        name="dateFin"  #dateFinModel="ngModel" [(ngModel)]="saisonAEditer.dateFin" required>
+      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
+      <mat-error *ngIf="dateFinModel.invalid && dateFinModel.touched">
+        {{ "admin.saisons.edition.champDateFinObligatoire" | translate: { } }}
+      </mat-error>
+    </mat-form-field>
+
     <mat-error *ngIf="afficherMessageErreur">
       {{ messageErreur }}
-      </mat-error>
-      
-  <div class="button-container">
-    <button mat-raised-button color="primary" type="submit" [disabled]="saisonForm.invalid">{{ "commun.enregistrer" | translate: { } }}</button>
-    <button mat-button  color="warn" type="button" (click)="closeDialog()">{{ "commun.annuler" | translate: { } }}</button>
+    </mat-error>
 
-  </div>
-</mat-card>
+    <div class="button-container">
+      <button mat-raised-button color="primary" type="submit" [disabled]="saisonForm.invalid">
+        {{ "commun.enregistrer" | translate: { } }}
+      </button>
+      <button mat-button color="warn" type="button" (click)="closeDialog()">
+        {{ "commun.annuler" | translate: { } }}
+      </button>
+
+    </div>
+  </mat-card>
 </form>

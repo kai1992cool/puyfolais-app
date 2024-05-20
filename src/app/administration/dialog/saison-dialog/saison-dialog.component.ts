@@ -1,11 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { SaisonService } from '../../../service/saison.service';
 import { first, switchMap, of } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { DateAdapter } from '@angular/material/core';
-
+import { Saison } from '../../../model/saison';
 
 @Component({
   selector: 'app-saison-dialog',
@@ -14,17 +14,21 @@ import { DateAdapter } from '@angular/material/core';
 })
 export class SaisonDialogComponent implements OnInit {
 
+  @ViewChild('saisonForm') saisonForm!: NgForm;
+
+  saisonAEditer: Saison;
+  afficherMessageErreur: boolean = false; // Variable pour contrôler l'affichage du message d'erreur
+  messageErreur: string = ''; // Contenu du message d'erreur
+
   constructor(
     public dialogRef: MatDialogRef<SaisonDialogComponent>,
     public saisonService: SaisonService,
     private traductionService: TranslateService,
     private dateAdapter: DateAdapter<any>,
-  ) { }
-
-  afficherMessageErreur: boolean = false; // Variable pour contrôler l'affichage du message d'erreur
-  messageErreur: string = ''; // Contenu du message d'erreur
-
-  @ViewChild('saisonForm') saisonForm!: NgForm;
+    @Inject(MAT_DIALOG_DATA) public data: any,
+  ) {
+    this.saisonAEditer = data.saisonAEditer;
+  }
 
   ngOnInit(): void {
     this.dateAdapter.setLocale(this.traductionService.currentLang);
@@ -38,33 +42,45 @@ export class SaisonDialogComponent implements OnInit {
     if (form.valid) {
       const formData = form.value;
 
-      this.saisonService.verifierChevauchementSaison(formData.dateDebut, formData.dateFin)
-        .pipe(
-          first(), // Se désabonner après la première émission
-          switchMap(chevauchement => {
-            if (!chevauchement) {
-              if (formData.dateDebut <= formData.dateFin) {
-                // Créer la saison
-                return this.saisonService.creerSaison(formData.libelle, formData.dateDebut, formData.dateFin)
-                  .then(() => {
-                    this.dialogRef.close();
-                  })
-                  .catch(error => {
-                    console.error('Erreur lors de la création de la saison :', error);
-                    // Gérer les erreurs éventuelles lors de la création de la saison
-                  });
-              } else {
-                this.messageErreur = this.traductionService.instant('admin.saisons.edition.messageDatesErronees');
-                this.afficherMessageErreur = true; // Affichez le message d'erreur
-              }
-            } else {
-              this.messageErreur = this.traductionService.instant('admin.saisons.edition.messageChevauchement');
-              this.afficherMessageErreur = true; // Affichez le message d'erreur
-            }
-            return of(null); // Renvoyer une valeur nulle pour terminer le flux observable
-          })
-        )
-        .subscribe();
+      if (formData.dateDebut <= formData.dateFin) {
+        if (this.saisonAEditer.uid === '') {
+          // Créer la saison
+          this.saisonService.creerSaison(formData.libelle, formData.dateDebut, formData.dateFin)
+            .then(() => {
+              this.dialogRef.close();
+            })
+            .catch(error => {
+              console.error('Erreur lors de la création de la saison :', error);
+              // Gérer les erreurs éventuelles lors de la création de la saison
+            });
+        } else {
+          // Met à jour la saison
+          this.saisonService.mettreAJourSaison(this.saisonAEditer)
+            .then(() => {
+              this.dialogRef.close();
+            })
+            .catch(error => {
+              console.error('Erreur lors de la création de la saison :', error);
+              // Gérer les erreurs éventuelles lors de la création de la saison
+            });
+        }
+
+      } else {
+        this.messageErreur = this.traductionService.instant('admin.saisons.edition.messageDatesErronees');
+        this.afficherMessageErreur = true; // Affichez le message d'erreur
+      }
     }
+  }
+
+  creerSaison(): Promise<void> {
+    return this.saisonService.creerSaison(
+      this.saisonAEditer.libelle!,
+      this.saisonAEditer.dateDebut!,
+      this.saisonAEditer.dateFin!,
+    ).then(() => { });  // Convert the Promise<DocumentReference<ISaison>> to Promise<void>
+  }
+
+  mettreAJourSaison(): Promise<void> {
+    return this.saisonService.mettreAJourSaison(this.saisonAEditer);
   }
 }

@@ -34,9 +34,9 @@ export class SaisonService {
     const dateDebutTimestamp = Timestamp.fromDate(dateDebut);
     const dateFinTimestamp = Timestamp.fromDate(dateFin);
     return this.collection.add({
-      libelle, 
+      libelle,
       dateDebut: dateDebutTimestamp,
-      dateFin: dateFinTimestamp, 
+      dateFin: dateFinTimestamp,
       seances: []
     });
   }
@@ -58,10 +58,10 @@ export class SaisonService {
   mettreAJourSaison(saison: Saison): Promise<void> {
 
     const isaison: ISaison = {
-      libelle: saison.libelle,
-      dateDebut: Timestamp.fromDate(saison.dateDebut),
-      dateFin: Timestamp.fromDate(saison.dateFin),
-      seances: saison.seances
+      libelle: saison.libelle!,
+      dateDebut: Timestamp.fromDate(saison.dateDebut!),
+      dateFin: Timestamp.fromDate(saison.dateFin!),
+      seances: saison.seances!
     };
 
     return this.collection.doc(saison.uid).update(isaison).catch(error => {
@@ -100,22 +100,7 @@ export class SaisonService {
     );
   }
 
-  /**
-   * Contrôle si une période est déjà couverte par une saison existante
-   * @param dateDebut Date de début de la période à tester
-   * @param dateFin Date de fin de la période à tester
-   * @returns True si une saison chevauche la période
-   */
-  verifierChevauchementSaison(dateDebut: Date, dateFin: Date): Observable<boolean> {
-    return this.firestore.collection<ISaison>('saisons', ref =>
-      ref.where('dateFin', '>=', dateDebut) // La date de fin de la saison est postérieure ou égale à la date de début fournie
-        .where('dateDebut', '<=', dateFin) // La date de début de la saison est antérieure ou égale à la date de fin fournie
-    ).get().pipe(
-      map(snapshot => !snapshot.empty) // Vérifie si la collection est vide ou non
-    );
-  }
-
-  /**
+   /**
  * Contrôle si une saison contient des séances
  * @param uidSaison L'identifiant de la saison
  * @returns True si une saison possède au moins une séance
@@ -146,9 +131,9 @@ export class SaisonService {
     const now = new Date();
     const etatsMap: Map<EtatSaison, string> = new Map();
 
-    if (saison.dateFin < now) {
+    if (saison.dateFin! < now) {
       etatsMap.set(EtatSaison.PAS, this.traductionEnumService.traduireEtatSaison(EtatSaison.PAS));
-    } else if (saison.dateDebut <= now && saison.dateFin >= now) {
+    } else if (saison.dateDebut! <= now && saison.dateFin! >= now) {
       etatsMap.set(EtatSaison.ENC, this.traductionEnumService.traduireEtatSaison(EtatSaison.ENC));
     } else {
       etatsMap.set(EtatSaison.AVN, this.traductionEnumService.traduireEtatSaison(EtatSaison.AVN));

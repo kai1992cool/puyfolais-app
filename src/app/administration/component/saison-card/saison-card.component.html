@@ -2,8 +2,6 @@
   <mat-card>
     <mat-card-content class="content-card-saison-details">
 
-      <!-- Affichage classique -->
-
       <!-- Libelle -->
       <div *ngIf="!editionDemandee" class="display-container-card-saison-details">
         <div class="label column-card">{{ saison.libelle }}</div>
@@ -28,11 +26,11 @@
       <!-- Boutons d'édition / Suppression / Planning -->
       <div class="column-boutons column-card" *ngIf="!(editionDemandee && planningDemande)">
 
-        <button mat-icon-button (click)="editerSaison()">
+        <button mat-icon-button (click)="editerSaison(saison)">
           <mat-icon>edit</mat-icon>
         </button>
 
-        <button mat-icon-button (click)="supprimerSaison(saison)" [matTooltip]="recupererMessageSuppressionImpossible()"
+        <button mat-icon-button (click)="ouvrirConfirmationDialogPourSuppressionSaison(saison)" [matTooltip]="recupererMessageSuppressionImpossible()"
           [ngStyle]="{'cursor': suppressionImpossible ? 'not-allowed' : 'pointer'}"
           [ngClass]="{'disabled-button': suppressionImpossible}">
           <mat-icon>delete</mat-icon>
@@ -47,22 +45,19 @@
     </mat-card-content>
   </mat-card>
 </div>
-
+<!-- 
 <div class="saison-details" *ngIf="editionDemandee">
   <mat-card>
     <mat-card-content>
-      <!-- Affichage Edition -->
       <div *ngIf="editionDemandee" class="display-container-card-saison-details">
 
         <div class="form-group column-card" fxLayout="row" fxLayoutAlign="center center">
 
-          <!-- Libelle -->
           <mat-form-field class="mat-form-field">
             <mat-label for="libelle">{{ 'admin.saisons.edition.champLibelle' | translate }}</mat-label>
             <input matInput type="text" class="form-control" id="libelle" [(ngModel)]="saison.libelle">
           </mat-form-field>
 
-          <!-- Dates -->
           <div class="column-card">
             <mat-form-field class="mat-form-field">
               <mat-label>{{ 'admin.saisons.edition.champDateDebut' | translate }}</mat-label>
@@ -79,7 +74,6 @@
             </mat-form-field>
           </div>
 
-          <!--  Boutons Formulaire -->
           <div class="button-container">
             <button mat-raised-button color="primary" (click)="validerMiseAJourSaison()"
               [disabled]="!formulaireValide()">{{ 'commun.enregistrer' | translate }}</button>
@@ -91,7 +85,7 @@
       <mat-error *ngIf="errorEdit" class="error-message">{{ errorEditMessage }}</mat-error>
     </mat-card-content>
   </mat-card>
-</div>
+</div> -->
 
 <div class="seance-details-planning" *ngIf="planningDemande">
   <div class="container-planning">

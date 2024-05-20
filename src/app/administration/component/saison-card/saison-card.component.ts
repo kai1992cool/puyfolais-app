@@ -9,6 +9,9 @@ import { Seance } from '../../../model/seance';
 import { TypeSeance } from '../../../enum/type-seances';
 import { ISeance } from '../../../interface/seance';
 import { DocumentReference } from '@angular/fire/compat/firestore';
+import { ValidationDialogComponent } from '../../../dialog/validation-dialog/validation-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import { SaisonDialogComponent } from '../../dialog/saison-dialog/saison-dialog.component';
 
 
 @Component({
@@ -39,7 +42,8 @@ export class SaisonCardComponent implements OnInit {
     public saisonService: SaisonService,
     private traductionService: TranslateService,
     private dateAdapter: DateAdapter<any>,
-    private seanceService: SeanceService
+    private seanceService: SeanceService,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -82,11 +86,27 @@ export class SaisonCardComponent implements OnInit {
     })
   }
 
+   /**
+  * Ouvre la modale de confirmation de suppression du groupe
+  * @param groupe Le groupe à supprimer
+  */
+   ouvrirConfirmationDialogPourSuppressionSaison(saison: Saison): void {
+    const dialogRef = this.dialog.open(ValidationDialogComponent, {
+      data: this.traductionService.instant('admin.saisons.confirmationSuppressionSaison')
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.supprimerSaison(saison);
+      }
+    });
+  }
+
   /**
    * Supprime la saison
    * @param arg0 La saison à supprimer
    */
-  supprimerSaison(arg0: Saison) {
+  private supprimerSaison(arg0: Saison) {
     if (!this.suppressionImpossible) {
       this.saisonService.supprimerSaison(arg0.uid).then(() => {
       })
@@ -105,10 +125,17 @@ export class SaisonCardComponent implements OnInit {
   //*********************
 
   /**
-   * Active le bloc d'édition d'une saison (et désative le bloc de visualisation)
-   */
-  editerSaison() {
-    this.editionDemandee = true;
+  * Ouvre la modale de modification d'une saison
+  */
+  editerSaison(saison: Saison) {
+    const dialogAjoutGroupe = this.dialog.open(SaisonDialogComponent, {
+      width: '400px',
+      data: { saisonAEditer: saison }
+    });
+
+    dialogAjoutGroupe.afterClosed().subscribe(() => {
+      
+    });
   }
 
   /**
@@ -152,19 +179,19 @@ export class SaisonCardComponent implements OnInit {
       this.errorEditMessage = this.traductionService.instant('admin.saisons.edition.champDateFinObligatoire');
     }
 
-    if (!(this.saison.dateDebut <= this.saison.dateFin)) {
+    if (!(this.saison.dateDebut! <= this.saison.dateFin!)) {
       this.errorEdit = true;
       this.errorEditMessage = this.traductionService.instant('admin.saisons.edition.messageDatesErronees');
     }
 
     if (dateMaxEtMin.dateMin) {
-      if (!(this.saison.dateDebut <= dateMaxEtMin.dateMin)) {
+      if (!(this.saison.dateDebut! <= dateMaxEtMin.dateMin)) {
         this.errorEdit = true;
         this.errorEditMessage = this.traductionService.instant('admin.saisons.edition.messageModificationPlageAvecSeanceExistantes');
       }
     }
     if (dateMaxEtMin.dateMax) {
-      if (!(this.saison.dateFin >= dateMaxEtMin.dateMax)) {
+      if (!(this.saison.dateFin! >= dateMaxEtMin.dateMax)) {
         this.errorEdit = true;
         this.errorEditMessage = this.traductionService.instant('admin.saisons.edition.messageModificationPlageAvecSeanceExistantes');
       }
@@ -195,7 +222,7 @@ export class SaisonCardComponent implements OnInit {
    */
   private recupererSeancesExistantes(): void {
     this.listeSeances = [];
-    this.seanceService.recupererListeSeance(this.saison.seances)
+    this.seanceService.recupererListeSeance(this.saison.seances!)
       .subscribe(listeSeancesBdd => {
 
         listeSeancesBdd.forEach(seanceBdd => {

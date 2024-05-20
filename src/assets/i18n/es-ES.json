@@ -105,7 +105,6 @@
         "champLibelleObligatoire": " La etiqueta es obligatoria",
         "champDateDebutObligatoire": "La fecha de inicio es obligatoria",
         "champDateFinObligatoire": "La fecha de fin es obligatoria",
-        "messageChevauchement": "El período ingresado se superpone con un período existente.",
         "messageDatesErronees": "La fecha de inicio es mayor que la fecha de fin.",
         "messageModificationPlageAvecSeanceExistantes": "El nuevo rango de fechas no incluye todas las sesiones definidas actualmente. Por favor, modifique las fechas o ajuste las sesiones."
       },

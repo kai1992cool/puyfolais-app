@@ -105,7 +105,6 @@
         "champLibelleObligatoire": " Label is required",
         "champDateDebutObligatoire": "Start date is required",
         "champDateFinObligatoire": "End date is required",
-        "messageChevauchement": "The entered period overlaps with an existing period.",
         "messageDatesErronees": "Start date is greater than end date.",
         "messageModificationPlageAvecSeanceExistantes": "The new date range does not include all currently defined sessions. Please modify the dates or adjust the sessions."
       },

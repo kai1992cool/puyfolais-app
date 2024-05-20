@@ -125,18 +125,19 @@
     "saisons": {
       "titre": "Administration Saisons",
       "introduction": "Ici vous pouvez gérer les saisons.",
+      "confirmationSuppressionSaison": "Voulez-vous vraiment supprimer cette saison ?",
       "mentionDu": "Du",
       "mentionAu": "au",
       "blocageSuppression": "Vous ne pouvez pas supprimer de saisons avec des séances existantes.",
       "edition": {
-        "titre": "Nouvelle Saison",
+        "titreCreation": "Nouvelle Saison",
+        "titreModification": "Modification de la Saison",
         "champLibelle": "Libellé",
         "champDateDebut": "Date de Début",
         "champDateFin": "Date de Fin",
         "champLibelleObligatoire": " Le libellé est requis",
         "champDateDebutObligatoire": "La date de début est requise",
         "champDateFinObligatoire": "La date de fin est requise",
-        "messageChevauchement": "La période saisie chevauche une période existante.",
         "messageDatesErronees": "La date de début est supérieure à la date de fin.",
         "messageModificationPlageAvecSeanceExistantes": "La nouvelle plage de dates n'inclus pas toutes les séances actuellement définies. Veuillez modifier les dates ou rectifier les séances."
       },

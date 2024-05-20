@@ -28,8 +28,11 @@ export class AdminSaisonsComponent implements OnInit, OnDestroy  {
 
   ouvrirModalAjoutSaison(): void {
     this.saisonSelectionnee = null;
+    const newSaison: Saison = { uid: '' }
     const dialogAjoutSaison = this.dialog.open(SaisonDialogComponent, {
       width: '400px',
+      data: { saisonAEditer: newSaison }
+
     });
 
     dialogAjoutSaison.afterClosed().subscribe(() => {
