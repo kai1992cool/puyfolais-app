@@ -4,10 +4,10 @@
             {{ "admin.structures.edition.titre" | translate: { } }}
         </mat-card-title>
         <mat-form-field class="full-width">
-            <input matInput placeholder="{{ 'admin.structures.edition.champLibelle' | translate }}" name="libelle"
-                [(ngModel)]="structureForm.value['libelle']" required>
-            <mat-error *ngIf="structureForm.invalid && structureForm.controls['libelle'].touched">
-                {{ "admin.structures.edition.champLibelleObligatoire" | translate: { } }}
+            <input matInput placeholder="{{ 'admin.structures.edition.champNom' | translate }}" name="nom"
+                [(ngModel)]="structureForm.value['nom']" required>
+            <mat-error *ngIf="structureForm.invalid && structureForm.controls['nom'].touched">
+                {{ "admin.structures.edition.champNomObligatoire" | translate: { } }}
             </mat-error>
         </mat-form-field>
 

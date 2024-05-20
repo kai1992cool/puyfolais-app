@@ -1,10 +1,13 @@
 {
   "commun": {
+    "oui": "Oui",
+    "non": "Non",
     "connecter": "Se connecter",
     "deconnecter": "Se déconnecter",
     "inscription": "S'enregistrer",
     "cliquerIci": "Cliquez ici",
     "confirmation": "Confirmation",
+    "validation": "Validation",
     "enregistrer": "Enregistrer",
     "annuler": "Annuler",
     "langue": "Langue",
@@ -97,10 +100,11 @@
     "groupes" :{
       "ajouterGroupe": "Ajouter un groupe à la structure {{ nomStructure }}",
       "edition":  {
-        "titre": "Nouveau Groupe",
-        "champLibelle": "Nom",
+        "titreCreation": "Nouveau Groupe",
+        "titreModification": "Modification du Groupe",
+        "champNom": "Nom",
         "champNumero": "Numéro du groupe",
-        "champLibelleObligatoire": " Le nom est requis",
+        "champNomObligatoire": " Le nom est requis",
         "champNumeroObligatoire": " Le numéro est requis"        
       }
     },
@@ -109,9 +113,9 @@
       "introduction": "Ici vous pouvez gérer les structures de l'association.",
       "edition": {
         "titre": "Nouvelle Structure",
-        "champLibelle": "Nom",
+        "champNom": "Nom",
         "champType": "Type de structure",
-        "champLibelleObligatoire": " Le nom est requis",
+        "champNomObligatoire": " Le nom est requis",
         "champTypeObligatoire": " Le type est requis"
       }
     },

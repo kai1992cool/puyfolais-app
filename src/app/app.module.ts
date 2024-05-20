@@ -40,6 +40,7 @@ import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import localeEs from '@angular/common/locales/es';
 import localeEn from '@angular/common/locales/en';
+import { ValidationDialogComponent } from './dialog/validation-dialog/validation-dialog.component';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -53,7 +54,8 @@ export function createTranslateLoader(http: HttpClient) {
     SigninComponent,
     SignupComponent,
     ConfirmationDialogComponent,
-    SaisonDialogComponent],
+    SaisonDialogComponent,
+    ValidationDialogComponent],
   imports: [
     AngularFireAuthModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),

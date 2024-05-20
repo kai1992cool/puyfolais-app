@@ -23,7 +23,6 @@ export class GroupeService {
 
     const structureRef = this.firestore.doc<IStructure>(`structures/${structureUid}`).ref;
 
-
     return this.collection.add({
       nom,
       numero,
@@ -48,9 +47,9 @@ export class GroupeService {
   mettreAJourGroupe(groupe: Groupe): Promise<void> {
 
     const igroupe: IGroupe = {
-      nom: groupe.nom,
-      numero: groupe.numero,
-      structure: groupe.structure
+      nom: groupe.nom!,
+      numero: groupe.numero!,
+      structure: groupe.structure!
     };
 
     return this.collection.doc(groupe.uid).update(igroupe).catch(error => {

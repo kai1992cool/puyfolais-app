@@ -1,7 +1,8 @@
-import { Component, Inject, Input, ViewChild } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA  } from '@angular/material/dialog';
+import { Component, Inject, Input, OnInit, ViewChild } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { GroupeService } from '../../../service/groupe.service';
 import { NgForm } from '@angular/forms';
+import { Groupe } from '../../../model/groupe';
 
 @Component({
   selector: 'app-groupe-dialog',
@@ -10,38 +11,54 @@ import { NgForm } from '@angular/forms';
 })
 export class GroupeDialogComponent {
 
+  @ViewChild('groupeForm') groupeForm!: NgForm;
+
   referenceStructureParente: string = '';
+  groupeAEditer: Groupe;
+  afficherMessageErreur: boolean = false; // Variable pour contrôler l'affichage du message d'erreur
+  messageErreur: string = ''; // Contenu du message d'erreur
 
   constructor(
     public dialogRef: MatDialogRef<GroupeDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public groupeService: GroupeService
   ) {
+    this.groupeAEditer = data.groupeAEditer;
     this.referenceStructureParente = data.referenceStructureParente;
-   }
+  }
 
-  afficherMessageErreur: boolean = false; // Variable pour contrôler l'affichage du message d'erreur
-  messageErreur: string = ''; // Contenu du message d'erreur
-
-  @ViewChild('groupeForm') groupeForm!: NgForm;
 
   closeDialog(): void {
     this.dialogRef.close();
   }
 
-  onSubmit(form: NgForm): void {
-    if (form.valid) {
-      const formData = form.value;
+  onSubmit(): void {
+    if (this.groupeForm.valid) {
+      const operation = (this.groupeAEditer.uid !== '')
+        ? this.updateGroupe()
+        : this.createGroupe();
 
-      this.groupeService.creerGroupe(formData.libelle, formData.numero, this.referenceStructureParente)
+      operation
         .then(() => {
           this.dialogRef.close();
         })
         .catch(error => {
-          console.error('Erreur lors de la création de la structure :', error);
-          // Gérer les erreurs éventuelles lors de la création de la saison
+          console.error('Erreur lors de l\'opération sur le groupe :', error);
+          // Gérer les erreurs éventuelles lors de l'opération sur le groupe
         });
     }
+  }
+
+  createGroupe(): Promise<void> {
+    return this.groupeService.creerGroupe(
+      this.groupeAEditer.nom!,
+      this.groupeAEditer.numero!,
+      this.referenceStructureParente
+    ).then(() => {});  // Convert the Promise<DocumentReference<IGroupe>> to Promise<void>
+  }
+
+  updateGroupe(): Promise<void> {
+    return this.groupeService.mettreAJourGroupe(this.groupeAEditer);
   }
 
 }

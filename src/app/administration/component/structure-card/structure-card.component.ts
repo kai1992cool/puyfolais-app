@@ -8,6 +8,7 @@ import { GroupeService } from '../../../service/groupe.service';
 import { Groupe } from '../../../model/groupe';
 import { GroupeDialogComponent } from '../../dialog/groupe-dialog/groupe-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { ValidationDialogComponent } from '../../../dialog/validation-dialog/validation-dialog.component';
 
 @Component({
   selector: 'app-structure-card',
@@ -86,7 +87,7 @@ export class StructureCardComponent {
 
     if (!this.structure?.nom) {
       this.errorEdit = true;
-      this.errorEditMessage = this.traductionService.instant('admin.saisons.edition.champLibelleObligatoire');
+      this.errorEditMessage = this.traductionService.instant('admin.saisons.edition.champNomObligatoire');
     }
 
 
@@ -121,9 +122,10 @@ export class StructureCardComponent {
   }
 
   ajouterGroupe() {
+    const newGroupe: Groupe = {uid: ''}
     const dialogAjoutGroupe = this.dialog.open(GroupeDialogComponent, {
       width: '400px',
-      data: { referenceStructureParente: this.structure.uid }
+      data: { referenceStructureParente: this.structure.uid, groupeAEditer: newGroupe}
     });
 
     dialogAjoutGroupe.afterClosed().subscribe(() => {
@@ -131,15 +133,37 @@ export class StructureCardComponent {
     });
   }
 
+  ouvrirConfirmationDialogPourSuppression(groupe: Groupe): void {
+    const dialogRef = this.dialog.open(ValidationDialogComponent, {
+      data: 'Voulez-vous vraiment supprimer ce groupe ?'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.supprimerGroupe(groupe);
+      }
+    });
+  }
+
     /**
  * Supprime du groupe
  * @param arg0 Le groupe à supprimer 
  */
-    supprimerGroupe(arg0: Groupe) {
+    private supprimerGroupe(arg0: Groupe) {
       
         this.groupeService.supprimerGroupe(arg0.uid).then(() => {
           this.recupererGroupesExistants();
         })
       }
     
+      mettreAJourGroupe(groupe: Groupe) {
+        const dialogAjoutGroupe = this.dialog.open(GroupeDialogComponent, {
+          width: '400px',
+          data: { referenceStructureParente: this.structure.uid, groupeAEditer: groupe }
+        });
+    
+        dialogAjoutGroupe.afterClosed().subscribe(() => {
+          this.recupererGroupesExistants();
+        });
+      }
 }

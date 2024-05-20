@@ -34,7 +34,7 @@ export class StructureDialogComponent {
     if (form.valid) {
       const formData = form.value;
 
-      this.structureService.creerStructure(formData.libelle, formData.typeStructure)
+      this.structureService.creerStructure(formData.nom, formData.typeStructure)
         .then(() => {
           this.dialogRef.close();
         })
