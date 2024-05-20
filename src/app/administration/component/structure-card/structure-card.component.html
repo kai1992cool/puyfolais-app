@@ -1,21 +1,21 @@
-<div class="structure-details" *ngIf="!editionDemandee">
+<div class="structure-details">
   <mat-card>
     <mat-card-content class="content-card-structure-details">
 
       <!-- Affichage classique -->
 
       <!-- Nom -->
-      <div *ngIf="!editionDemandee" class="display-container-card-structure-details">
+      <div class="display-container-card-structure-details">
         <div class="label column-card">{{ structure.nom }}</div>
       </div>
 
       <!-- Type -->
-      <div *ngIf="!editionDemandee" class="display-container-card-structure-details">
+      <div class="display-container-card-structure-details">
         <div class="label column-card">{{ traductionEnumService.traduireTypeStructure(structure.type) }}</div>
       </div>
 
       <!-- Boutons d'édition / Suppression / Listes  -->
-      <div class="column-boutons column-card" *ngIf="!(editionDemandee)">
+      <div class="column-boutons column-card">
 
         <button mat-icon-button (click)="editerStructure(structure)">
           <mat-icon>edit</mat-icon>
@@ -42,7 +42,7 @@
       <div class="button-container">
         <button mat-list-item (click)="voirFicheGroupe(groupe)">{{groupe.nom}} (Groupe {{groupe.numero}})</button>
         <button mat-icon-button (click)="editerGroupe(groupe)">
-          <mat-icon>update</mat-icon>
+          <mat-icon>edit</mat-icon>
         </button>
         <button mat-icon-button (click)="ouvrirConfirmationDialogPourSuppressionGroupe(groupe)">
           <mat-icon>delete</mat-icon>

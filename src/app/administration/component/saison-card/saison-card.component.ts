@@ -30,7 +30,6 @@ export class SaisonCardComponent implements OnInit {
   etatSaisonTraduit: Map<EtatSaison, string> = new Map();
   couleurBadgeSaison: string = '';
   suppressionImpossible: boolean = true;
-  editionDemandee: boolean = false;
   planningDemande: boolean = false;
   listeJoursFiltresActifs: number[] = this.FILTRE_JOURS_VEN_SAM.slice();;
   listeMoisFiltresActifs: number[] = this.FILTRE_MOIS_TOUS.slice();;
@@ -136,23 +135,6 @@ export class SaisonCardComponent implements OnInit {
     dialogAjoutGroupe.afterClosed().subscribe(() => {
       
     });
-  }
-
-  /**
-   * Valide la mise à jour en BDD
-   */
-  validerMiseAJourSaison() {
-
-    this.saisonService.mettreAJourSaison(this.saison).then(() => {
-      this.editionDemandee = false;
-    })
-  }
-
-  /**
-   * Masque le bloc d'édition et réaffiche le bloc de visualisation
-   */
-  annulerMiseAJourSaison() {
-    this.editionDemandee = false;
   }
 
   /**

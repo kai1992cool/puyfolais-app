@@ -20,7 +20,6 @@ export class StructureCardComponent {
 
   @Input() structure!: Structure;
 
-  editionDemandee: boolean = false;
   suppressionStructureImpossible: boolean = false; // A implémenter si besoin (méthode verifierPossibiliteSupprimerStructure )
   errorEdit: boolean = false;
   errorEditMessage: string = '';
@@ -83,22 +82,6 @@ export class StructureCardComponent {
  */
   recupererMessagesuppressionStructureImpossible(): string {
     return this.suppressionStructureImpossible ? this.traductionService.instant('admin.structures.blocageSuppression') : '';
-  }
-
-  /**
-   * Valide la mise à jour en BDD
-   */
-  validerMiseAJourStructure() {
-    this.structureService.mettreAJourStructure(this.structure).then(() => {
-      this.editionDemandee = false;
-    })
-  }
-
-  /**
-   * Masque le bloc d'édition et réaffiche le bloc de visualisation
-   */
-  annulerMiseAJourStructure() {
-    this.editionDemandee = false;
   }
 
   /**

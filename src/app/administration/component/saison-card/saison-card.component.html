@@ -1,14 +1,14 @@
-<div class="saison-details" *ngIf="!editionDemandee">
+<div class="saison-details">
   <mat-card>
     <mat-card-content class="content-card-saison-details">
 
       <!-- Libelle -->
-      <div *ngIf="!editionDemandee" class="display-container-card-saison-details">
+      <div class="display-container-card-saison-details">
         <div class="label column-card">{{ saison.libelle }}</div>
       </div>
 
       <!-- Dates -->
-      <div *ngIf="!editionDemandee" class="display-container-card-saison-details">
+      <div class="display-container-card-saison-details">
         <div class="column-card">
           {{ "admin.saisons.mentionDu" | translate: { } }} {{ saison.dateDebut | date:'dd/MM/yyyy' }} {{
           "admin.saisons.mentionAu" | translate: { } }} {{ saison.dateFin | date:'dd/MM/yyyy' }}
@@ -17,14 +17,14 @@
       </div>
 
       <!-- Etat Saison -->
-      <div class="column-card" *ngIf="!(editionDemandee && planningDemande)">
+      <div class="column-card" *ngIf="!(planningDemande)">
         <mat-chip [style.background-color]="couleurBadgeSaison" [matBadge]="listeSeances.length" matBadgePosition="above after">
           <div class="chip-text-etat-saison">{{ texteBadgeSaison }}</div>
         </mat-chip>
       </div>
 
       <!-- Boutons d'édition / Suppression / Planning -->
-      <div class="column-boutons column-card" *ngIf="!(editionDemandee && planningDemande)">
+      <div class="column-boutons column-card" *ngIf="!(planningDemande)">
 
         <button mat-icon-button (click)="editerSaison(saison)">
           <mat-icon>edit</mat-icon>
@@ -45,47 +45,6 @@
     </mat-card-content>
   </mat-card>
 </div>
-<!-- 
-<div class="saison-details" *ngIf="editionDemandee">
-  <mat-card>
-    <mat-card-content>
-      <div *ngIf="editionDemandee" class="display-container-card-saison-details">
-
-        <div class="form-group column-card" fxLayout="row" fxLayoutAlign="center center">
-
-          <mat-form-field class="mat-form-field">
-            <mat-label for="libelle">{{ 'admin.saisons.edition.champLibelle' | translate }}</mat-label>
-            <input matInput type="text" class="form-control" id="libelle" [(ngModel)]="saison.libelle">
-          </mat-form-field>
-
-          <div class="column-card">
-            <mat-form-field class="mat-form-field">
-              <mat-label>{{ 'admin.saisons.edition.champDateDebut' | translate }}</mat-label>
-              <input matInput [matDatepicker]="pickerDebut" id="dateDebut" [(ngModel)]="saison.dateDebut">
-              <mat-datepicker-toggle matSuffix [for]="pickerDebut"></mat-datepicker-toggle>
-              <mat-datepicker #pickerDebut></mat-datepicker>
-            </mat-form-field>
-
-            <mat-form-field class="mat-form-field">
-              <mat-label>{{ 'admin.saisons.edition.champDateFin' | translate }}</mat-label>
-              <input matInput [matDatepicker]="pickerFin" id="dateFin" [(ngModel)]="saison.dateFin">
-              <mat-datepicker-toggle matSuffix [for]="pickerFin"></mat-datepicker-toggle>
-              <mat-datepicker #pickerFin></mat-datepicker>
-            </mat-form-field>
-          </div>
-
-          <div class="button-container">
-            <button mat-raised-button color="primary" (click)="validerMiseAJourSaison()"
-              [disabled]="!formulaireValide()">{{ 'commun.enregistrer' | translate }}</button>
-            <button mat-button color="warn" (click)="annulerMiseAJourSaison()">{{ 'commun.annuler' | translate
-              }}</button>
-          </div>
-        </div>
-      </div>
-      <mat-error *ngIf="errorEdit" class="error-message">{{ errorEditMessage }}</mat-error>
-    </mat-card-content>
-  </mat-card>
-</div> -->
 
 <div class="seance-details-planning" *ngIf="planningDemande">
   <div class="container-planning">
