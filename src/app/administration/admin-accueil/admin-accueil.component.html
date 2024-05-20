@@ -3,7 +3,28 @@
 <p id="text-page">{{ "admin.introduction" | translate: { } }}</p>
 
 <div class="menu-button-container">
-    <button  mat-raised-button color="primary" routerLink="/admin/utilisateurs"  class="menu-button">
+    <button  mat-raised-button color="primary" routerLink="/admin/param"  class="menu-button" [disabled]="true">
+        <div class="menu-button-content">
+        <mat-icon >settings</mat-icon>
+        {{ 'admin.service.gestionParametrage' | translate }}
+    </div>
+    </button>
+
+    <button  mat-raised-button color="primary" routerLink="/admin/puyfolais"  class="menu-button" [disabled]="true">
+        <div class="menu-button-content">
+        <mat-icon >theater_comedy</mat-icon>
+        {{ 'admin.service.gestionPuyfolais' | translate }}
+    </div>
+    </button>
+
+    <button  mat-raised-button color="primary" routerLink="/admin/scene"  class="menu-button" [disabled]="true">
+        <div class="menu-button-content">
+        <mat-icon >movie_edit</mat-icon>
+        {{ 'admin.service.gestionScene' | translate }}
+    </div>
+    </button>
+
+    <button  mat-raised-button color="primary" routerLink="/admin/utilisateurs"  class="menu-button" [disabled]="true">
         <div class="menu-button-content">
         <mat-icon >supervisor_account</mat-icon>
         {{ 'admin.service.gestionUtilisateur' | translate }}
@@ -19,7 +40,7 @@
 
     <button  mat-raised-button color="primary" routerLink="/admin/saisons"  class="menu-button">
         <div class="menu-button-content">
-        <mat-icon >theater_comedy</mat-icon>
+        <mat-icon >sunny</mat-icon>
         {{ 'admin.service.gestionSaison' | translate }}
     </div>
     </button>    

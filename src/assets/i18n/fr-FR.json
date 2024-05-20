@@ -83,13 +83,26 @@
     "titre": "Administration",
     "introduction": "Ici vous pouvez accéder au paramétrage de l'application (utilisateur, structure, options ...).",
     "service": {
+      "gestionParametrage": "Paramétrage de l'Application",
+      "gestionPuyfolais": "Gestion des puyfolais",
+      "gestionScene": "Gestion des scènes et rôles",
       "gestionUtilisateur": "Gestion des utilisateurs",
-      "gestionStructure": "Gestion des structures",
+      "gestionStructure": "Gestion des structures et groupes",
       "gestionSaison": "Gestion des saisons"
     },
     "utilisateurs": {
       "titre": "Administration Utilisateurs",
       "introduction": "Ici vous pouvez gérer les utilisateurs de l'applications."
+    },
+    "groupes" :{
+      "ajouterGroupe": "Ajouter un groupe à la structure {{ nomStructure }}",
+      "edition":  {
+        "titre": "Nouveau Groupe",
+        "champLibelle": "Nom",
+        "champNumero": "Numéro du groupe",
+        "champLibelleObligatoire": " Le nom est requis",
+        "champNumeroObligatoire": " Le numéro est requis"        
+      }
     },
     "structures": {
       "titre": "Administration Structures",
