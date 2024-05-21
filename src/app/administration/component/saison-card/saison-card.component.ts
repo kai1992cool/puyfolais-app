@@ -36,7 +36,7 @@ export class SaisonCardComponent implements OnInit {
   listeSeances: Seance[] = [];
   errorEdit: boolean = false;
   errorEditMessage: string = '';
-  
+
   constructor(
     public saisonService: SaisonService,
     private traductionService: TranslateService,
@@ -85,20 +85,22 @@ export class SaisonCardComponent implements OnInit {
     })
   }
 
-   /**
-  * Ouvre la modale de confirmation de suppression du groupe
-  * @param groupe Le groupe à supprimer
-  */
-   ouvrirConfirmationDialogPourSuppressionSaison(saison: Saison): void {
-    const dialogRef = this.dialog.open(ValidationDialogComponent, {
-      data: this.traductionService.instant('admin.saisons.confirmationSuppressionSaison')
-    });
+  /**
+ * Ouvre la modale de confirmation de suppression du groupe
+ * @param groupe Le groupe à supprimer
+ */
+  ouvrirConfirmationDialogPourSuppressionSaison(saison: Saison): void {
+    if (!this.suppressionImpossible) {
+      const dialogRef = this.dialog.open(ValidationDialogComponent, {
+        data: this.traductionService.instant('admin.saisons.confirmationSuppressionSaison')
+      });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.supprimerSaison(saison);
-      }
-    });
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          this.supprimerSaison(saison);
+        }
+      });
+    }
   }
 
   /**
@@ -106,10 +108,8 @@ export class SaisonCardComponent implements OnInit {
    * @param arg0 La saison à supprimer
    */
   private supprimerSaison(arg0: Saison) {
-    if (!this.suppressionImpossible) {
-      this.saisonService.supprimerSaison(arg0).then(() => {
-      })
-    }
+    this.saisonService.supprimerSaison(arg0).then(() => {
+    })
   }
 
   /**
@@ -133,7 +133,7 @@ export class SaisonCardComponent implements OnInit {
     });
 
     dialogAjoutGroupe.afterClosed().subscribe(() => {
-      
+
     });
   }
 
