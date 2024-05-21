@@ -7,8 +7,8 @@ export class Structure {
 
     constructor(
         uid: string,
-        nom: string,
-        type: TypeStructure
+        nom?: string,
+        type?: TypeStructure
       ) {
         this.uid = uid;
         this.nom = nom;

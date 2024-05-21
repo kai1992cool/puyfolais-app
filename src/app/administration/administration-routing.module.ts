@@ -7,6 +7,7 @@ import { AdminUtilisateursComponent } from './admin-utilisateurs/admin-utilisate
 import { AdminAccueilComponent } from './admin-accueil/admin-accueil.component';
 import { AdminStructuresComponent } from './admin-structures/admin-structures.component';
 import { AdminSaisonsComponent } from './admin-saisons/admin-saisons.component';
+import { AdminPuyfolaisComponent } from './admin-puyfolais/admin-puyfolais.component';
 
 const routes: Routes = [
   
@@ -25,6 +26,10 @@ const routes: Routes = [
     {
       path: 'saisons',
       component: AdminSaisonsComponent
+    },
+    {
+      path: 'puyfolais',
+      component: AdminPuyfolaisComponent
     }
     
   

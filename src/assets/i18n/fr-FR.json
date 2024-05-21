@@ -144,6 +144,10 @@
       "seances": {
         "aucuneSeance": "Aucune séance définie, veuillez en ajouter à l'aide du calendrier"
       }
-    }
+    },
+    "puyfolais": {
+      "titre": "Administration Puyfolais",
+      "introduction": "Ici vous pouvez gérer les puyfolais de l'association."   
+    } 
   }
 }

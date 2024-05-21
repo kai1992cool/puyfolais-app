@@ -8,9 +8,9 @@ export class Groupe {
 
     constructor(
         uid: string,
-        nom: string,
-        numero: number,
-        structure: DocumentReference
+        nom?: string,
+        numero?: number,
+        structure?: DocumentReference
       ) {
         this.uid = uid;
         this.nom = nom;
