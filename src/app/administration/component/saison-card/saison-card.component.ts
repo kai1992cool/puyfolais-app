@@ -226,7 +226,7 @@ export class SaisonCardComponent implements OnInit {
     // Dans le cas d'une création, on applique une heure par défaut à la nouvelle séance.
     if (seancesADate.length === 0) {
       // TODO : implémenter le paramétrage de l'heure de début de séance
-      nouvelleSeance.date.setHours(21)
+      nouvelleSeance.date.setHours(22)
     }
     this.listeSeances.push(nouvelleSeance)
     this.listeSeances.sort((a, b) => a.date.getTime() - b.date.getTime());

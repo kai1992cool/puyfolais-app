@@ -17,14 +17,14 @@
       </div>
 
       <!-- Etat Saison -->
-      <div class="column-card" *ngIf="!(planningDemande)">
+      <div class="column-card">
         <mat-chip [style.background-color]="couleurBadgeSaison" [matBadge]="listeSeances.length" matBadgePosition="above after">
           <div class="chip-text-etat-saison">{{ texteBadgeSaison }}</div>
         </mat-chip>
       </div>
 
       <!-- Boutons d'édition / Suppression / Planning -->
-      <div class="column-boutons column-card" *ngIf="!(planningDemande)">
+      <div class="column-boutons column-card">
 
         <button mat-icon-button (click)="editerSaison(saison)">
           <mat-icon>edit</mat-icon>
