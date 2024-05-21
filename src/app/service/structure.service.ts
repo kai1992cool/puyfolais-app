@@ -4,6 +4,7 @@ import { IStructure } from '../interface/structure';
 import { Structure } from '../model/structure';
 import { Observable, map } from 'rxjs';
 import { TypeStructure } from '../enum/type-structures';
+import { GroupeService } from './groupe.service';
 
 
 @Injectable({
@@ -11,16 +12,18 @@ import { TypeStructure } from '../enum/type-structures';
 })
 export class StructureService {
 
-  constructor(private firestore: AngularFirestore) { }
+  constructor(
+    private firestore: AngularFirestore,
+    private groupeService: GroupeService
+  ) { }
 
   collection: AngularFirestoreCollection<IStructure> = this.firestore.collection<IStructure>('structures')
 
-  
-/**
- * Créé une structure dans Firestore
- * @param nom Le nom de la structure
-   * @returns L'identifiant technique de la structure
- */
+  /**
+   * Créé une structure dans Firestore
+   * @param nom Le nom de la structure
+     * @returns L'identifiant technique de la structure
+   */
   creerStructure(nom: string, type: TypeStructure): Promise<DocumentReference<any>> {
 
     return this.collection.add({
@@ -29,13 +32,25 @@ export class StructureService {
     });
   }
 
-   /**
+  /**
    * Supprime une structure
    * @param uid l'UID de la structure à supprimer
    * @returns  Le promise résultant de la suppression
    */
-   supprimerStructure(uid: string): Promise<void> {
-    return this.collection.doc(uid).delete();
+  supprimerStructure(uid: string): Promise<void> {
+    return new Promise(async (resolve, reject) => {
+      // Récupérer tous les groupes de la structure
+      this.groupeService.recupererGroupesParUidStructure(uid).forEach(async (groupes) => {
+        // Supprimer chaque groupe
+        for (const groupe of groupes) {
+          this.groupeService.supprimerGroupe(groupe.uid);
+        }
+      });
+
+      // Supprimer la structure après la suppression des groupes
+      await this.collection.doc(uid).delete();
+      resolve();
+    });
   }
 
   /**
@@ -56,11 +71,11 @@ export class StructureService {
     });
   }
 
-   /**
-   * Retourne la liste des structures
-   * @returns un tableau contenant la liste des saisons
-   */
-   recupererStructure(): Observable<Structure[]> {
+  /**
+  * Retourne la liste des structures
+  * @returns un tableau contenant la liste des saisons
+  */
+  recupererStructure(): Observable<Structure[]> {
     return this.collection.snapshotChanges().pipe(
       map(actions => {
         return actions.map(action => {

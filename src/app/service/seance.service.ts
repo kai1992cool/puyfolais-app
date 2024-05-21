@@ -10,6 +10,7 @@ import { Timestamp } from 'firebase/firestore';
 })
 export class SeanceService {
 
+
   constructor(private firestore: AngularFirestore) { }
 
   collection: AngularFirestoreCollection<ISeance> = this.firestore.collection<ISeance>('seances')
@@ -67,7 +68,6 @@ export class SeanceService {
     });
     return Promise.all(listDoc).then(() => {});  
   }
-
 
   recupererListeSeance(references: DocumentReference[]): Observable<Seance[]> {
     // Créer un tableau d'observables pour chaque référence

@@ -107,7 +107,7 @@ export class SaisonCardComponent implements OnInit {
    */
   private supprimerSaison(arg0: Saison) {
     if (!this.suppressionImpossible) {
-      this.saisonService.supprimerSaison(arg0.uid).then(() => {
+      this.saisonService.supprimerSaison(arg0).then(() => {
       })
     }
   }

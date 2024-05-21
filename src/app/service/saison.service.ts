@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, DocumentReference } from '@angular/fire/compat/firestore';
 import { Observable, map } from 'rxjs';
-import { AngularFireAuth } from "@angular/fire/compat/auth";
 import { ISaison } from '../interface/saison';
 import { EtatSaison } from '../enum/etat-saison';
 import { EnumTraductionService } from './enum-traduction.service';
-import { ISeance } from '../interface/seance';
 import { Timestamp } from 'firebase/firestore';
 import { Saison } from '../model/saison';
+import { SeanceService } from './seance.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +15,8 @@ export class SaisonService {
 
   constructor(
     private firestore: AngularFirestore,
-    private traductionEnumService: EnumTraductionService
+    private traductionEnumService: EnumTraductionService,
+    private seanceService: SeanceService
   ) { }
 
   collection: AngularFirestoreCollection<ISaison> = this.firestore.collection<ISaison>('saisons')
@@ -43,11 +43,21 @@ export class SaisonService {
 
   /**
    * Supprime une saison
-   * @param uid l'UID de la saison à supprimer
+   * @param uid la saison à supprimer
    * @returns  Le promise résultant de la suppression
    */
-  supprimerSaison(uid: string): Promise<void> {
-    return this.collection.doc(uid).delete();
+  async supprimerSaison(saison: Saison): Promise<void> {
+    try {
+      // Supprimer toutes les séances associées
+      const suppressionSeances = saison.seances!.map(seanceRef => seanceRef.delete());
+      await Promise.all(suppressionSeances);
+
+      // Supprimer la saison après la suppression des séances
+      await this.collection.doc(saison.uid).delete();
+    } catch (error) {
+      console.error("Erreur lors de la suppression de la saison :", error);
+      throw error;
+    }
   }
 
   /**
