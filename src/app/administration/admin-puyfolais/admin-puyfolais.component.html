@@ -8,14 +8,14 @@
 
 <div>
   <mat-form-field class="full-width">
-    <input type="search" matInput [(ngModel)]="filtreRecherche" placeholder="{{ 'commun.rechercher' | translate }}">
+    <input type="search" matInput #searchInput (input)="mettreAJourListePuyfolais()" placeholder="{{ 'commun.rechercher' | translate }}">
     <button mat-button matSuffix>
       <mat-icon>search</mat-icon>
     </button>
   </mat-form-field>
 </div>
 
-<div *ngFor="let puyfolais of listePuyfolais | filter: filtreRecherche">
+<div *ngFor="let puyfolais of listePuyfolais">
   <div class="structure-container">
     <app-puyfolais-card [puyfolais]="puyfolais">
     </app-puyfolais-card>

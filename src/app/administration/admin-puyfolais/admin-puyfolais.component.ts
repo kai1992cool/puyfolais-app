@@ -1,9 +1,8 @@
-import { Component, inject } from '@angular/core';
+import { AfterViewInit, Component, ViewChild, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Puyfolais } from '../../model/puyfolais';
 import { PuyfolaisService } from '../../service/puyfolais.service';
 import { Subscription } from 'rxjs';
-import { FilterPipe } from '../pipe/filter.pipe';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -11,7 +10,7 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: './admin-puyfolais.component.html',
   styleUrl: './admin-puyfolais.component.scss'
 })
-export class AdminPuyfolaisComponent {
+export class AdminPuyfolaisComponent implements AfterViewInit  {
 
   constructor(
     private dialog: MatDialog,
@@ -21,9 +20,10 @@ export class AdminPuyfolaisComponent {
   listePuyfolais: Puyfolais[] = [];
   puyfolaisSubscription: Subscription | undefined; // Garder une référence à l'abonnement pour pouvoir s'en désabonner
   puyfolaisService = inject(PuyfolaisService);
-  filtreRecherche: string = '';
+  @ViewChild('searchInput') searchInput: any; // Référence à l'élément input de recherche
 
-  ngOnInit() {
+  
+  ngAfterViewInit() {
     this.mettreAJourListePuyfolais();
   }
 
@@ -33,24 +33,12 @@ export class AdminPuyfolaisComponent {
       this.puyfolaisSubscription.unsubscribe();
     }
 
-    // Souscrire à un nouvel observable
-    this.puyfolaisSubscription = this.puyfolaisService.recupererPuyfolais().subscribe(puyfolais => {
+    // Récupérer le texte de l'input de recherche
+    const searchText = this.searchInput.nativeElement.value;
+
+    // Souscrire à un nouvel observable avec le texte de recherche
+    this.puyfolaisSubscription = this.puyfolaisService.recupererPuyfolais(searchText).subscribe(puyfolais => {
       this.listePuyfolais = puyfolais.sort((a, b) => a.nom!.localeCompare(b.nom!));
     });
   }
-
-  // ouvrirModalAjoutStructure(): void {
-  //   this.structureSelectionnee = null;
-  //   const newStructure: Structure = { uid: '' }
-  //   const dialogAjoutSaison = this.dialog.open(StructureDialogComponent, {
-  //     width: '400px',
-  //     data: { structureAEditer: newStructure }
-  //   });
-
-  //   dialogAjoutSaison.afterClosed().subscribe(() => {
-  //     this.mettreAJourListeStructure();
-  //   });
-
-  // }
-
 }

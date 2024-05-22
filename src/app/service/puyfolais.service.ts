@@ -4,7 +4,7 @@ import { IPuyfolais } from '../interface/puyfolais';
 import { Puyfolais } from '../model/puyfolais';
 import { Timestamp } from 'firebase/firestore';
 import { FormGroup } from '@angular/forms';
-import { Observable, map } from 'rxjs';
+import { Observable, from } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -99,12 +99,27 @@ export class PuyfolaisService {
   * Retourne la liste des structures
   * @returns un tableau contenant la liste des saisons
   */
-  recupererPuyfolais(): Observable<Puyfolais[]> {
-    return this.collection.snapshotChanges().pipe(
-      map(actions => {
-        return actions.map(action => {
-          const firestoreData = action.payload.doc.data() as IPuyfolais;
-          const uid = action.payload.doc.id;
+  recupererPuyfolais(filtre: string): Observable<Puyfolais[]> {
+    return from(this.collection.ref.where('nom', '>=', filtre)
+      .where('nom', '<=', filtre + '\uf8ff')
+      .where('prenom', '>=', filtre)
+      .where('prenom', '<=', filtre + '\uf8ff')
+      .where('email', '>=', filtre)
+      .where('email', '<=', filtre + '\uf8ff')
+      .where('numero', '==', parseInt(filtre))
+      // .where('adresse', '>=', filtre)
+      // .where('adresse', '<=', filtre + '\uf8ff')
+      // .where('ville', '>=', filtre)
+      // .where('ville', '<=', filtre + '\uf8ff')
+      // .where('cp', '>=', filtre)
+      // .where('cp', '<=', filtre + '\uf8ff')
+      .limit(10)
+      .get()
+      .then(snapshot => {
+        const puyfolaisList: Puyfolais[] = [];
+        snapshot.docs.forEach(doc => {
+          const firestoreData = doc.data() as IPuyfolais;
+          const uid = doc.id;
 
           // Construction de l'objet Puyfolais
           let puyfolais: Puyfolais = {
@@ -116,31 +131,32 @@ export class PuyfolaisService {
           };
 
           if (firestoreData.dateNaissance) {
-            puyfolais.dateNaissance = firestoreData.dateNaissance.toDate()
+            puyfolais.dateNaissance = firestoreData.dateNaissance.toDate();
           }
 
-          if (firestoreData.email) {
-            puyfolais.email = firestoreData.email
+          if (firestoreData.email && firestoreData.email.includes(filtre)) {
+            puyfolais.email = firestoreData.email;
           }
 
-          if (firestoreData.numeroTelephone) {
-            puyfolais.numeroTelephone = firestoreData.numeroTelephone
+          if (firestoreData.numeroTelephone && firestoreData.numeroTelephone.includes(filtre)) {
+            puyfolais.numeroTelephone = firestoreData.numeroTelephone;
           }
 
-          if (firestoreData.adresse) {
-            puyfolais.adresse = firestoreData.adresse
+          if (firestoreData.adresse && firestoreData.adresse.includes(filtre)) {
+            puyfolais.adresse = firestoreData.adresse;
           }
 
-          if (firestoreData.cp) {
-            puyfolais.cp = firestoreData.cp
+          if (firestoreData.cp && firestoreData.cp.includes(filtre)) {
+            puyfolais.cp = firestoreData.cp;
           }
 
-          if (firestoreData.ville) {
-            puyfolais.ville = firestoreData.ville
+          if (firestoreData.ville && firestoreData.ville.includes(filtre)) {
+            puyfolais.ville = firestoreData.ville;
           }
-          return puyfolais;
+
+          puyfolaisList.push(puyfolais);
         });
-      })
-    );
+        return puyfolaisList;
+      }));
   }
 }

@@ -34,13 +34,24 @@ export class AddPuyfolaisComponent implements OnInit {
       email: ['', [Validators.email]],
       adresse: ['', []],
       cp: ['', []],
-      ville: ['', []]
+      ville: ['', []],
+      searchAdresse: ['', []]
     });
 
+     // Abonnez-vous aux changements de valeur du champ de recherche avec debounceTime
+     this.addPuyfolaisForm.get('searchAdresse')?.valueChanges
+     .pipe(
+       debounceTime(300), // Attendre 300 millisecondes après la dernière frappe
+       distinctUntilChanged() // Ne déclencher que si la valeur a changé
+     )
+     .subscribe(value => {
+       this.rechercherAdresses(value);
+     });
+     
   }
 
   annulerCreationPuyfolais() {
-    throw new Error('Method not implemented.');
+    this.router.navigate(['/admin/puyfolais']);
   }
 
   validerCreationPuyfolais() {
@@ -57,20 +68,20 @@ export class AddPuyfolaisComponent implements OnInit {
     this.addPuyfolaisForm.patchValue({
       adresse: address.name,
       cp: address.postcode,
-      ville: address.city
+      ville: address.city,
+      searchAdresse: address.label
     });
     this.resultatsRechercheAdresse = []; // Réinitialise la liste des résultats après la sélection
   }
 
-  rechercherAdresses(event: Event) {
-    const query = (event.target as HTMLInputElement).value;
-    if (query.trim() !== '') {
+  rechercherAdresses(query: string) {
+    // Vérifie que query est une chaîne de caractères
+    if (typeof query === 'string' && query.trim() !== '') {
       this.dataGouvService.searchAddress(query).subscribe(results => {
         this.resultatsRechercheAdresse = results;
       });
     } else {
-      this.resultatsRechercheAdresse = []; // Réinitialise la liste des résultats si la requête est vide
+      this.resultatsRechercheAdresse = []; // Réinitialise la liste des résultats si la requête est vide ou non valide
     }
   }
-
 }

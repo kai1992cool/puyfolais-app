@@ -66,20 +66,14 @@
     </div>
     <div class="bloc-adresse">
 
-
       <mat-form-field class="full-width">
-        <input matInput placeholder="{{ 'admin.puyfolais.ajouter.rechercheAdresse' | translate }}"
-          formControlName="searchAdresse" (input)="rechercherAdresses($event)">
-      </mat-form-field>
-
-      <div *ngIf="resultatsRechercheAdresse.length > 0">
-        <p>Résultats de la recherche :</p>
-        <ul>
-          <li *ngFor="let result of resultatsRechercheAdresse" (click)="selectionnerAdresse(result)">
+        <input matInput placeholder="{{ 'admin.puyfolais.ajouter.rechercheAdresse' | translate }}" formControlName="searchAdresse" [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectionnerAdresse($event.option.value)">
+          <mat-option *ngFor="let result of resultatsRechercheAdresse" [value]="result">
             {{ result.label }}
-          </li>
-        </ul>
-      </div>
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
 
       <mat-form-field class="full-width">
         <input matInput placeholder="{{ 'admin.puyfolais.ajouter.champAdresse' | translate }}"
@@ -107,6 +101,9 @@
 
       <mat-form-field class="full-width">
         <input matInput placeholder="{{ 'admin.puyfolais.ajouter.champEmail' | translate }}" formControlName="email">
+        <mat-error *ngIf="addPuyfolaisForm.get('email')?.invalid && addPuyfolaisForm.get('email')?.touched">
+          {{ "admin.puyfolais.ajouter.champEmailIncorrect" | translate }}
+        </mat-error>
       </mat-form-field>
 
     </div>

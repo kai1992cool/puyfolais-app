@@ -36,7 +36,7 @@ export class FakeService {
   }
 
   async generateRecords(): Promise<void> {
-    for (let i = 0; i < 995; i++) {
+    for (let i = 0; i < 11; i++) {
       await this.addRecordToFirestore();
       console.log(`Enregistrement ${i + 1} ajouté.`);
     }
