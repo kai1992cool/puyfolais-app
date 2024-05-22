@@ -24,17 +24,20 @@ import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatSelectModule } from '@angular/material/select'
 import { SeanceCardComponent } from './component/seance-card/seance-card.component';
-import { LocalizeDatePipe } from './pipe/localize-date.pipe';
 import { StructureDialogComponent } from './dialog/structure-dialog/structure-dialog.component';
 import { StructureCardComponent } from './component/structure-card/structure-card.component';
 import {MatListModule} from '@angular/material/list';
 import { GroupeDialogComponent } from './dialog/groupe-dialog/groupe-dialog.component';
 import { AdminPuyfolaisComponent } from './admin-puyfolais/admin-puyfolais.component';
 import { AddPuyfolaisComponent } from './puyfolais/add-puyfolais/add-puyfolais.component';
-
+import { ReactiveFormsModule } from '@angular/forms';
+import { PuyfolaisCardComponent } from './component/puyfolais-card/puyfolais-card.component';  
+import { FilterPipe } from './pipe/filter.pipe';
+import { LocalizeDatePipe } from './pipe/localize-date.pipe';
 
 @NgModule({
-  declarations: [AdminUtilisateursComponent, AdminAccueilComponent, AdminComponent, AdminStructuresComponent, AdminSaisonsComponent, SaisonCardComponent, SeanceCardComponent, LocalizeDatePipe, StructureDialogComponent, StructureCardComponent, GroupeDialogComponent, AdminPuyfolaisComponent, AddPuyfolaisComponent],  
+  declarations: [AdminUtilisateursComponent, AdminAccueilComponent, AdminComponent, AdminStructuresComponent, AdminSaisonsComponent, SaisonCardComponent, SeanceCardComponent,  StructureDialogComponent, StructureCardComponent, GroupeDialogComponent, AdminPuyfolaisComponent, AddPuyfolaisComponent, PuyfolaisCardComponent,FilterPipe,
+    LocalizeDatePipe],  
   imports: [
     CommonModule,
     AdministrationRoutingModule,
@@ -51,6 +54,7 @@ import { AddPuyfolaisComponent } from './puyfolais/add-puyfolais/add-puyfolais.c
     MatSlideToggle,
     MatListModule,
     FormsModule,
+    ReactiveFormsModule,
     TranslateModule.forChild({
       loader: {
         provide: TranslateLoader,

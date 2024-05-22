@@ -2,11 +2,26 @@
 
 <p id="text-page">{{ "admin.puyfolais.introduction" | translate: { } }}</p>
 
-<button mat-fab  routerLink="/admin">
+<button mat-fab routerLink="/admin">
   <mat-icon>arrow_back</mat-icon>
 </button>
 
+<div>
+  <mat-form-field class="full-width">
+    <input type="search" matInput [(ngModel)]="filtreRecherche" placeholder="{{ 'commun.rechercher' | translate }}">
+    <button mat-button matSuffix>
+      <mat-icon>search</mat-icon>
+    </button>
+  </mat-form-field>
+</div>
+
+<div *ngFor="let puyfolais of listePuyfolais | filter: filtreRecherche">
+  <div class="structure-container">
+    <app-puyfolais-card [puyfolais]="puyfolais">
+    </app-puyfolais-card>
+  </div>
+</div>
 
 <button mat-fab class="add-button" routerLink="/admin/puyfolais/add">
-    <mat-icon>add</mat-icon>
-  </button>
+  <mat-icon>add</mat-icon>
+</button>

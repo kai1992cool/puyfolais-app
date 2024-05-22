@@ -55,7 +55,8 @@ export function createTranslateLoader(http: HttpClient) {
     SignupComponent,
     ConfirmationDialogComponent,
     SaisonDialogComponent,
-    ValidationDialogComponent],
+    ValidationDialogComponent
+  ],
   imports: [
     AngularFireAuthModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),

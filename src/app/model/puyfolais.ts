@@ -1,23 +1,24 @@
-import { Foyer } from "./foyer";
-
 export class Puyfolais {
+    uid: string;
     nom: string;
     prenom: string;
     genre: string;
-    numero?: string;
+    numero: number;
     dateNaissance?: Date;
     numeroTelephone?: string;
     email?: string;
 
     constructor(
+        uid: string,
         nom: string,
         prenom: string,
         genre: string,
-        numero?: string,
+        numero: number,
         dateNaissance?: Date,
         numeroTelephone?: string,
         email?: string,
     ) {
+        this.uid = uid
         this.nom = nom
         this.prenom = prenom
         this.genre = genre
@@ -26,4 +27,6 @@ export class Puyfolais {
         this.numeroTelephone = numeroTelephone
         this.email = email
     }
+
+
 }

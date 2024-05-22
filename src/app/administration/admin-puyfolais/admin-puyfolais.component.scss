@@ -3,3 +3,10 @@
     bottom: 20px;
     right: 20px;
   }
+
+  .full-width {
+    width: calc(100% - 32px);
+    /* Réduit la largeur des éléments à l'intérieur de la carte */
+    margin: 0 auto;
+    /* Centre les éléments horizontalement */
+}

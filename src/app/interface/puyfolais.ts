@@ -1,10 +1,11 @@
 import { Timestamp } from "firebase/firestore";
 
 export interface IPuyfolais {
-    numero: string;
+    numero: number;
     nom: string;
     prenom: string;
-    dateNaissance: Timestamp;
-    numeroTelephone: string;
-    email: string;
+    genre: string;
+    dateNaissance?: Timestamp;
+    numeroTelephone?: string;
+    email?: string;
 }

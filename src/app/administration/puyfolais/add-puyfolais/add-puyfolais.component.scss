@@ -1,0 +1,16 @@
+.full-width {
+    width: calc(100% - 32px);
+    /* Réduit la largeur des éléments à l'intérieur de la carte */
+    margin: 0 auto;
+    /* Centre les éléments horizontalement */
+}
+
+.flex-container {
+    display: flex;
+    /* Utiliser Flexbox */
+}
+
+.flex-container>* {
+    flex: 1;
+    /* Chaque enfant occupera une part égale de l'espace disponible */
+}

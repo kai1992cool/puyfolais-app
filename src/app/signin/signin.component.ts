@@ -18,7 +18,11 @@ export class SigninComponent {
   form: FormGroup;
   errorMessage: string = ''; // Propriété pour stocker le message d'erreur
 
-  constructor(public dialogService: DialogService, public angularFireAuth: AngularFireAuth, private router: Router, private fb: FormBuilder, private translateService: TranslateService) {
+  constructor(
+    public dialogService: DialogService, 
+    public angularFireAuth: AngularFireAuth, 
+    private router: Router, private fb: FormBuilder, 
+    private translateService: TranslateService) {
     this.form = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]

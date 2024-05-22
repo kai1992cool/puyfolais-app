@@ -1,0 +1,34 @@
+<div class="puyfilais-details">
+    <mat-card>
+        <mat-card-content class="content-card-puyfolais-details">
+
+            <!-- Numéro -->
+            <div class="display-container-card-puyfolais-details">
+                <div class="label column-card">{{ puyfolais.numero }}</div>
+            </div>
+
+            <!-- Nom -->
+            <div class="display-container-card-puyfolais-details">
+                <div class="label column-card">{{ puyfolais.nom }}</div>
+            </div>
+
+            <!-- Prénom -->
+            <div class="display-container-card-puyfolais-details">
+                <div class="label column-card">{{ puyfolais.prenom }}</div>
+            </div>
+
+            <!-- Boutons d'édition / Suppression   -->
+            <div class="column-boutons column-card">
+
+                <!-- <button mat-icon-button (click)="editerPuyfolais(puyfolais)">
+            <mat-icon>edit</mat-icon>
+          </button> -->
+
+                <button mat-icon-button (click)="ouvrirConfirmationDialogPourSuppressionPuyfolais(puyfolais)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>

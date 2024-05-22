@@ -2,6 +2,83 @@
 
 <p id="text-page">{{ "admin.puyfolais.ajouter.introduction" | translate: { } }}</p>
 
-<button mat-fab  routerLink="/admin/puyfolais">
-    <mat-icon>arrow_back</mat-icon>
-  </button>
+<button mat-fab routerLink="/admin/puyfolais">
+  <mat-icon>arrow_back</mat-icon>
+</button>
+
+<form [formGroup]="addPuyfolaisForm" (ngSubmit)="validerCreationPuyfolais()">
+  <div class="flex-container">
+    <div class="bloc-identite">
+      <div class="bloc-numero">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="{{ 'admin.puyfolais.ajouter.champNumero' | translate }}" formControlName="numero"
+            required>
+          <mat-error *ngIf="addPuyfolaisForm.get('numero')?.invalid && addPuyfolaisForm.get('numero')?.touched">
+            <ng-container *ngIf="addPuyfolaisForm.get('numero')?.errors?.['required']">
+              {{ "admin.puyfolais.ajouter.champNumeroObligatoire" | translate }}
+            </ng-container>
+            <ng-container *ngIf="addPuyfolaisForm.get('numero')?.errors?.['notNumeric']">
+              {{ "admin.puyfolais.ajouter.champNumeroNumerique" | translate }}
+            </ng-container>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="bloc-nom-prenom">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="{{ 'admin.puyfolais.ajouter.champNom' | translate }}" formControlName="nom"
+            required>
+          <mat-error *ngIf="addPuyfolaisForm.get('nom')?.invalid && addPuyfolaisForm.get('nom')?.touched">
+            {{ "admin.puyfolais.ajouter.champNomObligatoire" | translate }}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <input matInput placeholder="{{ 'admin.puyfolais.ajouter.champPrenom' | translate }}" formControlName="prenom"
+            required>
+          <mat-error *ngIf="addPuyfolaisForm.get('prenom')?.invalid && addPuyfolaisForm.get('prenom')?.touched">
+            {{ "admin.puyfolais.ajouter.champPrenomObligatoire" | translate }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="bloc-genre">
+        <mat-form-field class="full-width mat-form-field">
+          <mat-select formControlName="genre" required placeholder="{{ 'commun.genre' | translate }}">
+            <mat-option value="M">{{ "commun.masculin" | translate }}</mat-option>
+            <mat-option value="F">{{ "commun.feminin" | translate }}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="addPuyfolaisForm.get('genre')?.invalid && addPuyfolaisForm.get('genre')?.touched">
+            {{ "admin.puyfolais.ajouter.champGenreObligatoire" | translate }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="bloc-naissance">
+        <mat-form-field class="full-width mat-form-field">
+          <input matInput [matDatepicker]="picker" placeholder="{{ 'admin.puyfolais.ajouter.champNaissance' | translate }}"
+            formControlName="dateNaissance" >
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error *ngIf="addPuyfolaisForm.get('dateNaissance')?.invalid && addPuyfolaisForm.get('dateNaissance')?.touched">
+            {{ "admin.puyfolais.ajouter.champDateNaissanceObligatoire" | translate }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+    </div>
+    <div class="bloc-adresse">
+TEST
+    </div>
+  </div>
+  <div class="button-container">
+    <button mat-raised-button color="primary" type="submit" [disabled]="addPuyfolaisForm.invalid">
+      {{ "commun.enregistrer" | translate }}
+    </button>
+
+    <button mat-button color="warn" type="button" (click)="annulerCreationPuyfolais()">
+      {{ "commun.annuler" | translate }}
+    </button>
+  </div>
+
+</form>

@@ -2,6 +2,9 @@
   "commun": {
     "oui": "Oui",
     "non": "Non",
+    "genre": "Genre",
+    "masculin": "Masculin",
+    "feminin": "Féminin",
     "connecter": "Se connecter",
     "deconnecter": "Se déconnecter",
     "inscription": "S'enregistrer",
@@ -9,6 +12,7 @@
     "confirmation": "Confirmation",
     "validation": "Validation",
     "enregistrer": "Enregistrer",
+    "rechercher": "Rechercher",
     "annuler": "Annuler",
     "langue": "Langue",
     "jours": {
@@ -148,9 +152,20 @@
     "puyfolais": {
       "titre": "Administration Puyfolais",
       "introduction": "Ici vous pouvez gérer les puyfolais de l'association."   ,
+      "confirmationSuppressionPuyfolais": "Voulez-vous vraiment supprimer ce puyfolais ?",
       "ajouter": {
         "titre": "Ajouter un Puyfolais",
-        "introduction": "Remplissez ce formulaire pour créer un nouveau puyfolais."   
+        "introduction": "Remplissez ce formulaire pour créer un nouveau puyfolais.",   
+        "champNumero": "Numéro",
+        "champNom": "Nom",
+        "champPrenom": "Prénom",
+        "champGenre": "Genre",
+        "champNaissance": "Date de Naissance",
+        "champNumeroObligatoire": " Le numéro est requis",
+        "champNumeroNumerique": " Le numéro ne doit contenir que des chiffres",
+        "champNomObligatoire": " Le nom est requis",
+        "champPrenomObligatoire": " Le prénom est requis",
+        "champGenreObligatoire": " Le genre est requis"
       }
     } 
   }
