@@ -20,25 +20,37 @@ export class PuyfolaisService {
  * @param nom Le puyfolais
    * @returns L'identifiant technique du puyfolais
  */
-  creerPuyfolais(puyfolais: FormGroup): Promise<DocumentReference<IPuyfolais>> {
+  creerPuyfolais(formPuyfolais: FormGroup): Promise<DocumentReference<IPuyfolais>> {
 
     const ipuyfolais: IPuyfolais = {
-      numero: puyfolais.value.numero,
-      nom: puyfolais.value.nom,
-      prenom: puyfolais.value.prenom,
-      genre: puyfolais.value.genre
+      numero: formPuyfolais.value.numero,
+      nom: formPuyfolais.value.nom,
+      prenom: formPuyfolais.value.prenom,
+      genre: formPuyfolais.value.genre
     };
 
-    if (puyfolais.value.dateNaissance) {
-      ipuyfolais.dateNaissance = Timestamp.fromDate(puyfolais.value.dateNaissance);
+    if (formPuyfolais.value.dateNaissance) {
+      ipuyfolais.dateNaissance = Timestamp.fromDate(formPuyfolais.value.dateNaissance);
     }
 
-    if (puyfolais.value.numeroTelephone) {
-      ipuyfolais.numeroTelephone = puyfolais.value.numeroTelephone;
+    if (formPuyfolais.value.numeroTelephone) {
+      ipuyfolais.numeroTelephone = formPuyfolais.value.tel;
     }
 
-    if (puyfolais.value.email) {
-      ipuyfolais.email = puyfolais.value.email;
+    if (formPuyfolais.value.email) {
+      ipuyfolais.email = formPuyfolais.value.email;
+    }
+
+    if (formPuyfolais.value.adresse) {
+      ipuyfolais.adresse = formPuyfolais.value.adresse;
+    }
+
+    if (formPuyfolais.value.cp) {
+      ipuyfolais.cp = formPuyfolais.value.cp;
+    }
+
+    if (formPuyfolais.value.ville) {
+      ipuyfolais.ville = formPuyfolais.value.ville;
     }
 
     return this.collection.add(ipuyfolais);
@@ -113,6 +125,18 @@ export class PuyfolaisService {
 
           if (firestoreData.numeroTelephone) {
             puyfolais.numeroTelephone = firestoreData.numeroTelephone
+          }
+
+          if (firestoreData.adresse) {
+            puyfolais.adresse = firestoreData.adresse
+          }
+
+          if (firestoreData.cp) {
+            puyfolais.cp = firestoreData.cp
+          }
+
+          if (firestoreData.ville) {
+            puyfolais.ville = firestoreData.ville
           }
           return puyfolais;
         });

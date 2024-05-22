@@ -8,4 +8,7 @@ export interface IPuyfolais {
     dateNaissance?: Timestamp;
     numeroTelephone?: string;
     email?: string;
+    adresse?: string;
+    cp?: string;
+    ville?: string;
 }

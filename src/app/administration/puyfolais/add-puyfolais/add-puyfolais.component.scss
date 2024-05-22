@@ -7,10 +7,20 @@
 
 .flex-container {
     display: flex;
-    /* Utiliser Flexbox */
-}
-
-.flex-container>* {
-    flex: 1;
-    /* Chaque enfant occupera une part égale de l'espace disponible */
-}
+  }
+  
+  .bloc-identite, .bloc-adresse {
+    width: 50%; /* Chaque bloc occupe 50% de la largeur */
+  }
+  
+  .cp-ville-container {
+    display: flex;
+  }
+  
+  .cp-input {
+    width: 40%; /* Champ CP occupe 40% */
+  }
+  
+  .ville-input {
+    width: 60%; /* Champ Ville occupe 60% */
+  }

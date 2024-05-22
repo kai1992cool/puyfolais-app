@@ -4,6 +4,10 @@
 <p id="text-page" *ngIf="!(authentificationFirebaseAngular.authState | async)">{{ "accueil.start" | translate: { } }}
 </p>
 
+<div>
+<button (click)="fakeService.generateRecords()">FAKE</button>
+</div>
+
 <div class="menu-button-container">
     <button *ngIf="utilisateurEstAdmin" mat-raised-button color="primary" routerLink="/admin" class="menu-button">
         <div class="menu-button-content">
@@ -12,3 +16,4 @@
     </div>
     </button>
 </div>
+

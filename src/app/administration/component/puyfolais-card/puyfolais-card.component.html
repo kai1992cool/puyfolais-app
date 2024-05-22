@@ -7,14 +7,19 @@
                 <div class="label column-card">{{ puyfolais.numero }}</div>
             </div>
 
-            <!-- Nom -->
+            <!-- Nom / Prenom / Genre-->
             <div class="display-container-card-puyfolais-details">
-                <div class="label column-card">{{ puyfolais.nom }}</div>
+                <div class="label column-card">{{ puyfolais.nom }} {{ puyfolais.prenom }} ({{ puyfolais.genre }})</div>
             </div>
 
-            <!-- Prénom -->
+            <!-- tel / Email -->
             <div class="display-container-card-puyfolais-details">
-                <div class="label column-card">{{ puyfolais.prenom }}</div>
+                <div class="label column-card">Email : {{ puyfolais.email }}  /Tel : {{ puyfolais.numeroTelephone }}</div>
+            </div>
+
+            <!-- Adresse -->
+            <div class="display-container-card-puyfolais-details">
+                <div class="label column-card">Adresse : {{ puyfolais.adresse }}  {{ puyfolais.cp }} {{ puyfolais.ville }}</div>
             </div>
 
             <!-- Boutons d'édition / Suppression   -->

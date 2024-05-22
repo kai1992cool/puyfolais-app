@@ -34,6 +34,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { PuyfolaisCardComponent } from './component/puyfolais-card/puyfolais-card.component';  
 import { FilterPipe } from './pipe/filter.pipe';
 import { LocalizeDatePipe } from './pipe/localize-date.pipe';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [AdminUtilisateursComponent, AdminAccueilComponent, AdminComponent, AdminStructuresComponent, AdminSaisonsComponent, SaisonCardComponent, SeanceCardComponent,  StructureDialogComponent, StructureCardComponent, GroupeDialogComponent, AdminPuyfolaisComponent, AddPuyfolaisComponent, PuyfolaisCardComponent,FilterPipe,
@@ -47,6 +48,7 @@ import { LocalizeDatePipe } from './pipe/localize-date.pipe';
     MatButtonModule,
     MatCardModule,
     MatChipsModule,
+    MatAutocompleteModule,
     MatDatepickerModule,
     MatTooltipModule,
     MatBadgeModule,

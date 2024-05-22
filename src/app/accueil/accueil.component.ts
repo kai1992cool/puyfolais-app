@@ -3,6 +3,7 @@ import { AngularFireAuth } from "@angular/fire/compat/auth";
 import { Observable } from 'rxjs';
 import { UtilisateurService } from './../service/utilisateur.service';
 import { Profil } from '../enum/profil';
+import { FakeService } from '../service/fake.service';
 
 
 @Component({
@@ -14,7 +15,8 @@ export class AccueilComponent implements OnInit {
 
   constructor(
     public authentificationFirebaseAngular: AngularFireAuth,
-    public utilisateurService: UtilisateurService
+    public utilisateurService: UtilisateurService,
+    public fakeService: FakeService
   ) {}
 
   userFirebase: firebase.default.User | null = null;
