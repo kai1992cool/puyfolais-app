@@ -1,5 +1,4 @@
 import { Timestamp } from "firebase/firestore";
-import { IFoyer } from "./foyer";
 
 export interface IPuyfolais {
     numero: string;
@@ -8,5 +7,4 @@ export interface IPuyfolais {
     dateNaissance: Timestamp;
     numeroTelephone: string;
     email: string;
-    foyer: IFoyer;
 }

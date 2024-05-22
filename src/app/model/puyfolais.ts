@@ -8,7 +8,6 @@ export class Puyfolais {
     dateNaissance?: Date;
     numeroTelephone?: string;
     email?: string;
-    foyer?: Foyer;
 
     constructor(
         nom: string,
@@ -18,7 +17,6 @@ export class Puyfolais {
         dateNaissance?: Date,
         numeroTelephone?: string,
         email?: string,
-        foyer?: Foyer
     ) {
         this.nom = nom
         this.prenom = prenom
@@ -27,6 +25,5 @@ export class Puyfolais {
         this.dateNaissance = dateNaissance
         this.numeroTelephone = numeroTelephone
         this.email = email
-        this.foyer = foyer
     }
 }

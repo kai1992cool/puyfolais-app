@@ -30,10 +30,11 @@ import { StructureCardComponent } from './component/structure-card/structure-car
 import {MatListModule} from '@angular/material/list';
 import { GroupeDialogComponent } from './dialog/groupe-dialog/groupe-dialog.component';
 import { AdminPuyfolaisComponent } from './admin-puyfolais/admin-puyfolais.component';
+import { AddPuyfolaisComponent } from './puyfolais/add-puyfolais/add-puyfolais.component';
 
 
 @NgModule({
-  declarations: [AdminUtilisateursComponent, AdminAccueilComponent, AdminComponent, AdminStructuresComponent, AdminSaisonsComponent, SaisonCardComponent, SeanceCardComponent, LocalizeDatePipe, StructureDialogComponent, StructureCardComponent, GroupeDialogComponent, AdminPuyfolaisComponent],  
+  declarations: [AdminUtilisateursComponent, AdminAccueilComponent, AdminComponent, AdminStructuresComponent, AdminSaisonsComponent, SaisonCardComponent, SeanceCardComponent, LocalizeDatePipe, StructureDialogComponent, StructureCardComponent, GroupeDialogComponent, AdminPuyfolaisComponent, AddPuyfolaisComponent],  
   imports: [
     CommonModule,
     AdministrationRoutingModule,

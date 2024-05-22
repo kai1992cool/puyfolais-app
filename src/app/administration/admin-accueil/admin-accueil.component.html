@@ -2,6 +2,10 @@
 
 <p id="text-page">{{ "admin.introduction" | translate: { } }}</p>
 
+<button mat-fab  routerLink="/">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+
 <div class="menu-button-container">
     <button  mat-raised-button color="primary" routerLink="/admin/param"  class="menu-button" [disabled]="true">
         <div class="menu-button-content">

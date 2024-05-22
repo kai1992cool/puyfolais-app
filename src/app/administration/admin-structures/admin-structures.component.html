@@ -2,13 +2,16 @@
 
 <p id="text-page">{{ "admin.structures.introduction" | translate: { } }}</p>
 
+<button mat-fab  routerLink="/admin">
+  <mat-icon>arrow_back</mat-icon>
+</button>
+
 <div *ngFor="let structure of listeToutesStructure">
   <div class="structure-container">
     <app-structure-card 
       [structure]="structure">
     </app-structure-card>
   </div>
-
 </div>
 
 <button mat-fab class="add-button" (click)="ouvrirModalAjoutStructure()">

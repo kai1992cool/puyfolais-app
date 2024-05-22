@@ -2,6 +2,10 @@
 
 <p id="text-page">{{ "admin.saisons.introduction" | translate: { } }}</p>
 
+<button mat-fab  routerLink="/admin">
+  <mat-icon>arrow_back</mat-icon>
+</button>
+
 <div *ngFor="let saison of listeToutesSaisons">
   <div class="saisons-container">
     <app-saison-card 

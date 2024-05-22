@@ -147,7 +147,11 @@
     },
     "puyfolais": {
       "titre": "Administration Puyfolais",
-      "introduction": "Ici vous pouvez gérer les puyfolais de l'association."   
+      "introduction": "Ici vous pouvez gérer les puyfolais de l'association."   ,
+      "ajouter": {
+        "titre": "Ajouter un Puyfolais",
+        "introduction": "Remplissez ce formulaire pour créer un nouveau puyfolais."   
+      }
     } 
   }
 }
