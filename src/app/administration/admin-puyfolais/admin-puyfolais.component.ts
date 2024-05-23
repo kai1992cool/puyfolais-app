@@ -34,11 +34,12 @@ export class AdminPuyfolaisComponent implements AfterViewInit  {
     }
 
     // Récupérer le texte de l'input de recherche
-    const searchText = this.searchInput.nativeElement.value;
+    const searchText = this.searchInput.nativeElement.value.toLowerCase();
 
     // Souscrire à un nouvel observable avec le texte de recherche
     this.puyfolaisSubscription = this.puyfolaisService.recupererPuyfolais(searchText).subscribe(puyfolais => {
-      this.listePuyfolais = puyfolais.sort((a, b) => a.nom!.localeCompare(b.nom!));
+      // this.listePuyfolais = puyfolais.sort((a, b) => a.nom!.localeCompare(b.nom!));
+      this.listePuyfolais = puyfolais;
     });
   }
 }

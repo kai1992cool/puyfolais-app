@@ -45,4 +45,19 @@ export class PuyfolaisCardComponent {
     })
   }
 
+  transformLettreMaj(nom: string | undefined): string {
+    if (nom) {
+      return nom.toUpperCase();
+    } else {
+      return ''
+    }
+  }
+
+  transformPremiereLettreMaj(prenom: string | undefined): string {
+    if (prenom) {
+      return prenom.charAt(0).toUpperCase() + prenom.slice(1).toLowerCase();
+    } else {
+      return ''
+    }
+  }
 }

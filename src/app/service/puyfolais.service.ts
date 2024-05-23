@@ -24,8 +24,8 @@ export class PuyfolaisService {
 
     const ipuyfolais: IPuyfolais = {
       numero: formPuyfolais.value.numero,
-      nom: formPuyfolais.value.nom,
-      prenom: formPuyfolais.value.prenom,
+      nom: formPuyfolais.value.nom.toLowerCase(),
+      prenom: formPuyfolais.value.prenom.toLowerCase(),
       genre: formPuyfolais.value.genre
     };
 
@@ -38,11 +38,11 @@ export class PuyfolaisService {
     }
 
     if (formPuyfolais.value.email) {
-      ipuyfolais.email = formPuyfolais.value.email;
+      ipuyfolais.email = formPuyfolais.value.email.toLowerCase();
     }
 
     if (formPuyfolais.value.adresse) {
-      ipuyfolais.adresse = formPuyfolais.value.adresse;
+      ipuyfolais.adresse = formPuyfolais.value.adresse.toLowerCase();
     }
 
     if (formPuyfolais.value.cp) {
@@ -50,7 +50,7 @@ export class PuyfolaisService {
     }
 
     if (formPuyfolais.value.ville) {
-      ipuyfolais.ville = formPuyfolais.value.ville;
+      ipuyfolais.ville = formPuyfolais.value.ville.toLowerCase();
     }
 
     return this.collection.add(ipuyfolais);
@@ -79,17 +79,38 @@ export class PuyfolaisService {
       dateNaissance = undefined;
     };
 
-    const igroupe: IPuyfolais = {
+    const ipuyfolais: IPuyfolais = {
       numero: puyfolais.numero,
-      nom: puyfolais.nom,
-      prenom: puyfolais.prenom,
+      nom: puyfolais.nom.toLowerCase(),
+      prenom: puyfolais.prenom.toLowerCase(),
       genre: puyfolais.genre,
-      dateNaissance: dateNaissance,
-      numeroTelephone: puyfolais.numeroTelephone,
-      email: puyfolais.email
     };
 
-    return this.collection.doc(puyfolais.uid).update(igroupe).catch(error => {
+    if (puyfolais.dateNaissance) {
+      ipuyfolais.dateNaissance = Timestamp.fromDate(puyfolais.dateNaissance);
+    }
+
+    if (puyfolais.numeroTelephone) {
+      ipuyfolais.numeroTelephone = puyfolais.numeroTelephone;
+    }
+
+    if (puyfolais.email) {
+      ipuyfolais.email = puyfolais.email.toLowerCase();
+    }
+
+    if (puyfolais.adresse) {
+      ipuyfolais.adresse = puyfolais.adresse.toLowerCase();
+    }
+
+    if (puyfolais.cp) {
+      ipuyfolais.cp = puyfolais.cp;
+    }
+
+    if (puyfolais.ville) {
+      ipuyfolais.ville = puyfolais.ville.toLowerCase();
+    }
+
+    return this.collection.doc(puyfolais.uid).update(ipuyfolais).catch(error => {
       // Gérer les erreurs
       console.error("Erreur lors de la mise à jour du puyfolais :", error);
     });
@@ -102,11 +123,11 @@ export class PuyfolaisService {
   recupererPuyfolais(filtre: string): Observable<Puyfolais[]> {
     return from(this.collection.ref.where('nom', '>=', filtre)
       .where('nom', '<=', filtre + '\uf8ff')
-      .where('prenom', '>=', filtre)
-      .where('prenom', '<=', filtre + '\uf8ff')
-      .where('email', '>=', filtre)
-      .where('email', '<=', filtre + '\uf8ff')
-      .where('numero', '==', parseInt(filtre))
+      // .where('prenom', '>=', filtre)
+      // .where('prenom', '<=', filtre + '\uf8ff')
+      // .where('email', '>=', filtre)
+      // .where('email', '<=', filtre + '\uf8ff')
+      // .where('numero', '==', parseInt(filtre))
       // .where('adresse', '>=', filtre)
       // .where('adresse', '<=', filtre + '\uf8ff')
       // .where('ville', '>=', filtre)
@@ -134,23 +155,23 @@ export class PuyfolaisService {
             puyfolais.dateNaissance = firestoreData.dateNaissance.toDate();
           }
 
-          if (firestoreData.email && firestoreData.email.includes(filtre)) {
+          if (firestoreData.email) {
             puyfolais.email = firestoreData.email;
           }
 
-          if (firestoreData.numeroTelephone && firestoreData.numeroTelephone.includes(filtre)) {
+          if (firestoreData.numeroTelephone) {
             puyfolais.numeroTelephone = firestoreData.numeroTelephone;
           }
 
-          if (firestoreData.adresse && firestoreData.adresse.includes(filtre)) {
+          if (firestoreData.adresse) {
             puyfolais.adresse = firestoreData.adresse;
           }
 
-          if (firestoreData.cp && firestoreData.cp.includes(filtre)) {
+          if (firestoreData.cp) {
             puyfolais.cp = firestoreData.cp;
           }
 
-          if (firestoreData.ville && firestoreData.ville.includes(filtre)) {
+          if (firestoreData.ville) {
             puyfolais.ville = firestoreData.ville;
           }
 
