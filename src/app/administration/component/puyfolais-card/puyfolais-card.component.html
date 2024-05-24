@@ -9,25 +9,28 @@
 
             <!-- Nom / Prenom / Genre-->
             <div class="display-container-card-puyfolais-details">
-                <div class="label column-card">{{ transformLettreMaj(puyfolais.nom) }} {{ transformPremiereLettreMaj(puyfolais.prenom) }} ({{ puyfolais.genre }})</div>
+                <div class="label column-card">{{ transformLettreMaj(puyfolais.nom) }} {{
+                    transformPremiereLettreMaj(puyfolais.prenom) }} ({{ puyfolais.genre }})</div>
             </div>
 
             <!-- tel / Email -->
             <div class="display-container-card-puyfolais-details">
-                <div class="label column-card">Email : {{ puyfolais.email }}  /Tel : {{ puyfolais.numeroTelephone }}</div>
+                <div class="label column-card">Email : {{ puyfolais.email }} /Tel : {{ puyfolais.numeroTelephone }}
+                </div>
             </div>
 
             <!-- Adresse -->
             <div class="display-container-card-puyfolais-details">
-                <div class="label column-card">Adresse : {{ transformPremiereLettreMaj(puyfolais.adresse) }}  {{ puyfolais.cp }} {{ transformLettreMaj(puyfolais.ville) }}</div>
+                <div class="label column-card">Adresse : {{ transformPremiereLettreMaj(puyfolais.adresse) }} {{
+                    puyfolais.cp }} {{ transformLettreMaj(puyfolais.ville) }}</div>
             </div>
 
             <!-- Boutons d'édition / Suppression   -->
             <div class="column-boutons column-card">
 
-                <!-- <button mat-icon-button (click)="editerPuyfolais(puyfolais)">
-            <mat-icon>edit</mat-icon>
-          </button> -->
+                <button mat-icon-button (click)="editerPuyfolais(puyfolais)">
+                    <mat-icon>edit</mat-icon>
+                </button>
 
                 <button mat-icon-button (click)="ouvrirConfirmationDialogPourSuppressionPuyfolais(puyfolais)">
                     <mat-icon>delete</mat-icon>

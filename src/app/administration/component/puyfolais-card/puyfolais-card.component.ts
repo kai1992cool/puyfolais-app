@@ -45,6 +45,10 @@ export class PuyfolaisCardComponent {
     })
   }
 
+  editerPuyfolais(arg0: Puyfolais) {
+    
+  }
+
   transformLettreMaj(nom: string | undefined): string {
     if (nom) {
       return nom.toUpperCase();
