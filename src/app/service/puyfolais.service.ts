@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, DocumentReference } from '@angular/fire/compat/firestore';
 import { IPuyfolais } from '../interface/puyfolais';
 import { Puyfolais } from '../model/puyfolais';
-import { Timestamp } from 'firebase/firestore';
+import { Timestamp, getFirestore, or, query, where, collection, getDocs, limit, and } from 'firebase/firestore';
 import { FormGroup } from '@angular/forms';
 import { Observable, from } from 'rxjs';
-
+import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
@@ -14,6 +14,7 @@ export class PuyfolaisService {
   constructor(private firestore: AngularFirestore) { }
 
   collection: AngularFirestoreCollection<IPuyfolais> = this.firestore.collection<IPuyfolais>('puyfolais')
+  puyfolaisRef = collection(getFirestore(), "puyfolais");
 
   /**
  * Créé une puyfolais dans Firestore
@@ -72,13 +73,6 @@ export class PuyfolaisService {
    */
   mettreAJourPuyfolais(puyfolais: Puyfolais): Promise<void> {
 
-    let dateNaissance: Timestamp | undefined;
-    if (puyfolais.dateNaissance) {
-      dateNaissance = Timestamp.fromDate(puyfolais.dateNaissance);
-    } else {
-      dateNaissance = undefined;
-    };
-
     const ipuyfolais: IPuyfolais = {
       numero: puyfolais.numero,
       nom: puyfolais.nom.toLowerCase(),
@@ -121,63 +115,17 @@ export class PuyfolaisService {
   * @returns un tableau contenant la liste des saisons
   */
   recupererPuyfolais(filtre: string): Observable<Puyfolais[]> {
-    return from(this.collection.ref.where('nom', '>=', filtre)
-      .where('nom', '<=', filtre + '\uf8ff')
-      // .where('prenom', '>=', filtre)
-      // .where('prenom', '<=', filtre + '\uf8ff')
-      // .where('email', '>=', filtre)
-      // .where('email', '<=', filtre + '\uf8ff')
-      // .where('numero', '==', parseInt(filtre))
-      // .where('adresse', '>=', filtre)
-      // .where('adresse', '<=', filtre + '\uf8ff')
-      // .where('ville', '>=', filtre)
-      // .where('ville', '<=', filtre + '\uf8ff')
-      // .where('cp', '>=', filtre)
-      // .where('cp', '<=', filtre + '\uf8ff')
-      .limit(10)
-      .get()
-      .then(snapshot => {
-        const puyfolaisList: Puyfolais[] = [];
-        snapshot.docs.forEach(doc => {
-          const firestoreData = doc.data() as IPuyfolais;
-          const uid = doc.id;
 
-          // Construction de l'objet Puyfolais
-          let puyfolais: Puyfolais = {
-            uid: uid,
-            numero: firestoreData.numero,
-            nom: firestoreData.nom,
-            prenom: firestoreData.prenom,
-            genre: firestoreData.genre
-          };
+    const q = query(this.puyfolaisRef, or(
+      and(where('nom', '>=', filtre), where('nom', '<=', filtre + '\uf8ff')),
+      and(where('prenom', '>=', filtre), where('prenom', '<=', filtre + '\uf8ff')),
+      and(where('email', '>=', filtre), where('email', '<=', filtre + '\uf8ff')),
+      and(where('numero', '==', parseInt(filtre)))
+    ), limit(50));
 
-          if (firestoreData.dateNaissance) {
-            puyfolais.dateNaissance = firestoreData.dateNaissance.toDate();
-          }
-
-          if (firestoreData.email) {
-            puyfolais.email = firestoreData.email;
-          }
-
-          if (firestoreData.numeroTelephone) {
-            puyfolais.numeroTelephone = firestoreData.numeroTelephone;
-          }
-
-          if (firestoreData.adresse) {
-            puyfolais.adresse = firestoreData.adresse;
-          }
-
-          if (firestoreData.cp) {
-            puyfolais.cp = firestoreData.cp;
-          }
-
-          if (firestoreData.ville) {
-            puyfolais.ville = firestoreData.ville;
-          }
-
-          puyfolaisList.push(puyfolais);
-        });
-        return puyfolaisList;
-      }));
+    return from(getDocs(q)).pipe(
+      map(snapshot => snapshot.docs.map(doc => doc.data() as Puyfolais))
+    );
   }
+
 }
