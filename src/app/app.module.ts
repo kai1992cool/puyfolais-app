@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { AngularFireAnalyticsModule, ScreenTrackingService, UserTrackingService } from '@angular/fire/compat/analytics';
 
@@ -46,55 +46,49 @@ export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    AccueilComponent,
-    GoogleSsoDirective,
-    SigninComponent,
-    SignupComponent,
-    ConfirmationDialogComponent,
-    SaisonDialogComponent,
-    ValidationDialogComponent
-  ],
-  imports: [
-    AngularFireAuthModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireAnalyticsModule,
-    BrowserModule,
-    AdministrationModule,
-    AppRoutingModule,
-    MatIconModule,
-    MatToolbarModule,
-    MatMenuModule,
-    MatCardModule,
-    MatInputModule,
-    MatDialogModule,
-    MatDividerModule,
-    ReactiveFormsModule,
-    MatButtonModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    HttpClientModule,
-    FormsModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: (createTranslateLoader),
-        deps: [HttpClient],
-      },
-      defaultLanguage: 'fr-FR',
-    }),
-  ],
-  providers: [
-    provideAnimationsAsync(), 
-    { provide: LOCALE_ID, useValue: 'fr-FR' }, 
-    { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' },
-    ScreenTrackingService,
-    UserTrackingService
-  ],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [
+        AppComponent,
+        AccueilComponent,
+        GoogleSsoDirective,
+        SigninComponent,
+        SignupComponent,
+        ConfirmationDialogComponent,
+        SaisonDialogComponent,
+        ValidationDialogComponent
+    ],
+    bootstrap: [AppComponent], imports: [AngularFireAuthModule,
+        AngularFireModule.initializeApp(environment.firebaseConfig),
+        AngularFireAnalyticsModule,
+        BrowserModule,
+        AdministrationModule,
+        AppRoutingModule,
+        MatIconModule,
+        MatToolbarModule,
+        MatMenuModule,
+        MatCardModule,
+        MatInputModule,
+        MatDialogModule,
+        MatDividerModule,
+        ReactiveFormsModule,
+        MatButtonModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        FormsModule,
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: (createTranslateLoader),
+                deps: [HttpClient],
+            },
+            defaultLanguage: 'fr-FR',
+        })], providers: [
+        provideAnimationsAsync(),
+        { provide: LOCALE_ID, useValue: 'fr-FR' },
+        { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' },
+        ScreenTrackingService,
+        UserTrackingService,
+        provideHttpClient(withInterceptorsFromDi())
+    ] })
 export class AppModule {
   
   constructor() {
