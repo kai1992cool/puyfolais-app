@@ -9,8 +9,7 @@
 
             <!-- Nom / Prenom / Genre-->
             <div class="display-container-card-puyfolais-details">
-                <div class="label column-card">{{ transformLettreMaj(puyfolais.nom) }} {{
-                    transformPremiereLettreMaj(puyfolais.prenom) }} ({{ puyfolais.genre }})</div>
+                <div class="label column-card">{{ puyfolais.nom }} {{ puyfolais.prenom }} ({{ puyfolais.genre }})</div>
             </div>
 
             <!-- tel / Email -->
@@ -21,8 +20,8 @@
 
             <!-- Adresse -->
             <div class="display-container-card-puyfolais-details">
-                <div class="label column-card">Adresse : {{ transformPremiereLettreMaj(puyfolais.adresse) }} {{
-                    puyfolais.cp }} {{ transformLettreMaj(puyfolais.ville) }}</div>
+                <div class="label column-card">Adresse : {{ puyfolais.adresse }} {{
+                    puyfolais.cp }} {{ puyfolais.ville }}</div>
             </div>
 
             <!-- Boutons d'édition / Suppression   -->

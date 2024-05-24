@@ -34,7 +34,7 @@ export class PuyfolaisService {
       ipuyfolais.dateNaissance = Timestamp.fromDate(formPuyfolais.value.dateNaissance);
     }
 
-    if (formPuyfolais.value.numeroTelephone) {
+    if (formPuyfolais.value.tel) {
       ipuyfolais.numeroTelephone = formPuyfolais.value.tel;
     }
 
@@ -71,40 +71,40 @@ export class PuyfolaisService {
    * @param groupe l'objet puyfolais à mettre à jour
    * @returns  Le promise résultant de la mise à jour
    */
-  mettreAJourPuyfolais(puyfolais: Puyfolais): Promise<void> {
+  mettreAJourPuyfolais(formPuyfolais: FormGroup, uid: string): Promise<void> {
 
     const ipuyfolais: IPuyfolais = {
-      numero: puyfolais.numero,
-      nom: puyfolais.nom.toLowerCase(),
-      prenom: puyfolais.prenom.toLowerCase(),
-      genre: puyfolais.genre,
+      numero: formPuyfolais.value.numero,
+      nom: formPuyfolais.value.nom.toLowerCase(),
+      prenom: formPuyfolais.value.prenom.toLowerCase(),
+      genre: formPuyfolais.value.genre,
     };
 
-    if (puyfolais.dateNaissance) {
-      ipuyfolais.dateNaissance = Timestamp.fromDate(puyfolais.dateNaissance);
+    if (formPuyfolais.value.dateNaissance) {
+      ipuyfolais.dateNaissance = Timestamp.fromDate(formPuyfolais.value.dateNaissance);
     }
 
-    if (puyfolais.numeroTelephone) {
-      ipuyfolais.numeroTelephone = puyfolais.numeroTelephone;
+    if (formPuyfolais.value.tel) {
+      ipuyfolais.numeroTelephone = formPuyfolais.value.tel;
     }
 
-    if (puyfolais.email) {
-      ipuyfolais.email = puyfolais.email.toLowerCase();
+    if (formPuyfolais.value.email) {
+      ipuyfolais.email = formPuyfolais.value.email.toLowerCase();
     }
 
-    if (puyfolais.adresse) {
-      ipuyfolais.adresse = puyfolais.adresse.toLowerCase();
+    if (formPuyfolais.value.adresse) {
+      ipuyfolais.adresse = formPuyfolais.value.adresse.toLowerCase();
     }
 
-    if (puyfolais.cp) {
-      ipuyfolais.cp = puyfolais.cp;
+    if (formPuyfolais.value.cp) {
+      ipuyfolais.cp = formPuyfolais.value.cp;
     }
 
-    if (puyfolais.ville) {
-      ipuyfolais.ville = puyfolais.ville.toLowerCase();
+    if (formPuyfolais.value.ville) {
+      ipuyfolais.ville = formPuyfolais.value.ville.toLowerCase();
     }
 
-    return this.collection.doc(puyfolais.uid).update(ipuyfolais).catch(error => {
+    return this.collection.doc(uid).update(ipuyfolais).catch(error => {
       // Gérer les erreurs
       console.error("Erreur lors de la mise à jour du puyfolais :", error);
     });
@@ -124,8 +124,37 @@ export class PuyfolaisService {
     ), limit(50));
 
     return from(getDocs(q)).pipe(
-      map(snapshot => snapshot.docs.map(doc => doc.data() as Puyfolais))
+      map(snapshot => snapshot.docs.map(doc => {
+        const data = doc.data();
+        const uid = doc.id;
+        // Conversion du champ dateNaissance de Timestamp à Date
+        if (data['dateNaissance'] instanceof Timestamp) {
+          data['dateNaissance'] = data['dateNaissance'].toDate();
+        }
+        data['nom'] = this.transformLettreMaj(data['nom'])
+        data['prenom'] = this.transformPremiereLettreMaj(data['prenom'])
+        data['ville'] = this.transformLettreMaj(data['ville'])
+        data['adresse'] = this.transformPremiereLettreMaj(data['adresse'])
+        data['uid'] = uid
+        return data as Puyfolais;
+      }))
     );
+  }
+
+  transformLettreMaj(nom: string | undefined): string {
+    if (nom) {
+      return nom.toUpperCase();
+    } else {
+      return ''
+    }
+  }
+
+  transformPremiereLettreMaj(prenom: string | undefined): string {
+    if (prenom) {
+      return prenom.charAt(0).toUpperCase() + prenom.slice(1).toLowerCase();
+    } else {
+      return ''
+    }
   }
 
 }

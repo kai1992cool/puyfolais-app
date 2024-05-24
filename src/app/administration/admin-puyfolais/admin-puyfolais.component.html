@@ -17,7 +17,7 @@
 
 <div *ngFor="let puyfolais of listePuyfolais">
   <div class="structure-container">
-    <app-puyfolais-card [puyfolais]="puyfolais">
+    <app-puyfolais-card [puyfolais]="puyfolais" (emitSupprimerPuyfolais)="mettreAJourListePuyfolais()">
     </app-puyfolais-card>
   </div>
 </div>
