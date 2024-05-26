@@ -156,7 +156,6 @@
       "ajouter": {
         "titre": "Ajouter un Puyfolais",
         "introduction": "Remplissez ce formulaire pour créer un nouveau puyfolais.", 
-        "rechercheAdresse": "Rechercher une Adresse",
         "champNumero": "Numéro",
         "champNom": "Nom",
         "champPrenom": "Prénom",

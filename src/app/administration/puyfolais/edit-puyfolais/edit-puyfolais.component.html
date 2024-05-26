@@ -10,7 +10,8 @@
   <div class="flex-container">
     <div class="bloc-identite">
       <div class="bloc-numero">
-        <mat-form-field class="full-width">
+        <mat-form-field  class="full-width">
+          <mat-hint>{{ 'admin.puyfolais.ajouter.champNumero' | translate }}</mat-hint>
           <input matInput placeholder="{{ 'admin.puyfolais.ajouter.champNumero' | translate }}" formControlName="numero"
             required>
           <mat-error *ngIf="addPuyfolaisForm.get('numero')?.invalid && addPuyfolaisForm.get('numero')?.touched">
@@ -25,7 +26,7 @@
       </div>
 
       <div class="bloc-nom-prenom">
-        <mat-form-field class="full-width">
+        <mat-form-field  class="full-width">
           <input matInput placeholder="{{ 'admin.puyfolais.ajouter.champNom' | translate }}" formControlName="nom"
             required>
           <mat-error *ngIf="addPuyfolaisForm.get('nom')?.invalid && addPuyfolaisForm.get('nom')?.touched">
@@ -33,7 +34,7 @@
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field class="full-width">
+        <mat-form-field  class="full-width">
           <input matInput placeholder="{{ 'admin.puyfolais.ajouter.champPrenom' | translate }}" formControlName="prenom"
             required>
           <mat-error *ngIf="addPuyfolaisForm.get('prenom')?.invalid && addPuyfolaisForm.get('prenom')?.touched">
@@ -43,7 +44,7 @@
       </div>
 
       <div class="bloc-genre">
-        <mat-form-field class="full-width mat-form-field">
+        <mat-form-field  class="full-width mat-form-field">
           <mat-select formControlName="genre" required placeholder="{{ 'commun.genre' | translate }}">
             <mat-option value="M">{{ "commun.masculin" | translate }}</mat-option>
             <mat-option value="F">{{ "commun.feminin" | translate }}</mat-option>
@@ -54,20 +55,19 @@
         </mat-form-field>
       </div>
 
-      <div class="bloc-naissance">
-        <mat-form-field class="full-width mat-form-field">
-          <input matInput [matDatepicker]="picker"
-            placeholder="{{ 'admin.puyfolais.ajouter.champNaissance' | translate }}" formControlName="dateNaissance">
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-      </div>
+      <mat-form-field class="full-width mat-form-field">
+        <input matInput [matDatepicker]="picker"
+               placeholder="{{ 'admin.puyfolais.ajouter.champNaissance' | translate }}"
+               formControlName="dateNaissance">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker useUtc="false"></mat-datepicker>
+      </mat-form-field>
 
     </div>
     <div class="bloc-adresse">
 
-      <mat-form-field class="full-width">
-        <input matInput placeholder="{{ 'admin.puyfolais.ajouter.rechercheAdresse' | translate }}" formControlName="adresse" [matAutocomplete]="auto" >
+      <mat-form-field  class="full-width">
+        <input matInput placeholder="{{ 'admin.puyfolais.ajouter.champAdresse' | translate }}" formControlName="adresse" [matAutocomplete]="auto" >
         <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectionnerAdresse($event.option.value)">
           <mat-option *ngFor="let result of resultatsRechercheAdresse" [value]="result">
             {{ result.label }}
@@ -75,14 +75,14 @@
         </mat-autocomplete>
       </mat-form-field>
 
-      <mat-form-field class="full-width">
-        <input matInput placeholder="{{ 'admin.puyfolais.ajouter.champTelephone' | translate }}" formControlName="tel">
-        <mat-error *ngIf="addPuyfolaisForm.get('tel')?.invalid && addPuyfolaisForm.get('tel')?.touched">
+      <mat-form-field  class="full-width">
+        <input matInput placeholder="{{ 'admin.puyfolais.ajouter.champTelephone' | translate }}" formControlName="numeroTelephone">
+        <mat-error *ngIf="addPuyfolaisForm.get('numeroTelephone')?.invalid && addPuyfolaisForm.get('numeroTelephone')?.touched">
           {{ "admin.puyfolais.ajouter.champTelephoneIncorrect" | translate }}
         </mat-error>
       </mat-form-field>
 
-      <mat-form-field class="full-width">
+      <mat-form-field  class="full-width">
         <input matInput placeholder="{{ 'admin.puyfolais.ajouter.champEmail' | translate }}" formControlName="email">
         <mat-error *ngIf="addPuyfolaisForm.get('email')?.invalid && addPuyfolaisForm.get('email')?.touched">
           {{ "admin.puyfolais.ajouter.champEmailIncorrect" | translate }}

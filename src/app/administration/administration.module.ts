@@ -29,7 +29,7 @@ import { StructureCardComponent } from './component/structure-card/structure-car
 import {MatListModule} from '@angular/material/list';
 import { GroupeDialogComponent } from './dialog/groupe-dialog/groupe-dialog.component';
 import { AdminPuyfolaisComponent } from './admin-puyfolais/admin-puyfolais.component';
-import { AddPuyfolaisComponent } from './puyfolais/add-puyfolais/add-puyfolais.component';
+import { EditPuyfolaisComponent } from './puyfolais/edit-puyfolais/edit-puyfolais.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PuyfolaisCardComponent } from './component/puyfolais-card/puyfolais-card.component';  
 import { FilterPipe } from './pipe/filter.pipe';
@@ -37,7 +37,21 @@ import { LocalizeDatePipe } from './pipe/localize-date.pipe';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @NgModule({
-  declarations: [AdminUtilisateursComponent, AdminAccueilComponent, AdminComponent, AdminStructuresComponent, AdminSaisonsComponent, SaisonCardComponent, SeanceCardComponent,  StructureDialogComponent, StructureCardComponent, GroupeDialogComponent, AdminPuyfolaisComponent, AddPuyfolaisComponent, PuyfolaisCardComponent,FilterPipe,
+  declarations: [
+    AdminUtilisateursComponent, 
+    AdminAccueilComponent, 
+    AdminComponent, 
+    AdminStructuresComponent, 
+    AdminSaisonsComponent, 
+    SaisonCardComponent, 
+    SeanceCardComponent,  
+    StructureDialogComponent, 
+    StructureCardComponent, 
+    GroupeDialogComponent, 
+    AdminPuyfolaisComponent, 
+    EditPuyfolaisComponent, 
+    PuyfolaisCardComponent,
+    FilterPipe,
     LocalizeDatePipe],  
   imports: [
     CommonModule,

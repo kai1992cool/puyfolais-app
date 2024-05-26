@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddPuyfolaisComponent } from './add-puyfolais.component';
+import { EditPuyfolaisComponent } from './edit-puyfolais.component';
 
 describe('AddPuyfolaisComponent', () => {
-  let component: AddPuyfolaisComponent;
-  let fixture: ComponentFixture<AddPuyfolaisComponent>;
+  let component: EditPuyfolaisComponent;
+  let fixture: ComponentFixture<EditPuyfolaisComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [AddPuyfolaisComponent]
+      declarations: [EditPuyfolaisComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(AddPuyfolaisComponent);
+    fixture = TestBed.createComponent(EditPuyfolaisComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

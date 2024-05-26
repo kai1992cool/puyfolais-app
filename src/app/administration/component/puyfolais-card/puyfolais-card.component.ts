@@ -52,7 +52,7 @@ export class PuyfolaisCardComponent {
   }
 
   editerPuyfolais(arg0: Puyfolais) {
-    this.router.navigateByUrl('/admin/puyfolais/add', {
+    this.router.navigateByUrl('/admin/puyfolais/edit', {
       state: { puyfolais: this.puyfolais }
     });
   }

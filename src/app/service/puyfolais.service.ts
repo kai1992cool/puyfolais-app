@@ -34,8 +34,8 @@ export class PuyfolaisService {
       ipuyfolais.dateNaissance = Timestamp.fromDate(formPuyfolais.value.dateNaissance);
     }
 
-    if (formPuyfolais.value.tel) {
-      ipuyfolais.numeroTelephone = formPuyfolais.value.tel;
+    if (formPuyfolais.value.numeroTelephone) {
+      ipuyfolais.numeroTelephone = formPuyfolais.value.numeroTelephone;
     }
 
     if (formPuyfolais.value.email) {
@@ -76,8 +76,8 @@ export class PuyfolaisService {
       ipuyfolais.dateNaissance = Timestamp.fromDate(formPuyfolais.value.dateNaissance);
     }
 
-    if (formPuyfolais.value.tel) {
-      ipuyfolais.numeroTelephone = formPuyfolais.value.tel;
+    if (formPuyfolais.value.numeroTelephone) {
+      ipuyfolais.numeroTelephone = formPuyfolais.value.numeroTelephone;
     }
 
     if (formPuyfolais.value.email) {

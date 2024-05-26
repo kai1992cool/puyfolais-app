@@ -42,63 +42,66 @@ import localeEs from '@angular/common/locales/es';
 import localeEn from '@angular/common/locales/en';
 import { ValidationDialogComponent } from './dialog/validation-dialog/validation-dialog.component';
 
+
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
-@NgModule({ declarations: [
-        AppComponent,
-        AccueilComponent,
-        GoogleSsoDirective,
-        SigninComponent,
-        SignupComponent,
-        ConfirmationDialogComponent,
-        SaisonDialogComponent,
-        ValidationDialogComponent
-    ],
-    bootstrap: [AppComponent], imports: [AngularFireAuthModule,
-        AngularFireModule.initializeApp(environment.firebaseConfig),
-        AngularFireAnalyticsModule,
-        BrowserModule,
-        AdministrationModule,
-        AppRoutingModule,
-        MatIconModule,
-        MatToolbarModule,
-        MatMenuModule,
-        MatCardModule,
-        MatInputModule,
-        MatDialogModule,
-        MatDividerModule,
-        ReactiveFormsModule,
-        MatButtonModule,
-        MatDatepickerModule,
-        MatNativeDateModule,
-        FormsModule,
-        TranslateModule.forRoot({
-            loader: {
-                provide: TranslateLoader,
-                useFactory: (createTranslateLoader),
-                deps: [HttpClient],
-            },
-            defaultLanguage: 'fr-FR',
-        })], providers: [
-        provideAnimationsAsync(),
-        { provide: LOCALE_ID, useValue: 'fr-FR' },
-        { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' },
-        ScreenTrackingService,
-        UserTrackingService,
-        provideHttpClient(withInterceptorsFromDi())
-    ] })
+@NgModule({
+  declarations: [
+    AppComponent,
+    AccueilComponent,
+    GoogleSsoDirective,
+    SigninComponent,
+    SignupComponent,
+    ConfirmationDialogComponent,
+    SaisonDialogComponent,
+    ValidationDialogComponent
+  ],
+  bootstrap: [AppComponent], imports: [AngularFireAuthModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAnalyticsModule,
+    BrowserModule,
+    AdministrationModule,
+    AppRoutingModule,
+    MatIconModule,
+    MatToolbarModule,
+    MatMenuModule,
+    MatCardModule,
+    MatInputModule,
+    MatDialogModule,
+    MatDividerModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    FormsModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (createTranslateLoader),
+        deps: [HttpClient],
+      },
+      defaultLanguage: 'fr-FR',
+    })], providers: [
+      provideAnimationsAsync(),
+      { provide: LOCALE_ID, useValue: 'fr-FR' },
+      { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' },
+      ScreenTrackingService,
+      UserTrackingService,
+      provideHttpClient(withInterceptorsFromDi())
+    ]
+})
 export class AppModule {
-  
+
   constructor() {
     registerLocaleData(localeFr); // Charger les données de la langue française
     registerLocaleData(localeEs); // Charger les données de la langue espagnol
     registerLocaleData(localeEn); // Charger les données de la langue anglais
 
-        // Initialiser Firebase App et Google Analytics
-        const app = initializeApp(environment.firebaseConfig);
-        const analytics = getAnalytics(app);
+    // Initialiser Firebase App et Google Analytics
+    const app = initializeApp(environment.firebaseConfig);
+    const analytics = getAnalytics(app);
   }
 
 }

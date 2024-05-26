@@ -8,7 +8,7 @@ import { AdminAccueilComponent } from './admin-accueil/admin-accueil.component';
 import { AdminStructuresComponent } from './admin-structures/admin-structures.component';
 import { AdminSaisonsComponent } from './admin-saisons/admin-saisons.component';
 import { AdminPuyfolaisComponent } from './admin-puyfolais/admin-puyfolais.component';
-import { AddPuyfolaisComponent } from './puyfolais/add-puyfolais/add-puyfolais.component';
+import { EditPuyfolaisComponent } from './puyfolais/edit-puyfolais/edit-puyfolais.component';
 
 const routes: Routes = [
   
@@ -34,8 +34,8 @@ const routes: Routes = [
     },
     
     {
-      path: 'puyfolais/add',
-      component: AddPuyfolaisComponent
+      path: 'puyfolais/edit',
+      component: EditPuyfolaisComponent
     }
 ];
 

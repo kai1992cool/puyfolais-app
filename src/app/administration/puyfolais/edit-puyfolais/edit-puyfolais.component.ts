@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { numericValidator } from '../../../app-validators';
 import { PuyfolaisService } from '../../../service/puyfolais.service';
@@ -9,11 +9,11 @@ import { Puyfolais } from '../../../model/puyfolais';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-add-puyfolais',
-  templateUrl: './add-puyfolais.component.html',
-  styleUrl: './add-puyfolais.component.scss'
+  selector: 'app-edit-puyfolais',
+  templateUrl: './edit-puyfolais.component.html',
+  styleUrl: './edit-puyfolais.component.scss'
 })
-export class AddPuyfolaisComponent implements OnInit {
+export class EditPuyfolaisComponent implements OnInit {
 
   addPuyfolaisForm!: FormGroup;
   resultatsRechercheAdresse: any[] = [];
@@ -24,7 +24,7 @@ export class AddPuyfolaisComponent implements OnInit {
     private puyfolaisService: PuyfolaisService,
     private router: Router,
     private dataGouvService: DataGouvService,
-    private traductionService: TranslateService
+    private traductionService: TranslateService,
   ) { 
     const navigation = this.router.getCurrentNavigation();
     if (navigation?.extras.state) {
@@ -39,7 +39,7 @@ export class AddPuyfolaisComponent implements OnInit {
       numero: [this.puyfolaisAEditer?.numero || '', [Validators.required, numericValidator()]],
       genre: [this.puyfolaisAEditer?.genre || '', [Validators.required]],
       dateNaissance: [this.puyfolaisAEditer?.dateNaissance || '', []],
-      tel: [this.puyfolaisAEditer?.numeroTelephone || '', [Validators.pattern(this.traductionService.instant('admin.puyfolais.ajouter.champTelephoneFormat'))]],
+      numeroTelephone: [this.puyfolaisAEditer?.numeroTelephone || '', [Validators.pattern(this.traductionService.instant('admin.puyfolais.ajouter.champTelephoneFormat'))]],
       email: [this.puyfolaisAEditer?.email || '', [Validators.email]],
       adresse: [this.puyfolaisAEditer?.adresse, []]
     });
