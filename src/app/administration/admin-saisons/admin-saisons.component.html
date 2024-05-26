@@ -1,10 +1,4 @@
-<div id="titre-page">{{ "admin.saisons.titre" | translate: { } }}</div>
-
-<p id="text-page">{{ "admin.saisons.introduction" | translate: { } }}</p>
-
-<button mat-fab  routerLink="/admin">
-  <mat-icon>arrow_back</mat-icon>
-</button>
+<app-titre-page [titre]="'admin.saisons.titre'" [introduction]="'admin.saisons.introduction'" [redirection]="'/admin'"></app-titre-page>
 
 <div *ngFor="let saison of listeToutesSaisons">
   <div class="saisons-container">

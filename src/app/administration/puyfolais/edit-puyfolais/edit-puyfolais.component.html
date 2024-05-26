@@ -1,10 +1,5 @@
-<div id="titre-page">{{ "admin.puyfolais.ajouter.titre" | translate: { } }}</div>
+<app-titre-page [titre]="'admin.puyfolais.ajouter.titre'" [introduction]="'admin.puyfolais.ajouter.introduction'"></app-titre-page>
 
-<p id="text-page">{{ "admin.puyfolais.ajouter.introduction" | translate: { } }}</p>
-
-<button mat-fab routerLink="/admin/puyfolais">
-  <mat-icon>arrow_back</mat-icon>
-</button>
 
 <form [formGroup]="addPuyfolaisForm" (ngSubmit)="validerCreationPuyfolais()">
   <div class="flex-container">

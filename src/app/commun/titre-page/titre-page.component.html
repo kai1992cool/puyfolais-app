@@ -1,0 +1,7 @@
+<div id="titre-page">{{ titre | translate: { } }}</div>
+
+<p id="accroche-page">{{ introduction | translate: { } }}</p>
+
+<button mat-fab *ngIf="redirection"  (click)="redirigerVers()">
+    <mat-icon>arrow_back</mat-icon>
+  </button>

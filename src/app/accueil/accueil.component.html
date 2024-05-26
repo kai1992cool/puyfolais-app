@@ -1,6 +1,5 @@
-<div id="titre-page">{{ "accueil.bienvenue" | translate: { } }}</div>
+<app-titre-page [titre]="'accueil.bienvenue'" [introduction]="'accueil.introduction'"></app-titre-page>
 
-<p id="text-page">{{ "accueil.introduction" | translate: { } }}</p>
 <p id="text-page" *ngIf="!(authentificationFirebaseAngular.authState | async)">{{ "accueil.start" | translate: { } }}
 </p>
 

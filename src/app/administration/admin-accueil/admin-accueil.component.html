@@ -1,10 +1,4 @@
-<div id="titre-page">{{ "admin.titre" | translate: { } }}</div>
-
-<p id="text-page">{{ "admin.introduction" | translate: { } }}</p>
-
-<button mat-fab  routerLink="/">
-    <mat-icon>arrow_back</mat-icon>
-  </button>
+<app-titre-page [titre]="'admin.titre'" [introduction]="'admin.introduction'" [redirection]="'/'"></app-titre-page>
 
 <div class="menu-button-container">
     <button  mat-raised-button color="primary" routerLink="/admin/param"  class="menu-button" [disabled]="true">

@@ -1,10 +1,4 @@
-<div id="titre-page">{{ "admin.structures.titre" | translate: { } }}</div>
-
-<p id="text-page">{{ "admin.structures.introduction" | translate: { } }}</p>
-
-<button mat-fab  routerLink="/admin">
-  <mat-icon>arrow_back</mat-icon>
-</button>
+<app-titre-page [titre]="'admin.structures.titre'" [introduction]="'admin.structures.introduction'" [redirection]="'/admin'"></app-titre-page>
 
 <div *ngFor="let structure of listeToutesStructure">
   <div class="structure-container">

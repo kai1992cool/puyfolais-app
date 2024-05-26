@@ -1,10 +1,5 @@
-<div id="titre-page">{{ "admin.puyfolais.titre" | translate: { } }}</div>
+<app-titre-page [titre]="'admin.puyfolais.titre'" [introduction]="'admin.puyfolais.introduction'" [redirection]="'/admin'"></app-titre-page>
 
-<p id="text-page">{{ "admin.puyfolais.introduction" | translate: { } }}</p>
-
-<button mat-fab routerLink="/admin">
-  <mat-icon>arrow_back</mat-icon>
-</button>
 
 <div>
   <mat-form-field class="full-width">
