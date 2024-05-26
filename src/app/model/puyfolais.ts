@@ -8,8 +8,6 @@ export class Puyfolais {
     numeroTelephone?: string;
     email?: string;
     adresse?: string;
-    cp?: string;
-    ville?: string;
 
     constructor(
         uid: string,
@@ -20,9 +18,7 @@ export class Puyfolais {
         dateNaissance?: Date,
         numeroTelephone?: string,
         email?: string,
-        adresse?: string,
-        cp?: string,
-        ville?: string
+        adresse?: string
     ) {
         this.uid = uid
         this.nom = nom
@@ -33,8 +29,6 @@ export class Puyfolais {
         this.numeroTelephone = numeroTelephone
         this.email = email
         this.adresse = adresse
-        this.cp = cp
-        this.ville = ville
     }
 
 

@@ -172,7 +172,9 @@
         "champNomObligatoire": " Le nom est requis",
         "champPrenomObligatoire": " Le prénom est requis",
         "champGenreObligatoire": " Le genre est requis",
-        "champEmailIncorrect": "Le format de l'adresse mail est invalide"
+        "champEmailIncorrect": "Le format de l'adresse mail est invalide",
+        "champTelephoneIncorrect": "Le format du numéro de téléphone doit correspondre au format français à 10 chiffres",
+        "champTelephoneFormat": "^0[1-7][0-9]{8}$"
       }
     } 
   }

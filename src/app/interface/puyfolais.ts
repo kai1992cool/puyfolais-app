@@ -9,6 +9,4 @@ export interface IPuyfolais {
     numeroTelephone?: string;
     email?: string;
     adresse?: string;
-    cp?: string;
-    ville?: string;
 }

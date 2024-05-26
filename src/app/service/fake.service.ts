@@ -22,9 +22,7 @@ export class FakeService {
       dateNaissance: Timestamp.fromDate(faker.date.birthdate()),
       numeroTelephone: faker.phone.number(),
       email: faker.internet.email().toLowerCase(),
-      adresse: faker.location.streetAddress().toLowerCase(),
-      cp: faker.location.zipCode(),
-      ville: faker.location.city().toLowerCase()
+      adresse: faker.location.streetAddress({ useFullAddress: true }) + " " +faker.location.zipCode() + " " + faker.location.city().toUpperCase()
     };
   }
 

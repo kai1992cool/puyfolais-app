@@ -43,15 +43,7 @@ export class PuyfolaisService {
     }
 
     if (formPuyfolais.value.adresse) {
-      ipuyfolais.adresse = formPuyfolais.value.adresse.toLowerCase();
-    }
-
-    if (formPuyfolais.value.cp) {
-      ipuyfolais.cp = formPuyfolais.value.cp;
-    }
-
-    if (formPuyfolais.value.ville) {
-      ipuyfolais.ville = formPuyfolais.value.ville.toLowerCase();
+      ipuyfolais.adresse = formPuyfolais.value.adresse;
     }
 
     return this.collection.add(ipuyfolais);
@@ -93,15 +85,7 @@ export class PuyfolaisService {
     }
 
     if (formPuyfolais.value.adresse) {
-      ipuyfolais.adresse = formPuyfolais.value.adresse.toLowerCase();
-    }
-
-    if (formPuyfolais.value.cp) {
-      ipuyfolais.cp = formPuyfolais.value.cp;
-    }
-
-    if (formPuyfolais.value.ville) {
-      ipuyfolais.ville = formPuyfolais.value.ville.toLowerCase();
+      ipuyfolais.adresse = formPuyfolais.value.adresse;
     }
 
     return this.collection.doc(uid).update(ipuyfolais).catch(error => {
@@ -133,7 +117,6 @@ export class PuyfolaisService {
         }
         data['nom'] = this.transformLettreMaj(data['nom'])
         data['prenom'] = this.transformPremiereLettreMaj(data['prenom'])
-        data['ville'] = this.transformLettreMaj(data['ville'])
         data['adresse'] = this.transformPremiereLettreMaj(data['adresse'])
         data['uid'] = uid
         return data as Puyfolais;

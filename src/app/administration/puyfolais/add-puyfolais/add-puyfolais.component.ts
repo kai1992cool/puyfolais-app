@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
 import { DataGouvService } from '../../../service/data-gouv.service';
 import { Puyfolais } from '../../../model/puyfolais';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-add-puyfolais',
@@ -22,7 +23,8 @@ export class AddPuyfolaisComponent implements OnInit {
     private fb: FormBuilder,
     private puyfolaisService: PuyfolaisService,
     private router: Router,
-    private dataGouvService: DataGouvService
+    private dataGouvService: DataGouvService,
+    private traductionService: TranslateService
   ) { 
     const navigation = this.router.getCurrentNavigation();
     if (navigation?.extras.state) {
@@ -37,16 +39,13 @@ export class AddPuyfolaisComponent implements OnInit {
       numero: [this.puyfolaisAEditer?.numero || '', [Validators.required, numericValidator()]],
       genre: [this.puyfolaisAEditer?.genre || '', [Validators.required]],
       dateNaissance: [this.puyfolaisAEditer?.dateNaissance || '', []],
-      tel: [this.puyfolaisAEditer?.numeroTelephone || '', []],
+      tel: [this.puyfolaisAEditer?.numeroTelephone || '', [Validators.pattern(this.traductionService.instant('admin.puyfolais.ajouter.champTelephoneFormat'))]],
       email: [this.puyfolaisAEditer?.email || '', [Validators.email]],
-      adresse: [this.puyfolaisAEditer?.adresse || '', []],
-      cp: [this.puyfolaisAEditer?.cp || '', []],
-      ville: [this.puyfolaisAEditer?.ville || '', []],
-      searchAdresse: ['', []]
+      adresse: [this.puyfolaisAEditer?.adresse, []]
     });
 
      // Abonnez-vous aux changements de valeur du champ de recherche avec debounceTime
-     this.addPuyfolaisForm.get('searchAdresse')?.valueChanges
+     this.addPuyfolaisForm.get('adresse')?.valueChanges
      .pipe(
        debounceTime(300), // Attendre 300 millisecondes après la dernière frappe
        distinctUntilChanged() // Ne déclencher que si la valeur a changé
@@ -80,10 +79,7 @@ export class AddPuyfolaisComponent implements OnInit {
   // Méthode appelée lorsque l'utilisateur sélectionne une suggestion
   selectionnerAdresse(address: any) {
     this.addPuyfolaisForm.patchValue({
-      adresse: address.name,
-      cp: address.postcode,
-      ville: address.city,
-      searchAdresse: address.label
+      adresse: address.label
     });
     this.resultatsRechercheAdresse = []; // Réinitialise la liste des résultats après la sélection
   }
