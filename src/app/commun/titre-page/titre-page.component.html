@@ -1,7 +1,14 @@
-<div id="titre-page">{{ titre | translate: { } }}</div>
+<div class="tpc-container-global">
+  <div class="tpc-container-navigation">
+    <button mat-button *ngIf="redirection" (click)="redirigerVers()">
+      <mat-icon>arrow_back</mat-icon> {{ "commun.retour" | translate: { } }}
+    </button>
+  </div>
 
-<p id="accroche-page">{{ introduction | translate: { } }}</p>
+  <div class="tpc-container-entete">
+    <div id="titre-page">{{ titre | translate: { } }}</div>
 
-<button mat-fab *ngIf="redirection"  (click)="redirigerVers()">
-    <mat-icon>arrow_back</mat-icon>
-  </button>
+    <p id="accroche-page">{{ introduction | translate: { } }}</p>
+
+  </div>
+</div>

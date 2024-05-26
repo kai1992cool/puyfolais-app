@@ -13,6 +13,7 @@
     "validation": "Validation",
     "enregistrer": "Enregistrer",
     "rechercher": "Rechercher",
+    "retour": "Retour",
     "annuler": "Annuler",
     "langue": "Langue",
     "jours": {
@@ -62,8 +63,8 @@
     }
   },
   "accueil": {
-    "bienvenue": "Bienvenue sur l'application Puyfolais !",
-    "introduction": "Cette application vous permettra de gérer votre activité de Puyfolais au sein de l'association.",
+    "bienvenue": "Application Puyfolaise",
+    "introduction": "Bienvenue dans cette application qui va vous permettre de gérer votre activité Puyfolaise.",
     "start": "Pour commencer, veuillez vous connecter en cliquant sur l'icône en haut à droite."
   },
   "sign": {

@@ -1,3 +1,20 @@
+.tpc-container-global {
+    display: flex;
+    position: relative;
+    /* Nécessaire pour positionner les éléments enfants absolument */
+}
+
+.tpc-container-navigation {
+    width: 10%; /* Occupe 10% de la largeur */
+    display: flex;
+    justify-content: center; /* Centre horizontalement */
+    align-items: center; /* Centre verticalement */
+}
+
+.tpc-container-entete {
+  width: 90%; /* Occupe 90% de la largeur */
+}
+
 #titre-page {
     font-family: Impact, Charcoal, sans-serif;
     font-size: 40px;
@@ -9,7 +26,7 @@
     font-style: normal;
     font-variant: small-caps;
     text-transform: none;
-    text-align: center;
+    // text-align: center;
     padding: 10px;
 }
 
@@ -24,5 +41,5 @@
     font-style: normal;
     font-variant: normal;
     text-transform: none;
-    text-align: center;
+    // text-align: center;
 }
