@@ -1,9 +1,9 @@
-import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { Component,   OnInit } from '@angular/core';
+import { FormBuilder, FormGroup,  Validators } from '@angular/forms';
 import { numericValidator } from '../../../app-validators';
 import { PuyfolaisService } from '../../../service/puyfolais.service';
 import { Router } from '@angular/router';
-import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
+import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { DataGouvService } from '../../../service/data-gouv.service';
 import { Puyfolais } from '../../../model/puyfolais';
 import { TranslateService } from '@ngx-translate/core';
