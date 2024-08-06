@@ -1,7 +1,6 @@
 <app-titre-page [titre]="'admin.puyfolais.titre'" [introduction]="'admin.puyfolais.introduction'" [redirection]="'/admin'"></app-titre-page>
 
-
-<div>
+<div class="search-container">
   <mat-form-field class="full-width">
     <input type="search" matInput #searchInput (input)="mettreAJourListePuyfolais()" placeholder="{{ 'commun.rechercher' | translate }}">
     <button mat-button matSuffix>
@@ -10,8 +9,8 @@
   </mat-form-field>
 </div>
 
-<div *ngFor="let puyfolais of listePuyfolais">
-  <div class="structure-container">
+<div class="cards-container">
+  <div *ngFor="let puyfolais of listePuyfolais" class="card-item">
     <app-puyfolais-card [puyfolais]="puyfolais" (emitSupprimerPuyfolais)="mettreAJourListePuyfolais()">
     </app-puyfolais-card>
   </div>

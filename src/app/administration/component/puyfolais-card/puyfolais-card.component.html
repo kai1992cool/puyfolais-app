@@ -1,42 +1,20 @@
-<div class="puyfilais-details">
-    <mat-card>
-        <mat-card-content class="content-card-puyfolais-details">
-
-            <!-- Numéro -->
-            <div class="display-container-card-puyfolais-details">
-                <div class="label column-card">{{ puyfolais.numero }}</div>
-            </div>
-
-            <!-- Nom / Prenom / Genre-->
-            <div class="display-container-card-puyfolais-details">
-                <div class="label column-card">{{ puyfolais.nom }} {{ puyfolais.prenom }} ({{ puyfolais.genre }})</div>
-            </div>
-
-            <!-- tel / Email -->
-            <div class="display-container-card-puyfolais-details">
-                <div class="label column-card">Email : {{ puyfolais.email }} /Tel : {{ puyfolais.numeroTelephone }}
-                </div>
-            </div>
-
-            <!-- Adresse -->
-            <div class="display-container-card-puyfolais-details">
-                <div class="label column-card">
-                    Adresse : {{ puyfolais.adresse }}
-                </div>
-            </div>
-
-            <!-- Boutons d'édition / Suppression   -->
-            <div class="column-boutons column-card">
-
-                <button mat-icon-button (click)="editerPuyfolais(puyfolais)">
-                    <mat-icon>edit</mat-icon>
-                </button>
-
-                <button mat-icon-button (click)="ouvrirConfirmationDialogPourSuppressionPuyfolais(puyfolais)">
-                    <mat-icon>delete</mat-icon>
-                </button>
-
-            </div>
-        </mat-card-content>
-    </mat-card>
+<div class="puyfolais-details">
+  <mat-card class="simplified-card" [ngClass]="{ 'mineur-card': isMineur(puyfolais.dateNaissance) }">
+    <mat-card-content>
+      <div class="card-header">
+        <div class="card-title">
+          <span class="name">{{ puyfolais.nom }} {{ puyfolais.prenom }}</span>
+          <span class="email">{{ puyfolais.email }}</span>
+        </div>
+        <div class="button-container">
+          <button mat-icon-button (click)="editerPuyfolais(puyfolais)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button (click)="ouvrirConfirmationDialogPourSuppressionPuyfolais(puyfolais)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
 </div>

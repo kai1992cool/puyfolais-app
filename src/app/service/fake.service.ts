@@ -19,7 +19,7 @@ export class FakeService {
       nom: faker.person.lastName().toLowerCase(),
       prenom: faker.person.firstName().toLowerCase(),
       genre: faker.string.fromCharacters(['F', 'M']),
-      dateNaissance: Timestamp.fromDate(faker.date.birthdate()),
+      dateNaissance: Timestamp.fromDate(faker.date.birthdate({ min: 2, max: 90, mode: 'age' })),
       numeroTelephone: faker.phone.number(),
       email: faker.internet.email().toLowerCase(),
       adresse: faker.location.streetAddress({ useFullAddress: true }) + " " +faker.location.zipCode() + " " + faker.location.city().toUpperCase()
@@ -34,7 +34,7 @@ export class FakeService {
   }
 
   async generateRecords(): Promise<void> {
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 200; i++) {
       await this.addRecordToFirestore();
       console.log(`Enregistrement ${i + 1} ajouté.`);
     }

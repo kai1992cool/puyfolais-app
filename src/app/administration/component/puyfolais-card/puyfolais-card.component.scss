@@ -1,63 +1,43 @@
-.content-card-structure-details {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 10px;
+.puyfolais-details {
+  margin: 8px; /* Ajouter une marge autour de chaque carte */
 }
 
-.display-container-card-structure-details {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    /* Aligner les éléments horizontalement */
-    align-items: center;
-    /* Espacement entre les éléments */
+.simplified-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 4px;
+  padding: 16px;
+  max-width: 400px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  margin: 8px; /* Espacement horizontal et vertical entre les cartes */
 }
 
-.label {
-    font-weight: bold;
-    font-size: 1.2rem;
-    /* Taille de police plus grande */
+.mineur-card {
+  background-color: #f8d7da; /* Fond légèrement rouge pour les mineurs */
 }
 
-.column-card {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    /* Centre verticalement */
-    justify-content: center;
-    /* Centre horizontalement */
-    padding: 8px;
+.card-header {
+  display: flex;
+  justify-content: space-between; /* Espace entre le titre et les boutons */
+  align-items: center; /* Aligner verticalement le texte et les boutons */
 }
 
-.column-boutons {
-    display: flex;
-    align-items: center;
-    /* Centre verticalement */
-    position: relative;
+.card-title {
+  display: flex;
+  flex-direction: column; /* Nom et email en colonne */
 }
 
-mat-card {
-    margin: 10px;
+.name {
+  display: block;
 }
 
-.disabled-button {
-    opacity: 0.5;
-    /* Réduit l'opacité des boutons désactivés */
-}
-
-.mat-form-field {
-    margin-right: 10px;
-    margin-left: 10px;
+.email {
+  color: #888;
+  font-size: 0.9rem;
 }
 
 .button-container {
-    display: flex;
-    justify-content: space-between;
-    /* or space-around or space-evenly based on your need */
-    align-items: center;
-}
-
-.button-container button {
-    margin-right: 8px;
-    /* Add margin between buttons if needed */
+  display: flex;
+  align-items: center; /* Aligner verticalement les boutons */
 }

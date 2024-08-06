@@ -1,21 +1,23 @@
 .tpc-container-global {
     display: flex;
-    position: relative;
-    /* Nécessaire pour positionner les éléments enfants absolument */
-}
-
-.tpc-container-navigation {
+    flex-direction: row;
+    align-items: center;
+    position: relative; /* Nécessaire pour positionner les éléments enfants absolument */
+    padding: 10px;
+  }
+  
+  .tpc-container-navigation {
     width: 10%; /* Occupe 10% de la largeur */
     display: flex;
     justify-content: center; /* Centre horizontalement */
     align-items: center; /* Centre verticalement */
-}
-
-.tpc-container-entete {
-  width: 90%; /* Occupe 90% de la largeur */
-}
-
-#titre-page {
+  }
+  
+  .tpc-container-entete {
+    width: 90%; /* Occupe 90% de la largeur */
+  }
+  
+  #titre-page {
     font-family: Impact, Charcoal, sans-serif;
     font-size: 40px;
     letter-spacing: 6px;
@@ -26,11 +28,10 @@
     font-style: normal;
     font-variant: small-caps;
     text-transform: none;
-    // text-align: center;
     padding: 10px;
-}
-
-#accroche-page {
+  }
+  
+  #accroche-page {
     font-family: Georgia, serif;
     font-size: 19px;
     letter-spacing: -1px;
@@ -41,5 +42,47 @@
     font-style: normal;
     font-variant: normal;
     text-transform: none;
-    // text-align: center;
-}
+    padding: 10px;
+  }
+  
+  @media (max-width: 768px) {
+    .tpc-container-global {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .tpc-container-navigation {
+      width: 100%; /* Occupe 100% de la largeur */
+      justify-content: flex-start; /* Aligne à gauche */
+      padding-bottom: 10px;
+    }
+  
+    .tpc-container-entete {
+      width: 100%; /* Occupe 100% de la largeur */
+    }
+  
+    #titre-page {
+      font-size: 30px;
+      text-align: left;
+    }
+  
+    #accroche-page {
+      font-size: 16px;
+      text-align: left;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .tpc-container-navigation {
+      padding-bottom: 5px;
+    }
+  
+    #titre-page {
+      font-size: 25px;
+    }
+  
+    #accroche-page {
+      font-size: 14px;
+    }
+  }
+  

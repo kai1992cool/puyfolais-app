@@ -2,7 +2,7 @@ import { AfterViewInit, Component, ViewChild, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Puyfolais } from '../../model/puyfolais';
 import { PuyfolaisService } from '../../service/puyfolais.service';
-import { Subscription } from 'rxjs';
+import { Subscription, debounceTime, distinctUntilChanged, tap } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -13,7 +13,6 @@ import { TranslateService } from '@ngx-translate/core';
 export class AdminPuyfolaisComponent implements AfterViewInit  {
 
   constructor(
-    private dialog: MatDialog,
     public traductionService: TranslateService
     ) { }
 
@@ -37,8 +36,16 @@ export class AdminPuyfolaisComponent implements AfterViewInit  {
     const searchText = this.searchInput.nativeElement.value.toLowerCase();
 
     // Souscrire à un nouvel observable avec le texte de recherche
-    this.puyfolaisSubscription = this.puyfolaisService.recupererPuyfolais(searchText).subscribe(puyfolais => {
-      // this.listePuyfolais = puyfolais.sort((a, b) => a.nom!.localeCompare(b.nom!));
+    this.puyfolaisSubscription = this.puyfolaisService.recupererPuyfolais(searchText)
+    .pipe(
+      debounceTime(300), // Adjust debounce time as needed
+      distinctUntilChanged(), // Only emit if the value has changed
+      tap(() => {
+        // Show loading indicator
+      })
+    )
+    .subscribe(puyfolais => {
+      // Hide loading indicator
       this.listePuyfolais = puyfolais;
     });
   }

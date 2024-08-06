@@ -105,7 +105,7 @@ export class PuyfolaisService {
       and(where('prenom', '>=', filtre), where('prenom', '<=', filtre + '\uf8ff')),
       and(where('email', '>=', filtre), where('email', '<=', filtre + '\uf8ff')),
       and(where('numero', '==', parseInt(filtre)))
-    ), limit(50));
+    ), limit(200));
 
     return from(getDocs(q)).pipe(
       map(snapshot => snapshot.docs.map(doc => {

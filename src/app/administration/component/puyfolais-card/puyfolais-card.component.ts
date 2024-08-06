@@ -9,14 +9,13 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-puyfolais-card',
   templateUrl: './puyfolais-card.component.html',
-  styleUrl: './puyfolais-card.component.scss'
+  styleUrls: ['./puyfolais-card.component.scss']
 })
 export class PuyfolaisCardComponent {
 
   @Input() puyfolais!: Puyfolais;
   @Output() emitSupprimerPuyfolais: EventEmitter<void> = new EventEmitter<void>();
 
-  
   constructor(
     public puyfolaisService: PuyfolaisService,
     private traductionService: TranslateService,
@@ -24,10 +23,6 @@ export class PuyfolaisCardComponent {
     private router: Router
   ) { }
 
-  /**
-    * Ouvre la modale de confirmation de suppression du puyfolais
-    * @param groupe Le puyfolais à supprimer
-    */
   ouvrirConfirmationDialogPourSuppressionPuyfolais(puyfolais: Puyfolais): void {
     const dialogRef = this.dialog.open(ValidationDialogComponent, {
       data: this.traductionService.instant('admin.puyfolais.confirmationSuppressionPuyfolais')
@@ -40,15 +35,10 @@ export class PuyfolaisCardComponent {
     });
   }
 
-  /**
-   * Supprime le puyfolais
-   * @param arg0 Le puyfolais à supprimer 
-   */
   private supprimerPuyfolais(arg0: Puyfolais) {
     this.puyfolaisService.supprimerPuyfolais(arg0.uid).then(() => {
       this.emitSupprimerPuyfolais.emit();
-
-    })
+    });
   }
 
   editerPuyfolais(arg0: Puyfolais) {
@@ -57,4 +47,14 @@ export class PuyfolaisCardComponent {
     });
   }
 
+  isMineur(dateNaissance?: Date): boolean {
+    if (dateNaissance) {
+      const aujourdHui = new Date();
+      const anneeNaissance = dateNaissance.getFullYear();
+      const age = aujourdHui.getFullYear() - anneeNaissance;
+      return age < 18;
+    } else {
+      return false;
+    }
+  }
 }
