@@ -27,7 +27,8 @@ import { AppRoutingModule } from './app-routing.module';
     AppRoutingModule,
     BrowserModule,
     AdministrationModule,
-    SharedModule  ],
+    SharedModule  
+  ],
   providers: [ ]
 })
 export class AppModule { }
