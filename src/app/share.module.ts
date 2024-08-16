@@ -15,7 +15,6 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAnalyticsModule, ScreenTrackingService, UserTrackingService } from '@angular/fire/compat/analytics';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { GoogleSsoDirective } from './directive/google-sso.directive';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MaterialModule } from './material.module';
 
 export function createTranslateLoader(http: HttpClient) {
@@ -44,14 +43,6 @@ export function createTranslateLoader(http: HttpClient) {
       },
       defaultLanguage: 'fr-FR',
     }),
-    TranslateModule.forChild({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: (createTranslateLoader),
-        deps: [HttpClient],
-      },
-      defaultLanguage: 'fr-FR',
-    }),
   ],
   exports: [
     TitrePageComponent,
@@ -65,10 +56,8 @@ export function createTranslateLoader(http: HttpClient) {
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'fr-FR' },
-    provideAnimationsAsync(),
     ScreenTrackingService,
     UserTrackingService,
-    provideHttpClient(withInterceptorsFromDi())
   ]
 })
 export class SharedModule {

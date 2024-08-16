@@ -38,7 +38,7 @@
             ],
             "styles": [
               "src/styles.scss",
-              "@angular/material/prebuilt-themes/indigo-pink.css"
+              "@angular/material/prebuilt-themes/azure-blue.css"
             ],
             "scripts": []
           },

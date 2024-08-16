@@ -12,6 +12,9 @@ import { SharedModule } from './share.module';
 import { ValidationDialogComponent } from './dialog/validation-dialog/validation-dialog.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { provideNativeDateAdapter } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -27,8 +30,12 @@ import { AppRoutingModule } from './app-routing.module';
     AppRoutingModule,
     BrowserModule,
     AdministrationModule,
-    SharedModule  
+    SharedModule,
   ],
-  providers: [ ]
+  providers: [ 
+    provideHttpClient(withInterceptorsFromDi()),
+    provideAnimationsAsync(),
+    provideNativeDateAdapter(),
+  ]
 })
 export class AppModule { }
